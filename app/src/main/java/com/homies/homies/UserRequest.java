@@ -2,7 +2,7 @@ package com.homies.homies;
 
 public class UserRequest {
 
-    private String password ="pistol";
+    private String password;
     private String email;
     private String firstName;
     private String lastName;

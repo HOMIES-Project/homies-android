@@ -2,6 +2,7 @@ package com.homies.homies;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -10,6 +11,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.textfield.TextInputLayout;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -17,23 +20,24 @@ import retrofit2.Response;
 public class RegisterActivity extends AppCompatActivity {
 
     ImageView logo;
-    TextView login;
-    TextView sign;
-    EditText et_user;
-    EditText et_name;
-    EditText et_lastname;
-    EditText et_email;
-    EditText et_password;
-    EditText et_repassword;
+    TextView login, sign;
+    EditText et_user,et_name,et_lastname,et_email,et_password,et_repassword;
+    TextInputLayout ip_user,ip_name,ip_lastname,ip_email,ip_password,ip_repassword;
     Button btn_register;
-    boolean condition;
+    boolean condition = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        //Se enlazan los recursos de la interfaz de usuario con las variables en el código
+        //Se enlazan los recursos de la interfaz de usuario con las variables en el
+        ip_user = findViewById(R.id.ip_user);
+        ip_name = findViewById(R.id.ip_name);
+        ip_lastname = findViewById(R.id.ip_lastname);
+        ip_email = findViewById(R.id.ip_email);
+        ip_password = findViewById(R.id.ip_password);
+        ip_repassword = findViewById(R.id.ip_repassword);
         logo = findViewById(R.id.logo);
         login = findViewById(R.id.login);
         sign = findViewById(R.id.sign);
@@ -48,16 +52,46 @@ public class RegisterActivity extends AppCompatActivity {
         btn_register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                condition = false;
-                if(et_user.getText().toString().trim().isEmpty() ||
-                        et_password.getText().toString().trim().isEmpty() ||
-                        et_repassword.getText().toString().trim().isEmpty() ||
-                        et_email.getText().toString().trim().isEmpty())
-                { condition = true; }
-                saveUser(createRequest());
-
+                condition = true;
+                if (condition == true) {
+                    if (et_user.getText().toString().trim().length() < 1) {
+                        ip_user.setError(getString(R.string.val_username));
+                        condition = false;
+                    } else {
+                        ip_user.setErrorEnabled(false);
+                    }
+                    if (et_email.getText().toString().trim().length() < 8) {
+                        ip_email.setError(getString(R.string.val_email));
+                        condition = false;
+                    } else {
+                        ip_email.setErrorEnabled(false);
+                    }
+                    if (et_password.getText().toString().trim().length() < 4) {
+                        ip_password.setError(getString(R.string.val_pass));
+                        condition = false;
+                    } else {
+                        ip_password.setErrorEnabled(false);
+                    }
+                    if (et_repassword.getText().toString().trim().length() < 4) {
+                        ip_repassword.setError(getString(R.string.val_repass));
+                        condition = false;
+                    } else {
+                        ip_repassword.setErrorEnabled(false);
+                    }
+                    if(et_password.getText().toString().trim() != et_repassword.getText().toString().trim()){
+                        ip_repassword.setError("No coinciden el password y repetir password");
+                        condition = false;
+                    }
+                    else{
+                        ip_repassword.setErrorEnabled(false);
+                    }
+                    if (condition == true) {
+                        saveUser((createRequest()));
+                        Login(view);
+                    }
+                }
             }
+
         });
 
     }
@@ -65,7 +99,7 @@ public class RegisterActivity extends AppCompatActivity {
     public UserRequest createRequest(){
         UserRequest userRequest = new UserRequest();
         userRequest.setEmail(et_email.getText().toString());
-        userRequest.setEmail(et_password.getText().toString());
+        userRequest.setPassword(et_password.getText().toString());
 
         return userRequest;
     }
@@ -89,6 +123,11 @@ public class RegisterActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    public void Login (View view) {
+        Intent login = new Intent(this,MainActivity.class);
+        startActivity(login);
     }
 
 }
