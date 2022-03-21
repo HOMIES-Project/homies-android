@@ -20,7 +20,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@mipmap/logo" />
+        app:srcCompat="@drawable/ic_logo" />
 
     <TextView
         android:id="@+id/login"
@@ -75,7 +75,7 @@
         app:layout_constraintBottom_toTopOf="@+id/linear"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:startIconDrawable="@mipmap/ic_user"
+        app:startIconDrawable="@drawable/ic_user"
         app:startIconTint="@color/secondaryColor">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -198,7 +198,7 @@
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="1dp"
         android:padding="1dp"
-        app:startIconDrawable="@mipmap/ic_mail"
+        app:startIconDrawable="@drawable/ic_email"
         app:startIconTint="@color/secondaryColor"
         app:errorTextAppearance="@style/error_appearance"
         app:layout_constraintBottom_toTopOf="@+id/ip_password"
@@ -239,7 +239,7 @@
         app:layout_constraintBottom_toTopOf="@+id/ip_repassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:startIconDrawable="@mipmap/candado"
+        app:startIconDrawable="@drawable/ic_lock_password"
         app:startIconTint="@color/secondaryColor"
         app:helperText="Required*"
         app:helperTextTextColor="@color/secondaryLightColor"
@@ -264,26 +264,26 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
-        app:boxStrokeWidth="0dp"
-        app:boxStrokeWidthFocused="0dp"
         android:id="@+id/ip_repassword"
+        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
-        android:layout_marginBottom="13dp"
+        android:layout_marginBottom="36dp"
         android:padding="1dp"
+        app:boxStrokeWidth="0dp"
+        app:boxStrokeWidthFocused="0dp"
+        app:endIconMode="password_toggle"
         app:errorTextAppearance="@style/error_appearance"
-        app:layout_constraintBottom_toTopOf="@+id/btn_register"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.545"
-        app:layout_constraintStart_toStartOf="parent"
-        app:startIconDrawable="@mipmap/candado"
-        app:startIconTint="@color/secondaryColor"
         app:helperText="Required*"
         app:helperTextTextColor="@color/secondaryLightColor"
-        app:endIconMode="password_toggle">
+        app:layout_constraintBottom_toTopOf="@+id/btn_register"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:startIconDrawable="@drawable/ic_lock_password"
+        app:startIconTint="@color/secondaryColor">
 
 
         <com.google.android.material.textfield.TextInputEditText
