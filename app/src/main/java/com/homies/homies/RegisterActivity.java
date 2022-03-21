@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -60,31 +61,8 @@ public class RegisterActivity extends AppCompatActivity {
                     } else {
                         ip_user.setErrorEnabled(false);
                     }
-                    if (et_email.getText().toString().trim().length() < 8) {
-                        ip_email.setError(getString(R.string.val_email));
-                        condition = false;
-                    } else {
-                        ip_email.setErrorEnabled(false);
-                    }
-                    if (et_password.getText().toString().trim().length() < 4) {
-                        ip_password.setError(getString(R.string.val_pass));
-                        condition = false;
-                    } else {
-                        ip_password.setErrorEnabled(false);
-                    }
-                    if (et_repassword.getText().toString().trim().length() < 4) {
-                        ip_repassword.setError(getString(R.string.val_repass));
-                        condition = false;
-                    } else {
-                        ip_repassword.setErrorEnabled(false);
-                    }
-                    if(et_password.getText().toString().trim() != et_repassword.getText().toString().trim()){
-                        ip_repassword.setError("No coinciden el password y repetir password");
-                        condition = false;
-                    }
-                    else{
-                        ip_repassword.setErrorEnabled(false);
-                    }
+                    validateEmail();
+                    validatePassword();
                     if (condition == true) {
                         saveUser((createRequest()));
                         Login(view);
@@ -130,4 +108,43 @@ public class RegisterActivity extends AppCompatActivity {
         startActivity(login);
     }
 
+    private boolean validateEmail() {
+        String emailInput = et_email.getText().toString().trim();
+        if (emailInput.isEmpty()) {
+            ip_email.setError("Field can´t be empty");
+            condition = false;
+            return false;
+        } else if (!Patterns.EMAIL_ADDRESS.matcher(emailInput).matches()) {
+            ip_email.setError("Field must be with email format");
+            condition = false;
+            return false;
+        } else {
+            ip_email.setErrorEnabled(false);;
+            return true;
+        }
+    }
+    private boolean validatePassword() {
+        String passwordInput = et_password.getText().toString().trim();
+        String confirmPasswordInput = et_repassword.getText().toString().trim();
+        if (passwordInput.isEmpty()) {
+            ip_password.setError("Field can´t be empty");
+            condition = false;
+            return false;
+        } if (passwordInput.length()<8) {
+            ip_password.setError(("Password must be at least 8 characters"));
+            condition = false;
+            return false;
+        }else {
+            ip_password.setErrorEnabled(false);
+        }
+        if (!passwordInput.equals(confirmPasswordInput)) {
+            condition = false;
+            ip_repassword.setError("Password would not be matched");
+            return false;
+        } else {
+            ip_password.setErrorEnabled(false);
+            ip_repassword.setErrorEnabled(false);
+            return true;
+        }
+    }
 }
