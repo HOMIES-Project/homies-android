@@ -75,7 +75,8 @@
         app:layout_constraintBottom_toTopOf="@+id/linear"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:startIconDrawable="@mipmap/ic_user">
+        app:startIconDrawable="@mipmap/ic_user"
+        app:startIconTint="@color/secondaryColor">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/et_user"
@@ -190,6 +191,7 @@
         android:layout_marginBottom="1dp"
         android:padding="1dp"
         app:startIconDrawable="@mipmap/ic_mail"
+        app:startIconTint="@color/secondaryColor"
         app:errorTextAppearance="@style/error_appearance"
         app:layout_constraintBottom_toTopOf="@+id/ip_password"
         app:layout_constraintEnd_toEndOf="parent"
@@ -230,6 +232,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:startIconDrawable="@mipmap/candado"
+        app:startIconTint="@color/secondaryColor"
         app:helperText="Required*"
         app:helperTextTextColor="@color/secondaryLightColor"
         app:endIconMode="password_toggle"
@@ -269,6 +272,7 @@
         app:layout_constraintHorizontal_bias="0.545"
         app:layout_constraintStart_toStartOf="parent"
         app:startIconDrawable="@mipmap/candado"
+        app:startIconTint="@color/secondaryColor"
         app:helperText="Required*"
         app:helperTextTextColor="@color/secondaryLightColor"
         app:endIconMode="password_toggle">
