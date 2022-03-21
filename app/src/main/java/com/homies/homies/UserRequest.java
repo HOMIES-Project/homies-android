@@ -6,7 +6,6 @@ public class UserRequest {
     private String email;
     private String firstName;
     private String lastName;
-    private String langKey;
     private String login;
 
     public String getPassword() {
@@ -39,14 +38,6 @@ public class UserRequest {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
-    }
-
-    public String getLangKey() {
-        return langKey;
-    }
-
-    public void setLangKey(String langKey) {
-        this.langKey = langKey;
     }
 
     public String getLogin() {

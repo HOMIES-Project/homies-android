@@ -78,15 +78,18 @@ public class RegisterActivity extends AppCompatActivity {
         UserRequest userRequest = new UserRequest();
         userRequest.setEmail(et_email.getText().toString());
         userRequest.setPassword(et_password.getText().toString());
+        userRequest.setLogin(et_user.getText().toString());
+        userRequest.setFirstName(et_name.getText().toString());
+        userRequest.setLastName(et_lastname.getText().toString());
 
         return userRequest;
     }
 
     public void saveUser(UserRequest userRequest){
-        Call<UserResponse> userResponseCall = ApiClient.getUserService().saveUser(userRequest);
-        userResponseCall.enqueue(new Callback<UserResponse>() {
+        Call<Void> userResponseCall = ApiClient.getUserService().saveUser(userRequest);
+        userResponseCall.enqueue(new Callback<Void>() {
             @Override
-            public void onResponse(Call<UserResponse> call, Response<UserResponse> response) {
+            public void onResponse(Call<Void> call, Response<Void> response) {
 
                 if(response.isSuccessful() && condition){
                     Toast.makeText(RegisterActivity.this, "Sing Up correctly", Toast.LENGTH_LONG).show();
@@ -96,7 +99,7 @@ public class RegisterActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<UserResponse> call, Throwable t) {
+            public void onFailure(Call<Void> call, Throwable t) {
                 Toast.makeText(RegisterActivity.this, "Sing Up failed"+t.getLocalizedMessage(), Toast.LENGTH_LONG).show();
 
             }
@@ -114,7 +117,11 @@ public class RegisterActivity extends AppCompatActivity {
             ip_email.setError("Field can´t be empty");
             condition = false;
             return false;
-        } else if (!Patterns.EMAIL_ADDRESS.matcher(emailInput).matches()) {
+        } if (emailInput.length()<8) {
+            ip_password.setError(("Password must be at least 8 characters"));
+            condition = false;
+            return false;
+        }else if (!Patterns.EMAIL_ADDRESS.matcher(emailInput).matches()) {
             ip_email.setError("Field must be with email format");
             condition = false;
             return false;
