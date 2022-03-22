@@ -13,11 +13,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Intent intent = getIntent();
+/*        Intent intent = getIntent();
         if(intent.getExtras() != null){
             loginResponse = (UserResponse) intent.getSerializableExtra("data");
 
             Log.e("TAG","=====>" + loginResponse.getUsername());
-        }
+        }*/
     }
 }
