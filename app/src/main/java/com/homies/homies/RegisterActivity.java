@@ -145,4 +145,9 @@ public class RegisterActivity extends AppCompatActivity {
             ip_repassword.setErrorEnabled(false);
         }
     }
+
+    public void clickTextViewLogin(View view){
+        Intent login = new Intent(this,LoginActivity.class);
+        startActivity(login);
+    }
 }
