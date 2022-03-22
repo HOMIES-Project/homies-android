@@ -54,7 +54,7 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 condition = true;
-                if (condition == true) {
+                if (condition) {
                     if (et_user.getText().toString().trim().length() < 1) {
                         ip_user.setError(getString(R.string.val_username));
                         condition = false;
@@ -63,7 +63,7 @@ public class RegisterActivity extends AppCompatActivity {
                     }
                     validateEmail();
                     validatePassword();
-                    if (condition == true) {
+                    if (condition) {
                         saveUser((createRequest()));
                         Login(view);
                     }
@@ -86,7 +86,7 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     public void saveUser(UserRequest userRequest){
-        Call<Void> userResponseCall = ApiClient.getUserService().saveUser(userRequest);
+        Call<Void> userResponseCall = ApiClient.getService().saveUser(userRequest);
         userResponseCall.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
@@ -111,47 +111,39 @@ public class RegisterActivity extends AppCompatActivity {
         startActivity(login);
     }
 
-    private boolean validateEmail() {
+    private void validateEmail() {
         String emailInput = et_email.getText().toString().trim();
         if (emailInput.isEmpty()) {
             ip_email.setError("Field can´t be empty");
             condition = false;
-            return false;
         } if (emailInput.length()<8) {
             ip_password.setError(("Password must be at least 8 characters"));
             condition = false;
-            return false;
         }else if (!Patterns.EMAIL_ADDRESS.matcher(emailInput).matches()) {
             ip_email.setError("Field must be with email format");
             condition = false;
-            return false;
         } else {
-            ip_email.setErrorEnabled(false);;
-            return true;
+            ip_email.setErrorEnabled(false);
         }
     }
-    private boolean validatePassword() {
+    private void validatePassword() {
         String passwordInput = et_password.getText().toString().trim();
         String confirmPasswordInput = et_repassword.getText().toString().trim();
         if (passwordInput.isEmpty()) {
             ip_password.setError("Field can´t be empty");
             condition = false;
-            return false;
         } if (passwordInput.length()<8) {
             ip_password.setError(("Password must be at least 8 characters"));
             condition = false;
-            return false;
         }else {
             ip_password.setErrorEnabled(false);
         }
         if (!passwordInput.equals(confirmPasswordInput)) {
             condition = false;
             ip_repassword.setError("Password would not be matched");
-            return false;
         } else {
             ip_password.setErrorEnabled(false);
             ip_repassword.setErrorEnabled(false);
-            return true;
         }
     }
 }
