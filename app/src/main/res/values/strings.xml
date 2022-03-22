@@ -16,4 +16,9 @@
     <string name="login">Log In</string>
     <string name="userNameLogin">Username</string>
     <string name="passwordLogin">Password</string>
+    <string name="remenberPassword">Forgot your password?</string>
+    <string name="loginPage">Log in</string>
+    <string name="signUpPage">Sign up</string>
+    <string name="logoApp">Homies</string>
+
 </resources>
