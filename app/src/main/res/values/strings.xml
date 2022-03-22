@@ -12,4 +12,6 @@
     <string name="val_email">Minimum 8 characters required</string>
     <string name="val_pass">Minimum 8 characters required</string>
     <string name="val_repass">Minimum 8 characters required</string>
+    <!-- Login text-->
+    <string name="login">Log In</string>
 </resources>
