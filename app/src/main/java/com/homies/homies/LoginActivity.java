@@ -45,7 +45,7 @@ public class LoginActivity extends AppCompatActivity {
                     String message = "All inputs required ..";
                     Toast.makeText(LoginActivity.this, message, Toast.LENGTH_SHORT).show();
                 } else if ((inputPassword.getText().toString().length() < 4) || inputPassword.getText().toString().length() > 100) {
-                    String message = "Password must have between 8 and 100 characters ...";
+                    String message = "Password must have between 4 and 100 characters ...";
                     Toast.makeText(LoginActivity.this, message, Toast.LENGTH_SHORT).show();
                 } else {
                     LoginRequest loginRequest = new LoginRequest();

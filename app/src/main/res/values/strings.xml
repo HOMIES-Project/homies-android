@@ -14,4 +14,6 @@
     <string name="val_repass">Minimum 8 characters required</string>
     <!-- Login text-->
     <string name="login">Log In</string>
+    <string name="userNameLogin">Username</string>
+    <string name="passwordLogin">Password</string>
 </resources>
