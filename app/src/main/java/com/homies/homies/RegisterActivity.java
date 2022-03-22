@@ -54,20 +54,19 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 condition = true;
-                if (condition) {
-                    if (et_user.getText().toString().trim().length() < 1) {
-                        ip_user.setError(getString(R.string.val_username));
-                        condition = false;
-                    } else {
-                        ip_user.setErrorEnabled(false);
-                    }
-                    validateEmail();
-                    validatePassword();
-                    if (condition) {
-                        saveUser((createRequest()));
-                        Login(view);
-                    }
+                if (et_user.getText().toString().trim().length() < 1) {
+                    ip_user.setError(getString(R.string.val_username));
+                    condition = false;
+                } else {
+                    ip_user.setErrorEnabled(false);
                 }
+                if (condition) {
+                    saveUser((createRequest()));
+                    Login(view);
+                }
+                validatePassword();
+                validateEmail();
+
             }
 
         });
