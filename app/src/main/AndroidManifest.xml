@@ -13,7 +13,8 @@
         android:theme="@style/Theme.Homies">
         <activity android:name=".MainActivity"/>
         <activity android:name=".RegisterActivity"/>
-        <activity android:name=".LoginActivity"
+        <activity android:name=".LoginActivity"/>
+        <activity android:name=".Splash"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

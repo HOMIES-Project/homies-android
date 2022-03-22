@@ -44,5 +44,7 @@
         app:layout_constraintBottom_toTopOf="@+id/imageView2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:progressBackgroundTintMode="@color/primaryColor"/>
+        android:indeterminate="true"
+        android:indeterminateTintMode="src_atop"
+        android:indeterminateTint="@color/primaryColor"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
