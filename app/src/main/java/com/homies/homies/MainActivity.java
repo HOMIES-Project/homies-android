@@ -7,7 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 
 public class MainActivity extends AppCompatActivity {
-    LoginResponse loginResponse;
+    UserResponse loginResponse;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -15,7 +15,7 @@ public class MainActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         if(intent.getExtras() != null){
-            loginResponse = (LoginResponse) intent.getSerializableExtra("data");
+            loginResponse = (UserResponse) intent.getSerializableExtra("data");
 
             Log.e("TAG","=====>" + loginResponse.getUsername());
         }
