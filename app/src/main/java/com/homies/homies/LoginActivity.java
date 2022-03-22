@@ -80,4 +80,8 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     }
+    public void clickTextViewRegister(View view){
+        Intent login = new Intent(this,RegisterActivity.class);
+        startActivity(login);
+    }
 }
