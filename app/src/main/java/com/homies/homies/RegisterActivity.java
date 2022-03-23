@@ -54,6 +54,8 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 condition = true;
+                validatePassword();
+                validateEmail();
                 if (et_user.getText().toString().trim().length() < 1) {
                     ip_user.setError(getString(R.string.val_username));
                     condition = false;
@@ -63,12 +65,9 @@ public class RegisterActivity extends AppCompatActivity {
                 if (condition) {
                     saveUser((createRequest()));
                     Login(view);
+
                 }
-                validatePassword();
-                validateEmail();
-
             }
-
         });
 
     }
