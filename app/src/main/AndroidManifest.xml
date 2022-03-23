@@ -12,9 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Homies">
         <activity android:name=".MainActivity"/>
-        <activity android:name=".RegisterActivity"/>
-        <activity android:name=".LoginActivity"/>
-        <activity android:name=".Splash"
+        <activity android:name=".unused.RegisterActivity"/>
+        <activity android:name=".unused.LoginActivity"/>
+        <activity android:name=".SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

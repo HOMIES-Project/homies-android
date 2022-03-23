@@ -9,6 +9,16 @@ public class UserRequest {
     private String login;
     private String username;
 
+    public String getLangKey() {
+        return langKey;
+    }
+
+    public void setLangKey(String langKey) {
+        this.langKey = langKey;
+    }
+
+    private String langKey;
+
 
     public String getPassword() {
         return password;

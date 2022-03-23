@@ -2,22 +2,24 @@ package com.homies.homies;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
+import android.widget.Button;
+
+import com.homies.homies.unused.Adaptador;
 
 public class MainActivity extends AppCompatActivity {
     UserResponse loginResponse;
+    Adaptador adaptador;
+    Button btnLogin;
+    Button btnRegister;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-/*        Intent intent = getIntent();
-        if(intent.getExtras() != null){
-            loginResponse = (UserResponse) intent.getSerializableExtra("data");
+        btnLogin = findViewById(R.id.logIn);
+        btnRegister = findViewById(R.id.signUp);
+        adaptador = new Adaptador(getSupportFragmentManager());
 
-            Log.e("TAG","=====>" + loginResponse.getUsername());
-        }*/
     }
 }

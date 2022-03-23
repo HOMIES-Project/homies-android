@@ -6,13 +6,57 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <TextView
+    <ImageView
+        android:id="@+id/logoIV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="MENÚ PRINCIPAL"
+        android:layout_marginTop="51dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_logo"/>
+
+    <Button
+        android:id="@+id/logIn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="105dp"
+        android:layout_marginTop="26dp"
+        android:layout_marginBottom="30dp"
+        android:layout_marginEnd="30dp"
+        android:fontFamily="@font/montserrat_regular"
+        android:text="@string/loginPage"
+        android:textSize="17sp"
+        style="?android:attr/borderlessButtonStyle"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/logoIV" />
+
+    <Button
+        android:id="@+id/signUp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="26dp"
+        android:layout_marginEnd="105dp"
+        android:layout_marginBottom="30dp"
+        android:fontFamily="@font/montserrat_regular"
+        android:text="@string/signUpPage"
+        android:textSize="17sp"
+        style="?android:attr/borderlessButtonStyle"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/logIn"
+        app:layout_constraintTop_toBottomOf="@+id/logoIV"/>
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="250dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/logoIV" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
