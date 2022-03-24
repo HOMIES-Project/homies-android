@@ -46,5 +46,5 @@
         app:layout_constraintStart_toStartOf="parent"
         android:indeterminate="true"
         android:indeterminateTintMode="src_atop"
-        android:indeterminateTint="@color/primaryColor"/>
+        android:indeterminateTint="@color/primaryTextColor"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

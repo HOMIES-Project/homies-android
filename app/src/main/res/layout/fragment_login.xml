@@ -64,9 +64,9 @@
             android:padding="1dp"
             app:boxStrokeWidth="0dp"
             app:boxStrokeWidthFocused="0dp"
-            app:endIconMode="clear_text"
             app:errorTextAppearance="@style/error_appearance"
             app:helperText="@string/helperRequired"
+            app:endIconMode="password_toggle"
             app:helperTextTextColor="@color/primaryLightColor"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -109,7 +109,7 @@
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:layout_marginTop="46dp"
+            android:layout_marginTop="44dp"
             android:background="@drawable/btn_custom"
             android:fontFamily="@font/montserrat_regular"
             android:padding="1dp"
@@ -117,6 +117,7 @@
             android:textAllCaps="false"
             android:textColor="@color/primaryTextColor"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.495"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/forgotPasswordTV" />
 
