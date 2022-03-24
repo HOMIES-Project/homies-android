@@ -12,15 +12,48 @@
         android:layout_height="wrap_content"
         tools:context=".user.LoginFragment">
 
+        <Button
+            android:id="@+id/logIn"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="105dp"
+            android:layout_marginTop="26dp"
+            android:fontFamily="@font/montserrat_regular"
+            android:text="@string/login"
+            android:textAllCaps="false"
+            android:textColor="@color/secondaryTextColor"
+            android:textSize="17sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/signUp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="26dp"
+            android:layout_marginEnd="105dp"
+            android:layout_marginBottom="30dp"
+            android:fontFamily="@font/montserrat_regular"
+            android:text="@string/signUpPage"
+            android:textAllCaps="false"
+            android:textSize="17sp"
+            style="?android:attr/borderlessButtonStyle"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/logIn"
+            app:layout_constraintTop_toTopOf="parent"/>
+
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/ip_user"
             style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="10dp"
             android:layout_marginEnd="20dp"
-            android:layout_marginBottom="1dp"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/montserrat_regular"
             android:padding="1dp"
             app:boxStrokeWidth="0dp"
             app:boxStrokeWidthFocused="0dp"
@@ -28,10 +61,9 @@
             app:errorTextAppearance="@style/error_appearance"
             app:helperText="@string/helperRequired"
             app:helperTextTextColor="@color/primaryLightColor"
-            android:fontFamily="@font/montserrat_regular"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/logIn"
             app:startIconDrawable="@drawable/ic_email"
             app:startIconTint="@color/primaryColor">
 
@@ -46,10 +78,10 @@
                 android:background="@drawable/rounded_edittext"
                 android:fontFamily="@font/montserrat_regular"
                 android:hint="@string/username"
-                android:textColor="@color/fieldTextColor"
                 android:inputType="textEmailAddress"
                 android:maxLength="50"
                 android:padding="15dp"
+                android:textColor="@color/fieldTextColor"
                 android:textSize="15sp" />
         </com.google.android.material.textfield.TextInputLayout>
 

@@ -1,6 +1,7 @@
 package com.homies.homies.user;
 
 import android.app.Activity;
+import android.graphics.Paint;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -20,6 +21,7 @@ import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputLayout;
 import com.homies.homies.R;
+import com.homies.homies.services.Adaptador;
 import com.homies.homies.services.ApiClient;
 import com.homies.homies.services.UserRequest;
 import com.homies.homies.user.LoginFragment;
@@ -34,8 +36,9 @@ public class RegisterFragment extends Fragment {
     TextView login, sign;
     EditText et_user, et_name, et_lastname, et_email, et_password, et_repassword;
     TextInputLayout ip_user, ip_name, ip_lastname, ip_email, ip_password, ip_repassword;
-    Button btn_register;
+    Button btn_register, signUp, logIn;
     Activity activity ;
+    Adaptador adaptador;
     boolean condition = true;
 
     @Nullable
@@ -58,6 +61,22 @@ public class RegisterFragment extends Fragment {
         et_password = register.findViewById(R.id.et_password);
         et_repassword = register.findViewById(R.id.et_repassword);
         btn_register = register.findViewById(R.id.btn_register);
+
+
+        logIn = register.findViewById(R.id.logIn);
+        signUp = register.findViewById(R.id.signUp);
+        adaptador = new Adaptador(getParentFragmentManager());
+
+        signUp.setPaintFlags(signUp.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+        logIn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                LoginFragment loginFragment = new LoginFragment();
+                FragmentTransaction fragmentTransaction = getParentFragmentManager().beginTransaction();
+                fragmentTransaction.replace(R.id.fragment, loginFragment);
+                fragmentTransaction.commit();
+            }
+        });
 
         btn_register.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -27,27 +27,6 @@ public class MainActivity extends AppCompatActivity {
         signUp = findViewById(R.id.signUp);
         adaptador = new Adaptador(getSupportFragmentManager());
 
-        signUp.setOnClickListener(new View.OnClickListener() {
-            @SuppressLint("ResourceType")
-            @Override
-            public void onClick(View view) {
-                RegisterFragment registerFragment = new RegisterFragment();
-                FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-                fragmentTransaction.replace(R.id.fragment, registerFragment);
-                fragmentTransaction.commit();
-
-
-            }
-        });
-        logIn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                LoginFragment loginFragment = new LoginFragment();
-                FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-                fragmentTransaction.replace(R.id.fragment, loginFragment);
-                fragmentTransaction.commit();
-            }
-        });
 
     }
 }
