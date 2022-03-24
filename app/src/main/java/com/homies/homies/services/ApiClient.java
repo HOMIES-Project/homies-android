@@ -18,7 +18,7 @@ public class ApiClient {
         OkHttpClient okHttpClient = new OkHttpClient.Builder().addInterceptor(httpLoggingInterceptor).build();
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://homies-1854.herokuapp.com/api/")
+                .baseUrl("https://homies-back-app.herokuapp.com/api/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(okHttpClient)
                 .build();

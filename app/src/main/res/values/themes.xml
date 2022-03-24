@@ -2,22 +2,22 @@
     <!-- Base application theme. -->
     <style name="Theme.Homies" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/secondaryColor</item>
-        <item name="colorPrimaryVariant">@color/secondaryLightColor</item>
-        <item name="colorOnPrimary">@color/secondaryDarkColor</item>
+        <item name="colorPrimary">@color/primaryColor</item>
+        <item name="colorPrimaryVariant">@color/primaryLightColor</item>
+        <item name="colorOnPrimary">@color/primaryTextColor</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/primaryColor</item>
-        <item name="colorSecondaryVariant">@color/primaryLightColor</item>
-        <item name="colorOnSecondary">@color/primaryDarkColor</item>
+        <item name="colorSecondary">@color/secondaryColor</item>
+        <item name="colorSecondaryVariant">@color/secondaryLightColor</item>
+        <item name="colorOnSecondary">@color/secondaryTextColor</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <item name="windowActionBar">false</item>
         <item name="android:windowNoTitle">true</item>
         <!-- Customize your theme here. -->
-        <item name="colorAccent">@color/colorAcent</item>
+        <item name="colorAccent">@color/errorColor</item>
     </style>
     <style name="error_appearance" parent = "@android:style/TextAppearance">
-        <item name="android:textColor">@color/colorAcent</item>
+        <item name="android:textColor">@color/errorColor</item>
     </style>
 
 

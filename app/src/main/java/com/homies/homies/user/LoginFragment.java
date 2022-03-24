@@ -1,11 +1,14 @@
 package com.homies.homies.user;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Paint;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -18,6 +21,7 @@ import android.widget.Toast;
 
 import com.homies.homies.MenuActivity;
 import com.homies.homies.R;
+import com.homies.homies.services.Adaptador;
 import com.homies.homies.services.ApiClient;
 import com.homies.homies.services.UserRequest;
 import com.homies.homies.services.UserResponse;
@@ -28,10 +32,11 @@ import retrofit2.Response;
 
 
 public class LoginFragment extends Fragment {
-    Button btnLogin;
+    Button btnLogin,  signUp, logIn;
     EditText inputUser, inputPassword;
     TextView forgotPassword;
     Activity activity;
+    Adaptador adaptador;
 
     @Nullable
     @Override
@@ -43,6 +48,24 @@ public class LoginFragment extends Fragment {
         inputPassword = login.findViewById(R.id.passwordInput);
         forgotPassword = login.findViewById(R.id.forgotPasswordTV);
         activity = getActivity();
+
+        logIn = login.findViewById(R.id.logIn);
+        signUp = login.findViewById(R.id.signUp);
+        adaptador = new Adaptador(getParentFragmentManager());
+
+        logIn.setPaintFlags(logIn.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+        signUp.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("ResourceType")
+            @Override
+            public void onClick(View view) {
+                RegisterFragment registerFragment = new RegisterFragment();
+                FragmentTransaction fragmentTransaction = getParentFragmentManager().beginTransaction();
+                fragmentTransaction.replace(R.id.fragment, registerFragment);
+                fragmentTransaction.commit();
+
+
+            }
+        });
 
         forgotPassword.setOnClickListener(new View.OnClickListener() {
             @Override
