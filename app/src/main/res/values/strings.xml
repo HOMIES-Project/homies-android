@@ -4,7 +4,7 @@
     <string name="username">Usuario</string>
     <string name="password">Contraseña</string>
     <string name="e_mail">Email</string>
-    <string name="register">Registro</string>
+    <string name="register">Registrarse</string>
     <string name="re_type_password">Repetir Contraseña</string>
     <string name="your_first_name">Nombre</string>
     <string name="your_last_name">Apellidos</string>
@@ -24,6 +24,7 @@
     <string name="fieldEmail">El campo debe tener el formato email</string>
     <string name="logoApp">Homies</string>
     <string name="helperRequired">Obligatorio*</string>
+    <string name="error">¡Error! Intentelo de nuevo</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

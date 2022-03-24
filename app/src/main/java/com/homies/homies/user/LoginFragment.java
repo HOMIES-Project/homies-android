@@ -83,7 +83,7 @@ public class LoginFragment extends Fragment {
                     startActivity(new Intent(activity, MenuActivity.class));
                     activity.finish();
                 } else {
-                    String message = "An error ocurred please try again later ...";
+                    String message = getString(R.string.error);
                     Toast.makeText(activity, message, Toast.LENGTH_SHORT).show();
                 }
             }
