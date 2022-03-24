@@ -27,12 +27,13 @@
             app:endIconMode="clear_text"
             app:errorTextAppearance="@style/error_appearance"
             app:helperText="@string/helperRequired"
-            app:helperTextTextColor="@color/secondaryLightColor"
+            app:helperTextTextColor="@color/primaryLightColor"
+            android:fontFamily="@font/montserrat_regular"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:startIconDrawable="@drawable/ic_email"
-            app:startIconTint="@color/secondaryColor">
+            app:startIconTint="@color/primaryColor">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/userInput"
@@ -45,6 +46,7 @@
                 android:background="@drawable/rounded_edittext"
                 android:fontFamily="@font/montserrat_regular"
                 android:hint="@string/username"
+                android:textColor="@color/fieldTextColor"
                 android:inputType="textEmailAddress"
                 android:maxLength="50"
                 android:padding="15dp"
@@ -65,12 +67,12 @@
             app:endIconMode="clear_text"
             app:errorTextAppearance="@style/error_appearance"
             app:helperText="@string/helperRequired"
-            app:helperTextTextColor="@color/secondaryLightColor"
+            app:helperTextTextColor="@color/primaryLightColor"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/ip_user"
             app:startIconDrawable="@drawable/ic_lock_password"
-            app:startIconTint="@color/secondaryColor">
+            app:startIconTint="@color/primaryColor">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/passwordInput"
@@ -82,6 +84,7 @@
                 android:layout_marginBottom="0dp"
                 android:background="@drawable/rounded_edittext"
                 android:fontFamily="@font/montserrat_regular"
+                android:textColor="@color/fieldTextColor"
                 android:hint="@string/password"
                 android:inputType="textPassword"
                 android:maxLength="50"
@@ -95,7 +98,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="25dp"
             android:text="@string/rememberPassword"
-            android:textColor="@color/secondaryColor"
+            android:fontFamily="@font/montserrat_semibold"
+            android:textColor="@color/primaryColor"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/ip_pasword" />
