@@ -1,4 +1,4 @@
-package com.homies.homies;
+package com.homies.homies.user;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -16,6 +16,12 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.homies.homies.MenuActivity;
+import com.homies.homies.R;
+import com.homies.homies.services.ApiClient;
+import com.homies.homies.services.UserRequest;
+import com.homies.homies.services.UserResponse;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -25,7 +31,7 @@ public class LoginFragment extends Fragment {
     Button btnLogin;
     EditText inputUser, inputPassword;
     TextView forgotPassword;
-    Activity activity = getActivity();
+    Activity activity;
 
     @Nullable
     @Override
@@ -36,6 +42,7 @@ public class LoginFragment extends Fragment {
         inputUser = login.findViewById(R.id.userInput);
         inputPassword = login.findViewById(R.id.passwordInput);
         forgotPassword = login.findViewById(R.id.forgotPasswordTV);
+        activity = getActivity();
 
         forgotPassword.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,7 +80,7 @@ public class LoginFragment extends Fragment {
             public void onResponse(Call<UserResponse> call, Response<UserResponse> response) {
                 if (response.isSuccessful()) {
                     UserResponse userResponse = response.body();
-                    startActivity(new Intent(activity, MainActivity.class));
+                    startActivity(new Intent(activity, MenuActivity.class));
                     activity.finish();
                 } else {
                     String message = "An error ocurred please try again later ...";

@@ -5,12 +5,12 @@
     android:id="@+id/login_fragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LoginFragment">
+    tools:context=".user.LoginFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:context=".LoginFragment">
+        tools:context=".user.LoginFragment">
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/ip_user"

@@ -1,11 +1,11 @@
-package com.homies.homies.unused;
+package com.homies.homies.services;
+
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
-
-import com.homies.homies.LoginFragment;
-import com.homies.homies.RegisterFragment;
+import com.homies.homies.user.LoginFragment;
+import com.homies.homies.user.RegisterFragment;
 
 public class Adaptador extends FragmentPagerAdapter {
 

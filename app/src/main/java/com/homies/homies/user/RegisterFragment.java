@@ -1,7 +1,6 @@
-package com.homies.homies;
+package com.homies.homies.user;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -20,6 +19,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputLayout;
+import com.homies.homies.R;
+import com.homies.homies.services.ApiClient;
+import com.homies.homies.services.UserRequest;
+import com.homies.homies.user.LoginFragment;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -32,24 +35,22 @@ public class RegisterFragment extends Fragment {
     EditText et_user, et_name, et_lastname, et_email, et_password, et_repassword;
     TextInputLayout ip_user, ip_name, ip_lastname, ip_email, ip_password, ip_repassword;
     Button btn_register;
-    Activity activity = getActivity();
+    Activity activity ;
     boolean condition = true;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View register = inflater.inflate(R.layout.fragment_login, container, false);
+        View register = inflater.inflate(R.layout.fragment_register, container, false);
 
         //Se enlazan los recursos de la interfaz de usuario con las variables en el
+        activity = getActivity();
         ip_user = register.findViewById(R.id.ip_user);
         ip_name = register.findViewById(R.id.ip_name);
         ip_lastname = register.findViewById(R.id.ip_lastname);
         ip_email = register.findViewById(R.id.ip_email);
         ip_password = register.findViewById(R.id.ip_password);
         ip_repassword = register.findViewById(R.id.ip_repassword);
-        logo = register.findViewById(R.id.logo);
-        login = register.findViewById(R.id.login);
-        sign = register.findViewById(R.id.sign);
         et_user = register.findViewById(R.id.et_user);
         et_name = register.findViewById(R.id.et_name);
         et_lastname = register.findViewById(R.id.et_lastname);
@@ -116,10 +117,10 @@ public class RegisterFragment extends Fragment {
 
 
     public void Login(View v) {
-        Fragment fragment = new LoginFragment();
+        LoginFragment loginFragment = new LoginFragment();
         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.login_fragment, fragment);
+        fragmentTransaction.replace(R.id.fragment, loginFragment);
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
     }
