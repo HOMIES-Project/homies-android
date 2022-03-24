@@ -30,7 +30,7 @@
             app:counterMaxLength="20"
             app:endIconMode="clear_text"
             app:errorTextAppearance="@style/error_appearance"
-            app:helperText="Required*"
+            app:helperText="@string/helperRequired"
             app:helperTextTextColor="@color/secondaryLightColor"
             app:layout_constraintBottom_toTopOf="@+id/linear"
             app:layout_constraintEnd_toEndOf="parent"
@@ -165,7 +165,7 @@
             app:layout_constraintBottom_toTopOf="@+id/ip_password"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:helperText="Required*"
+            app:helperText="@string/helperRequired"
             app:helperTextTextColor="@color/secondaryLightColor">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -202,7 +202,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:startIconDrawable="@drawable/ic_lock_password"
             app:startIconTint="@color/secondaryColor"
-            app:helperText="Required*"
+            app:helperText="@string/helperRequired"
             app:helperTextTextColor="@color/secondaryLightColor"
             app:endIconMode="password_toggle"
             >
@@ -237,7 +237,7 @@
             app:boxStrokeWidthFocused="0dp"
             app:endIconMode="password_toggle"
             app:errorTextAppearance="@style/error_appearance"
-            app:helperText="Required*"
+            app:helperText="@string/helperRequired"
             app:helperTextTextColor="@color/secondaryLightColor"
             app:layout_constraintBottom_toTopOf="@+id/btn_register"
             app:layout_constraintEnd_toEndOf="parent"
@@ -275,10 +275,9 @@
             android:background="@drawable/btn_custom"
             android:fontFamily="@font/montserrat_regular"
             android:text="@string/register"
-            android:textColor="#263238"
+            android:textColor="@color/primaryTextColor"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.492"
             app:layout_constraintStart_toStartOf="parent" />
 
 

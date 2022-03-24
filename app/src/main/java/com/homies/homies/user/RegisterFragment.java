@@ -65,7 +65,7 @@ public class RegisterFragment extends Fragment {
                 condition = true;
                 validatePassword();
                 validateEmail();
-                if (et_user.getText().toString().trim().length() < 1) {
+                if (et_user.getText().toString().trim().length() < 4) {
                     ip_user.setError(getString(R.string.val_username));
                     condition = false;
                 } else {
@@ -101,9 +101,9 @@ public class RegisterFragment extends Fragment {
             public void onResponse(Call<Void> call, Response<Void> response) {
 
                 if (response.isSuccessful() && condition) {
-                    Toast.makeText(activity, "Sing Up correctly", Toast.LENGTH_LONG).show();
+                    Toast.makeText(activity, getString(R.string.signUpCorrect), Toast.LENGTH_LONG).show();
                 } else {
-                    Toast.makeText(activity, "Sing Up failed", Toast.LENGTH_LONG).show();
+                    Toast.makeText(activity, getString(R.string.signUpFailed), Toast.LENGTH_LONG).show();
                 }
             }
 
@@ -128,14 +128,14 @@ public class RegisterFragment extends Fragment {
     private void validateEmail() {
         String emailInput = et_email.getText().toString().trim();
         if (emailInput.isEmpty()) {
-            ip_email.setError("Field can´t be empty");
+            ip_email.setError(getString(R.string.fieldEmpty));
             condition = false;
         }
         if (emailInput.length() < 8) {
-            ip_password.setError(("Password must be at least 8 characters"));
+            ip_password.setError(getString(R.string.val_passMin));
             condition = false;
         } else if (!Patterns.EMAIL_ADDRESS.matcher(emailInput).matches()) {
-            ip_email.setError("Field must be with email format");
+            ip_email.setError(getString(R.string.fieldEmail));
             condition = false;
         } else {
             ip_email.setErrorEnabled(false);
@@ -146,18 +146,18 @@ public class RegisterFragment extends Fragment {
         String passwordInput = et_password.getText().toString().trim();
         String confirmPasswordInput = et_repassword.getText().toString().trim();
         if (passwordInput.isEmpty()) {
-            ip_password.setError("Field can´t be empty");
+            ip_password.setError(getString(R.string.fieldEmpty));
             condition = false;
         }
         if (passwordInput.length() < 8) {
-            ip_password.setError(("Password must be at least 8 characters"));
+            ip_password.setError(getString(R.string.val_passMin));
             condition = false;
         } else {
             ip_password.setErrorEnabled(false);
         }
         if (!passwordInput.equals(confirmPasswordInput)) {
             condition = false;
-            ip_repassword.setError("Password would not be matched");
+            ip_repassword.setError(getString(R.string.val_pass_matched));
         } else {
             ip_password.setErrorEnabled(false);
             ip_repassword.setErrorEnabled(false);

@@ -55,10 +55,10 @@ public class LoginFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 if (TextUtils.isEmpty(inputUser.getText().toString()) || TextUtils.isEmpty(inputPassword.getText().toString())) {
-                    String message = "All inputs required ..";
+                    String message = getString(R.string.val_required);
                     Toast.makeText(activity, message, Toast.LENGTH_SHORT).show();
-                } else if ((inputPassword.getText().toString().length() < 4) || inputPassword.getText().toString().length() > 100) {
-                    String message = "Password must have between 4 and 100 characters ...";
+                } else if ((inputPassword.getText().toString().length() < 8) || inputPassword.getText().toString().length() > 100) {
+                    String message = getString(R.string.val_passMin);
                     Toast.makeText(activity, message, Toast.LENGTH_SHORT).show();
                 } else {
                     UserRequest userRequest = new UserRequest();
