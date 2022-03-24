@@ -1,35 +1,48 @@
-package com.homies.homies;
+package com.homies.homies.user;
 
-import androidx.appcompat.app.AppCompatActivity;
-
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+
 import android.text.TextUtils;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.homies.homies.MenuActivity;
+import com.homies.homies.R;
+import com.homies.homies.services.ApiClient;
+import com.homies.homies.services.UserRequest;
+import com.homies.homies.services.UserResponse;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class LoginActivity extends AppCompatActivity {
 
+public class LoginFragment extends Fragment {
     Button btnLogin;
     EditText inputUser, inputPassword;
     TextView forgotPassword;
+    Activity activity;
 
+    @Nullable
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View login = inflater.inflate(R.layout.fragment_login, container, false);
 
-        btnLogin = findViewById(R.id.loginButton);
-        inputUser = findViewById(R.id.userInput);
-        inputPassword = findViewById(R.id.passwordInput);
-        forgotPassword = findViewById(R.id.forgotPasswordTV);
+        btnLogin = login.findViewById(R.id.loginButton);
+        inputUser = login.findViewById(R.id.userInput);
+        inputPassword = login.findViewById(R.id.passwordInput);
+        forgotPassword = login.findViewById(R.id.forgotPasswordTV);
+        activity = getActivity();
 
         forgotPassword.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -42,11 +55,11 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (TextUtils.isEmpty(inputUser.getText().toString()) || TextUtils.isEmpty(inputPassword.getText().toString())) {
-                    String message = "All inputs required ..";
-                    Toast.makeText(LoginActivity.this, message, Toast.LENGTH_SHORT).show();
-                } else if ((inputPassword.getText().toString().length() < 4) || inputPassword.getText().toString().length() > 100) {
-                    String message = "Password must have between 4 and 100 characters ...";
-                    Toast.makeText(LoginActivity.this, message, Toast.LENGTH_SHORT).show();
+                    String message = getString(R.string.val_required);
+                    Toast.makeText(activity, message, Toast.LENGTH_SHORT).show();
+                } else if ((inputPassword.getText().toString().length() < 8) || inputPassword.getText().toString().length() > 100) {
+                    String message = getString(R.string.val_passMin);
+                    Toast.makeText(activity, message, Toast.LENGTH_SHORT).show();
                 } else {
                     UserRequest userRequest = new UserRequest();
                     userRequest.setUsername(inputUser.getText().toString());
@@ -56,7 +69,9 @@ public class LoginActivity extends AppCompatActivity {
                 }
             }
         });
+        return login;
     }
+
 
     public void loginUser(UserRequest userRequest) {
         Call<UserResponse> loginResponseCall = ApiClient.getService().loginUser(userRequest);
@@ -65,23 +80,20 @@ public class LoginActivity extends AppCompatActivity {
             public void onResponse(Call<UserResponse> call, Response<UserResponse> response) {
                 if (response.isSuccessful()) {
                     UserResponse userResponse = response.body();
-                    startActivity(new Intent(LoginActivity.this, MainActivity.class));
-                    finish();
+                    startActivity(new Intent(activity, MenuActivity.class));
+                    activity.finish();
                 } else {
-                    String message = "An error ocurred please try again later ...";
-                    Toast.makeText(LoginActivity.this, message, Toast.LENGTH_SHORT).show();
+                    String message = getString(R.string.error);
+                    Toast.makeText(activity, message, Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<UserResponse> call, Throwable t) {
                 String message = t.getLocalizedMessage();
-                Toast.makeText(LoginActivity.this, message, Toast.LENGTH_SHORT).show();
+                Toast.makeText(activity, message, Toast.LENGTH_SHORT).show();
             }
         });
     }
-    public void clickTextViewRegister(View view){
-        Intent login = new Intent(this,RegisterActivity.class);
-        startActivity(login);
-    }
+
 }

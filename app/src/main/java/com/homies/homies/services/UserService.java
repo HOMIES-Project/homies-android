@@ -1,4 +1,4 @@
-package com.homies.homies;
+package com.homies.homies.services;
 
 import retrofit2.Call;
 import retrofit2.http.Body;

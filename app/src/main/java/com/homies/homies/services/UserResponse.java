@@ -1,14 +1,22 @@
-package com.homies.homies;
+package com.homies.homies.services;
 
-public class UserRequest {
+public class UserResponse {
 
     private String password;
     private String email;
     private String firstName;
     private String lastName;
+    private String langKey;
     private String login;
     private String username;
 
+    public String getLogin() {
+        return login;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
+    }
 
     public String getPassword() {
         return password;
@@ -42,12 +50,12 @@ public class UserRequest {
         this.lastName = lastName;
     }
 
-    public String getLogin() {
-        return login;
+    public String getLangKey() {
+        return langKey;
     }
 
-    public void setLogin(String login) {
-        this.login = login;
+    public void setLangKey(String langKey) {
+        this.langKey = langKey;
     }
 
     public String getUsername() {
@@ -57,5 +65,4 @@ public class UserRequest {
     public void setUsername(String username) {
         this.username = username;
     }
-
 }

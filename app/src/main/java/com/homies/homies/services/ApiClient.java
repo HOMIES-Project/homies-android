@@ -1,4 +1,6 @@
-package com.homies.homies;
+package com.homies.homies.services;
+
+import com.homies.homies.services.UserService;
 
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
@@ -18,7 +20,6 @@ public class ApiClient {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://homies-1854.herokuapp.com/api/")
                 .addConverterFactory(GsonConverterFactory.create())
-
                 .client(okHttpClient)
                 .build();
 
