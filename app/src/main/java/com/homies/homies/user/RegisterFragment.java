@@ -1,10 +1,13 @@
 package com.homies.homies.user;
 
 import android.app.Activity;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.os.Bundle;
 
+import androidx.annotation.ColorInt;
 import androidx.annotation.Nullable;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -19,6 +22,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputLayout;
 import com.homies.homies.R;
 import com.homies.homies.services.Adaptador;
@@ -61,6 +65,7 @@ public class RegisterFragment extends Fragment {
         et_password = register.findViewById(R.id.et_password);
         et_repassword = register.findViewById(R.id.et_repassword);
         btn_register = register.findViewById(R.id.btn_register);
+        View snack =register.findViewById(R.id.main_layout);
 
 
         logIn = register.findViewById(R.id.logIn);
@@ -81,6 +86,7 @@ public class RegisterFragment extends Fragment {
         btn_register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                snackBar();
                 condition = true;
                 validatePassword();
                 validateEmail();
@@ -121,6 +127,7 @@ public class RegisterFragment extends Fragment {
 
                 if (response.isSuccessful() && condition) {
                     Toast.makeText(activity, getString(R.string.signUpCorrect), Toast.LENGTH_LONG).show();
+
                 } else {
                     Toast.makeText(activity, getString(R.string.signUpFailed), Toast.LENGTH_LONG).show();
                 }
@@ -181,5 +188,18 @@ public class RegisterFragment extends Fragment {
             ip_password.setErrorEnabled(false);
             ip_repassword.setErrorEnabled(false);
         }
+    }
+
+    public void snackBar () {
+        Snackbar snackBar = Snackbar.make(getActivity().findViewById(android.R.id.content),
+                getString(R.string.snack), Snackbar.LENGTH_INDEFINITE);
+        snackBar.getView().setBackgroundColor(Color.parseColor("#64A5C3"));
+        snackBar.setAction("Aceptar", new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //se oculta
+            }
+        }).show();
+
     }
 }
