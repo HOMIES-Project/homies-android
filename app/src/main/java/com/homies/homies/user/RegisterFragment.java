@@ -72,7 +72,6 @@ public class RegisterFragment extends Fragment {
         signUp = register.findViewById(R.id.signUp);
         adaptador = new Adaptador(getParentFragmentManager());
 
-        signUp.setPaintFlags(signUp.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
         logIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
