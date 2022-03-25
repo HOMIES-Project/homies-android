@@ -28,9 +28,9 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           tag_name: ${{ github.run_id }}-${{ github.run_number }}-${{ github.ref }}
-          release_name: Release ${{ github.ref }}
+          release_name: Release ${{ github.run_number }}-${{ github.ref }}
           draft: false
-          prerelease: false
+          prerelease: true
 
       - name: ✅ Save name of our Artifact
         id: set-result-artifact
