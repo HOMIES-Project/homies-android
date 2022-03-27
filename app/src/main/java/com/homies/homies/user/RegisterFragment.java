@@ -36,8 +36,7 @@ import retrofit2.Response;
 
 public class RegisterFragment extends Fragment {
 
-    ImageView logo;
-    TextView login, sign;
+
     EditText et_user, et_name, et_lastname, et_email, et_password, et_repassword;
     TextInputLayout ip_user, ip_name, ip_lastname, ip_email, ip_password, ip_repassword;
     Button btn_register, signUp, logIn;
@@ -85,10 +84,11 @@ public class RegisterFragment extends Fragment {
         btn_register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showSnackBar();
                 condition = true;
                 validatePassword();
                 validateEmail();
+                confirmPassword();
+
                 if (et_user.getText().toString().trim().length() < 4) {
                     ip_user.setError(getString(R.string.val_username));
                     condition = false;
@@ -98,6 +98,7 @@ public class RegisterFragment extends Fragment {
                 if (condition) {
                     saveUser((createRequest()));
                     Login(view);
+
 
                 }
             }
@@ -126,8 +127,12 @@ public class RegisterFragment extends Fragment {
 
                 if (response.isSuccessful() && condition) {
                     Toast.makeText(activity, getString(R.string.signUpCorrect), Toast.LENGTH_LONG).show();
+                    showSnackBar();
 
-                } else {
+                } else if (response.code()== 400) {
+                    Toast.makeText(activity, getString(R.string.error_user_registered), Toast.LENGTH_LONG).show();
+
+                }else{
                     Toast.makeText(activity, getString(R.string.signUpFailed), Toast.LENGTH_LONG).show();
                 }
             }
@@ -157,7 +162,7 @@ public class RegisterFragment extends Fragment {
             condition = false;
         }
         if (emailInput.length() < 8) {
-            ip_password.setError(getString(R.string.val_passMin));
+            ip_email.setError(getString(R.string.val_email));
             condition = false;
         } else if (!Patterns.EMAIL_ADDRESS.matcher(emailInput).matches()) {
             ip_email.setError(getString(R.string.fieldEmail));
@@ -169,7 +174,6 @@ public class RegisterFragment extends Fragment {
 
     private void validatePassword() {
         String passwordInput = et_password.getText().toString().trim();
-        String confirmPasswordInput = et_repassword.getText().toString().trim();
         if (passwordInput.isEmpty()) {
             ip_password.setError(getString(R.string.fieldEmpty));
             condition = false;
@@ -180,14 +184,20 @@ public class RegisterFragment extends Fragment {
         } else {
             ip_password.setErrorEnabled(false);
         }
+    }
+
+    private void confirmPassword() {
+        String passwordInput = et_password.getText().toString().trim();
+        String confirmPasswordInput = et_repassword.getText().toString().trim();
+
         if (!passwordInput.equals(confirmPasswordInput)) {
             condition = false;
             ip_repassword.setError(getString(R.string.val_pass_matched));
         } else {
-            ip_password.setErrorEnabled(false);
             ip_repassword.setErrorEnabled(false);
         }
     }
+
 
     public void showSnackBar () {
         Snackbar snackBar = Snackbar.make(getActivity().findViewById(android.R.id.content),
@@ -201,4 +211,5 @@ public class RegisterFragment extends Fragment {
         }).show();
 
     }
+
 }
