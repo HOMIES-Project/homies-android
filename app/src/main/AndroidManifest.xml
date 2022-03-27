@@ -11,7 +11,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Homies">
-        <activity android:name=".LayoutBottonSheet"></activity>
         <activity
             android:name=".MenuActivity"
             android:exported="false" />

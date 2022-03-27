@@ -56,5 +56,4 @@ public class Adaptador extends FragmentPagerAdapter {
         }
         return titulo;
     }
-
 }
