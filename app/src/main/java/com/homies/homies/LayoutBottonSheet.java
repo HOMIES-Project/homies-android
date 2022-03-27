@@ -38,9 +38,6 @@ public class LayoutBottonSheet extends AppCompatActivity {
                         if (TextUtils.isEmpty(passInput.getText().toString())) {
                             String message = getString(R.string.val_required);
                             Toast.makeText(LayoutBottonSheet.this, message, Toast.LENGTH_SHORT).show();
-                        } else if (passInput.getText().toString().length() < 8 || passInput.getText().toString().length() > 100){
-                            String message = getString(R.string.val_passMin);
-                            Toast.makeText(LayoutBottonSheet.this, message, Toast.LENGTH_SHORT).show();
                         } else {
                             UserRequest userRequest = new UserRequest();
                             userRequest.setPassword(passInput.getText().toString());
