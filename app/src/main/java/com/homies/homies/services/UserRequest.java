@@ -8,6 +8,7 @@ public class UserRequest {
     private String lastName;
     private String login;
     private String username;
+    private String token;
 
     public String getLangKey() {
         return langKey;
@@ -68,4 +69,11 @@ public class UserRequest {
         this.username = username;
     }
 
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
 }

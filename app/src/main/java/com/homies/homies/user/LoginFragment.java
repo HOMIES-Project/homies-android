@@ -2,6 +2,7 @@ package com.homies.homies.user;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.graphics.Paint;
 import android.os.Bundle;
@@ -16,9 +17,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.homies.homies.MainActivity;
 import com.homies.homies.MenuActivity;
 import com.homies.homies.R;
 import com.homies.homies.services.Adaptador;
@@ -32,8 +36,8 @@ import retrofit2.Response;
 
 
 public class LoginFragment extends Fragment {
-    Button btnLogin,  signUp, logIn;
-    EditText inputUser, inputPassword;
+    Button btnLogin,  signUp, logIn, btnRecover;
+    EditText inputUser, inputPassword, recoverInput;
     TextView forgotPassword;
     Activity activity;
     Adaptador adaptador;
@@ -42,11 +46,16 @@ public class LoginFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View login = inflater.inflate(R.layout.fragment_login, container, false);
+        View lostPassword = inflater.inflate(R.layout.layout_botton_sheet, container, false);
 
         btnLogin = login.findViewById(R.id.loginButton);
         inputUser = login.findViewById(R.id.userInput);
         inputPassword = login.findViewById(R.id.passwordInput);
         forgotPassword = login.findViewById(R.id.forgotPasswordTV);
+        recoverInput = lostPassword.findViewById(R.id.recoverInput);
+        btnRecover = lostPassword.findViewById(R.id.recoverButton);
+
+
         activity = getActivity();
 
         logIn = login.findViewById(R.id.logIn);
@@ -61,15 +70,29 @@ public class LoginFragment extends Fragment {
                 FragmentTransaction fragmentTransaction = getParentFragmentManager().beginTransaction();
                 fragmentTransaction.replace(R.id.fragment, registerFragment);
                 fragmentTransaction.commit();
-
-
             }
         });
 
         forgotPassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //startActivity(new Intent(LoginActivity.this));
+                BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(
+                        getActivity(), R.style.BottonSheetDialogTheme
+                );
+                View bottomSheetView = LayoutInflater.from(activity.getApplicationContext())
+                        .inflate(
+                                R.layout.layout_botton_sheet,
+                                (ScrollView)login.findViewById(R.id.bottonSheetContainer)
+                        );
+
+                btnRecover.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        bottomSheetDialog.dismiss();
+                    }
+                });
+                bottomSheetDialog.setContentView(bottomSheetView);
+                bottomSheetDialog.show();
             }
         });
 
@@ -79,7 +102,7 @@ public class LoginFragment extends Fragment {
                 if (TextUtils.isEmpty(inputUser.getText().toString()) || TextUtils.isEmpty(inputPassword.getText().toString())) {
                     String message = getString(R.string.val_required);
                     Toast.makeText(activity, message, Toast.LENGTH_SHORT).show();
-                } else if ((inputPassword.getText().toString().length() < 8) || inputPassword.getText().toString().length() > 100) {
+                } else if ((inputPassword.getText().toString().length() < 8)) {
                     String message = getString(R.string.val_passMin);
                     Toast.makeText(activity, message, Toast.LENGTH_SHORT).show();
                 } else {

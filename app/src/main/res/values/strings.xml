@@ -9,7 +9,7 @@
     <string name="your_first_name">Nombre</string>
     <string name="your_last_name">Apellidos</string>
     <string name="val_required">Todos los campos obligatorios</string>
-    <string name="val_passMin">Contraseña mínima de 4 caracteres</string>
+    <string name="val_passMin">Contraseña mínima de 8 caracteres</string>
     <string name="val_username">Mínimo de 4 caracteres</string>
     <string name="val_email">Mínimo de 8 caracteres</string>
     <string name="val_pass">Mínimo de 8 caracteres</string>
