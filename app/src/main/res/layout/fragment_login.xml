@@ -27,6 +27,16 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <View
+            android:layout_width="100dp"
+            android:layout_height="4dp"
+            android:layout_alignBaseline="@+id/logIn"
+            android:layout_alignParentEnd="true"
+            android:background="@color/primaryColor"
+            app:layout_constraintEnd_toEndOf="@+id/logIn"
+            app:layout_constraintStart_toStartOf="@+id/logIn"
+            app:layout_constraintTop_toBottomOf="@+id/logIn" />
+
         <Button
             android:id="@+id/signUp"
             android:layout_width="wrap_content"

@@ -53,7 +53,6 @@ public class LoginFragment extends Fragment {
         signUp = login.findViewById(R.id.signUp);
         adaptador = new Adaptador(getParentFragmentManager());
 
-        logIn.setPaintFlags(logIn.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
         signUp.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("ResourceType")
             @Override
@@ -106,7 +105,7 @@ public class LoginFragment extends Fragment {
                     startActivity(new Intent(activity, MenuActivity.class));
                     activity.finish();
                 } else {
-                    String message = getString(R.string.error);
+                    String message = getString(R.string.error_login);
                     Toast.makeText(activity, message, Toast.LENGTH_SHORT).show();
                 }
             }
