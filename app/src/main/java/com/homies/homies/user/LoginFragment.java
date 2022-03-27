@@ -86,14 +86,22 @@ public class LoginFragment extends Fragment {
                             String message = getString(R.string.val_required);
                             Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
                         } else {
+                            //reset password
                             UserRequest userRequest = new UserRequest();
-                            userRequest.setPassword(passInput.getText().toString().trim());
+                            userRequest.setEmail(passInput.getText().toString().trim());
+                            String key = userRequest.getKey();
 
                             resetPassword(userRequest);
 
+                            //confirm password
+                            userRequest.setKey(key);
+                            String newPassword = userRequest.getPassword();
+                            userRequest.setPassword(newPassword);
+
+                            confirmPassword(userRequest);
+
                             bottomSheetDialog.dismiss();
                         }
-
                     }
                 });
                 bottomSheetDialog.setContentView(bottomSheetView);
@@ -149,6 +157,26 @@ public class LoginFragment extends Fragment {
     public void resetPassword(UserRequest userRequest) {
         Call<UserResponse> resetPasswordResponseCall = ApiClient.getService().resetPassword(userRequest);
         resetPasswordResponseCall.enqueue(new Callback<UserResponse>() {
+            @Override
+            public void onResponse(Call<UserResponse> call, Response<UserResponse> response) {
+                if (response.isSuccessful()) {
+                    UserResponse userResponse = response.body();
+                } else {
+                    String message = getString(R.string.error_login);
+                    Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<UserResponse> call, Throwable t) {
+                String message = t.getLocalizedMessage();
+                Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+    public void confirmPassword(UserRequest userRequest) {
+        Call<UserResponse> confirmPasswordResponseCall = ApiClient.getService().applyPassword(userRequest);
+        confirmPasswordResponseCall.enqueue(new Callback<UserResponse>() {
             @Override
             public void onResponse(Call<UserResponse> call, Response<UserResponse> response) {
                 if (response.isSuccessful()) {
