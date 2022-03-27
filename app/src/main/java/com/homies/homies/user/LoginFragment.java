@@ -105,7 +105,7 @@ public class LoginFragment extends Fragment {
                     startActivity(new Intent(activity, MenuActivity.class));
                     activity.finish();
                 } else {
-                    String message = getString(R.string.error);
+                    String message = getString(R.string.error_login);
                     Toast.makeText(activity, message, Toast.LENGTH_SHORT).show();
                 }
             }

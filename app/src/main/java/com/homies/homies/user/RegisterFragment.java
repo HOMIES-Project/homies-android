@@ -85,7 +85,7 @@ public class RegisterFragment extends Fragment {
         btn_register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                snackBar();
+                showSnackBar();
                 condition = true;
                 validatePassword();
                 validateEmail();
@@ -189,9 +189,9 @@ public class RegisterFragment extends Fragment {
         }
     }
 
-    public void snackBar () {
+    public void showSnackBar () {
         Snackbar snackBar = Snackbar.make(getActivity().findViewById(android.R.id.content),
-                getString(R.string.snack), Snackbar.LENGTH_INDEFINITE);
+                getString(R.string.snackbar_confirm_email), Snackbar.LENGTH_INDEFINITE);
         snackBar.getView().setBackgroundColor(Color.parseColor("#64A5C3"));
         snackBar.setAction("Aceptar", new View.OnClickListener() {
             @Override
