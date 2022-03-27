@@ -12,4 +12,7 @@ public interface UserService {
     @POST("register")
     Call<Void> saveUser(@Body UserRequest userRequest);
 
+    @POST("account/reset-password/init")
+    Call<UserResponse> resetUser(@Body UserRequest userRequest);
+
 }
