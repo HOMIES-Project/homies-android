@@ -9,6 +9,8 @@ public class UserResponse {
     private String langKey;
     private String login;
     private String username;
+    private String token;
+    private String key;
 
     public String getLogin() {
         return login;
@@ -64,5 +66,21 @@ public class UserResponse {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
     }
 }

@@ -9,15 +9,15 @@
     <string name="your_first_name">Nombre</string>
     <string name="your_last_name">Apellidos</string>
     <string name="val_required">Todos los campos obligatorios</string>
-    <string name="val_passMin">Contraseña mínima de 4 caracteres</string>
+    <string name="val_passMin">Contraseña mínima de 8 caracteres</string>
     <string name="val_username">Mínimo de 4 caracteres</string>
     <string name="val_email">Mínimo de 8 caracteres</string>
     <string name="val_pass">Mínimo de 8 caracteres</string>
     <string name="val_repass">Mínimo de 8 caracteres</string>
     <string name="val_pass_matched">La contraseña no coincide</string>
-    <string name="login">Log In</string>
+    <string name="login">Login</string>
     <string name="rememberPassword">¿Has olvidado la contraseña?</string>
-    <string name="signUpPage">Sign up</string>
+    <string name="signUpPage">Registro</string>
     <string name="signUpCorrect">Registrado</string>
     <string name="signUpFailed">Error en el registro</string>
     <string name="fieldEmpty">El campo no puede estar vacio</string>
@@ -28,4 +28,8 @@
     <string name="snackbar_confirm_email">Revisa tu email para finalizar el registro</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="recoverInput">Email</string>
+    <string name="ingressEmail">Debes de introducir una dirección de email para que la contraseña se envíe.</string>
+    <string name="recoverButton">Enviar</string>
 </resources>
