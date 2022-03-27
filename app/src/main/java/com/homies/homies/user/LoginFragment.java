@@ -36,8 +36,8 @@ import retrofit2.Response;
 
 
 public class LoginFragment extends Fragment {
-    Button btnLogin,  signUp, logIn, btnRecover;
-    EditText inputUser, inputPassword, recoverInput;
+    Button btnLogin, signUp, logIn;
+    EditText inputUser, inputPassword;
     TextView forgotPassword;
     Activity activity;
     Adaptador adaptador;
@@ -46,15 +46,11 @@ public class LoginFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View login = inflater.inflate(R.layout.fragment_login, container, false);
-        View lostPassword = inflater.inflate(R.layout.layout_botton_sheet, container, false);
 
         btnLogin = login.findViewById(R.id.loginButton);
         inputUser = login.findViewById(R.id.userInput);
         inputPassword = login.findViewById(R.id.passwordInput);
         forgotPassword = login.findViewById(R.id.forgotPasswordTV);
-        recoverInput = lostPassword.findViewById(R.id.recoverInput);
-        btnRecover = lostPassword.findViewById(R.id.recoverButton);
-
 
         activity = getActivity();
 
@@ -81,16 +77,11 @@ public class LoginFragment extends Fragment {
                 );
                 View bottomSheetView = LayoutInflater.from(activity.getApplicationContext())
                         .inflate(
-                                R.layout.layout_botton_sheet,
+                                R.layout.activity_layout_botton_sheet,
                                 (ScrollView)login.findViewById(R.id.bottonSheetContainer)
                         );
+                bottomSheetDialog.dismiss();
 
-                btnRecover.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        bottomSheetDialog.dismiss();
-                    }
-                });
                 bottomSheetDialog.setContentView(bottomSheetView);
                 bottomSheetDialog.show();
             }
@@ -117,7 +108,6 @@ public class LoginFragment extends Fragment {
         return login;
     }
 
-
     public void loginUser(UserRequest userRequest) {
         Call<UserResponse> loginResponseCall = ApiClient.getService().loginUser(userRequest);
         loginResponseCall.enqueue(new Callback<UserResponse>() {
@@ -139,6 +129,7 @@ public class LoginFragment extends Fragment {
                 Toast.makeText(activity, message, Toast.LENGTH_SHORT).show();
             }
         });
+
     }
 
 }
