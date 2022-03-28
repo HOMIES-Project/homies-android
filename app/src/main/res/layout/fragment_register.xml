@@ -8,56 +8,83 @@
     tools:context=".user.RegisterFragment">
 
 
-    <Button
-        android:id="@+id/logIn"
-        style="?android:attr/borderlessButtonStyle"
-        android:layout_width="wrap_content"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="105dp"
-        android:layout_marginTop="26dp"
-        android:fontFamily="@font/montserrat_regular"
-        android:text="@string/login"
-        android:textAllCaps="false"
-        android:textColor="@color/secondaryTextColor"
-        android:textSize="17sp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="1dp"
+        android:padding="1dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:id="@+id/cons_button">
 
         <Button
-            android:id="@+id/signUp"
+            android:id="@+id/logIn"
             style="?android:attr/borderlessButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="30dp"
+            android:layout_marginStart="105dp"
             android:layout_marginTop="26dp"
-            android:layout_marginEnd="105dp"
-            android:layout_marginBottom="30dp"
             android:fontFamily="@font/montserrat_regular"
-            android:text="@string/signUpPage"
+            android:text="@string/login"
             android:textAllCaps="false"
-            android:textColor="@color/black"
+            android:textColor="@color/secondaryTextColor"
             android:textSize="17sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/logIn"
+            app:layout_constraintEnd_toStartOf="@+id/cons_signUp"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-    <View
-        android:id="@+id/view"
-        android:layout_width="100dp"
-        android:layout_height="4dp"
-        android:layout_alignBaseline="@+id/logIn"
-        android:layout_alignParentEnd="true"
-        android:background="@color/primaryColor"
-        app:layout_constraintEnd_toEndOf="@+id/signUp"
-        app:layout_constraintStart_toStartOf="@+id/signUp"
-        app:layout_constraintTop_toBottomOf="@+id/signUp" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cons_signUp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginEnd="0dp"
+            android:layout_marginBottom="0dp"
+            app:layout_constraintStart_toEndOf="@+id/logIn"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <Button
+                android:id="@+id/signUp"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="26dp"
+                android:layout_marginEnd="105dp"
+                android:layout_marginBottom="30dp"
+                android:fontFamily="@font/montserrat_regular"
+                android:text="@string/signUpPage"
+                android:textAllCaps="false"
+                android:textColor="@color/black"
+                android:textSize="17sp"
+                app:layout_constraintEnd_toEndOf="parent"
+
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <View
+                android:id="@+id/view"
+                android:layout_width="100dp"
+                android:layout_height="4dp"
+                android:layout_alignParentEnd="true"
+                android:background="@color/primaryColor"
+                app:layout_constraintEnd_toEndOf="@+id/signUp"
+                app:layout_constraintStart_toStartOf="@+id/signUp"
+                app:layout_constraintTop_toBottomOf="@+id/signUp" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 
     <ScrollView
         android:id="@+id/scrollView2"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="94dp"
-        app:layout_constraintTop_toBottomOf="@+id/signUp">
+        app:layout_constraintTop_toBottomOf="@+id/cons_button">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/re"
