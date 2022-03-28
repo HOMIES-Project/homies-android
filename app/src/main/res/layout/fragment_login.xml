@@ -12,48 +12,76 @@
         android:layout_height="wrap_content"
         tools:context=".user.LoginFragment">
 
-        <Button
-            android:id="@+id/logIn"
-            style="?android:attr/borderlessButtonStyle"
-            android:layout_width="wrap_content"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="105dp"
-            android:layout_marginTop="26dp"
-            android:fontFamily="@font/montserrat_regular"
-            android:text="@string/login"
-            android:textAllCaps="false"
-            android:textColor="@color/secondaryTextColor"
-            android:textSize="17sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <View
-            android:layout_width="100dp"
-            android:layout_height="4dp"
-            android:layout_alignBaseline="@+id/logIn"
-            android:layout_alignParentEnd="true"
-            android:background="@color/primaryColor"
-            app:layout_constraintEnd_toEndOf="@+id/logIn"
-            app:layout_constraintStart_toStartOf="@+id/logIn"
-            app:layout_constraintTop_toBottomOf="@+id/logIn" />
-
-        <Button
-            android:id="@+id/signUp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="30dp"
-            android:layout_marginTop="26dp"
-            android:layout_marginEnd="105dp"
-            android:layout_marginBottom="30dp"
-            android:fontFamily="@font/montserrat_regular"
-            android:text="@string/signUpPage"
-            android:textAllCaps="false"
-            android:textSize="17sp"
-            style="?android:attr/borderlessButtonStyle"
-            android:textColor="@color/black"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="1dp"
+            android:padding="1dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/logIn"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:id="@+id/cons_button">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cons_login"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/cons_signUp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/cons_button">
+
+
+                <Button
+                    android:id="@+id/logIn"
+                    style="?android:attr/borderlessButtonStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:fontFamily="@font/montserrat_regular"
+                    android:text="@string/login"
+                    android:textAllCaps="false"
+                    android:textColor="@color/secondaryTextColor"
+                    android:textSize="17sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+                <View
+                    android:id="@+id/view"
+                    android:layout_width="100dp"
+                    android:layout_height="4dp"
+                    android:layout_alignParentEnd="true"
+                    android:background="@color/primaryColor"
+                    app:layout_constraintEnd_toEndOf="@+id/logIn"
+                    app:layout_constraintStart_toStartOf="@+id/logIn"
+                    app:layout_constraintTop_toBottomOf="@+id/logIn" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cons_signUp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/cons_login"
+                app:layout_constraintTop_toTopOf="@+id/cons_button">
+
+                <Button
+                    android:id="@+id/signUp"
+                    style="?android:attr/borderlessButtonStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat_regular"
+                    android:text="@string/signUpPage"
+                    android:textAllCaps="false"
+                    android:textColor="@color/black"
+                    android:textSize="17sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/ip_user"
@@ -71,7 +99,7 @@
             app:errorTextAppearance="@style/error_appearance"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/logIn"
+            app:layout_constraintTop_toBottomOf="@+id/cons_button"
             app:startIconDrawable="@drawable/ic_email"
             app:startIconTint="@color/primaryColor">
 
@@ -99,7 +127,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="20dp"
             android:layout_marginEnd="20dp"
             android:padding="1dp"
             app:boxStrokeWidth="0dp"
