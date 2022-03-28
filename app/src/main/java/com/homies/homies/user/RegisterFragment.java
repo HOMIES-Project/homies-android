@@ -132,6 +132,9 @@ public class RegisterFragment extends Fragment {
                 } else if (response.code()== 400) {
                     Toast.makeText(activity, getString(R.string.error_user_registered), Toast.LENGTH_LONG).show();
 
+                }else if (response.code()== 500) {
+                    Toast.makeText(activity, getString(R.string.error_server), Toast.LENGTH_LONG).show();
+
                 }else{
                     Toast.makeText(activity, getString(R.string.signUpFailed), Toast.LENGTH_LONG).show();
                 }
