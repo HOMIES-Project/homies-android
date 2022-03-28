@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -88,17 +89,20 @@ public class LoginFragment extends Fragment {
                         } else {
                             //reset password
                             UserRequest userRequest = new UserRequest();
-                            userRequest.setEmail(passInput.getText().toString().trim());
-                            String key = userRequest.getKey();
 
-                            resetPassword(userRequest);
+                            String email = passInput.getText().toString().trim();
+                            //userRequest.setEmail();
+                            String key = userRequest.getKey();
+                            resetPassword(email);
+
 
                             //confirm password
-                            userRequest.setKey(key);
+                            /*userRequest.setKey(key);
                             String newPassword = userRequest.getPassword();
                             userRequest.setPassword(newPassword);
 
-                            confirmPassword(userRequest);
+
+                            confirmPassword(userRequest);*/
 
                             bottomSheetDialog.dismiss();
                         }
@@ -154,8 +158,8 @@ public class LoginFragment extends Fragment {
 
     }
 
-    public void resetPassword(UserRequest userRequest) {
-        Call<UserResponse> resetPasswordResponseCall = ApiClient.getService().resetPassword(userRequest);
+    public void resetPassword(String email) {
+        Call<UserResponse> resetPasswordResponseCall = ApiClient.getService().resetPassword(email);
         resetPasswordResponseCall.enqueue(new Callback<UserResponse>() {
             @Override
             public void onResponse(Call<UserResponse> call, Response<UserResponse> response) {
