@@ -54,77 +54,53 @@ public class LoginFragment extends Fragment {
         signUp = login.findViewById(R.id.signUp);
         adaptador = new Adaptador(getParentFragmentManager());
 
-        signUp.setOnClickListener(new View.OnClickListener() {
-            @SuppressLint("ResourceType")
-            @Override
-            public void onClick(View view) {
-                RegisterFragment registerFragment = new RegisterFragment();
-                FragmentTransaction fragmentTransaction = getParentFragmentManager().beginTransaction();
-                fragmentTransaction.replace(R.id.fragment, registerFragment);
-                fragmentTransaction.commit();
-            }
+        signUp.setOnClickListener(view -> {
+            RegisterFragment registerFragment = new RegisterFragment();
+            FragmentTransaction fragmentTransaction = getParentFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.fragment, registerFragment);
+            fragmentTransaction.commit();
         });
 
-        forgotPassword.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(
-                        getActivity(), R.style.BottonSheetDialogTheme
-                );
-                View bottomSheetView = LayoutInflater.from(activity.getApplicationContext())
-                        .inflate(
-                                R.layout.activity_layout_botton_sheet,
-                                (ScrollView)login.findViewById(R.id.bottonSheetContainer)
-                        );
+        forgotPassword.setOnClickListener((View.OnClickListener) view -> {
+            BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(
+                    getActivity(), R.style.BottonSheetDialogTheme
+            );
+            View bottomSheetView = LayoutInflater.from(activity.getApplicationContext())
+                    .inflate(
+                            R.layout.activity_layout_botton_sheet,
+                            (ScrollView)login.findViewById(R.id.bottonSheetContainer)
+                    );
 
-                passInput = bottomSheetView.findViewById(R.id.recoverInput);
-                btnRecover = bottomSheetView.findViewById(R.id.btnRecover);
-                btnRecover.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        if (passInput.getText().toString().trim().isEmpty()) {
-                            String message = getString(R.string.val_required);
-                            Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
-                        } else {
-                            //reset password
-                            UserRequest userRequest = new UserRequest();
-                            userRequest.setEmail(passInput.getText().toString().trim());
-                            String key = userRequest.getKey();
-
-                            resetPassword(userRequest);
-
-                            //confirm password
-                            userRequest.setKey(key);
-                            String newPassword = userRequest.getPassword();
-                            userRequest.setPassword(newPassword);
-
-                            confirmPassword(userRequest);
-
-                            bottomSheetDialog.dismiss();
-                        }
-                    }
-                });
-                bottomSheetDialog.setContentView(bottomSheetView);
-                bottomSheetDialog.show();
-            }
-        });
-
-        btnLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (TextUtils.isEmpty(inputUser.getText().toString().trim()) || TextUtils.isEmpty(inputPassword.getText().toString().trim())) {
+            passInput = bottomSheetView.findViewById(R.id.recoverInput);
+            btnRecover = bottomSheetView.findViewById(R.id.btnRecover);
+            btnRecover.setOnClickListener(view1 -> {
+                if (passInput.getText().toString().trim().isEmpty()) {
                     String message = getString(R.string.val_required);
-                    Toast.makeText(activity, message, Toast.LENGTH_SHORT).show();
-                } else if ((inputPassword.getText().toString().trim().length() < 8)) {
-                    String message = getString(R.string.val_passMin);
-                    Toast.makeText(activity, message, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
                 } else {
-                    UserRequest userRequest = new UserRequest();
-                    userRequest.setUsername(inputUser.getText().toString().trim());
-                    userRequest.setPassword(inputPassword.getText().toString().trim());
 
-                    loginUser(userRequest);
+                    String email = passInput.getText().toString().trim();
+                    resetPassword(email);
+                    bottomSheetDialog.dismiss();
                 }
+            });
+            bottomSheetDialog.setContentView(bottomSheetView);
+            bottomSheetDialog.show();
+        });
+
+        btnLogin.setOnClickListener(view -> {
+            if (TextUtils.isEmpty(inputUser.getText().toString().trim()) || TextUtils.isEmpty(inputPassword.getText().toString().trim())) {
+                String message = getString(R.string.val_required);
+                Toast.makeText(activity, message, Toast.LENGTH_SHORT).show();
+            } else if ((inputPassword.getText().toString().trim().length() < 8)) {
+                String message = getString(R.string.val_passMin);
+                Toast.makeText(activity, message, Toast.LENGTH_SHORT).show();
+            } else {
+                UserRequest userRequest = new UserRequest();
+                userRequest.setUsername(inputUser.getText().toString().trim());
+                userRequest.setPassword(inputPassword.getText().toString().trim());
+
+                loginUser(userRequest);
             }
         });
         return login;
@@ -154,13 +130,14 @@ public class LoginFragment extends Fragment {
 
     }
 
-    public void resetPassword(UserRequest userRequest) {
-        Call<UserResponse> resetPasswordResponseCall = ApiClient.getService().resetPassword(userRequest);
-        resetPasswordResponseCall.enqueue(new Callback<UserResponse>() {
+    public void resetPassword(String email) {
+        Call<Void> resetPasswordResponseCall = ApiClient.getService().resetPassword(email);
+        resetPasswordResponseCall.enqueue(new Callback<Void>() {
             @Override
-            public void onResponse(Call<UserResponse> call, Response<UserResponse> response) {
+            public void onResponse(Call<Void> call, Response<Void> response) {
                 if (response.isSuccessful()) {
-                    UserResponse userResponse = response.body();
+                    String message = "Revisa tu correo";
+                    Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
                 } else {
                     String message = getString(R.string.error_login);
                     Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
@@ -168,27 +145,7 @@ public class LoginFragment extends Fragment {
             }
 
             @Override
-            public void onFailure(Call<UserResponse> call, Throwable t) {
-                String message = t.getLocalizedMessage();
-                Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
-    public void confirmPassword(UserRequest userRequest) {
-        Call<UserResponse> confirmPasswordResponseCall = ApiClient.getService().applyPassword(userRequest);
-        confirmPasswordResponseCall.enqueue(new Callback<UserResponse>() {
-            @Override
-            public void onResponse(Call<UserResponse> call, Response<UserResponse> response) {
-                if (response.isSuccessful()) {
-                    UserResponse userResponse = response.body();
-                } else {
-                    String message = getString(R.string.error_login);
-                    Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<UserResponse> call, Throwable t) {
+            public void onFailure(Call<Void> call, Throwable t) {
                 String message = t.getLocalizedMessage();
                 Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
             }

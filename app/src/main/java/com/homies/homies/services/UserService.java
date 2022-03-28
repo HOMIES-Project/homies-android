@@ -16,8 +16,6 @@ public interface UserService {
     Call<UserResponse> changePassword(@Body UserRequest userRequest);
 
     @POST("account/reset-password/init")
-    Call<UserResponse> resetPassword(@Body UserRequest userRequest);
+    Call<Void> resetPassword(@Body String email);
 
-    @POST("account/reset-password/finish")
-    Call<UserResponse> applyPassword(@Body UserRequest userRequest);
 }
