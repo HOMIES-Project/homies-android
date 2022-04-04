@@ -35,4 +35,7 @@
     <string name="recoverInput">Email</string>
     <string name="ingressEmail">Debes de introducir una dirección de email para que la contraseña se envíe.</string>
     <string name="recoverButton">Enviar</string>
+    <string name="settings">Opciones</string>
+    <string name="group_exit">Salir del grupo</string>
+    <string name="log_out">Cerrar sesion</string>
 </resources>
