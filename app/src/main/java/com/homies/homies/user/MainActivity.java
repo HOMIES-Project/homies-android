@@ -1,17 +1,13 @@
-package com.homies.homies;
+package com.homies.homies.user;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentTransaction;
 
-import android.annotation.SuppressLint;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 
+import com.homies.homies.R;
 import com.homies.homies.services.UserResponse;
 import com.homies.homies.services.Adaptador;
-import com.homies.homies.user.LoginFragment;
-import com.homies.homies.user.RegisterFragment;
 
 public class MainActivity extends AppCompatActivity {
     UserResponse loginResponse;
@@ -21,7 +17,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_user);
 
         logIn = findViewById(R.id.logIn);
         signUp = findViewById(R.id.signUp);
