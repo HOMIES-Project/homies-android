@@ -1,5 +1,8 @@
 package com.homies.homies.services;
 
+import static com.squareup.okhttp.internal.Internal.instance;
+
+import com.google.android.gms.common.api.Api;
 import com.homies.homies.services.UserService;
 
 import okhttp3.OkHttpClient;
@@ -8,6 +11,9 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ApiClient {
+
+    private static ApiClient instance = null;
+    private Api myApi;
 
 
     private static Retrofit getRetrofit(){
@@ -26,15 +32,26 @@ public class ApiClient {
         return retrofit;
     }
 
+    public static synchronized ApiClient getInstance() {
+        if (instance == null) {
+            instance = new ApiClient();
+        }
+        return instance;
+    }
+
+    public Api getMyApi() {
+        return myApi;
+    }
+
 
     public static UserService getService() {
 
         UserService userService = getRetrofit().create(UserService.class);
-
         return userService;
 
         
     }
+
 
 
 }

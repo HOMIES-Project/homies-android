@@ -10,6 +10,7 @@ public class UserRequest {
     private String username;
     private String token;
     private String key;
+    private String langKey;
 
     public String getLangKey() {
         return langKey;
@@ -18,9 +19,6 @@ public class UserRequest {
     public void setLangKey(String langKey) {
         this.langKey = langKey;
     }
-
-    private String langKey;
-
 
     public String getPassword() {
         return password;
