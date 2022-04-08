@@ -1,7 +1,11 @@
 package com.homies.homies;
 
 
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.nfc.Tag;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,46 +33,31 @@ import retrofit2.Response;
 public class GroupFragment extends Fragment {
 
     ListView recyclerView;
-    String groups;
     
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View group = inflater.inflate(R.layout.fragment_group, container, false);
-        /*MyListData[] myListData = new MyListData[] {
-                new MyListData("Email", android.R.drawable.ic_dialog_email),
-                new MyListData("Info", android.R.drawable.ic_dialog_info),
-                new MyListData("Delete", android.R.drawable.ic_delete),
-                new MyListData("Dialer", android.R.drawable.ic_dialog_dialer),
-                new MyListData("Alert", android.R.drawable.ic_dialog_alert),
-                new MyListData("Map", android.R.drawable.ic_dialog_map),
-
-
-        };
-
-
-        RecyclerView recyclerView = (RecyclerView) group.findViewById(R.id.recyclerView);
-        MyListAdapter adapter = new MyListAdapter(myListData);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        recyclerView.setAdapter(adapter);*/
-
+        getGroup();
         recyclerView = group.findViewById(R.id.recyclerView);
 
-
-
-        getGroup();
 
         return group;
     }
 
     public void getGroup() {
-        Call<List<GroupResponse>> groupResponseCall = ApiClient.getService().getGroup();
+
+        SharedPreferences preferences = getActivity().getSharedPreferences("MY_APP", Context.MODE_PRIVATE);
+        Log.e("error","HolaSergio");
+        String retrivedToken  = preferences.getString("TOKEN",null);
+        Call<List<GroupResponse>> groupResponseCall = ApiClient.getService().getGroup("Bearer " + retrivedToken);
         groupResponseCall.enqueue(new Callback<List<GroupResponse>>() {
             @Override
-            public void onResponse(Call<List<GroupResponse>> call, Response<List<GroupResponse>> response) {
-                List<GroupResponse> myGroupList = response.body();
+            public void onResponse(Call<List<GroupResponse>> groupResponseCall, Response<List<GroupResponse>> response) {
+                Log.e("error","Hola1");
+                if (response.isSuccessful()) {
+               List<GroupResponse> myGroupList = response.body();
                 String[] oneGroup = new String[myGroupList.size()];
 
                 for (int i = 0; i < myGroupList.size(); i++) {
@@ -76,10 +65,16 @@ public class GroupFragment extends Fragment {
                 }
 
                 recyclerView.setAdapter(new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, oneGroup));
+                    Toast.makeText(getActivity(), "Hola", Toast.LENGTH_LONG).show();
+                }else {
+                    String message = getString(R.string.error_login);
+                    Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
+                }
             }
 
             @Override
-            public void onFailure(Call<List<GroupResponse>> call, Throwable t) {
+            public void onFailure(Call<List<GroupResponse>> groupResponseCall, Throwable t) {
+                Log.e("error","Hola2");
                 Toast.makeText(getActivity(), "An error has occured", Toast.LENGTH_LONG).show();
 
             }

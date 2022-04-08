@@ -7,6 +7,7 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
+import retrofit2.http.Header;
 import retrofit2.http.POST;
 
 public interface UserService {
@@ -24,7 +25,7 @@ public interface UserService {
     Call<Void> resetPassword(@Body String email);
 
     @GET("groups")
-    Call<List<GroupResponse>> getGroup();
+    Call<List<GroupResponse>> getGroup(@Header("Authorization") String authHeader);
 
     @POST("groups")
     Call<GroupResponse> saveGroup(@Body GroupRequest groupRequest);

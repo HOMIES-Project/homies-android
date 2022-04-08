@@ -32,16 +32,6 @@ public class ApiClient {
         return retrofit;
     }
 
-    public static synchronized ApiClient getInstance() {
-        if (instance == null) {
-            instance = new ApiClient();
-        }
-        return instance;
-    }
-
-    public Api getMyApi() {
-        return myApi;
-    }
 
 
     public static UserService getService() {

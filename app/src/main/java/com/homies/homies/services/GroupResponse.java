@@ -2,19 +2,18 @@ package com.homies.homies.services;
 
 public class GroupResponse {
 
-    private Integer id;
+    private int id;
     private String groupKey;
     private String groupName ;
     private String groupRelation ;
-    private String userData ;
-    private String userAdmin ;
-    private String taskList ;
+    private UserAdmin userAdmin;
 
-    public Integer getId() {
+
+    public int getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -42,27 +41,6 @@ public class GroupResponse {
         this.groupRelation = groupRelation;
     }
 
-    public String getUserData() {
-        return userData;
-    }
 
-    public void setUserData(String userData) {
-        this.userData = userData;
-    }
 
-    public String getUserAdmin() {
-        return userAdmin;
-    }
-
-    public void setUserAdmin(String userAdmin) {
-        this.userAdmin = userAdmin;
-    }
-
-    public String getTaskList() {
-        return taskList;
-    }
-
-    public void setTaskList(String taskList) {
-        this.taskList = taskList;
-    }
 }

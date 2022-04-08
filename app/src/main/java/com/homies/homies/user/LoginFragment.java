@@ -2,7 +2,9 @@ package com.homies.homies.user;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -112,7 +114,9 @@ public class LoginFragment extends Fragment {
             @Override
             public void onResponse(Call<UserResponse> call, Response<UserResponse> response) {
                 if (response.isSuccessful()) {
-                    UserResponse userResponse = response.body();
+                    String token = response.body().getToken();
+                    SharedPreferences preferences = getActivity().getSharedPreferences("MY_APP", Context.MODE_PRIVATE);
+                    preferences.edit().putString("TOKEN",token).apply();
                     startActivity(new Intent(activity, MenuActivity.class));
                     activity.finish();
                 } else {
