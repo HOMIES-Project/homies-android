@@ -11,7 +11,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
+import android.widget.ScrollView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -19,6 +21,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.homies.homies.services.ApiClient;
 import com.homies.homies.services.GroupRequest;
 import com.homies.homies.services.GroupResponse;
@@ -33,6 +36,7 @@ import retrofit2.Response;
 public class GroupFragment extends Fragment {
 
     ListView recyclerView;
+    Button add;
     
 
     @Nullable
@@ -41,6 +45,22 @@ public class GroupFragment extends Fragment {
         View group = inflater.inflate(R.layout.fragment_group, container, false);
         getGroup();
         recyclerView = group.findViewById(R.id.recyclerView);
+        add = group.findViewById(R.id.addGroup);
+
+        add.setOnClickListener((View.OnClickListener) view -> {
+            BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(
+                    getActivity(), R.style.BottonSheetDialogTheme
+            );
+            View bottomSheetView = LayoutInflater.from(activity.getApplicationContext())
+                    .inflate(
+                            R.layout.activity_layout_botton_addgroup,
+                            (ScrollView)group.findViewById(R.id.bottonAddContainer)
+                    );
+
+
+            bottomSheetDialog.setContentView(bottomSheetView);
+            bottomSheetDialog.show();
+        });
 
 
         return group;
@@ -49,13 +69,12 @@ public class GroupFragment extends Fragment {
     public void getGroup() {
 
         SharedPreferences preferences = getActivity().getSharedPreferences("MY_APP", Context.MODE_PRIVATE);
-        Log.e("error","HolaSergio");
         String retrivedToken  = preferences.getString("TOKEN",null);
         Call<List<GroupResponse>> groupResponseCall = ApiClient.getService().getGroup("Bearer " + retrivedToken);
         groupResponseCall.enqueue(new Callback<List<GroupResponse>>() {
             @Override
             public void onResponse(Call<List<GroupResponse>> groupResponseCall, Response<List<GroupResponse>> response) {
-                Log.e("error","Hola1");
+
                 if (response.isSuccessful()) {
                List<GroupResponse> myGroupList = response.body();
                 String[] oneGroup = new String[myGroupList.size()];
@@ -65,7 +84,7 @@ public class GroupFragment extends Fragment {
                 }
 
                 recyclerView.setAdapter(new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, oneGroup));
-                    Toast.makeText(getActivity(), "Hola", Toast.LENGTH_LONG).show();
+
                 }else {
                     String message = getString(R.string.error_login);
                     Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
@@ -74,7 +93,6 @@ public class GroupFragment extends Fragment {
 
             @Override
             public void onFailure(Call<List<GroupResponse>> groupResponseCall, Throwable t) {
-                Log.e("error","Hola2");
                 Toast.makeText(getActivity(), "An error has occured", Toast.LENGTH_LONG).show();
 
             }
