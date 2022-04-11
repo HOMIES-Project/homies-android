@@ -141,7 +141,9 @@ public class GroupFragment extends Fragment {
     }
     public GroupRequest createRequest() {
         GroupRequest groupRequest = new GroupRequest();
-        groupRequest.setUser(4);
+        SharedPreferences preferences = getActivity().getSharedPreferences("MY_APP", Context.MODE_PRIVATE);
+        int userId  = preferences.getInt("USER_ID",0);
+        groupRequest.setUser(userId);
         groupRequest.setGroupName(inputGroup.getText().toString());
         groupRequest.setGroupRelation(inputDescription.getText().toString());
 
@@ -159,6 +161,7 @@ public class GroupFragment extends Fragment {
                 if (response.isSuccessful()) {
                     String message = "Grupo creado";
                     Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+                    getGroup();
                 } else {
                     String message = getString(R.string.error_login);
                     Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
