@@ -1,6 +1,7 @@
 package com.homies.homies;
 
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.nfc.Tag;
@@ -12,21 +13,23 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.ScrollView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.homies.homies.services.ApiClient;
+import com.homies.homies.services.GroupListAdapter;
 import com.homies.homies.services.GroupRequest;
 import com.homies.homies.services.GroupResponse;
+import com.homies.homies.services.UserRequest;
+import com.homies.homies.services.UserResponse;
 
-import java.text.DateFormatSymbols;
 import java.util.List;
 
 import retrofit2.Call;
@@ -36,7 +39,19 @@ import retrofit2.Response;
 public class GroupFragment extends Fragment {
 
     ListView recyclerView;
-    Button add;
+    Button btnAdd, btnCancel;
+    EditText inputGroup, inputDescription;
+    Activity activity;
+    ImageButton add;
+    private String groupNames[] = {
+
+    };
+
+    private Integer imageid[] = {
+
+
+    };
+
     
 
     @Nullable
@@ -46,6 +61,11 @@ public class GroupFragment extends Fragment {
         getGroup();
         recyclerView = group.findViewById(R.id.recyclerView);
         add = group.findViewById(R.id.addGroup);
+        activity = getActivity();
+
+        GroupListAdapter groupListAdapter = new GroupListAdapter(activity,groupNames,imageid);
+        recyclerView.setAdapter(groupListAdapter);
+
 
         add.setOnClickListener((View.OnClickListener) view -> {
             BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(
@@ -56,6 +76,27 @@ public class GroupFragment extends Fragment {
                             R.layout.activity_layout_botton_addgroup,
                             (ScrollView)group.findViewById(R.id.bottonAddContainer)
                     );
+            inputGroup = bottomSheetView.findViewById(R.id.inputGroup);
+            inputDescription = bottomSheetView.findViewById(R.id.inputDescription);
+            btnCancel = bottomSheetView.findViewById(R.id.btnCancel);
+            btnAdd = bottomSheetView.findViewById(R.id.btnAdd);
+            btnAdd.setOnClickListener(view1 -> {
+                if (inputGroup.getText().toString().trim().isEmpty()) {
+                    String message = getString(R.string.val_name);
+                    Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+                } else {
+
+                    String newGroup = inputGroup.getText().toString().trim();
+                    saveGroup(createRequest());
+
+                    bottomSheetDialog.dismiss();
+                }
+            });
+            btnCancel.setOnClickListener(view1 -> {
+
+                    bottomSheetDialog.dismiss();
+                });
+
 
 
             bottomSheetDialog.setContentView(bottomSheetView);
@@ -95,6 +136,39 @@ public class GroupFragment extends Fragment {
             public void onFailure(Call<List<GroupResponse>> groupResponseCall, Throwable t) {
                 Toast.makeText(getActivity(), "An error has occured", Toast.LENGTH_LONG).show();
 
+            }
+        });
+    }
+    public GroupRequest createRequest() {
+        GroupRequest groupRequest = new GroupRequest();
+        groupRequest.setUser(4);
+        groupRequest.setGroupName(inputGroup.getText().toString());
+        groupRequest.setGroupRelation(inputDescription.getText().toString());
+
+
+        return groupRequest;
+    }
+
+    public void saveGroup(GroupRequest groupRequest) {
+        SharedPreferences preferences = getActivity().getSharedPreferences("MY_APP", Context.MODE_PRIVATE);
+        String retrivedToken  = preferences.getString("TOKEN",null);
+        Call<GroupResponse> groupResponseCall = ApiClient.getService().saveGroup("Bearer " + retrivedToken,groupRequest);
+        groupResponseCall.enqueue(new Callback<GroupResponse>() {
+            @Override
+            public void onResponse(Call<GroupResponse> call, Response<GroupResponse> response) {
+                if (response.isSuccessful()) {
+                    String message = "Grupo creado";
+                    Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+                } else {
+                    String message = getString(R.string.error_login);
+                    Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<GroupResponse> call, Throwable t) {
+                String message = t.getLocalizedMessage();
+                Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
             }
         });
     }

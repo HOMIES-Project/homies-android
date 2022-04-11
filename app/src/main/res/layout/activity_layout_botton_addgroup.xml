@@ -13,22 +13,22 @@
         tools:context=".LayoutActivity">
 
         <TextView
-            android:id="@+id/ingressMail"
+            android:id="@+id/ingressGroup"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginTop="25dp"
             android:layout_marginEnd="20dp"
+            android:padding="15dp"
             android:fontFamily="@font/montserrat_regular"
-            android:gravity="center"
-            android:text="@string/ingressEmail"
+            android:text="@string/ingressGroup"
             android:textSize="17sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
-            android:id="@+id/recoverInput"
+            android:id="@+id/inputGroup"
             android:layout_width="match_parent"
             android:layout_height="61dp"
             android:layout_marginStart="20dp"
@@ -36,21 +36,60 @@
             android:layout_marginEnd="20dp"
             android:background="@drawable/rounded_edittext"
             android:fontFamily="@font/montserrat_regular"
-            android:hint="@string/recoverInput"
+            android:hint="@string/nameGroup"
             android:inputType="textEmailAddress"
             android:maxLength="50"
             android:padding="15dp"
             android:textSize="15sp"
             android:drawableTint="@color/primaryColor"
-            android:drawableLeft="@drawable/ic_email"
+            android:drawableStart="@drawable/ic_people"
             android:drawablePadding="10dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/ingressMail" />
+            app:layout_constraintTop_toBottomOf="@+id/ingressGroup" />
+
+        <EditText
+            android:id="@+id/inputDescription"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="25dp"
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/rounded_edittext"
+            android:fontFamily="@font/montserrat_regular"
+            android:hint="@string/descriptionGroup"
+            android:inputType="textEmailAddress"
+            android:maxLength="50"
+            android:padding="15dp"
+            android:textSize="15sp"
+            android:drawableTint="@color/primaryColor"
+            android:drawableStart="@drawable/ic_mode_edit"
+            android:drawablePadding="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/inputGroup" />
 
         <Button
-            android:id="@+id/btnRecover"
-            android:layout_width="300dp"
+            android:id="@+id/btnAdd"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/btn_custom"
+            android:fontFamily="@font/montserrat_regular"
+            android:padding="1dp"
+            android:text="@string/addButton"
+            android:textAllCaps="false"
+            android:textColor="@color/primaryTextColor"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/btnCancel"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/inputDescription"/>
+
+
+        <Button
+            android:id="@+id/btnCancel"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:layout_marginTop="20dp"
@@ -58,13 +97,13 @@
             android:background="@drawable/btn_custom"
             android:fontFamily="@font/montserrat_regular"
             android:padding="1dp"
-            android:text="@string/recoverButton"
+            android:text="@string/Cancel"
             android:textAllCaps="false"
             android:textColor="@color/primaryTextColor"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/btnAdd"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/recoverInput"/>
+            app:layout_constraintTop_toBottomOf="@+id/inputDescription"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
