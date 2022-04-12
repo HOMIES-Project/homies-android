@@ -43,4 +43,9 @@
     <string name="text_erase_group">¿Estás seguro que quieres eliminar este grupo?</string>
     <string name="noreturn_text">Esta acción no puede deshacerse</string>
     <string name="confirmErase">Confirmar</string>
+    <string name="añadir_usuario">Añadir usuario</string>
+    <string name="confirmUser">Confirmar</string>
+    <string name="userTV">Introduce el id del usuario que quieres añadir</string>
+    <string name="add_user_et">Usuario</string>
+    <string name="error_user">Usuario no añadido al grupo</string>
 </resources>

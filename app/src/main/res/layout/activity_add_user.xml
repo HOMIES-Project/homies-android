@@ -2,65 +2,81 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/addUserContainer"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/botton_sheet_background"
-    android:id="@+id/groupContainer">
+    android:background="@drawable/botton_sheet_background">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         tools:context=".LayoutActivity">
 
+        <Button
+            android:id="@+id/closeButton"
+            android:layout_width="14dp"
+            android:layout_height="14dp"
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/ic_close"
+            app:layout_constraintBottom_toTopOf="@+id/ingressUser"
+            app:layout_constraintEnd_toEndOf="parent" />
+
         <TextView
-            android:id="@+id/eraseGroup"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:id="@+id/ingressUser"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="22dp"
             android:layout_marginEnd="20dp"
             android:fontFamily="@font/montserrat_regular"
             android:gravity="left"
-            android:text="@string/text_erase_group"
-            android:textSize="17dp"
-            android:textStyle="bold"
+            android:lines="2"
+            android:minLines="2"
+            android:singleLine="false"
+            android:text="@string/userTV"
+            android:textSize="17sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/noReturn"
+        <EditText
+            android:id="@+id/addUser"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="61dp"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="40dp"
             android:layout_marginEnd="20dp"
+            android:background="@drawable/rounded_edittext"
+            android:drawableLeft="@drawable/ic_user"
+            android:drawablePadding="10dp"
+            android:drawableTint="@color/primaryColor"
             android:fontFamily="@font/montserrat_regular"
-            android:gravity="left"
-            android:text="@string/noreturn_text"
-            android:textSize="17sp"
+            android:hint="@string/add_user_et"
+            android:inputType="text"
+            android:maxLength="50"
+            android:padding="15dp"
+            android:textSize="15sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/eraseGroup" />
-
+            app:layout_constraintTop_toBottomOf="@+id/ingressUser" />
 
         <Button
-            android:id="@+id/btnErase"
+            android:id="@+id/btnAddUser"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:layout_marginTop="32dp"
-            android:layout_marginBottom="32dp"
-            android:background="@drawable/btn_error"
+            android:layout_marginTop="14dp"
+            android:layout_marginBottom="27dp"
+            android:background="@drawable/btn_custom"
             android:fontFamily="@font/montserrat_regular"
             android:padding="1dp"
-            android:text="@string/confirmErase"
+            android:text="@string/confirmUser"
             android:textAllCaps="false"
             android:textColor="@color/primaryTextColor"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/noReturn"/>
+            app:layout_constraintTop_toBottomOf="@+id/addUser" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

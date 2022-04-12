@@ -1,7 +1,5 @@
 package com.homies.homies.services;
 
-import androidx.recyclerview.widget.RecyclerView;
-
 import java.util.List;
 
 import retrofit2.Call;
@@ -30,4 +28,6 @@ public interface UserService {
     @POST("groups")
     Call<GroupResponse> saveGroup(@Body GroupRequest groupRequest);
 
+    @POST("/api/groups/add-user")
+    Call<UserAdminRequest> addUser(@Body UserAdminRequest userAdmin);
 }
