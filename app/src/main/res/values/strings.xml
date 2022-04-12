@@ -38,4 +38,6 @@
     <string name="settings">Opciones</string>
     <string name="group_exit">Salir del grupo</string>
     <string name="log_out">Cerrar sesion</string>
+    <string name="groupName">Group</string>
+    <string name="delete_group">Borrar Grupo</string>
 </resources>
