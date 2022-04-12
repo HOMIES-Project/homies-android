@@ -6,7 +6,8 @@ public class GroupResponse {
     private String groupKey;
     private String groupName ;
     private String groupRelation ;
-    private UserAdmin userAdmin;
+    private int user;
+    UserData userdata;
 
 
     public int getId() {
@@ -41,6 +42,19 @@ public class GroupResponse {
         this.groupRelation = groupRelation;
     }
 
+    public int getUser() {
+        return user;
+    }
 
+    public void setUser(int user) {
+        this.user = user;
+    }
 
+    public UserData getUserdata() {
+        return userdata;
+    }
+
+    public void setUserdata(UserData userdata) {
+        this.userdata = userdata;
+    }
 }

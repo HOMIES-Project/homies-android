@@ -28,6 +28,6 @@ public interface UserService {
     Call<List<GroupResponse>> getGroup(@Header("Authorization") String authHeader);
 
     @POST("groups")
-    Call<GroupResponse> saveGroup(@Body GroupRequest groupRequest);
+    Call<GroupResponse> saveGroup(@Header("Authorization")String authHeader, @Body GroupRequest groupRequest);
 
 }
