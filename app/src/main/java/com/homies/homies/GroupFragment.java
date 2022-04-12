@@ -4,9 +4,7 @@ package com.homies.homies;
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.nfc.Tag;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +14,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
-import android.widget.ScrollView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -24,12 +21,8 @@ import androidx.fragment.app.Fragment;
 
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.homies.homies.services.ApiClient;
-import com.homies.homies.services.GroupListAdapter;
 import com.homies.homies.services.GroupRequest;
 import com.homies.homies.services.GroupResponse;
-import com.homies.homies.services.ProgramViewHolder;
-import com.homies.homies.services.UserRequest;
-import com.homies.homies.services.UserResponse;
 
 import java.util.List;
 
@@ -119,7 +112,7 @@ public class GroupFragment extends Fragment {
                 recyclerView.setOnItemClickListener(new AdapterView.OnItemClickListener()  {
 
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        Toast.makeText(getContext(),"You cliked " + oneGroup[position],Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(),"You cliked " + oneGroup[position],Toast.LENGTH_SHORT).show();//Toast temporal, no añadir string
                     }
                 });
 
@@ -132,7 +125,8 @@ public class GroupFragment extends Fragment {
 
             @Override
             public void onFailure(Call<List<GroupResponse>> groupResponseCall, Throwable t) {
-                Toast.makeText(getActivity(), "An error has occured", Toast.LENGTH_LONG).show();
+                String message = t.getLocalizedMessage();
+                Toast.makeText(activity, message, Toast.LENGTH_SHORT).show();
 
             }
 
@@ -175,10 +169,4 @@ public class GroupFragment extends Fragment {
         });
     }
 
-    public void onItemClick (AdapterView<?> parent,
-                                      View view,
-                                      int position,
-                                      long id) {
-
-    }
 }
