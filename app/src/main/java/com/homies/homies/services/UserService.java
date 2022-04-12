@@ -30,4 +30,7 @@ public interface UserService {
 
     @POST("/api/groups/add-user")
     Call<UserAdminRequest> addUser(@Body UserAdminRequest userAdmin);
+
+    @POST("/api/groups/delete-user")
+    Call<UserAdminRequest> eraseUser(@Body UserAdminRequest userAdmin);
 }
