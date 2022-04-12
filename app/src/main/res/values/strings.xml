@@ -40,4 +40,7 @@
     <string name="log_out">Cerrar sesion</string>
     <string name="groupName">Group</string>
     <string name="delete_group">Borrar Grupo</string>
+    <string name="text_erase_group">¿Estás seguro que quieres eliminar este grupo?</string>
+    <string name="noreturn_text">Esta acción no puede deshacerse</string>
+    <string name="confirmErase">Confirmar</string>
 </resources>
