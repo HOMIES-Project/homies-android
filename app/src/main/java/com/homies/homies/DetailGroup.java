@@ -3,7 +3,6 @@ package com.homies.homies;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
@@ -18,9 +17,6 @@ import android.widget.Toast;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.homies.homies.services.ApiClient;
 import com.homies.homies.services.GroupResponse;
-import com.homies.homies.services.UserAdminRequest;
-import com.homies.homies.services.UserAdminResponse;
-import com.homies.homies.services.UserResponse;
 
 import java.util.List;
 
