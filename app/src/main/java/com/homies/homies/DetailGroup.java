@@ -17,6 +17,8 @@ import android.widget.Toast;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.homies.homies.services.ApiClient;
 import com.homies.homies.services.GroupResponse;
+import com.homies.homies.services.UserAdmin;
+import com.homies.homies.services.UserRequest;
 
 import java.util.List;
 
@@ -54,7 +56,7 @@ public class DetailGroup extends AppCompatActivity {
                     Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
                 } else {
 
-                    addUser(userAdmin);
+                    addUsers();
                     bottomSheetDialog.dismiss();
                 }
             });
@@ -64,37 +66,27 @@ public class DetailGroup extends AppCompatActivity {
 
     }
 
-    public void addUser() {
+    public void addUsers() {
 
         SharedPreferences preferences = this.getSharedPreferences("MY_APP", Context.MODE_PRIVATE);
         Log.e("user","user");
         String retrivedToken  = preferences.getString("TOKEN",null);
-        Call<List<GroupResponse>> groupResponseCall = ApiClient.getService().getGroup("Bearer " + retrivedToken);
-        groupResponseCall.enqueue(new Callback<List<GroupResponse>>() {
+        Call<Void> userAdmin = ApiClient.getService().addUser();
+        userAdmin.enqueue(new Callback<Void>() {
             @Override
-            public void onResponse(Call<List<GroupResponse>> groupResponseCall, Response<List<GroupResponse>> response) {
-                Log.e("error","Hola1");
+            public void onResponse(Call<Void> userAdmin, Response<Void> response) {
                 if (response.isSuccessful()) {
-                    List<GroupResponse> myGroupList = response.body();
-                    String[] oneGroup = new String[myGroupList.size()];
-
-                    for (int i = 0; i < myGroupList.size(); i++) {
-                        oneGroup[i] = myGroupList.get(i).getGroupName();
-                    }
-
-                    recyclerView.setAdapter(new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, oneGroup));
-                    Toast.makeText(getActivity(), "Hola", Toast.LENGTH_LONG).show();
-                }else {
+                    String message = "Usuario añadido";
+                    Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+                } else {
                     String message = getString(R.string.error_login);
-                    Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
                 }
             }
-
             @Override
-            public void onFailure(Call<List<GroupResponse>> groupResponseCall, Throwable t) {
-                Log.e("error","Hola2");
-                Toast.makeText(getActivity(), "An error has occured", Toast.LENGTH_LONG).show();
-
+            public void onFailure(Call<Void> call, Throwable t) {
+                String message = t.getLocalizedMessage();
+                Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
             }
         });
     }

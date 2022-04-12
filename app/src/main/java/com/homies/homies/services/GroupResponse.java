@@ -6,7 +6,7 @@ public class GroupResponse {
     private String groupKey;
     private String groupName ;
     private String groupRelation ;
-    private UserAdminRequest userAdmin;
+    private UserAdmin userAdmin;
 
 
     public int getId() {

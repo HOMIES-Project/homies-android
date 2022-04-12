@@ -1,6 +1,7 @@
 package com.homies.homies;
 
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -10,14 +11,20 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.homies.homies.services.ApiClient;
+import com.homies.homies.services.GroupRequest;
 import com.homies.homies.services.GroupResponse;
+import com.homies.homies.services.UserAdmin;
 
 import java.util.List;
 
@@ -69,17 +76,9 @@ public class DetailGroupFragment extends Fragment {
 
             @Override
             public void onFailure(Call<List<GroupResponse>> groupResponseCall, Throwable t) {
-                Log.e("error","Hola2");
                 Toast.makeText(getActivity(), "An error has occured", Toast.LENGTH_LONG).show();
 
             }
         });
-    }
-
-    public void onItemClick (AdapterView<?> parent,
-                                      View view,
-                                      int position,
-                                      long id) {
-
     }
 }

@@ -29,8 +29,8 @@ public interface UserService {
     Call<GroupResponse> saveGroup(@Body GroupRequest groupRequest);
 
     @POST("/api/groups/add-user")
-    Call<UserAdmin> addUser(@Body UserAdmin userAdmin);
+    Call<Void> addUser(@Body UserRequest userRequest);
 
     @POST("/api/groups/delete-user")
-    Call<UserAdmin> eraseUser(@Body UserAdmin userAdmin);
+    Call<Void> eraseUser(@Body UserAdmin userAdmin);
 }
