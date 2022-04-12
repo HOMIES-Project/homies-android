@@ -43,16 +43,9 @@ public class GroupFragment extends Fragment {
     EditText inputGroup, inputDescription;
     Activity activity;
     ImageButton add;
-    private String groupNames[] = {
+    String[] textViewGroup = {"Hola"};
+    int[] imageViewGroup = {R.drawable.ic_people};
 
-    };
-
-    private Integer imageid[] = {
-
-
-    };
-
-    
 
     @Nullable
     @Override
@@ -63,7 +56,7 @@ public class GroupFragment extends Fragment {
         add = group.findViewById(R.id.addGroup);
         activity = getActivity();
 
-        GroupListAdapter groupListAdapter = new GroupListAdapter(activity,groupNames,imageid);
+        GroupListAdapter groupListAdapter = new GroupListAdapter(activity,textViewGroup,imageViewGroup);
         recyclerView.setAdapter(groupListAdapter);
 
 
@@ -74,7 +67,7 @@ public class GroupFragment extends Fragment {
             View bottomSheetView = LayoutInflater.from(activity.getApplicationContext())
                     .inflate(
                             R.layout.activity_layout_botton_addgroup,
-                            (ScrollView)group.findViewById(R.id.bottonAddContainer)
+                            group.findViewById(R.id.bottonAddContainer)
                     );
             inputGroup = bottomSheetView.findViewById(R.id.inputGroup);
             inputDescription = bottomSheetView.findViewById(R.id.inputDescription);
@@ -85,8 +78,6 @@ public class GroupFragment extends Fragment {
                     String message = getString(R.string.val_name);
                     Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
                 } else {
-
-                    String newGroup = inputGroup.getText().toString().trim();
                     saveGroup(createRequest());
 
                     bottomSheetDialog.dismiss();
@@ -159,7 +150,7 @@ public class GroupFragment extends Fragment {
             @Override
             public void onResponse(Call<GroupResponse> call, Response<GroupResponse> response) {
                 if (response.isSuccessful()) {
-                    String message = "Grupo creado";
+                    String message = getString(R.string.groupSucess);
                     Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
                     getGroup();
                 } else {

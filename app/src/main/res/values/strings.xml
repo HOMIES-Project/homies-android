@@ -45,5 +45,6 @@
     <string name="addButton">Crear Grupo</string>
     <string name="Cancel">Cancelar</string>
     <string name="val_name">Es necesario asiganr al grupo un nombre</string>
+    <string name="groupSucess">¡Grupo creado!</string>
 
 </resources>
