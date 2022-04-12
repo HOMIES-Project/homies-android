@@ -27,6 +27,7 @@ import com.homies.homies.services.ApiClient;
 import com.homies.homies.services.GroupListAdapter;
 import com.homies.homies.services.GroupRequest;
 import com.homies.homies.services.GroupResponse;
+import com.homies.homies.services.ProgramViewHolder;
 import com.homies.homies.services.UserRequest;
 import com.homies.homies.services.UserResponse;
 
@@ -43,8 +44,7 @@ public class GroupFragment extends Fragment {
     EditText inputGroup, inputDescription;
     Activity activity;
     ImageButton add;
-    String[] textViewGroup = {"Hola"};
-    int[] imageViewGroup = {R.drawable.ic_people};
+
 
 
     @Nullable
@@ -55,9 +55,6 @@ public class GroupFragment extends Fragment {
         recyclerView = group.findViewById(R.id.recyclerView);
         add = group.findViewById(R.id.addGroup);
         activity = getActivity();
-
-        GroupListAdapter groupListAdapter = new GroupListAdapter(activity,textViewGroup,imageViewGroup);
-        recyclerView.setAdapter(groupListAdapter);
 
 
         add.setOnClickListener((View.OnClickListener) view -> {
@@ -98,6 +95,9 @@ public class GroupFragment extends Fragment {
         return group;
     }
 
+
+
+
     public void getGroup() {
 
         SharedPreferences preferences = getActivity().getSharedPreferences("MY_APP", Context.MODE_PRIVATE);
@@ -108,14 +108,21 @@ public class GroupFragment extends Fragment {
             public void onResponse(Call<List<GroupResponse>> groupResponseCall, Response<List<GroupResponse>> response) {
 
                 if (response.isSuccessful()) {
-               List<GroupResponse> myGroupList = response.body();
+                List<GroupResponse> myGroupList = response.body();
                 String[] oneGroup = new String[myGroupList.size()];
 
                 for (int i = 0; i < myGroupList.size(); i++) {
                     oneGroup[i] = myGroupList.get(i).getGroupName();
                 }
 
-                recyclerView.setAdapter(new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, oneGroup));
+                recyclerView.setAdapter(new ArrayAdapter<String>(getActivity(), R.layout.list_item,R.id.textViewGroup , oneGroup));
+                recyclerView.setOnItemClickListener(new AdapterView.OnItemClickListener()  {
+
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        Toast.makeText(getContext(),"You cliked " + oneGroup[position],Toast.LENGTH_SHORT).show();
+                    }
+                });
+
 
                 }else {
                     String message = getString(R.string.error_login);
@@ -128,6 +135,7 @@ public class GroupFragment extends Fragment {
                 Toast.makeText(getActivity(), "An error has occured", Toast.LENGTH_LONG).show();
 
             }
+
         });
     }
     public GroupRequest createRequest() {

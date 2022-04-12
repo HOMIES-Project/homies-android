@@ -23,6 +23,8 @@ public class GroupListAdapter extends ArrayAdapter {
         this.groupNames = groupNames;
         this.imageViewGroup = imageid;
 
+
+
     }
 
     @Override
@@ -30,8 +32,6 @@ public class GroupListAdapter extends ArrayAdapter {
         View singleItem = convertView;
         ProgramViewHolder holder = null;
 
-
-        //LayoutInflater inflater = context.getLayoutInflater();
         if(singleItem == null){
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             singleItem = inflater.inflate(R.layout.list_item, parent, false);
@@ -52,14 +52,6 @@ public class GroupListAdapter extends ArrayAdapter {
         });
 
         return  singleItem;
-
-
-        /*    row = inflater.inflate(R.layout.list_item, null, true);
-        TextView textViewGroup = (TextView) row.findViewById(R.id.textViewGroup);
-        ImageView imageViewGroup = (ImageView) row.findViewById(R.id.imageViewGroup);
-
-        textViewGroup.setText(groupNames[position]);
-        imageViewGroup.setImageResource(imageViewGroup[position]);*/
 
     }
 }
