@@ -6,9 +6,11 @@ import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
 
 public interface UserService {
 
@@ -29,5 +31,9 @@ public interface UserService {
 
     @POST("groups")
     Call<GroupResponse> saveGroup(@Header("Authorization")String authHeader, @Body GroupRequest groupRequest);
+
+    @DELETE("user-data/{id}")
+    Call<UserResponse> deleteUser(@Header("Authorization")String authHeader,@Path("id") int userId);
+
 
 }
