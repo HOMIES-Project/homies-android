@@ -47,4 +47,11 @@
     <string name="val_name">Es necesario asiganr al grupo un nombre</string>
     <string name="groupSucess">¡Grupo creado!</string>
 
+    <!-- Settings User -->
+    <string name="saveChanges">Guardar Cambios</string>
+    <string name="deleteAccount">Borrar cuenta</string>
+    <string name="confirmDelete">¿Estás seguro de que quieres eliminar tu perfil?</string>
+    <string name="reconfirmDelete">Esta accion no puede deshacerse</string>
+    <string name="confirm">Confirmar</string>
+
 </resources>

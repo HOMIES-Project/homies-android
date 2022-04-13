@@ -45,6 +45,7 @@ public class GroupFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View group = inflater.inflate(R.layout.fragment_group, container, false);
         getGroup();
+        ((MenuActivity)getActivity()).getSupportActionBar().setTitle("Grupos");
         recyclerView = group.findViewById(R.id.recyclerView);
         add = group.findViewById(R.id.addGroup);
         activity = getActivity();
