@@ -29,8 +29,8 @@ public interface UserService {
     Call<GroupResponse> saveGroup(@Header("Authorization")String authHeader, @Body GroupRequest groupRequest);
 
     @POST("/api/groups/add-user")
-    Call<Void> addUser(@Body UserAdmin userAdmin);
+    Call<List<UserListResponse>> addUser(@Header("Authorization") String authHeader);
 
     @POST("/api/groups/delete-user")
-    Call<Void> eraseUser(@Body UserAdmin userAdmin);
+    Call<Void> eraseUser(@Header("Authorization") String authHeader, @Body UserAdmin userAdmin);
 }

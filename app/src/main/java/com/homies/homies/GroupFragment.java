@@ -112,6 +112,7 @@ public class GroupFragment extends Fragment {
                     recyclerView.setOnItemClickListener(new AdapterView.OnItemClickListener()  {
 
                         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
                             Toast.makeText(getContext(),"You cliked " + oneGroup[position],Toast.LENGTH_SHORT).show();//Toast temporal, no añadir string
                         }
                     });
