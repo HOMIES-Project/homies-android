@@ -48,4 +48,13 @@
     <string name="add_user_et">Usuario</string>
     <string name="error_user">Usuario no añadido al grupo</string>
     <string name="confirmUser">Confirmar</string>
+
+    <!-- Add Group -->
+    <string name="ingressGroup">Introduzca nombre del grupo y una descripción.</string>
+    <string name="nameGroup">Introduzca nombre grupo</string>
+    <string name="descriptionGroup">Introduzca descripción del grupo</string>
+    <string name="addButton">Crear Grupo</string>
+    <string name="Cancel">Cancelar</string>
+    <string name="val_name">Es necesario asiganr al grupo un nombre</string>
+    <string name="groupSucess">¡Grupo creado!</string>
 </resources>
