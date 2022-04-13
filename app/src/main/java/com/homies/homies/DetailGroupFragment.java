@@ -51,16 +51,14 @@ public class DetailGroupFragment extends Fragment {
     public void getUser() {
 
         SharedPreferences preferences = getActivity().getSharedPreferences("MY_APP", Context.MODE_PRIVATE);
-        Log.e("error","HolaSergio");
         String retrivedToken  = preferences.getString("TOKEN",null);
         Call<List<GroupResponse>> groupResponseCall = ApiClient.getService().getGroup("Bearer " + retrivedToken);
         groupResponseCall.enqueue(new Callback<List<GroupResponse>>() {
             @Override
             public void onResponse(Call<List<GroupResponse>> groupResponseCall, Response<List<GroupResponse>> response) {
-                Log.e("error","Hola1");
                 if (response.isSuccessful()) {
-               List<GroupResponse> myGroupList = response.body();
-                String[] oneGroup = new String[myGroupList.size()];
+                    List<GroupResponse> myGroupList = response.body();
+                    String[] oneGroup = new String[myGroupList.size()];
 
                 for (int i = 0; i < myGroupList.size(); i++) {
                     oneGroup[i] = myGroupList.get(i).getGroupName();
