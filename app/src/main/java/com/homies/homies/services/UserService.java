@@ -29,7 +29,7 @@ public interface UserService {
     Call<GroupResponse> saveGroup(@Body GroupRequest groupRequest);
 
     @POST("/api/groups/add-user")
-    Call<Void> addUser(@Body UserRequest userRequest);
+    Call<Void> addUser(@Body UserAdmin userAdmin);
 
     @POST("/api/groups/delete-user")
     Call<Void> eraseUser(@Body UserAdmin userAdmin);

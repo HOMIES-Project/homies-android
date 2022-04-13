@@ -48,15 +48,16 @@ public class DetailGroup extends AppCompatActivity {
                             (ScrollView)findViewById(R.id.addUserContainer)
                     );
 
-            userInput = userView.findViewById(R.id.ingressUser);
+            userInput = userView.findViewById(R.id.addUser);
             btnConfirmUser = userView.findViewById(R.id.btnAddUser);
-            btnAddUser.setOnClickListener(view1 -> {
+            btnConfirmUser.setOnClickListener(view1 -> {
                 if (userInput.getText().toString().trim().isEmpty()) {
                     String message = getString(R.string.val_required);
                     Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
                 } else {
-
-                    addUsers();
+                    UserAdmin userAdmin = new UserAdmin();
+                    userAdmin.setId(Integer.parseInt(userInput.getText().toString().trim()));
+                    addUsers(userAdmin);
                     bottomSheetDialog.dismiss();
                 }
             });
@@ -66,13 +67,13 @@ public class DetailGroup extends AppCompatActivity {
 
     }
 
-    public void addUsers() {
+    public void addUsers(UserAdmin userAdmin) {
 
         SharedPreferences preferences = this.getSharedPreferences("MY_APP", Context.MODE_PRIVATE);
         Log.e("user","user");
         String retrivedToken  = preferences.getString("TOKEN",null);
-        Call<Void> userAdmin = ApiClient.getService().addUser();
-        userAdmin.enqueue(new Callback<Void>() {
+        Call<Void> userRequest = ApiClient.getService().addUser(userAdmin);
+        userRequest.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> userAdmin, Response<Void> response) {
                 if (response.isSuccessful()) {
