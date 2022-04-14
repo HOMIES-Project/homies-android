@@ -3,6 +3,7 @@ package com.homies.homies;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -37,8 +38,6 @@ public class GroupFragment extends Fragment {
     EditText inputGroup, inputDescription;
     Activity activity;
     ImageButton add;
-
-
 
     @Nullable
     @Override
@@ -113,6 +112,8 @@ public class GroupFragment extends Fragment {
 
                         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
+                            startActivity(new Intent(getContext(), DetailGroup.class));
+                            activity.finish();
                             Toast.makeText(getContext(),"You cliked " + oneGroup[position],Toast.LENGTH_SHORT).show();//Toast temporal, no añadir string
                         }
                     });

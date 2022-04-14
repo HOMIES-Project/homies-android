@@ -5,7 +5,7 @@ public class UserListRequest {
     private String groupKey;
     private String groupName ;
     private String groupRelation ;
-    private int user;
+    private String user;
     private int id;
     UserAdmin userAdmin;
     private String addGroupDate;
@@ -45,11 +45,11 @@ public class UserListRequest {
         this.groupRelation = groupRelation;
     }
 
-    public int getUser() {
+    public String getUser() {
         return user;
     }
 
-    public void setUser(int user) {
+    public void setUser(String user) {
         this.user = user;
     }
 

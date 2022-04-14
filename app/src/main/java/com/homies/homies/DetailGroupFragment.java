@@ -15,12 +15,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.google.android.material.textfield.TextInputLayout;
 import com.homies.homies.services.ApiClient;
 import com.homies.homies.services.GroupRequest;
 import com.homies.homies.services.GroupResponse;
@@ -40,6 +42,8 @@ public class DetailGroupFragment extends Fragment {
     Button btnAddUser, btnCancelAction, btnConfirmUser;
     EditText userInput;
     Activity activity;
+    TextView group, description;
+
 
     @Nullable
     @Override
@@ -49,6 +53,12 @@ public class DetailGroupFragment extends Fragment {
         userList = user.findViewById(R.id.userList);
         btnAddUser = user.findViewById(R.id.btnAddUser);
         activity = getActivity();
+
+        group = user.findViewById(R.id.textInputGroupName);
+        description = user.findViewById(R.id.textInputDetailGroupName);
+
+        group.setText("groupName");
+        description.setText("groupDescription");
 
 
         btnAddUser.setOnClickListener((View.OnClickListener) view -> {
@@ -89,8 +99,8 @@ public class DetailGroupFragment extends Fragment {
     public void getUser() {
 
         SharedPreferences preferences = getActivity().getSharedPreferences("MY_USER", Context.MODE_PRIVATE);
-        String retrivedToken  = preferences.getString("TOKEN",null);
-        Call<List<UserListResponse>> userResponseCall = ApiClient.getService().addUser("Bearer " + retrivedToken);
+        String retrievedToken  = preferences.getString("TOKEN",null);
+        Call<List<UserListResponse>> userResponseCall = ApiClient.getService().addUser("Bearer " + retrievedToken);
         userResponseCall.enqueue(new Callback<List<UserListResponse>>() {
             @Override
             public void onResponse(Call<List<UserListResponse>> userResponseCall, Response<List<UserListResponse>> response) {
@@ -104,11 +114,11 @@ public class DetailGroupFragment extends Fragment {
                     }
 
                     userList.setAdapter(new ArrayAdapter<String>(getActivity(), R.layout.user_item,R.id.textViewUser , oneUsersList));
-                    userList.setOnItemClickListener(new AdapterView.OnItemClickListener()  {
 
+                    userList.setOnItemClickListener(new AdapterView.OnItemClickListener()  {
                         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                            Toast.makeText(getContext(),"You cliked " + oneUsersList[position],Toast.LENGTH_SHORT).show();//Toast temporal para eliminar usuario, no añadir string
+                            Toast.makeText(getContext(),"You cliked " + oneUsersList[position],Toast.LENGTH_SHORT).show();//Toast temporal para eliminar usuario
                         }
                     });
 
@@ -131,10 +141,9 @@ public class DetailGroupFragment extends Fragment {
         UserListRequest userListRequest = new UserListRequest();
         SharedPreferences preferences = getActivity().getSharedPreferences("MY_USER", Context.MODE_PRIVATE);
         int idUser = preferences.getInt("USER", 0);
-        String login = preferences.getString("USER_LOGIN", "");
         int idGroup = preferences.getInt("GROUP_ID", 0);
         userListRequest.setIdAdminGroup(idUser);
-        userListRequest.setLogin(login);
+        userListRequest.setLogin(userInput.getText().toString().trim());
         userListRequest.setIdGroup(idGroup);
 
 
@@ -143,8 +152,8 @@ public class DetailGroupFragment extends Fragment {
 
     public void saveUser(UserListRequest userListRequest) {
         SharedPreferences preferences = getActivity().getSharedPreferences("MY_USER", Context.MODE_PRIVATE);
-        String retrivedToken  = preferences.getString("TOKEN",null);
-        Call<UserListResponse> userResponseCall = ApiClient.getService().saveUser("Bearer " + retrivedToken, userListRequest);
+        String retrievedToken  = preferences.getString("TOKEN",null);
+        Call<UserListResponse> userResponseCall = ApiClient.getService().saveUser("Bearer " + retrievedToken, userListRequest);
         userResponseCall.enqueue(new Callback<UserListResponse>() {
             @Override
             public void onResponse(Call<UserListResponse> call, Response<UserListResponse> response) {
