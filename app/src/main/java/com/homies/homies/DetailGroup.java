@@ -29,8 +29,7 @@ import retrofit2.Response;
 
 public class DetailGroup extends AppCompatActivity {
 
-    Button btnAddUser, btnConfirmUser, deleteGroup;
-    EditText userInput;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
