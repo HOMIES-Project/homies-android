@@ -43,7 +43,6 @@
     <string name="text_erase_group">¿Estás seguro que quieres eliminar este grupo?</string>
     <string name="noreturn_text">Esta acción no puede deshacerse</string>
     <string name="confirmErase">Confirmar</string>
-    <string name="añadir_usuario">Añadir usuario</string>
     <string name="userTV">Introduce el id del usuario que quieres añadir</string>
     <string name="add_user_et">Usuario</string>
     <string name="error_user">Usuario no añadido al grupo</string>
@@ -57,4 +56,7 @@
     <string name="Cancel">Cancelar</string>
     <string name="val_name">Es necesario asiganr al grupo un nombre</string>
     <string name="groupSucess">¡Grupo creado!</string>
+    <string name="añadir_usuario">Añadir usuario</string>
+    <string name="val_user">Es necesario un nombre de usuario</string>
+    <string name="userSucess">usuarioCreado</string>
 </resources>

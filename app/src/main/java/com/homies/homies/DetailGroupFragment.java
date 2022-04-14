@@ -25,6 +25,8 @@ import com.homies.homies.services.ApiClient;
 import com.homies.homies.services.GroupRequest;
 import com.homies.homies.services.GroupResponse;
 import com.homies.homies.services.UserAdmin;
+import com.homies.homies.services.UserListRequest;
+import com.homies.homies.services.UserListResponse;
 
 import java.util.List;
 
@@ -34,15 +36,51 @@ import retrofit2.Response;
 
 public class DetailGroupFragment extends Fragment {
 
-    ListView recyclerView;
-    
+    ListView userList;
+    Button btnAddUser, btnCancelAction, btnConfirmUser;
+    EditText userInput;
+    Activity activity;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View user = inflater.inflate(R.layout.fragment_detail_group, container, false);
         getUser();
-        recyclerView = user.findViewById(R.id.userView);
+        userList = user.findViewById(R.id.userList);
+        btnAddUser = user.findViewById(R.id.btnAddUser);
+        activity = getActivity();
+
+
+        btnAddUser.setOnClickListener((View.OnClickListener) view -> {
+            BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(
+                    getActivity(), R.style.BottonSheetDialogTheme
+            );
+            View bottomSheetView = LayoutInflater.from(activity.getApplicationContext())
+                    .inflate(
+                            R.layout.activity_add_user,
+                            user.findViewById(R.id.addUserContainer)
+                    );
+            userInput = bottomSheetView.findViewById(R.id.userInput);
+            btnCancelAction = bottomSheetView.findViewById(R.id.btnCancelAction);
+            btnConfirmUser = bottomSheetView.findViewById(R.id.btnConfirmUser);
+            btnConfirmUser.setOnClickListener(view1 -> {
+                if (userInput.getText().toString().trim().isEmpty()) {
+                    String message = getString(R.string.val_user);
+                    Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+                } else {
+                    saveUser(createUserListRequest());
+
+                    bottomSheetDialog.dismiss();
+                }
+            });
+            btnCancelAction.setOnClickListener(view1 -> {
+
+                bottomSheetDialog.dismiss();
+            });
+
+            bottomSheetDialog.setContentView(bottomSheetView);
+            bottomSheetDialog.show();
+        });
 
 
         return user;
@@ -50,22 +88,30 @@ public class DetailGroupFragment extends Fragment {
 
     public void getUser() {
 
-        SharedPreferences preferences = getActivity().getSharedPreferences("MY_APP", Context.MODE_PRIVATE);
+        SharedPreferences preferences = getActivity().getSharedPreferences("MY_USER", Context.MODE_PRIVATE);
         String retrivedToken  = preferences.getString("TOKEN",null);
-        Call<List<GroupResponse>> groupResponseCall = ApiClient.getService().getGroup("Bearer " + retrivedToken);
-        groupResponseCall.enqueue(new Callback<List<GroupResponse>>() {
+        Call<List<UserListResponse>> userResponseCall = ApiClient.getService().addUser("Bearer " + retrivedToken);
+        userResponseCall.enqueue(new Callback<List<UserListResponse>>() {
             @Override
-            public void onResponse(Call<List<GroupResponse>> groupResponseCall, Response<List<GroupResponse>> response) {
+            public void onResponse(Call<List<UserListResponse>> userResponseCall, Response<List<UserListResponse>> response) {
+
                 if (response.isSuccessful()) {
-                    List<GroupResponse> myGroupList = response.body();
-                    String[] oneGroup = new String[myGroupList.size()];
+                    List<UserListResponse> myUserList = response.body();
+                    String[] oneUsersList = new String[myUserList.size()];
 
-                for (int i = 0; i < myGroupList.size(); i++) {
-                    oneGroup[i] = myGroupList.get(i).getGroupName();
-                }
+                    for (int i = 0; i < myUserList.size(); i++) {
+                        oneUsersList[i] = myUserList.get(i).getGroupName();
+                    }
 
-                recyclerView.setAdapter(new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, oneGroup));
-                    Toast.makeText(getActivity(), "Hola", Toast.LENGTH_LONG).show();
+                    userList.setAdapter(new ArrayAdapter<String>(getActivity(), R.layout.user_item,R.id.textViewUser , oneUsersList));
+                    userList.setOnItemClickListener(new AdapterView.OnItemClickListener()  {
+
+                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                            Toast.makeText(getContext(),"You cliked " + oneUsersList[position],Toast.LENGTH_SHORT).show();//Toast temporal para eliminar usuario, no añadir string
+                        }
+                    });
+
                 }else {
                     String message = getString(R.string.error_login);
                     Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
@@ -73,9 +119,49 @@ public class DetailGroupFragment extends Fragment {
             }
 
             @Override
-            public void onFailure(Call<List<GroupResponse>> groupResponseCall, Throwable t) {
-                Toast.makeText(getActivity(), "An error has occured", Toast.LENGTH_LONG).show();
+            public void onFailure(Call<List<UserListResponse>> userResponseCall, Throwable t) {
+                String message = t.getLocalizedMessage();
+                Toast.makeText(activity, message, Toast.LENGTH_SHORT).show();
 
+            }
+
+        });
+    }
+    public UserListRequest createUserListRequest() {
+        UserListRequest userListRequest = new UserListRequest();
+        SharedPreferences preferences = getActivity().getSharedPreferences("MY_USER", Context.MODE_PRIVATE);
+        int idUser = preferences.getInt("USER", 0);
+        String login = preferences.getString("USER_LOGIN", "");
+        int idGroup = preferences.getInt("GROUP_ID", 0);
+        userListRequest.setIdAdminGroup(idUser);
+        userListRequest.setLogin(login);
+        userListRequest.setIdGroup(idGroup);
+
+
+        return userListRequest;
+    }
+
+    public void saveUser(UserListRequest userListRequest) {
+        SharedPreferences preferences = getActivity().getSharedPreferences("MY_USER", Context.MODE_PRIVATE);
+        String retrivedToken  = preferences.getString("TOKEN",null);
+        Call<UserListResponse> userResponseCall = ApiClient.getService().saveUser("Bearer " + retrivedToken, userListRequest);
+        userResponseCall.enqueue(new Callback<UserListResponse>() {
+            @Override
+            public void onResponse(Call<UserListResponse> call, Response<UserListResponse> response) {
+                if (response.isSuccessful()) {
+                    String message = getString(R.string.userSucess);
+                    Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+                    getUser();
+                } else {
+                    String message = getString(R.string.error_login);
+                    Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<UserListResponse> call, Throwable t) {
+                String message = t.getLocalizedMessage();
+                Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
             }
         });
     }

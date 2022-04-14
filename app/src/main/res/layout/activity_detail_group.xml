@@ -14,125 +14,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/ip_groupName"
-        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginEnd="20dp"
-        android:padding="1dp"
-        app:boxStrokeWidth="0dp"
-        app:boxStrokeWidthFocused="0dp"
-        app:errorTextAppearance="@style/error_appearance"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar"
-        app:startIconDrawable="@drawable/ic_group_name_home"
-        app:startIconTint="@color/primaryColor">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/textInputGroupName"
-            android:layout_width="match_parent"
-            android:layout_height="61dp"
-            android:layout_marginStart="0dp"
-            android:layout_marginTop="0dp"
-            android:layout_marginEnd="0dp"
-            android:layout_marginBottom="0dp"
-            android:background="@drawable/rounded_edittext"
-            android:fontFamily="@font/montserrat_regular"
-            android:inputType="text"
-            android:maxLength="50"
-            android:padding="15dp"
-            android:text="@string/groupName"
-            android:textColor="@color/fieldTextColor"
-            android:textSize="15sp" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/ip_groupDetail"
-        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="20dp"
-        android:padding="1dp"
-        android:textAlignment="textStart"
-        app:boxStrokeWidth="0dp"
-        app:boxStrokeWidthFocused="0dp"
-        app:errorTextAppearance="@style/error_appearance"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ip_groupName"
-        app:startIconDrawable="@drawable/ic_group_name_home"
-        app:startIconTint="@color/primaryColor">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/textInputDetailGroupName"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginStart="0dp"
-            android:layout_marginTop="0dp"
-            android:layout_marginEnd="0dp"
-            android:layout_marginBottom="0dp"
-            android:background="@drawable/rounded_edittext"
-            android:fontFamily="@font/montserrat_regular"
-            android:inputType="text"
-            android:maxLength="50"
-            android:padding="15dp"
-            android:text="@string/groupName"
-            android:textColor="@color/fieldTextColor"
-            android:textSize="15sp" />
-    </com.google.android.material.textfield.TextInputLayout>
-
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragmentDetailGroup"
-        android:name="com.homies.homies.DetailGroupFragment"
         android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ip_groupDetail" />
-
-    <Button
-        android:id="@+id/addUserButton"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:layout_marginTop="-20dp"
-        android:background="@drawable/btn_custom"
-        android:fontFamily="@font/montserrat_regular"
-        android:padding="1dp"
-        android:text="@string/añadir_usuario"
-        android:textAllCaps="false"
-        android:textColor="@color/primaryTextColor"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fragmentDetailGroup" />
-
-    <Button
-        android:id="@+id/DeleteButton"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="20dp"
-        android:background="@drawable/btn_error"
-        android:fontFamily="@font/montserrat_regular"
-        android:padding="1dp"
-        android:text="@string/delete_group"
-        android:textAllCaps="false"
-        android:textColor="@color/white"
+        android:layout_height="match_parent"
+        android:layout_marginTop="65dp"
+        android:name="com.homies.homies.DetailGroupFragment"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/addUserButton" />
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
