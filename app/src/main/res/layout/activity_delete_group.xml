@@ -5,12 +5,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/botton_sheet_background"
-    android:id="@+id/groupContainer">
+    android:id="@+id/groupDeleteContainer">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         tools:context=".LayoutActivity">
+        <Button
+            android:id="@+id/btnCancelActionGroup"
+            android:layout_width="14dp"
+            android:layout_height="14dp"
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/ic_close"
+            app:layout_constraintBottom_toTopOf="@+id/eraseGroup"
+            app:layout_constraintEnd_toEndOf="parent" />
 
         <TextView
             android:id="@+id/eraseGroup"
@@ -45,7 +53,7 @@
 
 
         <Button
-            android:id="@+id/btnErase"
+            android:id="@+id/btnConfirmDeleteGroup"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"

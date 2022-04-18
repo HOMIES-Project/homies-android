@@ -39,7 +39,7 @@ import retrofit2.Response;
 public class DetailGroupFragment extends Fragment {
 
     ListView userList;
-    Button btnAddUser, btnCancelAction, btnConfirmUser;
+    Button btnAddUser, btnCancelAction, btnConfirmUser, btnDeleteGroup, btnCancelActionGroup, btnConfirmDeleteGroup;
     EditText userInput;
     Activity activity;
     TextView group, description;
@@ -56,9 +56,8 @@ public class DetailGroupFragment extends Fragment {
 
         group = user.findViewById(R.id.textInputGroupName);
         description = user.findViewById(R.id.textInputDetailGroupName);
+        btnDeleteGroup = user.findViewById(R.id.btnDeleteGroup);
 
-        group.setText("groupName");
-        description.setText("groupDescription");
 
 
         btnAddUser.setOnClickListener((View.OnClickListener) view -> {
@@ -94,11 +93,41 @@ public class DetailGroupFragment extends Fragment {
 
 
         return user;
+
+        btnDeleteGroup.setOnClickListener((View.OnClickListener) view -> {
+            BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(
+                    getActivity(), R.style.BottonSheetDialogTheme
+            );
+            View bottomSheetView = LayoutInflater.from(activity.getApplicationContext())
+                    .inflate(
+                            R.layout.activity_delete_group,
+                           group.findViewById(R.id.groupDeleteContainer)
+                    );
+
+            btnCancelActionGroup = bottomSheetView.findViewById(R.id.btnCancelActionGroup);
+            btnConfirmDeleteGroup = bottomSheetView.findViewById(R.id.btnConfirmDeleteGroup);
+            btnConfirmDeleteGroup.setOnClickListener(view1 -> {
+                  bottomSheetDialog.dismiss();
+                }
+            });
+            btnCancelActionGroup.setOnClickListener(view1 -> {
+
+                bottomSheetDialog.dismiss();
+            });
+
+            bottomSheetDialog.setContentView(bottomSheetView);
+            bottomSheetDialog.show();
+        });
+        
+        return group;
     }
+
+
+
 
     public void getUser() {
 
-        SharedPreferences preferences = getActivity().getSharedPreferences("MY_USER", Context.MODE_PRIVATE);
+        SharedPreferences preferences = getActivity().getSharedPreferences("MY_APP", Context.MODE_PRIVATE);
         String retrievedToken  = preferences.getString("TOKEN",null);
         Call<List<UserListResponse>> userResponseCall = ApiClient.getService().addUser("Bearer " + retrievedToken);
         userResponseCall.enqueue(new Callback<List<UserListResponse>>() {
@@ -139,7 +168,7 @@ public class DetailGroupFragment extends Fragment {
     }
     public UserListRequest createUserListRequest() {
         UserListRequest userListRequest = new UserListRequest();
-        SharedPreferences preferences = getActivity().getSharedPreferences("MY_USER", Context.MODE_PRIVATE);
+        SharedPreferences preferences = getActivity().getSharedPreferences("MY_APP", Context.MODE_PRIVATE);
         int idUser = preferences.getInt("USER", 0);
         int idGroup = preferences.getInt("GROUP_ID", 0);
         userListRequest.setIdAdminGroup(idUser);
@@ -151,7 +180,7 @@ public class DetailGroupFragment extends Fragment {
     }
 
     public void saveUser(UserListRequest userListRequest) {
-        SharedPreferences preferences = getActivity().getSharedPreferences("MY_USER", Context.MODE_PRIVATE);
+        SharedPreferences preferences = getActivity().getSharedPreferences("MY_APP", Context.MODE_PRIVATE);
         String retrievedToken  = preferences.getString("TOKEN",null);
         Call<UserListResponse> userResponseCall = ApiClient.getService().saveUser("Bearer " + retrievedToken, userListRequest);
         userResponseCall.enqueue(new Callback<UserListResponse>() {

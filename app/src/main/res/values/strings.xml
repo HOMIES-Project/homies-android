@@ -59,4 +59,5 @@
     <string name="añadir_usuario">Añadir usuario</string>
     <string name="val_user">Es necesario un nombre de usuario</string>
     <string name="userSucess">usuarioCreado</string>
+    <string name="groupDescription">descripcion</string>
 </resources>
