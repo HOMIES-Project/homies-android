@@ -14,18 +14,37 @@
         android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0">
 
         <ImageView
-            android:layout_width="414dp"
-            android:layout_height="150dp"
+            android:id="@+id/imageView3"
+            android:layout_width="109dp"
+            android:layout_height="118dp"
             android:layout_marginBottom="16dp"
             android:src="@drawable/ic_plus_circle"
             app:layout_constraintBottom_toTopOf="@+id/ip_user"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/upload"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.509" />
+
+        <Button
+            android:id="@+id/upload"
+            android:layout_width="46dp"
+            android:layout_height="45dp"
+            android:layout_centerInParent="true"
+            android:layout_marginEnd="124dp"
+            android:layout_marginBottom="132dp"
+            android:background="@drawable/btn_custom"
+            android:fontFamily="@font/montserrat_regular"
+            android:padding="1dp"
+            android:textAllCaps="false"
+            app:layout_constraintBottom_toTopOf="@+id/ip_user"
+            app:layout_constraintEnd_toEndOf="parent" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/ip_user"
@@ -34,7 +53,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
-            android:layout_marginBottom="1dp"
+            android:layout_marginBottom="4dp"
             android:fontFamily="@font/montserrat_regular"
             android:padding="1dp"
             app:boxStrokeWidth="0dp"
@@ -78,13 +97,13 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
-            android:layout_marginBottom="1dp"
+            android:layout_marginBottom="8dp"
             android:padding="1dp"
             app:boxStrokeWidth="0dp"
             app:boxStrokeWidthFocused="0dp"
             app:layout_constraintBottom_toTopOf="@+id/ip_email"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent">
 
             <com.google.android.material.textfield.TextInputLayout
@@ -172,14 +191,14 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
-            android:layout_marginBottom="36dp"
+            android:layout_marginBottom="96dp"
             android:padding="1dp"
             app:boxStrokeWidth="0dp"
             app:boxStrokeWidthFocused="0dp"
             app:errorTextAppearance="@style/error_appearance"
             app:helperText="@string/helperRequired"
             app:helperTextTextColor="@color/primaryLightColor"
-            app:layout_constraintBottom_toTopOf="@+id/btn_register"
+            app:layout_constraintBottom_toBottomOf="@+id/btn_save"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -204,7 +223,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button
-            android:id="@+id/btn_register"
+            android:id="@+id/btn_save"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
@@ -219,7 +238,6 @@
             android:textColor="@color/primaryTextColor"
             app:layout_constraintBottom_toTopOf="@+id/btn_delete"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.492"
             app:layout_constraintStart_toStartOf="parent" />
 
         <androidx.appcompat.widget.AppCompatButton
@@ -240,8 +258,6 @@
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

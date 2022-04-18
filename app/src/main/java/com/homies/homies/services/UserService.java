@@ -4,12 +4,16 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
+import okhttp3.MultipartBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
+import retrofit2.http.Multipart;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
+import retrofit2.http.Part;
 import retrofit2.http.Path;
 
 public interface UserService {
@@ -32,8 +36,27 @@ public interface UserService {
     @POST("groups")
     Call<GroupResponse> saveGroup(@Header("Authorization")String authHeader, @Body GroupRequest groupRequest);
 
+    @GET("user-data/{id}")
+    Call<UserData> userInfo(@Header("Authorization")String authHeader,@Path("id") int userId);
+
+    @PUT("user-data/{id}")
+    Call<UserData> updateInfo(@Header("Authorization")String authHeader,@Path("id") int userId, @Body UserRequest userRequest);
+
+    @Multipart
+    @POST("user-data/{id}")
+    Call <UserData> uploadPhoto(
+            @Header("Authorization")String authHeader,
+            @Path("id") int userId,
+            @Part("descripcion") UserRequest description,
+            @Part MultipartBody.Part photo);
+
     @DELETE("user-data/{id}")
     Call<UserResponse> deleteUser(@Header("Authorization")String authHeader,@Path("id") int userId);
+
+    @GET("groups/{id}")
+    Call<GroupResponse> groupInfo(@Header("Authorization")String authHeader,@Path("id") int userId);
+
+    
 
 
 }

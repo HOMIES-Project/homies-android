@@ -54,5 +54,7 @@
     <string name="reconfirmDelete">Esta accion no puede deshacerse</string>
     <string name="confirm">Confirmar</string>
     <string name="deleteSucess">¡Usuario eliminado!</string>
+    <string name="updateInfo">Datos Actualizados</string>
+
 
 </resources>

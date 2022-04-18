@@ -9,6 +9,7 @@ public class UserData {
     private boolean premium;
     private String birthDate;
     private String addDate;
+    UserRequest user;
 
 
     public int getId() {
@@ -65,5 +66,13 @@ public class UserData {
 
     public void setAddDate(String addDate) {
         this.addDate = addDate;
+    }
+
+    public UserRequest getUser() {
+        return user;
+    }
+
+    public void setUser(UserRequest user) {
+        this.user = user;
     }
 }
