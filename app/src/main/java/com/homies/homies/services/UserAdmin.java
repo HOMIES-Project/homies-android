@@ -8,6 +8,7 @@ public class UserAdmin {
     private boolean premium;
     private String birthDate;
     private String addDate;
+    UserRequest userAdmin;
 
     public int getId() {
         return id;
@@ -63,5 +64,13 @@ public class UserAdmin {
 
     public void setAddDate(String addDate) {
         this.addDate = addDate;
+    }
+
+    public UserRequest getUserAdmin() {
+        return userAdmin;
+    }
+
+    public void setUserAdmin(UserRequest userAdmin) {
+        this.userAdmin = userAdmin;
     }
 }
