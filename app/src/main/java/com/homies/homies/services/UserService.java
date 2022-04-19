@@ -7,6 +7,7 @@ import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
 
 public interface UserService {
 
@@ -34,5 +35,7 @@ public interface UserService {
     @POST("/api/groups/add-user")
     Call<UserListResponse> saveUser(@Header("Authorization") String authHeader, @Body UserListRequest userListRequest);
 
+    @GET("groups/{id}")
+    Call<GroupResponse> groupInfo(@Header("Authorization")String authHeader,@Path("id") int userId);
 
 }

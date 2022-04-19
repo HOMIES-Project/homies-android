@@ -62,6 +62,7 @@ public class DetailGroupFragment extends Fragment {
         description = user.findViewById(R.id.textInputDetailGroupName);
         btnDeleteGroup = user.findViewById(R.id.btnDeleteGroup);
 
+        groupInfo();
 
 
         btnAddUser.setOnClickListener((View.OnClickListener) view -> {
@@ -243,24 +244,23 @@ public class DetailGroupFragment extends Fragment {
         });
     }*/
 
-    public void GroupInfo() {
+    public void groupInfo() {
         SharedPreferences preferences = getActivity().getSharedPreferences("MY_APP", Context.MODE_PRIVATE);
         String retrivedToken  = preferences.getString("TOKEN",null);
-        Call<List<GroupResponse>> groupInfo = ApiClient.getService().getGroup("Bearer " + retrivedToken);
-        groupInfo.enqueue(new Callback<List<GroupResponse>>() {
+
+        Call<GroupResponse> groupDetails = ApiClient.getService().groupInfo("Bearer " + retrivedToken, getId());
+        groupDetails.enqueue(new Callback<GroupResponse>() {
             @Override
-            public void onResponse(Call<List<GroupResponse>> call, Response<List<GroupResponse>> response) {
+            public void onResponse(Call<GroupResponse> call, Response<GroupResponse> response) {
                 if (response.isSuccessful()) {
-                    List<GroupResponse> addlist= response.body();
+                    GroupResponse addlist= response.body();
 
-
-/*
-                    String groupName = addlist..getGroupName();
-                    String detailGroup = addlist.getGroup().getGroupRelation();
+                    String groupName = addlist.getGroupName();
+                    String detailGroup = addlist.getGroupRelation();
 
                     group.setText(groupName);
                     description.setText(detailGroup);
-*/
+
 
 
 
@@ -272,7 +272,7 @@ public class DetailGroupFragment extends Fragment {
             }
 
             @Override
-            public void onFailure(Call<List<GroupResponse>> call, Throwable t) {
+            public void onFailure(Call<GroupResponse> call, Throwable t) {
                 String message = t.getLocalizedMessage();
                 Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
 
