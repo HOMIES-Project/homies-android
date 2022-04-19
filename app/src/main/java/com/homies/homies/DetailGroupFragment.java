@@ -242,4 +242,42 @@ public class DetailGroupFragment extends Fragment {
             }
         });
     }*/
+
+    public void GroupInfo() {
+        SharedPreferences preferences = getActivity().getSharedPreferences("MY_APP", Context.MODE_PRIVATE);
+        String retrivedToken  = preferences.getString("TOKEN",null);
+        Call<List<GroupResponse>> groupInfo = ApiClient.getService().getGroup("Bearer " + retrivedToken);
+        groupInfo.enqueue(new Callback<List<GroupResponse>>() {
+            @Override
+            public void onResponse(Call<List<GroupResponse>> call, Response<List<GroupResponse>> response) {
+                if (response.isSuccessful()) {
+                    List<GroupResponse> addlist= response.body();
+
+
+                    String groupName = addlist..getGroupName();
+                    String detailGroup = addlist.getGroup().getDetailGroupName();
+
+                    group.setText(groupName);
+                    description.setText(detailGroup);
+
+
+
+
+                } else {
+                    String message = getString(R.string.error_login);
+                    Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<List<GroupResponse>> call, Throwable t) {
+                String message = t.getLocalizedMessage();
+                Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+
+            }
+        });
+
+    }
+
 }
