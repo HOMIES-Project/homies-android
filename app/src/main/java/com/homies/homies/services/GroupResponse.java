@@ -12,6 +12,7 @@ public class GroupResponse {
     UserData userdata;
 
 
+
     public int getId() {
         return id;
     }
@@ -59,4 +60,5 @@ public class GroupResponse {
     public void setUserdata(UserData userdata) {
         this.userdata = userdata;
     }
+
 }
