@@ -34,6 +34,5 @@ public interface UserService {
     @POST("/api/groups/add-user")
     Call<UserListResponse> saveUser(@Header("Authorization") String authHeader, @Body UserListRequest userListRequest);
 
-    @POST("/api/groups/delete-user")
-    Call<Void> eraseUser(@Header("Authorization") String authHeader, @Body UserAdmin userAdmin);
+
 }

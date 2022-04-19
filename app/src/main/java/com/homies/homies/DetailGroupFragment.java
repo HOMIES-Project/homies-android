@@ -3,6 +3,7 @@ package com.homies.homies;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
@@ -29,6 +30,8 @@ import com.homies.homies.services.GroupResponse;
 import com.homies.homies.services.UserAdmin;
 import com.homies.homies.services.UserListRequest;
 import com.homies.homies.services.UserListResponse;
+import com.homies.homies.services.UserResponse;
+import com.homies.homies.user.MainActivity;
 
 import java.util.List;
 
@@ -94,7 +97,7 @@ public class DetailGroupFragment extends Fragment {
 
         return user;
 
-        btnDeleteGroup.setOnClickListener((View.OnClickListener) view -> {
+        /*btnDeleteGroup.setOnClickListener((View.OnClickListener) view -> {
             BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(
                     getActivity(), R.style.BottonSheetDialogTheme
             );
@@ -119,7 +122,7 @@ public class DetailGroupFragment extends Fragment {
             bottomSheetDialog.show();
         });
         
-        return group;
+        return group;*/
     }
 
 
@@ -203,4 +206,31 @@ public class DetailGroupFragment extends Fragment {
             }
         });
     }
+
+    /*public void deletGroup() {
+        SharedPreferences preferences = getActivity().getSharedPreferences("MY_APP", Context.MODE_PRIVATE);
+        String retrivedToken  = preferences.getString("TOKEN",null);
+        Call<UserResponse> deleteRequest = ApiClient.getService().deleteGroup("Bearer " + retrivedToken, userInf().getId());
+        deleteRequest.enqueue(new Callback<UserResponse>() {
+            @Override
+            public void onResponse(Call<UserResponse> call, Response<UserResponse> response) {
+                if (response.isSuccessful()) {
+                    String message = getString(R.string.deleteSucess);
+                    Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(activity, MainActivity.class));
+                    activity.finish();
+
+                } else {
+                    String message = getString(R.string.error_login);
+                    Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<UserResponse> call, Throwable t) {
+                String message = t.getLocalizedMessage();
+                Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+            }
+        });
+    }*/
 }
