@@ -248,7 +248,7 @@ public class DetailGroupFragment extends Fragment {
         SharedPreferences preferences = getActivity().getSharedPreferences("MY_APP", Context.MODE_PRIVATE);
         String retrivedToken  = preferences.getString("TOKEN",null);
 
-        Call<GroupResponse> groupDetails = ApiClient.getService().groupInfo("Bearer " + retrivedToken, getId());
+        Call<GroupResponse> groupDetails = ApiClient.getService().groupInfo("Bearer " + retrivedToken, userAdminInf().getId());
         groupDetails.enqueue(new Callback<GroupResponse>() {
             @Override
             public void onResponse(Call<GroupResponse> call, Response<GroupResponse> response) {
@@ -260,9 +260,6 @@ public class DetailGroupFragment extends Fragment {
 
                     group.setText(groupName);
                     description.setText(detailGroup);
-
-
-
 
                 } else {
                     String message = getString(R.string.error_login);
