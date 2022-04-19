@@ -28,6 +28,7 @@ import com.homies.homies.services.ApiClient;
 import com.homies.homies.services.GroupRequest;
 import com.homies.homies.services.GroupResponse;
 import com.homies.homies.services.UserAdmin;
+import com.homies.homies.services.UserData;
 import com.homies.homies.services.UserListRequest;
 import com.homies.homies.services.UserListResponse;
 import com.homies.homies.services.UserResponse;
@@ -125,7 +126,15 @@ public class DetailGroupFragment extends Fragment {
         return group;*/
     }
 
+    public UserAdmin userAdminInf() {
+        UserAdmin userAdmin = new UserAdmin();
+        SharedPreferences preferences = getActivity().getSharedPreferences("MY_APP", Context.MODE_PRIVATE);
+        int userAdminId  = preferences.getInt("USERADMIN_ID",0);
+        userAdmin.setId(userAdminId);
 
+
+        return userAdmin;
+    }
 
 
     public void getUser() {
