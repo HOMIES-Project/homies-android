@@ -254,8 +254,9 @@ public class DetailGroupFragment extends Fragment {
                     List<GroupResponse> addlist= response.body();
 
 
-                    String groupName = addlist..getGroupName();
-                    String detailGroup = addlist.getGroup().getDetailGroupName();
+
+                    String groupName = addlist.getGroup().getGroupName();
+                    String detailGroup = addlist.getGroup().getGroupRelation();
 
                     group.setText(groupName);
                     description.setText(detailGroup);

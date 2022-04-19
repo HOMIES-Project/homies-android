@@ -13,6 +13,7 @@ public class GroupRequest {
     private String taskList ;
     private int user;
 
+
     public int getId() {
         return id;
     }

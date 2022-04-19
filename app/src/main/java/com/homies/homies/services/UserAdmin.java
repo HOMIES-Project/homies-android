@@ -9,6 +9,7 @@ public class UserAdmin {
     private String birthDate;
     private String addDate;
     UserRequest userAdmin;
+    GroupRequest group;
 
     public int getId() {
         return id;
@@ -72,5 +73,13 @@ public class UserAdmin {
 
     public void setUserAdmin(UserRequest userAdmin) {
         this.userAdmin = userAdmin;
+    }
+
+    public GroupRequest getGroup() {
+        return group;
+    }
+
+    public void setGroup(GroupRequest group) {
+        this.group = group;
     }
 }
