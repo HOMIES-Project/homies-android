@@ -3,7 +3,7 @@ package com.homies.homies.services;
 public class UserData {
 
     private int id;
-    private byte photo;
+    private String photo;
     private String photoContentType;
     private String phone;
     private boolean premium;
@@ -20,11 +20,11 @@ public class UserData {
         this.id = id;
     }
 
-    public byte getPhoto() {
+    public String getPhoto() {
         return photo;
     }
 
-    public void setPhoto(byte photo) {
+    public void setPhoto(String photo) {
         this.photo = photo;
     }
 
