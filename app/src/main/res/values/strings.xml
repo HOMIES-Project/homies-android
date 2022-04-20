@@ -60,4 +60,5 @@
     <string name="val_user">Es necesario un nombre de usuario</string>
     <string name="userSucess">usuarioCreado</string>
     <string name="groupDescription">descripcion</string>
+    <string name="Btn_leave_group">Dejar grupo</string>
 </resources>

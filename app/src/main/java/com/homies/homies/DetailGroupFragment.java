@@ -53,7 +53,7 @@ public class DetailGroupFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View user = inflater.inflate(R.layout.fragment_detail_group, container, false);
-        getUser();
+
         userList = user.findViewById(R.id.userList);
         btnAddUser = user.findViewById(R.id.btnAddUser);
         activity = getActivity();
@@ -62,8 +62,10 @@ public class DetailGroupFragment extends Fragment {
         description = user.findViewById(R.id.textInputDetailGroupName);
         btnDeleteGroup = user.findViewById(R.id.btnDeleteGroup);
 
-        groupInfo();
 
+
+        groupInfo();
+        getUser();
 
         btnAddUser.setOnClickListener((View.OnClickListener) view -> {
             BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(
@@ -82,6 +84,7 @@ public class DetailGroupFragment extends Fragment {
                     String message = getString(R.string.val_user);
                     Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
                 } else {
+
                     saveUser(createUserListRequest());
 
                     bottomSheetDialog.dismiss();
@@ -131,6 +134,7 @@ public class DetailGroupFragment extends Fragment {
         UserAdmin userAdmin = new UserAdmin();
         SharedPreferences preferences = getActivity().getSharedPreferences("MY_APP", Context.MODE_PRIVATE);
         int userAdminId  = preferences.getInt("USERADMIN_ID",0);
+
         userAdmin.setId(userAdminId);
 
 
@@ -147,12 +151,13 @@ public class DetailGroupFragment extends Fragment {
             @Override
             public void onResponse(Call<List<UserListResponse>> userResponseCall, Response<List<UserListResponse>> response) {
 
+
                 if (response.isSuccessful()) {
                     List<UserListResponse> myUserList = response.body();
                     String[] oneUsersList = new String[myUserList.size()];
 
                     for (int i = 0; i < myUserList.size(); i++) {
-                        oneUsersList[i] = myUserList.get(i).getGroupName();
+                        oneUsersList[i] = String.valueOf(myUserList.get(i).getUserAdmin().getId());
                     }
 
                     userList.setAdapter(new ArrayAdapter<String>(getActivity(), R.layout.user_item,R.id.textViewUser , oneUsersList));

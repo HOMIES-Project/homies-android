@@ -6,9 +6,9 @@ public class UserListResponse {
     private String groupKey;
     private String groupName ;
     private String groupRelation ;
-    private int user;
     private int id;
     UserAdmin userAdmin;
+    UserData userData;
     private String addGroupDate;
     private String taskList;
     private String login;
@@ -46,14 +46,6 @@ public class UserListResponse {
         this.groupRelation = groupRelation;
     }
 
-    public int getUser() {
-        return user;
-    }
-
-    public void setUser(int user) {
-        this.user = user;
-    }
-
     public int getId() {
         return id;
     }
@@ -68,6 +60,14 @@ public class UserListResponse {
 
     public void setUserAdmin(UserAdmin userAdmin) {
         this.userAdmin = userAdmin;
+    }
+
+    public UserData getUserData() {
+        return userData;
+    }
+
+    public void setUserData(UserData userData) {
+        this.userData = userData;
     }
 
     public String getAddGroupDate() {
