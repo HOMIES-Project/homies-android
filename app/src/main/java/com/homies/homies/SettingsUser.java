@@ -107,7 +107,6 @@ public class SettingsUser extends Fragment {
         userInfo();
         validateFields();
 
-
         if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED){
             ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},MY_PERMISSIONS_REQUEST);
         }
@@ -121,10 +120,8 @@ public class SettingsUser extends Fragment {
                 intent.setAction(Intent.ACTION_GET_CONTENT);
                 startActivityForResult(intent, IMG_REQUEST);
 
-
             }
         });
-
 
         btn_save.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -158,7 +155,6 @@ public class SettingsUser extends Fragment {
 
             });
 
-
             bottomSheetDialog.setContentView(bottomSheetView);
             bottomSheetDialog.show();
         });
@@ -172,7 +168,6 @@ public class SettingsUser extends Fragment {
         SharedPreferences preferences = getActivity().getSharedPreferences("MY_APP", Context.MODE_PRIVATE);
         int userId  = preferences.getInt("USER_ID",0);
         userData.setId(userId);
-
 
         return userData;
     }
@@ -275,13 +270,11 @@ public class SettingsUser extends Fragment {
             public void onResponse(Call<UserData> call, Response<UserData> response) {
                 if (response.isSuccessful()) {
 
-
-                   /*startActivity(new Intent(activity, MenuActivity.class));
+                   startActivity(new Intent(activity, MenuActivity.class));
                     activity.finish();
 
                     String message = getString(R.string.updateInfo);
-                    Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();*/
-
+                    Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
 
 
                 } else {
@@ -295,7 +288,6 @@ public class SettingsUser extends Fragment {
             public void onFailure(Call<UserData> call, Throwable t) {
                 String message = t.getLocalizedMessage();
                 Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
-
             }
         });
 
@@ -396,8 +388,6 @@ public class SettingsUser extends Fragment {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-
-
         }
     }
 
