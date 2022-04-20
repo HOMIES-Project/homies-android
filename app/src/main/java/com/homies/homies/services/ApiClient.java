@@ -12,9 +12,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ApiClient {
 
-    private static ApiClient instance = null;
-    private Api myApi;
-
 
     private static Retrofit getRetrofit(){
 

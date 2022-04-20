@@ -75,6 +75,7 @@ public class SettingsUser extends Fragment {
     Button upload, btn_save;
     boolean condition = true;
     private Bitmap bitmap;
+    String filePath ="";
 
     private static final int MY_PERMISSIONS_REQUEST = 100;
     private int PICK_IMAGE_FROM_GALLERY_REQUEST =1;
@@ -235,11 +236,16 @@ public class SettingsUser extends Fragment {
                     String name = adslist.getUser().getFirstName();
                     String lastName = adslist.getUser().getLastName();
                     String email = adslist.getUser().getEmail();
+                    String photoString = adslist.getPhoto();
+
+                    byte[] decodedString = Base64.decode(photoString, Base64.DEFAULT);
+                    Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
 
                     et_user.setText(user);
                     et_name.setText(name);
                     et_lastname.setText(lastName);
                     et_email.setText(email);
+                    imageView3.setImageBitmap(decodedByte);
 
 
 
@@ -271,7 +277,6 @@ public class SettingsUser extends Fragment {
         userData.getUser().setEmail(et_email.getText().toString());
         userData.getUser().setLangKey("en");
         userData.getUser().setPhone(null);
-        userData.getUser().setPhoto(null);
 
         Call<UserData> updateInfo = ApiClient.getService().updateInfo("Bearer " + retrivedToken, userInf().getId(), userData.getUser());
         updateInfo.enqueue(new Callback<UserData>() {
@@ -280,11 +285,11 @@ public class SettingsUser extends Fragment {
                 if (response.isSuccessful()) {
 
 
-                    startActivity(new Intent(activity, MenuActivity.class));
+                   /* startActivity(new Intent(activity, MenuActivity.class));
                     activity.finish();
 
                     String message = getString(R.string.updateInfo);
-                    Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();*/
 
 
 
@@ -389,12 +394,21 @@ public class SettingsUser extends Fragment {
     //endregion
 
    public void uploadPhoto() {
+        /*File file = new File(filePath);
+        RequestBody requestBody = RequestBody.create(MediaType.parse("image/*"),file);
+        MultipartBody.Part parts = MultipartBody.Part.createFormData("newimage", file.getName(), requestBody);
+
+        RequestBody someData = okhttp3.RequestBody.create(MediaType.parse("text/plain"),"This is the new image");
+        Apis
+        */
+
         SharedPreferences preferences = getActivity().getSharedPreferences("MY_APP", Context.MODE_PRIVATE);
         String retrivedToken  = preferences.getString("TOKEN",null);
 
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.PNG, 75, byteArrayOutputStream);
         byte [] imageInByte = byteArrayOutputStream.toByteArray();
+
         String encodedImage = Base64.encodeToString(imageInByte, Base64.DEFAULT);
 
        Call<UserData> uploadPhoto = ApiClient.getService().uploadPhoto("Bearer " + retrivedToken, userInf().getId(),encodedImage);
@@ -404,8 +418,6 @@ public class SettingsUser extends Fragment {
                if (response.isSuccessful()) {
 
 
-                   startActivity(new Intent(activity, MenuActivity.class));
-                   activity.finish();
 
                    String message = getString(R.string.updateInfo);
                    Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
@@ -441,10 +453,11 @@ public class SettingsUser extends Fragment {
 
             try {
                 bitmap = MediaStore.Images.Media.getBitmap(activity.getContentResolver(),path);
+                imageView3.setImageBitmap(bitmap);
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            imageView3.setImageBitmap(bitmap);
+
 
         }
     }

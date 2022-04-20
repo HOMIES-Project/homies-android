@@ -45,7 +45,7 @@ public interface UserService {
     @PUT("user-data/{id}")
     Call<UserData> updateInfo(@Header("Authorization")String authHeader,@Path("id") int userId, @Body UserRequest userRequest);
 
-    @PUT("user-data/{id}")
+    @POST("user-data/{id}")
     Call <UserData> uploadPhoto(
             @Header("Authorization")String authHeader,
             @Path("id") int userId,
