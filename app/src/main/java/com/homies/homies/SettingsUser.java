@@ -12,6 +12,8 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -75,21 +77,15 @@ public class SettingsUser extends Fragment {
     Button upload, btn_save;
     boolean condition = true;
     private Bitmap bitmap;
-    String filePath ="";
 
     private static final int MY_PERMISSIONS_REQUEST = 100;
     private int PICK_IMAGE_FROM_GALLERY_REQUEST =1;
     private int IMG_REQUEST =21;
 
-
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View settings = inflater.inflate(R.layout.fragment_settings_user, container, false);
-
-
-
 
         ip_user = settings.findViewById(R.id.ip_user);
         ip_name = settings.findViewById(R.id.ip_name);
@@ -137,12 +133,10 @@ public class SettingsUser extends Fragment {
                 validateClickFields();
                 if (condition) {
                     updateInfo(userInf());
-                    uploadPhoto();
+                    //uploadPhoto();
                 }
             }
         });
-
-
 
         btn_delete.setOnClickListener((View.OnClickListener) view -> {
             BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(
@@ -171,17 +165,6 @@ public class SettingsUser extends Fragment {
 
         return settings;
     }
-
-
-   /* protected void OnActivityResult(int requestCode, int resultCode,Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if (requestCode == PICK_IMAGE_FROM_GALLERY_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
-            Uri uri = data.getData();
-            uploadPhoto(uri);
-        }
-    }*/
-
 
 
     public UserData userInf() {
@@ -231,23 +214,22 @@ public class SettingsUser extends Fragment {
                 if (response.isSuccessful()) {
                     UserData adslist= response.body();
 
-
                     String user = adslist.getUser().getLogin();
                     String name = adslist.getUser().getFirstName();
                     String lastName = adslist.getUser().getLastName();
                     String email = adslist.getUser().getEmail();
                     String photoString = adslist.getPhoto();
 
-                    byte[] decodedString = Base64.decode(photoString, Base64.DEFAULT);
-                    Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+                    if(photoString != null){
+                        byte[] decodedString = Base64.decode(photoString, Base64.DEFAULT);
+                        Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+                        imageView3.setImageBitmap(decodedByte);
+                    }
 
                     et_user.setText(user);
                     et_name.setText(name);
                     et_lastname.setText(lastName);
                     et_email.setText(email);
-                    imageView3.setImageBitmap(decodedByte);
-
-
 
                 } else {
                     String message = getString(R.string.error_login);
@@ -265,7 +247,6 @@ public class SettingsUser extends Fragment {
         });
 
     }
-
     public void updateInfo(UserData userData) {
         SharedPreferences preferences = getActivity().getSharedPreferences("MY_APP", Context.MODE_PRIVATE);
         String retrivedToken  = preferences.getString("TOKEN",null);
@@ -278,6 +259,16 @@ public class SettingsUser extends Fragment {
         userData.getUser().setLangKey("en");
         userData.getUser().setPhone(null);
 
+        BitmapDrawable drawable = (BitmapDrawable) imageView3.getDrawable();
+        Bitmap bitmap = drawable.getBitmap();
+
+        ByteArrayOutputStream baos= new  ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG,100, baos);
+        byte [] b=baos.toByteArray();
+        String temp= Base64.encodeToString(b, Base64.DEFAULT);
+
+        userData.getUser().setPhoto(temp);
+
         Call<UserData> updateInfo = ApiClient.getService().updateInfo("Bearer " + retrivedToken, userInf().getId(), userData.getUser());
         updateInfo.enqueue(new Callback<UserData>() {
             @Override
@@ -285,7 +276,7 @@ public class SettingsUser extends Fragment {
                 if (response.isSuccessful()) {
 
 
-                   /* startActivity(new Intent(activity, MenuActivity.class));
+                   /*startActivity(new Intent(activity, MenuActivity.class));
                     activity.finish();
 
                     String message = getString(R.string.updateInfo);
@@ -309,8 +300,6 @@ public class SettingsUser extends Fragment {
         });
 
     }
-
-
     // Validations when interacting with form fields
     private void validateFields() {
         //region validationUser
@@ -393,56 +382,6 @@ public class SettingsUser extends Fragment {
     }
     //endregion
 
-   public void uploadPhoto() {
-        /*File file = new File(filePath);
-        RequestBody requestBody = RequestBody.create(MediaType.parse("image/*"),file);
-        MultipartBody.Part parts = MultipartBody.Part.createFormData("newimage", file.getName(), requestBody);
-
-        RequestBody someData = okhttp3.RequestBody.create(MediaType.parse("text/plain"),"This is the new image");
-        Apis
-        */
-
-        SharedPreferences preferences = getActivity().getSharedPreferences("MY_APP", Context.MODE_PRIVATE);
-        String retrivedToken  = preferences.getString("TOKEN",null);
-
-        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.PNG, 75, byteArrayOutputStream);
-        byte [] imageInByte = byteArrayOutputStream.toByteArray();
-
-        String encodedImage = Base64.encodeToString(imageInByte, Base64.DEFAULT);
-
-       Call<UserData> uploadPhoto = ApiClient.getService().uploadPhoto("Bearer " + retrivedToken, userInf().getId(),encodedImage);
-       uploadPhoto.enqueue(new Callback<UserData>() {
-           @Override
-           public void onResponse(Call<UserData> call, Response<UserData> response) {
-               if (response.isSuccessful()) {
-
-
-
-                   String message = getString(R.string.updateInfo);
-                   Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
-
-
-
-               } else {
-                   String message = getString(R.string.error_login);
-                   Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
-               }
-
-           }
-
-           @Override
-           public void onFailure(Call<UserData> call, Throwable t) {
-               String message = t.getLocalizedMessage();
-               Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
-
-           }
-       });
-
-
-
-   }
-
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         Context context;
@@ -461,8 +400,5 @@ public class SettingsUser extends Fragment {
 
         }
     }
-
-
-
 
 }
