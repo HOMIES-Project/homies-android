@@ -11,6 +11,9 @@ public class UserRequest {
     private String token;
     private String key;
     private String langKey;
+    private String photo;
+    private String phone;
+
 
     public String getLangKey() {
         return langKey;
@@ -82,5 +85,21 @@ public class UserRequest {
 
     public void setKey(String key) {
         this.key = key;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(String photo) {
+        this.photo = photo;
     }
 }
