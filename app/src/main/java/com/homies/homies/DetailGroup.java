@@ -36,7 +36,5 @@ public class DetailGroup extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_group);
 
-
-
     }
 }

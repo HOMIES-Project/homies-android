@@ -42,6 +42,7 @@ public class DetailGroupFragment extends Fragment {
                 transaction.setReorderingAllowed(true);
 
                 transaction.replace(R.id.fragmentDetailGroup, EditGroupFragment.class, null);
+                transaction.addToBackStack(null);
                 transaction.commit();
             }
         });
