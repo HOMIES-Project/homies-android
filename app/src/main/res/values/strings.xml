@@ -61,4 +61,9 @@
     <string name="userSucess">usuarioCreado</string>
     <string name="groupDescription">descripcion</string>
     <string name="Btn_leave_group">Dejar grupo</string>
+    <string name="btn_shopping_list">Lista de la compra</string>
+    <string name="btn_expenses">gastos</string>
+    <string name="btn_add_task">Añadir tarea</string>
+    <string name="btn_editGroup">Editar grupo</string>
+    <string name="title_toolber_myGroup">Mi grupo</string>
 </resources>
