@@ -253,20 +253,20 @@ public class SettingsUser extends Fragment {
         userData.getUser().setEmail(et_email.getText().toString());
         userData.getUser().setLangKey("en");
         userData.getUser().setPhone(null);
-        userData.getUser().setPhoto(null);
 
-        if(userData.getUser().getPhoto() != null){
-        BitmapDrawable drawable = (BitmapDrawable) imageView3.getDrawable();
-        Bitmap bitmap = drawable.getBitmap();
+        try {
+            BitmapDrawable drawable = (BitmapDrawable) imageView3.getDrawable();
+            Bitmap bitmap = drawable.getBitmap();
+            
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
+            byte[] b = baos.toByteArray();
+            String temp = Base64.encodeToString(b, Base64.DEFAULT);
 
-        ByteArrayOutputStream baos= new  ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.PNG,100, baos);
-        byte [] b=baos.toByteArray();
-        String temp= Base64.encodeToString(b, Base64.DEFAULT);
 
-
-        userData.getUser().setPhoto(temp);
-
+            userData.getUser().setPhoto(temp);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
         Call<UserData> updateInfo = ApiClient.getService().updateInfo("Bearer " + retrivedToken, userInf().getId(), userData.getUser());
