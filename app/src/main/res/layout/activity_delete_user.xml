@@ -29,10 +29,11 @@
             android:layout_marginEnd="20dp"
             android:fontFamily="@font/montserrat_regular"
             android:gravity="left"
-            android:text="@string/text_erase_group"
+            android:text="@string/delete_user"
             android:textSize="17dp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 

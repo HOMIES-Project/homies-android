@@ -11,14 +11,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         tools:context=".LayoutActivity">
-        <Button
-            android:id="@+id/btnCancelActionGroup"
-            android:layout_width="14dp"
-            android:layout_height="14dp"
-            android:layout_marginEnd="10dp"
-            android:background="@drawable/ic_close"
-            app:layout_constraintBottom_toTopOf="@+id/eraseGroup"
-            app:layout_constraintEnd_toEndOf="parent" />
 
         <TextView
             android:id="@+id/eraseGroup"
@@ -29,7 +21,7 @@
             android:layout_marginEnd="20dp"
             android:fontFamily="@font/montserrat_regular"
             android:gravity="left"
-            android:text="@string/text_erase_group"
+            android:text="@string/confirm_leave_group"
             android:textSize="17dp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
