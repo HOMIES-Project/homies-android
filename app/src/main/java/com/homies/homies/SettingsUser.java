@@ -253,7 +253,9 @@ public class SettingsUser extends Fragment {
         userData.getUser().setEmail(et_email.getText().toString());
         userData.getUser().setLangKey("en");
         userData.getUser().setPhone(null);
+        userData.getUser().setPhoto(null);
 
+        if(userData.getUser().getPhoto() != null){
         BitmapDrawable drawable = (BitmapDrawable) imageView3.getDrawable();
         Bitmap bitmap = drawable.getBitmap();
 
@@ -262,7 +264,10 @@ public class SettingsUser extends Fragment {
         byte [] b=baos.toByteArray();
         String temp= Base64.encodeToString(b, Base64.DEFAULT);
 
+
         userData.getUser().setPhoto(temp);
+
+        }
 
         Call<UserData> updateInfo = ApiClient.getService().updateInfo("Bearer " + retrivedToken, userInf().getId(), userData.getUser());
         updateInfo.enqueue(new Callback<UserData>() {
