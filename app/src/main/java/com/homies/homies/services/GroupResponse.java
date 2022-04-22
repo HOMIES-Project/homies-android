@@ -1,6 +1,7 @@
 package com.homies.homies.services;
 
 import java.util.Date;
+import java.util.List;
 
 public class GroupResponse {
 
@@ -9,8 +10,7 @@ public class GroupResponse {
     private String groupName ;
     private String groupRelation ;
     UserData userAdmin;
-    private int user;
-    UserData userdata;
+    List<UserData> userData;
     private Date addGroupDate;
 
 
@@ -46,20 +46,12 @@ public class GroupResponse {
         this.groupRelation = groupRelation;
     }
 
-    public int getUser() {
-        return user;
+    public List<UserData> getUserdata() {
+        return userData;
     }
 
-    public void setUser(int user) {
-        this.user = user;
-    }
-
-    public UserData getUserdata() {
-        return userdata;
-    }
-
-    public void setUserdata(UserData userdata) {
-        this.userdata = userdata;
+    public void setUserdata(List<UserData> userdata) {
+        this.userData = userdata;
     }
 
     public UserData getUserAdmin() {

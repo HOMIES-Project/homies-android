@@ -45,12 +45,6 @@ public interface UserService {
     @PUT("user-data/{id}")
     Call<UserData> updateInfo(@Header("Authorization")String authHeader,@Path("id") int userId, @Body UserRequest userRequest);
 
-    @POST("user-data/{id}")
-    Call <UserData> uploadPhoto(
-            @Header("Authorization")String authHeader,
-            @Path("id") int userId,
-            @Field("photo") String encodedImage);
-
     @DELETE("user-data/{id}")
     Call<UserResponse> deleteUser(@Header("Authorization")String authHeader,@Path("id") int userId);
 
