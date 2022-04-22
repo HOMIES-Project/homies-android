@@ -29,8 +29,13 @@ public interface UserService {
     @POST("groups")
     Call<GroupResponse> saveGroup(@Header("Authorization")String authHeader, @Body GroupRequest groupRequest);
 
-    @POST("/api/groups/add-user")
-    Call<UserListResponse> addUser(@Header("Authorization") String authHeader, @Body UserListRequest userListRequest);
+    @POST("groups/add-user")
+    Call<AddUserGroupResponse> addUser(@Header("Authorization") String authHeader, @Body AddUserGroupRequest userListRequest);
+
+    @POST("groups/add-user")
+    Call<String> addUser2(@Header("Authorization") String authHeader, @Body AddUserGroupRequest userListRequest);
+
+
 
     @GET("groups/{id}")
     Call<GroupResponse> groupInfo(@Header("Authorization")String authHeader,@Path("id") int userId);

@@ -1,6 +1,6 @@
 package com.homies.homies.services;
 
-public class TakeList {
+public class TaskList {
 
     private int id;
     private String nameList;
