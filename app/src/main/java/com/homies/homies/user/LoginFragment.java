@@ -17,6 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -39,6 +40,7 @@ public class LoginFragment extends Fragment {
     TextView forgotPassword;
     Activity activity;
     Adaptador adaptador;
+    ProgressBar progressBar;
 
     @Nullable
     @Override
@@ -49,6 +51,8 @@ public class LoginFragment extends Fragment {
         inputUser = login.findViewById(R.id.userInput);
         inputPassword = login.findViewById(R.id.passwordInput);
         forgotPassword = login.findViewById(R.id.forgotPasswordTV);
+
+        progressBar = login.findViewById(R.id.progressBar2);
 
         activity = getActivity();
 
@@ -61,6 +65,7 @@ public class LoginFragment extends Fragment {
             FragmentTransaction fragmentTransaction = getParentFragmentManager().beginTransaction();
             fragmentTransaction.replace(R.id.fragment, registerFragment);
             fragmentTransaction.commit();
+            progressBar.setVisibility(View.VISIBLE);
         });
 
         forgotPassword.setOnClickListener((View.OnClickListener) view -> {

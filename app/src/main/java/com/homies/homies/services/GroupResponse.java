@@ -1,13 +1,17 @@
 package com.homies.homies.services;
 
+import java.util.Date;
+
 public class GroupResponse {
 
     private int id;
     private String groupKey;
     private String groupName ;
     private String groupRelation ;
+    UserData userAdmin;
     private int user;
     UserData userdata;
+    private Date addGroupDate;
 
 
     public int getId() {
@@ -56,5 +60,21 @@ public class GroupResponse {
 
     public void setUserdata(UserData userdata) {
         this.userdata = userdata;
+    }
+
+    public UserData getUserAdmin() {
+        return userAdmin;
+    }
+
+    public void setUserAdmin(UserData userAdmin) {
+        this.userAdmin = userAdmin;
+    }
+
+    public Date getAddGroupDate() {
+        return addGroupDate;
+    }
+
+    public void setAddGroupDate(Date addGroupDate) {
+        this.addGroupDate = addGroupDate;
     }
 }
