@@ -30,10 +30,7 @@ public interface UserService {
     Call<GroupResponse> saveGroup(@Header("Authorization")String authHeader, @Body GroupRequest groupRequest);
 
     @POST("/api/groups/add-user")
-    Call<List<UserListResponse>> addUser(@Header("Authorization") String authHeader);
-
-    @POST("/api/groups/add-user")
-    Call<UserListResponse> saveUser(@Header("Authorization") String authHeader, @Body UserListRequest userListRequest);
+    Call<UserListResponse> addUser(@Header("Authorization") String authHeader, @Body UserListRequest userListRequest);
 
     @GET("groups/{id}")
     Call<GroupResponse> groupInfo(@Header("Authorization")String authHeader,@Path("id") int userId);

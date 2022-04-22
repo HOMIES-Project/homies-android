@@ -1,17 +1,22 @@
 package com.homies.homies.services;
 
 public class UserListRequest {
+
     private int idAdminGroup;
+    private String login;
+    private int idGroup;
+
+    private int id;
     private String groupKey;
     private String groupName ;
     private String groupRelation ;
-    private String user;
-    private int id;
-    UserAdmin userAdmin;
     private String addGroupDate;
+    UserAdmin userAdmin;
+    UserData userData;
     private String taskList;
-    private String login;
-    private int idGroup;
+    private String user;
+
+
 
     public int getIdAdminGroup() {
         return idAdminGroup;
@@ -19,6 +24,30 @@ public class UserListRequest {
 
     public void setIdAdminGroup(int idAdminGroup) {
         this.idAdminGroup = idAdminGroup;
+    }
+
+    public String getLogin() {
+        return login;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
+    }
+
+    public int getIdGroup() {
+        return idGroup;
+    }
+
+    public void setIdGroup(int idGroup) {
+        this.idGroup = idGroup;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getGroupKey() {
@@ -45,20 +74,12 @@ public class UserListRequest {
         this.groupRelation = groupRelation;
     }
 
-    public String getUser() {
-        return user;
+    public String getAddGroupDate() {
+        return addGroupDate;
     }
 
-    public void setUser(String user) {
-        this.user = user;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
+    public void setAddGroupDate(String addGroupDate) {
+        this.addGroupDate = addGroupDate;
     }
 
     public UserAdmin getUserAdmin() {
@@ -69,12 +90,12 @@ public class UserListRequest {
         this.userAdmin = userAdmin;
     }
 
-    public String getAddGroupDate() {
-        return addGroupDate;
+    public UserData getUserData() {
+        return userData;
     }
 
-    public void setAddGroupDate(String addGroupDate) {
-        this.addGroupDate = addGroupDate;
+    public void setUserData(UserData userData) {
+        this.userData = userData;
     }
 
     public String getTaskList() {
@@ -85,19 +106,11 @@ public class UserListRequest {
         this.taskList = taskList;
     }
 
-    public String getLogin() {
-        return login;
+    public String getUser() {
+        return user;
     }
 
-    public void setLogin(String login) {
-        this.login = login;
-    }
-
-    public int getIdGroup() {
-        return idGroup;
-    }
-
-    public void setIdGroup(int idGroup) {
-        this.idGroup = idGroup;
+    public void setUser(String user) {
+        this.user = user;
     }
 }
