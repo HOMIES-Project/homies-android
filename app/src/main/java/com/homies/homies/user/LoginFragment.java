@@ -117,6 +117,7 @@ public class LoginFragment extends Fragment {
                     String token = response.body().getToken();
                     SharedPreferences preferences = getActivity().getSharedPreferences("MY_APP", Context.MODE_PRIVATE);
                     preferences.edit().putString("TOKEN",token).apply();
+                    
                     startActivity(new Intent(activity, MenuActivity.class));
                     activity.finish();
                 } else {

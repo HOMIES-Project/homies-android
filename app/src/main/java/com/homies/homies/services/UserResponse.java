@@ -10,6 +10,7 @@ public class UserResponse {
     private String login;
     private String username;
     private String id_token;
+    private int id;
     private String key;
 
 
@@ -83,5 +84,13 @@ public class UserResponse {
 
     public void setKey(String key) {
         this.key = key;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }
