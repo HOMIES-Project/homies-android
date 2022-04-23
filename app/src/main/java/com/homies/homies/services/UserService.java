@@ -32,9 +32,8 @@ public interface UserService {
     @POST("groups/add-user")
     Call<AddUserGroupResponse> addUser(@Header("Authorization") String authHeader, @Body AddUserGroupRequest userListRequest);
 
-    @POST("groups/add-user")
-    Call<String> addUser2(@Header("Authorization") String authHeader, @Body AddUserGroupRequest userListRequest);
-
+    @POST("groups/delete-user")
+    Call<DeleteUserGroupResponse> deleteUser(@Header("Authorization") String authHeader, @Body DeleteUserGroupRequest deleteUserGroupRequest);
 
 
     @GET("groups/{id}")

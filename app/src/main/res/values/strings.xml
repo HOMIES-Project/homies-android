@@ -58,8 +58,8 @@
     <string name="groupSucess">¡Grupo creado!</string>
     <string name="añadir_usuario">Añadir usuario</string>
     <string name="val_user">Es necesario un nombre de usuario</string>
-    <string name="userSucess">usuarioCreado</string>
-    <string name="groupDescription">descripcion</string>
+    <string name="userSucess">Usuario añadido</string>
+    <string name="groupDescription">Descripcion</string>
     <string name="Btn_leave_group">Dejar grupo</string>
     <string name="btn_shopping_list">Lista de la compra</string>
     <string name="btn_expenses">gastos</string>

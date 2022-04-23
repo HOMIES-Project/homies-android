@@ -3,12 +3,15 @@ package com.homies.homies;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -24,6 +27,8 @@ import com.homies.homies.services.GroupResponse;
 import com.homies.homies.services.UserAdmin;
 import com.homies.homies.services.AddUserGroupRequest;
 import com.homies.homies.services.AddUserGroupResponse;
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -52,7 +57,7 @@ public class EditGroupFragment extends Fragment {
         description = editGroup.findViewById(R.id.textInputDetailGroupName);
         btnDeleteGroup = editGroup.findViewById(R.id.btnDeleteGroup);
 
-        UserAdmin userAdmin = new UserAdmin();
+        /*UserAdmin userAdmin = new UserAdmin();
         user = userAdmin.getId();
 
         if(user == userAdminInf().getId()){
@@ -73,7 +78,7 @@ public class EditGroupFragment extends Fragment {
             description.setClickable(false);
             btnAddUser.setVisibility(View.GONE);
             btnDeleteGroup.setVisibility(View.GONE);
-        }
+        }*/
 
         //groupUserInfo();
         //getUser();
@@ -140,7 +145,7 @@ public class EditGroupFragment extends Fragment {
         return group;*/
     }
 
-    public UserAdmin userAdminInf() {
+    /*public UserAdmin userAdminInf() {
         UserAdmin userAdmin = new UserAdmin();
         SharedPreferences preferences = getActivity().getSharedPreferences("MY_APP", Context.MODE_PRIVATE);
         int userAdminId  = preferences.getInt("USERADMIN_ID",0);
@@ -149,23 +154,23 @@ public class EditGroupFragment extends Fragment {
 
 
         return userAdmin;
-    }
+    }*/
 
 
     /*public void getUser() {
 
         SharedPreferences preferences = getActivity().getSharedPreferences("MY_APP", Context.MODE_PRIVATE);
         String retrievedToken  = preferences.getString("TOKEN",null);
-        Call<List<UserResponse>> userResponseCall = ApiClient.getService().getUser("Bearer " + retrievedToken);
-        userResponseCall.enqueue(new Callback<List<UserResponse>>() {
+        Call<List<AddUserGroupResponse>> userResponseCall = ApiClient.getService().addUser("Bearer " + retrievedToken);
+        userResponseCall.enqueue(new Callback<List<AddUserGroupResponse>>() {
             @Override
-            public void onResponse(Call<List<UserResponse>> userResponseCall, Response<List<UserResponse>> response) {
+            public void onResponse(Call<List<AddUserGroupResponse>> userResponseCall, Response<List<AddUserGroupResponse>> response) {
                 if (response.isSuccessful()) {
-                    List<UserResponse> myUserList = response.body();
+                    List<AddUserGroupResponse> myUserList = response.body();
                     String[] oneUsersList = new String[myUserList.size()];
 
                     for (int i = 0; i < myUserList.size(); i++) {
-                        oneUsersList[i] = myUserList.get(i).getFirstName();
+                        oneUsersList[i] = myUserList.get(i).getUserAdmin();
                     }
                     userList.setAdapter(new ArrayAdapter<String>(getActivity(), R.layout.user_item,R.id.textViewUser , oneUsersList));
                     userList.setOnItemClickListener(new AdapterView.OnItemClickListener()  {
@@ -180,27 +185,16 @@ public class EditGroupFragment extends Fragment {
                 }
             }
             @Override
-            public void onFailure(Call<List<UserResponse>> userResponseCall, Throwable t) {
+            public void onFailure(Call<List<AddUserGroupResponse>> userResponseCall, Throwable t) {
                 String message = t.getLocalizedMessage();
                 Toast.makeText(activity, message, Toast.LENGTH_SHORT).show();
             }
         });
     }*/
 
-    public AddUserGroupRequest createUserListRequest() {
-        AddUserGroupRequest addUserListRequest = new AddUserGroupRequest();
-        SharedPreferences preferences = getActivity().getSharedPreferences("MY_APP", Context.MODE_PRIVATE);
-        int idUser = preferences.getInt("USER", 0);
-        int idGroup = preferences.getInt("GROUP_ID", 0);
-        addUserListRequest.setIdAdminGroup(idUser);
-        addUserListRequest.setLogin(userInput.getText().toString().trim());
-        addUserListRequest.setIdGroup(idGroup);
 
 
-        return addUserListRequest;
-    }
-
-    public void addUser(AddUserGroupRequest userListRequest) {
+    /*public void addUser(AddUserGroupRequest userListRequest) {
         SharedPreferences preferences = getActivity().getSharedPreferences("MY_APP", Context.MODE_PRIVATE);
         userListRequest.setIdAdminGroup(6);
         String retrievedToken  = preferences.getString("TOKEN",null);
@@ -227,15 +221,33 @@ public class EditGroupFragment extends Fragment {
                 Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
             }
         });
-    }
+    }*/
 
-    public void addUserOld(AddUserGroupRequest userListRequest) {
+    public AddUserGroupRequest createUserListRequest() {
+        AddUserGroupRequest addUserListRequest = new AddUserGroupRequest();
+        SharedPreferences preferences = getActivity().getSharedPreferences("MY_APP", Context.MODE_PRIVATE);
+        int idUserAdminGroup = preferences.getInt("USERADMINGROUP_ID", 0);
+        int idGroup = preferences.getInt("GROUP_ID", 0);
+        addUserListRequest.setIdAdminGroup(idUserAdminGroup);
+        addUserListRequest.setLogin(userInput.getText().toString().trim());
+        addUserListRequest.setIdGroup(idGroup);
+
+
+        /*String token = response.body().getToken();
+        SharedPreferences preferences = getActivity().getSharedPreferences("MY_APP", Context.MODE_PRIVATE);
+        preferences.edit().putString("TOKEN",token).apply();*/
+
+        return createUserListRequest();
+
+    }
+    public void addUser(AddUserGroupRequest userListRequest) {
         SharedPreferences preferences = getActivity().getSharedPreferences("MY_APP", Context.MODE_PRIVATE);
         String retrievedToken  = preferences.getString("TOKEN",null);
-        userListRequest.setIdAdminGroup(6);
-        userListRequest.setIdGroup(12);
+        /*userListRequest.setIdAdminGroup(6);
+        userListRequest.setIdGroup(12);*/
+        createUserListRequest();
         Call<AddUserGroupResponse> userResponseCall = ApiClient.getService().addUser("Bearer " + retrievedToken, userListRequest);
-        AddUserGroupRequest userListRequest2 = userListRequest; //Para ver datos
+        //AddUserGroupRequest userListRequest2 = userListRequest; //Para ver datos
 
         userResponseCall.enqueue(new Callback<AddUserGroupResponse>() {
             @Override
@@ -243,7 +255,9 @@ public class EditGroupFragment extends Fragment {
                 if (response.isSuccessful()) {
                     String message = getString(R.string.userSucess);
                     Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
-                    //getUser();
+
+
+
                 } else {
                     String message = getString(R.string.error_login);
                     Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
