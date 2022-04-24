@@ -30,6 +30,7 @@ import com.homies.homies.services.GroupResponse;
 import com.homies.homies.services.UserAdmin;
 import com.homies.homies.services.AddUserGroupRequest;
 import com.homies.homies.services.AddUserGroupResponse;
+import com.homies.homies.services.UserData;
 import com.homies.homies.services.UserResponse;
 
 import java.util.List;
@@ -72,7 +73,10 @@ public class EditGroupFragment extends Fragment {
 
         //userAdmin
 
-        /*if(user.getId() == userAdmin.getId()){
+        int userNu = userGroup().getId();
+        int userA = userAdmin().getId();
+
+        if(userNu == userA){
             group.setFocusable(true);
             group.setFocusableInTouchMode(true);
             group.setClickable(true);
@@ -91,7 +95,7 @@ public class EditGroupFragment extends Fragment {
             description.setClickable(false);
             btnAddUser.setVisibility(View.GONE);
             btnDeleteGroup.setVisibility(View.GONE);
-        }*/
+        }
 
 
         btnAddUser.setOnClickListener((View.OnClickListener) view -> {
@@ -266,5 +270,21 @@ public class EditGroupFragment extends Fragment {
         });
     }
 
-    
+    public UserData userGroup() {
+        UserData userData = new UserData();
+        SharedPreferences preferences = getActivity().getSharedPreferences("MY_APP", Context.MODE_PRIVATE);
+        int userId  = preferences.getInt("USER_ID",0);
+
+        userData.setId(userId);
+
+        return userData;
+    }
+
+    public GroupRequest userAdmin() {
+        GroupRequest userAdmin = new GroupRequest();
+        SharedPreferences preferences = getActivity().getSharedPreferences("MY_APP", Context.MODE_PRIVATE);
+        int userId  = preferences.getInt("USER_ID",0);
+        userAdmin.getUserAdmin().setId(userId);
+        return userAdmin;
+    }
 }
