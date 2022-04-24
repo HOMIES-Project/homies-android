@@ -3,12 +3,13 @@ package com.homies.homies.services;
 public class UserData {
 
     private int id;
-    private byte photo;
+    private String photo;
     private String photoContentType;
     private String phone;
     private boolean premium;
     private String birthDate;
     private String addDate;
+    UserRequest user;
 
 
     public int getId() {
@@ -19,11 +20,11 @@ public class UserData {
         this.id = id;
     }
 
-    public byte getPhoto() {
+    public String getPhoto() {
         return photo;
     }
 
-    public void setPhoto(byte photo) {
+    public void setPhoto(String photo) {
         this.photo = photo;
     }
 
@@ -65,6 +66,14 @@ public class UserData {
 
     public void setAddDate(String addDate) {
         this.addDate = addDate;
+    }
+
+    public UserRequest getUser() {
+        return user;
+    }
+
+    public void setUser(UserRequest user) {
+        this.user = user;
     }
 }
 

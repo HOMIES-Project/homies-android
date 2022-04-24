@@ -155,6 +155,7 @@ public class GroupFragment extends Fragment {
         groupRequest.setGroupName(groupName);
         groupRequest.setGroupRelation(inputDescription.getText().toString());
 
+
         return groupRequest;
 
     }

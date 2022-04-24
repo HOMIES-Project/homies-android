@@ -12,6 +12,7 @@ public class GroupRequest {
     private UserAdmin userAdmin ;
     private String taskList ;
     private int user;
+    private AddUserGroupRequest addUserGroupRequest;
 
 
     public int getId() {
@@ -76,5 +77,13 @@ public class GroupRequest {
 
     public void setUserData(UserData userData) {
         this.userData = userData;
+    }
+
+    public AddUserGroupRequest getAddUserGroupRequest() {
+        return addUserGroupRequest;
+    }
+
+    public void setAddUserGroupRequest(AddUserGroupRequest addUserGroupRequest) {
+        this.addUserGroupRequest = addUserGroupRequest;
     }
 }

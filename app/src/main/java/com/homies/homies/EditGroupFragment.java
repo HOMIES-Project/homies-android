@@ -50,7 +50,8 @@ public class EditGroupFragment extends Fragment {
     EditText userInput;
     Activity activity;
     TextView group, description;
-    AddUserGroupRequest addUserGroupRequest;
+
+
 
 
     @Nullable
@@ -67,20 +68,10 @@ public class EditGroupFragment extends Fragment {
         btnDeleteGroup = editGroup.findViewById(R.id.btnDeleteGroup);
 
 
+        int userAdmin = groupIdAdmin().getId();
+        int userId = user().getId();
 
-
-        /*//get user
-        ApiClient.getInstance().getUser(userId).enqueue(new Callback<UserAdmin>());
-
-        //get userAdmin
-        ApiClient.getInstance().getUserAdmin(userId);*/
-
-        //userAdmin
-
-        int userNu = user().getId();
-
-
-        if(userNu == idAdmin){
+        if(userId == userAdmin){
             group.setFocusable(true);
             group.setFocusableInTouchMode(true);
             group.setClickable(true);
@@ -100,7 +91,6 @@ public class EditGroupFragment extends Fragment {
             btnAddUser.setVisibility(View.GONE);
             btnDeleteGroup.setVisibility(View.GONE);
         }
-
 
         btnAddUser.setOnClickListener((View.OnClickListener) view -> {
             BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(
@@ -135,44 +125,8 @@ public class EditGroupFragment extends Fragment {
         });
 
         return editGroup;
-
     }
 
-
-    /*public void getUser() {
-
-        SharedPreferences preferences = getActivity().getSharedPreferences("MY_APP", Context.MODE_PRIVATE);
-        String retrievedToken  = preferences.getString("TOKEN",null);
-        Call<List<AddUserGroupResponse>> userResponseCall = ApiClient.getService().addUser("Bearer " + retrievedToken);
-        userResponseCall.enqueue(new Callback<List<AddUserGroupResponse>>() {
-            @Override
-            public void onResponse(Call<List<AddUserGroupResponse>> userResponseCall, Response<List<AddUserGroupResponse>> response) {
-                if (response.isSuccessful()) {
-                    List<AddUserGroupResponse> myUserList = response.body();
-                    String[] oneUsersList = new String[myUserList.size()];
-
-                    for (int i = 0; i < myUserList.size(); i++) {
-                        oneUsersList[i] = myUserList.get(i).getUserAdmin();
-                    }
-                    userList.setAdapter(new ArrayAdapter<String>(getActivity(), R.layout.user_item,R.id.textViewUser , oneUsersList));
-                    userList.setOnItemClickListener(new AdapterView.OnItemClickListener()  {
-                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                            Toast.makeText(getContext(),"You cliked " + oneUsersList[position],Toast.LENGTH_SHORT).show();//Toast temporal para eliminar usuario
-                        }
-                    });
-
-                }else {
-                    String message = getString(R.string.error_login);
-                    Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
-                }
-            }
-            @Override
-            public void onFailure(Call<List<AddUserGroupResponse>> userResponseCall, Throwable t) {
-                String message = t.getLocalizedMessage();
-                Toast.makeText(activity, message, Toast.LENGTH_SHORT).show();
-            }
-        });
-    }*/
 
     public AddUserGroupRequest createUserListRequest() {
 
@@ -206,68 +160,13 @@ public class EditGroupFragment extends Fragment {
                     String message = getString(R.string.userSucess);
                     Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
 
-
-
                 } else {
                     String message = getString(R.string.error_login);
                     Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
                 }
             }
-
             @Override
             public void onFailure(Call<AddUserGroupResponse> call, Throwable t) {
-                String message = t.getLocalizedMessage();
-                Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
-
-    public void deleteUser(DeleteUserGroupRequest deleteUserGroupRequest) {
-        SharedPreferences preferences = getActivity().getSharedPreferences("MY_APP", Context.MODE_PRIVATE);
-        String retrivedToken  = preferences.getString("TOKEN",null);
-        Call<DeleteUserGroupResponse> deleteUserGroup = ApiClient.getService().deleteUser("Bearer " + retrivedToken, deleteUserGroupRequest);
-        deleteUserGroup.enqueue(new Callback<DeleteUserGroupResponse>() {
-            @Override
-            public void onResponse(Call<DeleteUserGroupResponse> call, Response<DeleteUserGroupResponse> response) {
-                if (response.isSuccessful()) {
-                    String message = getString(R.string.delete_user_group);
-                    Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
-
-                } else {
-                    String message = getString(R.string.error_login);
-                    Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
-                }
-            }
-            @Override
-            public void onFailure(Call<DeleteUserGroupResponse> call, Throwable t) {
-                String message = t.getLocalizedMessage();
-                Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
-
-   public void getGroupUserAdmin(UserAdmin userAdmin) {
-
-        SharedPreferences preferences = getActivity().getSharedPreferences("MY_APP", Context.MODE_PRIVATE);
-        String retrievedToken  = preferences.getString("TOKEN",null);
-
-        Call<GroupResponse> groupResponseCall = ApiClient.getService().groupInfo("Bearer " + retrievedToken, userAdmin);
-        groupResponseCall.enqueue(new Callback<GroupResponse>() {
-            @Override
-            public void onResponse(Call<GroupResponse> call, Response<GroupResponse> response) {
-                if (response.isSuccessful()) {
-
-                   response.body().getId();
-                   response.body().getGroupName();
-                   response.body().getGroupRelation();
-
-                } else {
-                    String message = getString(R.string.error_login);
-                    Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
-                }
-            }
-            @Override
-            public void onFailure(Call<GroupResponse> call, Throwable t) {
                 String message = t.getLocalizedMessage();
                 Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
             }
@@ -284,29 +183,21 @@ public class EditGroupFragment extends Fragment {
         return userData;
     }
 
-    /*public AddUserGroupRequest getGroupUserAdmin() {
-
-        AddUserGroupRequest userAdmin = new AddUserGroupRequest();
-        userAdmin.getIdAdminGroup();
-
-        return userAdmin;
-    }*/
-
-    public UserResponse userAdminId() {
-        UserResponse userResponse = new UserResponse();
+    public GroupRequest groupIdAdmin() {
+        GroupRequest groupRequest = new GroupRequest();
         SharedPreferences preferences = getActivity().getSharedPreferences("MY_APP", Context.MODE_PRIVATE);
-        int userResponseId  = preferences.getInt("USER_ID",0);
-        userResponse.setId(userResponseId);
+        int userId  = preferences.getInt("USERADMIN_ID",0);
 
-        return userResponse;
+        groupRequest.setId(userId);
+
+        return groupRequest;
+
     }
 
-
-
-    public void userAdminGroupId() {
+    public void userAdminGroupId(GroupRequest groupRequest) {
         SharedPreferences preferences = getActivity().getSharedPreferences("MY_APP", Context.MODE_PRIVATE);
         String retrivedToken  = preferences.getString("TOKEN",null);
-        Call<GroupResponse> userInfo = ApiClient.getService().groupInfo("Bearer " + retrivedToken,  , userAdminId().getId());
+        Call<GroupResponse> userInfo = ApiClient.getService().groupInfo("Bearer " + retrivedToken, groupRequest ,user().getId());
         userInfo.enqueue(new Callback<GroupResponse>() {
             @Override
             public void onResponse(Call<GroupResponse> call, Response<GroupResponse> response) {
@@ -321,68 +212,9 @@ public class EditGroupFragment extends Fragment {
                     String message = getString(R.string.error_login);
                     Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
                 }
-
             }
-
             @Override
             public void onFailure(Call<GroupResponse> call, Throwable t) {
-                String message = t.getLocalizedMessage();
-                Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
-
-            }
-        });
-
-    }
-
-    public void updateInfoGroup(GroupResponse groupResponse) {
-        SharedPreferences preferences = getActivity().getSharedPreferences("MY_APP", Context.MODE_PRIVATE);
-        String retrivedToken  = preferences.getString("TOKEN",null);
-        groupResponse.setUser(new GroupResponse());
-
-        userData.getUser().setFirstName(et_name.getText().toString());
-        userData.getUser().setLastName(et_lastname.getText().toString());
-        userData.getUser().setLogin(et_user.getText().toString());
-        userData.getUser().setEmail(et_email.getText().toString());
-        userData.getUser().setLangKey("en");
-        userData.getUser().setPhone(null);
-
-        try {
-            BitmapDrawable drawable = (BitmapDrawable) imageView3.getDrawable();
-            Bitmap bitmap = drawable.getBitmap();
-
-            ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
-            byte[] b = baos.toByteArray();
-            String temp = Base64.encodeToString(b, Base64.DEFAULT);
-
-
-            userData.getUser().setPhoto(temp);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        Call<UserData> updateInfo = ApiClient.getService().updateInfo("Bearer " + retrivedToken, userInf().getId(), userData.getUser());
-        updateInfo.enqueue(new Callback<UserData>() {
-            @Override
-            public void onResponse(Call<UserData> call, Response<UserData> response) {
-                if (response.isSuccessful()) {
-
-                    startActivity(new Intent(activity, MenuActivity.class));
-                    activity.finish();
-
-                    String message = getString(R.string.updateInfo);
-                    Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
-
-
-                } else {
-                    String message = getString(R.string.error_login);
-                    Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
-                }
-
-            }
-
-            @Override
-            public void onFailure(Call<UserData> call, Throwable t) {
                 String message = t.getLocalizedMessage();
                 Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
             }
