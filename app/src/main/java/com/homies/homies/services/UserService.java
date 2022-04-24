@@ -42,7 +42,5 @@ public interface UserService {
     @GET("account")
     Call<UserResponse> getAccount(@Header("Authorization") String authHeader);
 
-    @GET("user-data/{id}")
-    Call<UserAdmin> getUserAdmin(@Header("Authorization") String authHeader, @Path("id") int userId);
 
 }

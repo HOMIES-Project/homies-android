@@ -3,15 +3,11 @@ package com.homies.homies;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -26,14 +22,10 @@ import com.homies.homies.services.ApiClient;
 import com.homies.homies.services.DeleteUserGroupRequest;
 import com.homies.homies.services.DeleteUserGroupResponse;
 import com.homies.homies.services.GroupRequest;
-import com.homies.homies.services.GroupResponse;
-import com.homies.homies.services.UserAdmin;
 import com.homies.homies.services.AddUserGroupRequest;
 import com.homies.homies.services.AddUserGroupResponse;
 import com.homies.homies.services.UserData;
 import com.homies.homies.services.UserResponse;
-
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -46,8 +38,7 @@ public class EditGroupFragment extends Fragment {
     EditText userInput;
     Activity activity;
     TextView group, description;
-    int user;
-    UserAdmin userAdmin;
+
 
     @Nullable
     @Override
@@ -73,7 +64,7 @@ public class EditGroupFragment extends Fragment {
 
         //userAdmin
 
-        int userNu = userGroup().getId();
+        int userNu = user().getId();
         int userA = userAdmin().getId();
 
         if(userNu == userA){
@@ -270,7 +261,7 @@ public class EditGroupFragment extends Fragment {
         });
     }
 
-    public UserData userGroup() {
+    public UserData user() {
         UserData userData = new UserData();
         SharedPreferences preferences = getActivity().getSharedPreferences("MY_APP", Context.MODE_PRIVATE);
         int userId  = preferences.getInt("USER_ID",0);
@@ -281,10 +272,12 @@ public class EditGroupFragment extends Fragment {
     }
 
     public GroupRequest userAdmin() {
-        GroupRequest userAdmin = new GroupRequest();
+        GroupRequest groupRequest = new GroupRequest();
         SharedPreferences preferences = getActivity().getSharedPreferences("MY_APP", Context.MODE_PRIVATE);
-        int userId  = preferences.getInt("USER_ID",0);
-        userAdmin.getUserAdmin().setId(userId);
-        return userAdmin;
+        int userId  = preferences.getInt("USERADMIN_ID",0);
+
+        groupRequest.setId(userId);
+
+        return groupRequest;
     }
 }
