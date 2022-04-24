@@ -1,5 +1,7 @@
 package com.homies.homies.services;
 
+import androidx.constraintlayout.widget.Group;
+
 import java.util.List;
 
 import retrofit2.Call;
@@ -37,7 +39,7 @@ public interface UserService {
 
 
     @GET("groups/{id}")
-    Call<AddUserGroupRequest> groupInfo(@Header("Authorization")String authHeader,@Body AddUserGroupRequest addUserGroupRequest, @Path("id") int userId);
+    Call<GroupResponse> groupInfo(@Header("Authorization")String authHeader, @Body GroupRequest groupRequest, @Path("id") int userId);
 
     /*@GET("account")
     Call<UserResponse> getAccount(@Header("Authorization") String authHeader);*/

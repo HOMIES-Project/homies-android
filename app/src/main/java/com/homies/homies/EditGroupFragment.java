@@ -3,6 +3,7 @@ package com.homies.homies;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -32,6 +33,7 @@ import com.homies.homies.services.UserAdmin;
 import com.homies.homies.services.UserData;
 import com.homies.homies.services.UserRequest;
 import com.homies.homies.services.UserResponse;
+import com.homies.homies.user.MainActivity;
 
 import java.security.acl.Group;
 
@@ -288,7 +290,47 @@ public class EditGroupFragment extends Fragment {
         return userAdmin;
     }*/
 
+    public UserResponse userAdminId() {
+        UserResponse userResponse = new UserResponse();
+        SharedPreferences preferences = getActivity().getSharedPreferences("MY_APP", Context.MODE_PRIVATE);
+        int userResponseId  = preferences.getInt("USER_ID",0);
+        userResponse.setId(userResponseId);
 
+        return userResponse;
+    }
+
+
+
+    public void userAdminGroupId() {
+        SharedPreferences preferences = getActivity().getSharedPreferences("MY_APP", Context.MODE_PRIVATE);
+        String retrivedToken  = preferences.getString("TOKEN",null);
+        Call<GroupResponse> userInfo = ApiClient.getService().groupInfo("Bearer " + retrivedToken,  , userAdminId().getId());
+        userInfo.enqueue(new Callback<GroupResponse>() {
+            @Override
+            public void onResponse(Call<GroupResponse> call, Response<GroupResponse> response) {
+                if (response.isSuccessful()) {
+                    GroupResponse userIdGroup= response.body();
+
+                    userIdGroup.getId();
+                    userIdGroup.getGroupName();
+                    userIdGroup.getGroupRelation();
+
+                } else {
+                    String message = getString(R.string.error_login);
+                    Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<GroupResponse> call, Throwable t) {
+                String message = t.getLocalizedMessage();
+                Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+
+            }
+        });
+
+    }
 
 
 
