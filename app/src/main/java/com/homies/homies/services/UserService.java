@@ -37,7 +37,7 @@ public interface UserService {
 
 
     @GET("groups/{id}")
-    Call<GroupResponse> groupInfo(@Header("Authorization")String authHeader,@Body UserAdmin userAdmin);
+    Call<AddUserGroupRequest> groupInfo(@Header("Authorization")String authHeader,@Body AddUserGroupRequest addUserGroupRequest, @Path("id") int userId);
 
     /*@GET("account")
     Call<UserResponse> getAccount(@Header("Authorization") String authHeader);*/
