@@ -4,7 +4,10 @@ package com.homies.homies;
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,8 +27,12 @@ import com.homies.homies.services.DeleteUserGroupResponse;
 import com.homies.homies.services.GroupRequest;
 import com.homies.homies.services.AddUserGroupRequest;
 import com.homies.homies.services.AddUserGroupResponse;
+import com.homies.homies.services.GroupResponse;
+import com.homies.homies.services.UserAdmin;
 import com.homies.homies.services.UserData;
 import com.homies.homies.services.UserResponse;
+
+import java.security.acl.Group;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -65,9 +72,10 @@ public class EditGroupFragment extends Fragment {
         //userAdmin
 
         int userNu = user().getId();
-        int userA = userAdmin().getId();
 
-        if(userNu == userA){
+        int userAD = userAdmin().getId();
+
+        if(userNu == userAD){
             group.setFocusable(true);
             group.setFocusableInTouchMode(true);
             group.setClickable(true);
@@ -233,7 +241,7 @@ public class EditGroupFragment extends Fragment {
         });
     }
 
-    public void getAccountInfo() {
+   /* public void getAccountInfo() {
 
         SharedPreferences preferences = getActivity().getSharedPreferences("MY_APP", Context.MODE_PRIVATE);
         String retrievedToken  = preferences.getString("TOKEN",null);
@@ -259,7 +267,7 @@ public class EditGroupFragment extends Fragment {
                 Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
             }
         });
-    }
+    }*/
 
     public UserData user() {
         UserData userData = new UserData();
@@ -271,13 +279,17 @@ public class EditGroupFragment extends Fragment {
         return userData;
     }
 
-    public GroupRequest userAdmin() {
-        GroupRequest groupRequest = new GroupRequest();
+    public UserAdmin userAdmin() {
+        UserAdmin userAdmin = new UserAdmin();
         SharedPreferences preferences = getActivity().getSharedPreferences("MY_APP", Context.MODE_PRIVATE);
-        int userId  = preferences.getInt("USERADMIN_ID",0);
+        //int userId  = preferences.getInt("USER_ID",0);
 
-        groupRequest.setId(userId);
+        userAdmin.getId();
 
-        return groupRequest;
+        return userAdmin;
     }
+
+
+
+
 }
