@@ -69,4 +69,5 @@
     <string name="delete_user">¿Estás seguro de que quieres eliminar al usuario de este grupo?</string>
     <string name="leave_group">¿Está seguro de que quiere salir de este grupo?</string>
     <string name="confirm_leave_group">Saliste del grupo</string>
+    <string name="delete_user_group">Usuario borrado del grupo</string>
 </resources>

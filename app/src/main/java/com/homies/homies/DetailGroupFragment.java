@@ -1,7 +1,9 @@
 package com.homies.homies;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,17 +23,13 @@ public class DetailGroupFragment extends Fragment {
 
     Button btnEditGroup;
 
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         View main = inflater.inflate(R.layout.fragment_detail_group, container, false);
 
-
         btnEditGroup = main.findViewById(R.id.btn_editGroup);
-
-
 
         btnEditGroup.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -41,11 +39,15 @@ public class DetailGroupFragment extends Fragment {
                 FragmentTransaction transaction = fragmentManager.beginTransaction();
                 transaction.setReorderingAllowed(true);
 
-                transaction.replace(R.id.fragmentDetailGroup, EditGroupFragment.class, null);
+                //transaction.replace(R.id.fragmentDetailGroup, EditGroupFragment.class, null);
+                transaction.replace(R.id.fragmentGroup, EditGroupFragment.class, null);
                 transaction.addToBackStack(null);
                 transaction.commit();
+
+
             }
         });
+
 
         return main;
     }

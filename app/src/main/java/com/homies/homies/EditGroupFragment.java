@@ -23,10 +23,14 @@ import androidx.fragment.app.Fragment;
 
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.homies.homies.services.ApiClient;
+import com.homies.homies.services.DeleteUserGroupRequest;
+import com.homies.homies.services.DeleteUserGroupResponse;
+import com.homies.homies.services.GroupRequest;
 import com.homies.homies.services.GroupResponse;
 import com.homies.homies.services.UserAdmin;
 import com.homies.homies.services.AddUserGroupRequest;
 import com.homies.homies.services.AddUserGroupResponse;
+import com.homies.homies.services.UserResponse;
 
 import java.util.List;
 
@@ -41,8 +45,8 @@ public class EditGroupFragment extends Fragment {
     EditText userInput;
     Activity activity;
     TextView group, description;
-
     int user;
+    UserAdmin userAdmin;
 
     @Nullable
     @Override
@@ -57,10 +61,18 @@ public class EditGroupFragment extends Fragment {
         description = editGroup.findViewById(R.id.textInputDetailGroupName);
         btnDeleteGroup = editGroup.findViewById(R.id.btnDeleteGroup);
 
-        /*UserAdmin userAdmin = new UserAdmin();
-        user = userAdmin.getId();
 
-        if(user == userAdminInf().getId()){
+
+
+        /*//get user
+        ApiClient.getInstance().getUser(userId).enqueue(new Callback<UserAdmin>());
+
+        //get userAdmin
+        ApiClient.getInstance().getUserAdmin(userId);*/
+
+        //userAdmin
+
+        /*if(user.getId() == userAdmin.getId()){
             group.setFocusable(true);
             group.setFocusableInTouchMode(true);
             group.setClickable(true);
@@ -69,6 +81,7 @@ public class EditGroupFragment extends Fragment {
             description.setClickable(true);
             btnAddUser.setVisibility(View.VISIBLE);
             btnDeleteGroup.setVisibility(View.VISIBLE);
+
         }else{
             group.setFocusable(false);
             group.setFocusableInTouchMode(false);
@@ -80,8 +93,6 @@ public class EditGroupFragment extends Fragment {
             btnDeleteGroup.setVisibility(View.GONE);
         }*/
 
-        //groupUserInfo();
-        //getUser();
 
         btnAddUser.setOnClickListener((View.OnClickListener) view -> {
             BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(
@@ -117,44 +128,7 @@ public class EditGroupFragment extends Fragment {
 
         return editGroup;
 
-        /*btnDeleteGroup.setOnClickListener((View.OnClickListener) view -> {
-            BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(
-                    getActivity(), R.style.BottonSheetDialogTheme
-            );
-            View bottomSheetView = LayoutInflater.from(activity.getApplicationContext())
-                    .inflate(
-                            R.layout.activity_delete_group,
-                           group.findViewById(R.id.groupDeleteContainer)
-                    );
-
-            btnCancelActionGroup = bottomSheetView.findViewById(R.id.btnCancelActionGroup);
-            btnConfirmDeleteGroup = bottomSheetView.findViewById(R.id.btnConfirmDeleteGroup);
-            btnConfirmDeleteGroup.setOnClickListener(view1 -> {
-                  bottomSheetDialog.dismiss();
-                }
-            });
-            btnCancelActionGroup.setOnClickListener(view1 -> {
-
-                bottomSheetDialog.dismiss();
-            });
-
-            bottomSheetDialog.setContentView(bottomSheetView);
-            bottomSheetDialog.show();
-        });
-        
-        return group;*/
     }
-
-    /*public UserAdmin userAdminInf() {
-        UserAdmin userAdmin = new UserAdmin();
-        SharedPreferences preferences = getActivity().getSharedPreferences("MY_APP", Context.MODE_PRIVATE);
-        int userAdminId  = preferences.getInt("USERADMIN_ID",0);
-
-        userAdmin.setId(userAdminId);
-
-
-        return userAdmin;
-    }*/
 
 
     /*public void getUser() {
@@ -192,63 +166,31 @@ public class EditGroupFragment extends Fragment {
         });
     }*/
 
-
-
-    /*public void addUser(AddUserGroupRequest userListRequest) {
-        SharedPreferences preferences = getActivity().getSharedPreferences("MY_APP", Context.MODE_PRIVATE);
-        userListRequest.setIdAdminGroup(6);
-        String retrievedToken  = preferences.getString("TOKEN",null);
-        userListRequest.setIdGroup(12);
-        Call<String> userResponseCall = ApiClient.getService().addUser2("Bearer " + retrievedToken, userListRequest);
-        AddUserGroupRequest userListRequest2 = userListRequest; //Para ver datos
-
-        userResponseCall.enqueue(new Callback<String>() {
-            @Override
-            public void onResponse(Call<String> call, Response<String> response) {
-                if (response.isSuccessful()) {
-                    String message = getString(R.string.userSucess);
-                    Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
-                    //getUser();
-                } else {
-                    String message = getString(R.string.error_login);
-                    Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<String> call, Throwable t) {
-                String message = t.getLocalizedMessage();
-                Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
-            }
-        });
-    }*/
-
     public AddUserGroupRequest createUserListRequest() {
+
         AddUserGroupRequest addUserListRequest = new AddUserGroupRequest();
         SharedPreferences preferences = getActivity().getSharedPreferences("MY_APP", Context.MODE_PRIVATE);
+
         int idUserAdminGroup = preferences.getInt("USERADMINGROUP_ID", 0);
         int idGroup = preferences.getInt("GROUP_ID", 0);
+
         addUserListRequest.setIdAdminGroup(idUserAdminGroup);
         addUserListRequest.setLogin(userInput.getText().toString().trim());
         addUserListRequest.setIdGroup(idGroup);
 
-
-        /*String token = response.body().getToken();
-        SharedPreferences preferences = getActivity().getSharedPreferences("MY_APP", Context.MODE_PRIVATE);
-        preferences.edit().putString("TOKEN",token).apply();*/
-
-        return createUserListRequest();
+        return addUserListRequest;
 
     }
     public void addUser(AddUserGroupRequest userListRequest) {
+
         SharedPreferences preferences = getActivity().getSharedPreferences("MY_APP", Context.MODE_PRIVATE);
         String retrievedToken  = preferences.getString("TOKEN",null);
         /*userListRequest.setIdAdminGroup(6);
         userListRequest.setIdGroup(12);*/
         createUserListRequest();
+
         Call<AddUserGroupResponse> userResponseCall = ApiClient.getService().addUser("Bearer " + retrievedToken, userListRequest);
         //AddUserGroupRequest userListRequest2 = userListRequest; //Para ver datos
-
         userResponseCall.enqueue(new Callback<AddUserGroupResponse>() {
             @Override
             public void onResponse(Call<AddUserGroupResponse> call, Response<AddUserGroupResponse> response) {
@@ -272,18 +214,45 @@ public class EditGroupFragment extends Fragment {
         });
     }
 
-    /*public void deletGroup() {
+    public void deleteUser(DeleteUserGroupRequest deleteUserGroupRequest) {
         SharedPreferences preferences = getActivity().getSharedPreferences("MY_APP", Context.MODE_PRIVATE);
         String retrivedToken  = preferences.getString("TOKEN",null);
-        Call<UserResponse> deleteRequest = ApiClient.getService().deleteGroup("Bearer " + retrivedToken, userInf().getId());
-        deleteRequest.enqueue(new Callback<UserResponse>() {
+        Call<DeleteUserGroupResponse> deleteUserGroup = ApiClient.getService().deleteUser("Bearer " + retrivedToken, deleteUserGroupRequest);
+        deleteUserGroup.enqueue(new Callback<DeleteUserGroupResponse>() {
+            @Override
+            public void onResponse(Call<DeleteUserGroupResponse> call, Response<DeleteUserGroupResponse> response) {
+                if (response.isSuccessful()) {
+                    String message = getString(R.string.delete_user_group);
+                    Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+
+                } else {
+                    String message = getString(R.string.error_login);
+                    Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+                }
+            }
+            @Override
+            public void onFailure(Call<DeleteUserGroupResponse> call, Throwable t) {
+                String message = t.getLocalizedMessage();
+                Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    public void getAccountInfo() {
+
+        SharedPreferences preferences = getActivity().getSharedPreferences("MY_APP", Context.MODE_PRIVATE);
+        String retrievedToken  = preferences.getString("TOKEN",null);
+
+        Call<UserResponse> userResponseCall = ApiClient.getService().getAccount("Bearer " + retrievedToken);
+        userResponseCall.enqueue(new Callback<UserResponse>() {
             @Override
             public void onResponse(Call<UserResponse> call, Response<UserResponse> response) {
                 if (response.isSuccessful()) {
-                    String message = getString(R.string.deleteSucess);
-                    Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(activity, MainActivity.class));
-                    activity.finish();
+                    SharedPreferences preferences = getActivity().getSharedPreferences("MY_APP", Context.MODE_PRIVATE);
+                    preferences.edit().putInt("USER_ID", response.body().getId());
+
+                   System.out.println("Response: " + response.body());
+
                 } else {
                     String message = getString(R.string.error_login);
                     Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
@@ -295,31 +264,7 @@ public class EditGroupFragment extends Fragment {
                 Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
             }
         });
-    }*/
+    }
 
-    /*public void groupUserInfo() {
-        SharedPreferences preferences = getActivity().getSharedPreferences("MY_APP", Context.MODE_PRIVATE);
-        String retrivedToken  = preferences.getString("TOKEN",null);
-        Call<AddUserGroupResponse> userList = ApiClient.getService().groupInfo("Bearer " + retrivedToken, userAdminInf().getId());
-        userList.enqueue(new Callback<AddUserGroupResponse>() {
-            @Override
-            public void onResponse(Call<AddUserGroupResponse> call, Response<AddUserGroupResponse> response) {
-                if (response.isSuccessful()) {
-                    GroupResponse addlist= response.body();
-                    String groupName = addlist.getGroupName();
-                    String detailGroup = addlist.getGroupRelation();
-                    group.setText(groupName);
-                    description.setText(detailGroup);
-                } else {
-                    String message = getString(R.string.error_login);
-                    Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
-                }
-            }
-            @Override
-            public void onFailure(Call<AddUserGroupResponse> call, Throwable t) {
-                String message = t.getLocalizedMessage();
-                Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
-            }
-        });
-    }*/
+    
 }

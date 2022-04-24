@@ -9,7 +9,7 @@ public class GroupRequest {
     private String groupName ;
     private String groupRelation ;
     UserData userData ;
-    private String userAdmin ;
+    private UserAdmin userAdmin ;
     private String taskList ;
     private int user;
 
@@ -46,13 +46,11 @@ public class GroupRequest {
         this.groupRelation = groupRelation;
     }
 
-
-
-    public String getUserAdmin() {
+    public UserAdmin getUserAdmin() {
         return userAdmin;
     }
 
-    public void setUserAdmin(String userAdmin) {
+    public void setUserAdmin(UserAdmin userAdmin) {
         this.userAdmin = userAdmin;
     }
 

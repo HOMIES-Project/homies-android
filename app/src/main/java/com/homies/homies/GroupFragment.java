@@ -19,6 +19,8 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.homies.homies.services.ApiClient;
@@ -112,8 +114,16 @@ public class GroupFragment extends Fragment {
 
                         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                            startActivity(new Intent(getContext(), DetailGroup.class));
-                            activity.finish();
+                            FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                            FragmentTransaction transaction = fragmentManager.beginTransaction();
+                            transaction.setReorderingAllowed(true);
+
+                            transaction.replace(R.id.fragmentGroup, DetailGroupFragment.class, null);
+                            transaction.addToBackStack(null);
+                            transaction.commit();
+
+
+
                             Toast.makeText(getContext(),"You cliked " + oneGroup[position],Toast.LENGTH_SHORT).show();//Toast temporal, no añadir string
                         }
                     });
@@ -134,16 +144,19 @@ public class GroupFragment extends Fragment {
 
         });
     }
+
+
     public GroupRequest createRequest() {
         GroupRequest groupRequest = new GroupRequest();
         SharedPreferences preferences = getActivity().getSharedPreferences("MY_APP", Context.MODE_PRIVATE);
         int userId  = preferences.getInt("USER_ID",0);
+        String groupName = inputGroup.getText().toString();
         groupRequest.setUser(userId);
-        groupRequest.setGroupName(inputGroup.getText().toString());
+        groupRequest.setGroupName(groupName);
         groupRequest.setGroupRelation(inputDescription.getText().toString());
 
-
         return groupRequest;
+
     }
 
     public void saveGroup(GroupRequest groupRequest) {
