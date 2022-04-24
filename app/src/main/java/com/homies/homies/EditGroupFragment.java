@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.util.Base64;
 import android.view.LayoutInflater;
@@ -35,6 +36,7 @@ import com.homies.homies.services.UserRequest;
 import com.homies.homies.services.UserResponse;
 import com.homies.homies.user.MainActivity;
 
+import java.io.ByteArrayOutputStream;
 import java.security.acl.Group;
 
 import retrofit2.Call;
@@ -332,6 +334,60 @@ public class EditGroupFragment extends Fragment {
 
     }
 
+    public void updateInfoGroup(GroupResponse groupResponse) {
+        SharedPreferences preferences = getActivity().getSharedPreferences("MY_APP", Context.MODE_PRIVATE);
+        String retrivedToken  = preferences.getString("TOKEN",null);
+        groupResponse.setUser(new GroupResponse());
 
+        userData.getUser().setFirstName(et_name.getText().toString());
+        userData.getUser().setLastName(et_lastname.getText().toString());
+        userData.getUser().setLogin(et_user.getText().toString());
+        userData.getUser().setEmail(et_email.getText().toString());
+        userData.getUser().setLangKey("en");
+        userData.getUser().setPhone(null);
+
+        try {
+            BitmapDrawable drawable = (BitmapDrawable) imageView3.getDrawable();
+            Bitmap bitmap = drawable.getBitmap();
+
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
+            byte[] b = baos.toByteArray();
+            String temp = Base64.encodeToString(b, Base64.DEFAULT);
+
+
+            userData.getUser().setPhoto(temp);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        Call<UserData> updateInfo = ApiClient.getService().updateInfo("Bearer " + retrivedToken, userInf().getId(), userData.getUser());
+        updateInfo.enqueue(new Callback<UserData>() {
+            @Override
+            public void onResponse(Call<UserData> call, Response<UserData> response) {
+                if (response.isSuccessful()) {
+
+                    startActivity(new Intent(activity, MenuActivity.class));
+                    activity.finish();
+
+                    String message = getString(R.string.updateInfo);
+                    Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+
+
+                } else {
+                    String message = getString(R.string.error_login);
+                    Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<UserData> call, Throwable t) {
+                String message = t.getLocalizedMessage();
+                Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+            }
+        });
+
+    }
 
 }
