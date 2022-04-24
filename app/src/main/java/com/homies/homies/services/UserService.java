@@ -37,10 +37,10 @@ public interface UserService {
 
 
     @GET("groups/{id}")
-    Call<GroupResponse> groupInfo(@Header("Authorization")String authHeader,@Path("id") int userId);
+    Call<GroupResponse> groupInfo(@Header("Authorization")String authHeader,@Body UserAdmin userAdmin);
 
-    @GET("account")
-    Call<UserResponse> getAccount(@Header("Authorization") String authHeader);
+    /*@GET("account")
+    Call<UserResponse> getAccount(@Header("Authorization") String authHeader);*/
 
 
 }

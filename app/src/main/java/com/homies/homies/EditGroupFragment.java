@@ -30,6 +30,7 @@ import com.homies.homies.services.AddUserGroupResponse;
 import com.homies.homies.services.GroupResponse;
 import com.homies.homies.services.UserAdmin;
 import com.homies.homies.services.UserData;
+import com.homies.homies.services.UserRequest;
 import com.homies.homies.services.UserResponse;
 
 import java.security.acl.Group;
@@ -45,6 +46,7 @@ public class EditGroupFragment extends Fragment {
     EditText userInput;
     Activity activity;
     TextView group, description;
+    AddUserGroupRequest addUserGroupRequest;
 
 
     @Nullable
@@ -73,9 +75,8 @@ public class EditGroupFragment extends Fragment {
 
         int userNu = user().getId();
 
-        int userAD = userAdmin().getId();
 
-        if(userNu == userAD){
+        if(userNu == idAdmin){
             group.setFocusable(true);
             group.setFocusableInTouchMode(true);
             group.setClickable(true);
@@ -241,20 +242,20 @@ public class EditGroupFragment extends Fragment {
         });
     }
 
-   /* public void getAccountInfo() {
+   public void getGroupUserAdmin(UserAdmin userAdmin) {
 
         SharedPreferences preferences = getActivity().getSharedPreferences("MY_APP", Context.MODE_PRIVATE);
         String retrievedToken  = preferences.getString("TOKEN",null);
 
-        Call<UserResponse> userResponseCall = ApiClient.getService().getAccount("Bearer " + retrievedToken);
-        userResponseCall.enqueue(new Callback<UserResponse>() {
+        Call<GroupResponse> groupResponseCall = ApiClient.getService().groupInfo("Bearer " + retrievedToken, userAdmin);
+        groupResponseCall.enqueue(new Callback<GroupResponse>() {
             @Override
-            public void onResponse(Call<UserResponse> call, Response<UserResponse> response) {
+            public void onResponse(Call<GroupResponse> call, Response<GroupResponse> response) {
                 if (response.isSuccessful()) {
-                    SharedPreferences preferences = getActivity().getSharedPreferences("MY_APP", Context.MODE_PRIVATE);
-                    preferences.edit().putInt("USER_ID", response.body().getId());
 
-                   System.out.println("Response: " + response.body());
+                   response.body().getId();
+                   response.body().getGroupName();
+                   response.body().getGroupRelation();
 
                 } else {
                     String message = getString(R.string.error_login);
@@ -262,12 +263,12 @@ public class EditGroupFragment extends Fragment {
                 }
             }
             @Override
-            public void onFailure(Call<UserResponse> call, Throwable t) {
+            public void onFailure(Call<GroupResponse> call, Throwable t) {
                 String message = t.getLocalizedMessage();
                 Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
             }
         });
-    }*/
+    }
 
     public UserData user() {
         UserData userData = new UserData();
@@ -279,15 +280,14 @@ public class EditGroupFragment extends Fragment {
         return userData;
     }
 
-    public UserAdmin userAdmin() {
-        UserAdmin userAdmin = new UserAdmin();
-        SharedPreferences preferences = getActivity().getSharedPreferences("MY_APP", Context.MODE_PRIVATE);
-        //int userId  = preferences.getInt("USER_ID",0);
+    /*public AddUserGroupRequest getGroupUserAdmin() {
 
-        userAdmin.getId();
+        AddUserGroupRequest userAdmin = new AddUserGroupRequest();
+        userAdmin.getIdAdminGroup();
 
         return userAdmin;
-    }
+    }*/
+
 
 
 
