@@ -9,11 +9,9 @@ public class GroupRequest {
     private String groupName ;
     private String groupRelation ;
     UserData userData ;
-    private UserAdmin userAdmin ;
+    private String userAdmin ;
     private String taskList ;
     private int user;
-    private AddUserGroupRequest addUserGroupRequest;
-
 
     public int getId() {
         return id;
@@ -47,7 +45,9 @@ public class GroupRequest {
         this.groupRelation = groupRelation;
     }
 
-    public UserAdmin getUserAdmin() {
+
+
+    public String getUserAdmin() {
         return userAdmin;
     }
 
@@ -77,13 +77,5 @@ public class GroupRequest {
 
     public void setUserData(UserData userData) {
         this.userData = userData;
-    }
-
-    public AddUserGroupRequest getAddUserGroupRequest() {
-        return addUserGroupRequest;
-    }
-
-    public void setAddUserGroupRequest(AddUserGroupRequest addUserGroupRequest) {
-        this.addUserGroupRequest = addUserGroupRequest;
     }
 }

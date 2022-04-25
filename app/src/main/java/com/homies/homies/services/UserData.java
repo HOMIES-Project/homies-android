@@ -76,4 +76,3 @@ public class UserData {
         this.user = user;
     }
 }
-

@@ -70,4 +70,23 @@
     <string name="leave_group">¿Está seguro de que quiere salir de este grupo?</string>
     <string name="confirm_leave_group">Saliste del grupo</string>
     <string name="delete_user_group">Usuario borrado del grupo</string>
+    <!-- Add Group -->
+    <string name="ingressGroup">Introduzca nombre del grupo y una descripción.</string>
+    <string name="nameGroup">Introduzca nombre grupo</string>
+    <string name="descriptionGroup">Introduzca descripción del grupo</string>
+    <string name="addButton">Crear Grupo</string>
+    <string name="Cancel">Cancelar</string>
+    <string name="val_name">Es necesario asiganr al grupo un nombre</string>
+    <string name="groupSucess">¡Grupo creado!</string>
+
+    <!-- Settings User -->
+    <string name="saveChanges">Guardar Cambios</string>
+    <string name="deleteAccount">Borrar cuenta</string>
+    <string name="confirmDelete">¿Estás seguro de que quieres eliminar tu perfil?</string>
+    <string name="reconfirmDelete">Esta accion no puede deshacerse</string>
+    <string name="confirm">Confirmar</string>
+    <string name="deleteSucess">¡Usuario eliminado!</string>
+    <string name="updateInfo">Datos Actualizados</string>
+
+
 </resources>

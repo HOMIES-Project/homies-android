@@ -5,12 +5,18 @@ import androidx.constraintlayout.widget.Group;
 import java.util.ArrayList;
 import java.util.List;
 
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
+import retrofit2.http.Field;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
+import retrofit2.http.Multipart;
+import retrofit2.http.PATCH;
 import retrofit2.http.POST;
-import retrofit2.http.Path;
+import retrofit2.http.PUT;
 
 public interface UserService {
 
@@ -31,6 +37,27 @@ public interface UserService {
 
     @POST("groups")
     Call<GroupResponse> saveGroup(@Header("Authorization")String authHeader, @Body GroupRequest groupRequest);
+
+    @GET("user-data/{id}")
+    Call<UserData> userInfo(@Header("Authorization")String authHeader,@Path("id") int userId);
+
+    @PUT("user-data/{id}")
+    Call<UserData> updateInfo(@Header("Authorization")String authHeader,@Path("id") int userId, @Body UserRequest userRequest);
+
+    @POST("user-data/{id}")
+    Call <UserData> uploadPhoto(
+            @Header("Authorization")String authHeader,
+            @Path("id") int userId,
+            @Field("photo") String encodedImage);
+
+    @DELETE("user-data/{id}")
+    Call<UserResponse> deleteUser(@Header("Authorization")String authHeader,@Path("id") int userId);
+
+    @GET("groups/{id}")
+    Call<GroupResponse> groupInfo(@Header("Authorization")String authHeader,@Path("id") int userId);
+
+    
+
 
     @POST("groups/add-user")
     Call<ArrayList<AddUserGroupResponse>> addUserGroup(@Header("Authorization") String authHeader);

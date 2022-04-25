@@ -60,5 +60,4 @@ public class GroupResponse {
     public void setUserdata(UserData userdata) {
         this.userdata = userdata;
     }
-
 }

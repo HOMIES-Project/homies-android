@@ -41,49 +41,17 @@ public class GroupFragment extends Fragment {
     Activity activity;
     ImageButton add;
 
+
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View group = inflater.inflate(R.layout.fragment_group, container, false);
         getGroup();
+        ((MenuActivity)getActivity()).getSupportActionBar().setTitle("Grupos");
         recyclerView = group.findViewById(R.id.recyclerView);
         add = group.findViewById(R.id.addGroup);
         activity = getActivity();
-
-
-        add.setOnClickListener((View.OnClickListener) view -> {
-            BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(
-                    getActivity(), R.style.BottonSheetDialogTheme
-            );
-            View bottomSheetView = LayoutInflater.from(activity.getApplicationContext())
-                    .inflate(
-                            R.layout.activity_layout_botton_addgroup,
-                            group.findViewById(R.id.bottonAddContainer)
-                    );
-            inputGroup = bottomSheetView.findViewById(R.id.inputGroup);
-            inputDescription = bottomSheetView.findViewById(R.id.inputDescription);
-            btnCancel = bottomSheetView.findViewById(R.id.btnCancel);
-            btnAdd = bottomSheetView.findViewById(R.id.btnAdd);
-            btnAdd.setOnClickListener(view1 -> {
-                if (inputGroup.getText().toString().trim().isEmpty()) {
-                    String message = getString(R.string.val_name);
-                    Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
-                } else {
-                    saveGroup(createRequest());
-
-                    bottomSheetDialog.dismiss();
-                }
-            });
-            btnCancel.setOnClickListener(view1 -> {
-
-                bottomSheetDialog.dismiss();
-            });
-
-
-
-            bottomSheetDialog.setContentView(bottomSheetView);
-            bottomSheetDialog.show();
-        });
 
 
         return group;
@@ -102,8 +70,8 @@ public class GroupFragment extends Fragment {
             public void onResponse(Call<List<GroupResponse>> groupResponseCall, Response<List<GroupResponse>> response) {
 
                 if (response.isSuccessful()) {
-                    List<GroupResponse> myGroupList = response.body();
-                    String[] oneGroup = new String[myGroupList.size()];
+                List<GroupResponse> myGroupList = response.body();
+                String[] oneGroup = new String[myGroupList.size()];
 
                     for (int i = 0; i < myGroupList.size(); i++) {
                         oneGroup[i] = myGroupList.get(i).getGroupName();
@@ -144,20 +112,16 @@ public class GroupFragment extends Fragment {
 
         });
     }
-
-
     public GroupRequest createRequest() {
         GroupRequest groupRequest = new GroupRequest();
         SharedPreferences preferences = getActivity().getSharedPreferences("MY_APP", Context.MODE_PRIVATE);
         int userId  = preferences.getInt("USER_ID",0);
-        String groupName = inputGroup.getText().toString();
         groupRequest.setUser(userId);
-        groupRequest.setGroupName(groupName);
+        groupRequest.setGroupName(inputGroup.getText().toString());
         groupRequest.setGroupRelation(inputDescription.getText().toString());
 
 
         return groupRequest;
-
     }
 
     public void saveGroup(GroupRequest groupRequest) {
