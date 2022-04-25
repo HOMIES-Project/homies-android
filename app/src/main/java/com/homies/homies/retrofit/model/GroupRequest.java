@@ -1,6 +1,5 @@
 package com.homies.homies.retrofit.model;
 
-import android.service.autofill.UserData;
 
 public class GroupRequest {
 
