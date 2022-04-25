@@ -60,8 +60,8 @@ public class SettingsUser extends Fragment {
     private Bitmap bitmap;
 
     private static final int MY_PERMISSIONS_REQUEST = 100;
-    private int PICK_IMAGE_FROM_GALLERY_REQUEST =1;
-    private int IMG_REQUEST =21;
+    private final int PICK_IMAGE_FROM_GALLERY_REQUEST =1;
+    private final int IMG_REQUEST =21;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -103,7 +103,7 @@ public class SettingsUser extends Fragment {
 
             }
         });
-
+        //button save changes
         btn_save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -115,14 +115,14 @@ public class SettingsUser extends Fragment {
                 }
             }
         });
-
+        //Button delete user
         btn_delete.setOnClickListener((View.OnClickListener) view -> {
             BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(
                     getActivity(), R.style.BottonSheetDialogTheme
             );
             View bottomSheetView = LayoutInflater.from(activity.getApplicationContext())
                     .inflate(
-                            R.layout.activity_layout_botton_deleteuser,
+                            R.layout.dialog_layout_botton_deleteuser,
                             settings.findViewById(R.id.bottonDeleteUser)
                     );
 
@@ -152,7 +152,7 @@ public class SettingsUser extends Fragment {
 
         return userData;
     }
-
+    //Method to delete user
     public void deleteUser() {
         SharedPreferences preferences = getActivity().getSharedPreferences("MY_APP", Context.MODE_PRIVATE);
         String retrivedToken  = preferences.getString("TOKEN",null);
@@ -179,7 +179,7 @@ public class SettingsUser extends Fragment {
             }
         });
     }
-
+    //Method to obtain user data
     public void userInfo() {
         SharedPreferences preferences = getActivity().getSharedPreferences("MY_APP", Context.MODE_PRIVATE);
         String retrivedToken  = preferences.getString("TOKEN",null);
@@ -223,6 +223,7 @@ public class SettingsUser extends Fragment {
         });
 
     }
+    //Method for updating user data
     public void updateInfo(UserData userData) {
         SharedPreferences preferences = getActivity().getSharedPreferences("MY_APP", Context.MODE_PRIVATE);
         String retrivedToken  = preferences.getString("TOKEN",null);

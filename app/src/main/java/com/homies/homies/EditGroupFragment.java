@@ -30,6 +30,12 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+//
+//
+// IN DEVELOPMENT
+//
+//
+
 public class EditGroupFragment extends Fragment {
 
     RecyclerView userList;
@@ -55,11 +61,11 @@ public class EditGroupFragment extends Fragment {
 
 
 
-        //Extraigo los datos del user que ha hecho login y del userAdmin del grupo
+        //extract the data of the logged in user and the userAdmin of the group.
         int userId = user().getId();
         //int userAdmin = addUserGroupResponse.getUserAdmin().getId();
 
-        //Si el usuario es el administrador se habilitan o deshabilitan los botones
+        //If the user is the administrator, the buttons are enabled or disabled.
         /*if(userId == userAdmin){
             group.setFocusable(true);
             group.setFocusableInTouchMode(true);
@@ -87,7 +93,7 @@ public class EditGroupFragment extends Fragment {
             );
             View bottomSheetView = LayoutInflater.from(activity.getApplicationContext())
                     .inflate(
-                            R.layout.activity_add_user,
+                            R.layout.dialog_add_user,
                             editGroup.findViewById(R.id.addUserContainer)
                     );
             userInput = bottomSheetView.findViewById(R.id.userInput);
@@ -117,7 +123,7 @@ public class EditGroupFragment extends Fragment {
     }
 
 
-    //Metodo para pedir los parámetros del grupo
+    //Method for requesting group parameters
     public AddUserGroupRequest createUserListRequest() {
 
         AddUserGroupRequest addUserListRequest = new AddUserGroupRequest();
@@ -133,7 +139,7 @@ public class EditGroupFragment extends Fragment {
         return addUserListRequest;
 
     }
-    //Metodo para añadir usuario al grupo
+    //Method to add user to group
     public void addUserGroup(/*AddUserGroupRequest addUserGroupRequest*/) {
 
         SharedPreferences preferences = getActivity().getSharedPreferences("MY_APP", Context.MODE_PRIVATE);
@@ -168,7 +174,7 @@ public class EditGroupFragment extends Fragment {
         });
     }
 
-    //Metodo para obtener el usuario que ha hecho login.
+    //Method to obtain the logged in user.
     public UserData user() {
         UserData userData = new UserData();
         SharedPreferences preferences = getActivity().getSharedPreferences("MY_APP", Context.MODE_PRIVATE);

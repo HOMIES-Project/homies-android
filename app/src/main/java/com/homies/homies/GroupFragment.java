@@ -59,7 +59,7 @@ public class GroupFragment extends Fragment {
         return group;
     }
 
-
+    //Method to get the list of groups where the user appears
     public void groupList() {
 
         SharedPreferences preferences = getActivity().getSharedPreferences("MY_APP", Context.MODE_PRIVATE);
@@ -94,8 +94,6 @@ public class GroupFragment extends Fragment {
                             transaction.addToBackStack(null);
                             transaction.commit();
 
-
-
                             Toast.makeText(getContext(),"You cliked " + oneGroup[position],Toast.LENGTH_SHORT).show();//Toast temporal, no añadir string
                         }
                     });
@@ -127,7 +125,7 @@ public class GroupFragment extends Fragment {
 
         return groupRequest;
     }
-
+    //Method to create a new group
     public void saveGroup(GroupRequest groupRequest) {
         SharedPreferences preferences = getActivity().getSharedPreferences("MY_APP", Context.MODE_PRIVATE);
         String retrivedToken  = preferences.getString("TOKEN",null);

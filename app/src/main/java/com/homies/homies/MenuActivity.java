@@ -37,16 +37,9 @@ public class MenuActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         if(id == R.id.opcion1) {
-            Toast.makeText(this,"OPCION1", Toast.LENGTH_LONG);
+            Toast.makeText(this,"SETTINGS", Toast.LENGTH_LONG);
             Settings();
-
-        }else if(id == R.id.opcion2){
-            Toast.makeText(this, "OPCION2", Toast.LENGTH_LONG);
-        }else if(id == R.id.opcion3) {
-            Toast.makeText(this,"OPCION3", Toast.LENGTH_LONG);
-
         }
-
         return true;
     }
 

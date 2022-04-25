@@ -70,7 +70,7 @@ public class LoginFragment extends Fragment {
             );
             View bottomSheetView = LayoutInflater.from(activity.getApplicationContext())
                     .inflate(
-                            R.layout.activity_layout_botton_sheet,
+                            R.layout.dialog_layout_botton_sheet,
                             (ScrollView)login.findViewById(R.id.bottonSheetContainer)
                     );
 
