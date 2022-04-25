@@ -78,7 +78,7 @@
             android:textSize="15sp" />
     </com.google.android.material.textfield.TextInputLayout>
 
-    <ListView
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/userList"
         android:name="com.homies.homies.DetailGroupFragment"
         android:layout_width="match_parent"

@@ -2,6 +2,7 @@ package com.homies.homies.services;
 
 import androidx.constraintlayout.widget.Group;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -32,17 +33,11 @@ public interface UserService {
     Call<GroupResponse> saveGroup(@Header("Authorization")String authHeader, @Body GroupRequest groupRequest);
 
     @POST("groups/add-user")
-    Call<AddUserGroupResponse> addUser(@Header("Authorization") String authHeader, @Body AddUserGroupRequest userListRequest);
+    Call<ArrayList<AddUserGroupResponse>> addUserGroup(@Header("Authorization") String authHeader);
 
     @POST("groups/delete-user")
     Call<DeleteUserGroupResponse> deleteUser(@Header("Authorization") String authHeader, @Body DeleteUserGroupRequest deleteUserGroupRequest);
 
-
-    @GET("groups/{id}")
-    Call<GroupResponse> groupInfo(@Header("Authorization")String authHeader, @Body GroupRequest groupRequest, @Path("id") int userId);
-
-    /*@GET("account")
-    Call<UserResponse> getAccount(@Header("Authorization") String authHeader);*/
 
 
 }
