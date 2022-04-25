@@ -6,16 +6,12 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Toast;
 
-import com.homies.homies.user.LoginFragment;
 
-import java.util.Set;
 
 public class MenuActivity extends AppCompatActivity {
 
@@ -27,8 +23,6 @@ public class MenuActivity extends AppCompatActivity {
         setContentView(R.layout.activity_group);
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-
 
     }
 

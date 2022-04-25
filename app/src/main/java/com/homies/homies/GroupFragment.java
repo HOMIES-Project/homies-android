@@ -48,7 +48,7 @@ public class GroupFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View group = inflater.inflate(R.layout.fragment_group, container, false);
-        userInfo();
+        groupList();
         ((MenuActivity)getActivity()).getSupportActionBar().setTitle("Grupos");
         listView = group.findViewById(R.id.listView);
         add = group.findViewById(R.id.addGroup);
@@ -95,7 +95,7 @@ public class GroupFragment extends Fragment {
     }
 
 
-    public void userInfo() {
+    public void groupList() {
 
         SharedPreferences preferences = getActivity().getSharedPreferences("MY_APP", Context.MODE_PRIVATE);
         String retrivedToken  = preferences.getString("TOKEN",null);
@@ -162,7 +162,7 @@ public class GroupFragment extends Fragment {
                 if (response.isSuccessful()) {
                     String message = getString(R.string.groupSucess);
                     Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
-                    userInfo();
+                    groupList();
                 } else {
                     String message = getString(R.string.error_login);
                     Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
