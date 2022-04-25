@@ -1,5 +1,7 @@
 package com.homies.homies.services;
 
+import android.service.autofill.UserData;
+
 public class GroupRequest {
 
     private int id;
@@ -43,7 +45,13 @@ public class GroupRequest {
         this.groupRelation = groupRelation;
     }
 
+    public UserData getUserData() {
+        return userData;
+    }
 
+    public void setUserData(UserData userData) {
+        this.userData = userData;
+    }
 
     public String getUserAdmin() {
         return userAdmin;
@@ -67,13 +75,5 @@ public class GroupRequest {
 
     public void setUser(int user) {
         this.user = user;
-    }
-
-    public UserData getUserData() {
-        return userData;
-    }
-
-    public void setUserData(UserData userData) {
-        this.userData = userData;
     }
 }

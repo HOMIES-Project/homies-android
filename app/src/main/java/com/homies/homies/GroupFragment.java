@@ -3,6 +3,7 @@ package com.homies.homies;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -19,6 +20,8 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.homies.homies.services.ApiClient;
@@ -56,41 +59,6 @@ public class GroupFragment extends Fragment {
         numberUser = group.findViewById(R.id.numberUser);
 
 
-        add.setOnClickListener((View.OnClickListener) view -> {
-            BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(
-                    getActivity(), R.style.BottonSheetDialogTheme
-            );
-            View bottomSheetView = LayoutInflater.from(activity.getApplicationContext())
-                    .inflate(
-                            R.layout.activity_layout_botton_addgroup,
-                            group.findViewById(R.id.bottonAddContainer)
-                    );
-            inputGroup = bottomSheetView.findViewById(R.id.inputGroup);
-            inputDescription = bottomSheetView.findViewById(R.id.inputDescription);
-            btnCancel = bottomSheetView.findViewById(R.id.btnCancel);
-            btnAdd = bottomSheetView.findViewById(R.id.btnAdd);
-            btnAdd.setOnClickListener(view1 -> {
-                if (inputGroup.getText().toString().trim().isEmpty()) {
-                    String message = getString(R.string.val_name);
-                    Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
-                } else {
-                    saveGroup(createRequest());
-
-                    bottomSheetDialog.dismiss();
-                }
-            });
-            btnCancel.setOnClickListener(view1 -> {
-
-                    bottomSheetDialog.dismiss();
-                });
-
-
-
-            bottomSheetDialog.setContentView(bottomSheetView);
-            bottomSheetDialog.show();
-        });
-
-
         return group;
     }
 
@@ -119,10 +87,21 @@ public class GroupFragment extends Fragment {
                     //listView.setAdapter(new ArrayAdapter<String>(getActivity(), R.layout.list_item,R.id.numberUser , numbersUser));
                     listView.setOnItemClickListener(new AdapterView.OnItemClickListener()  {
 
-                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        Toast.makeText(getContext(),"You cliked " + oneGroup[position],Toast.LENGTH_SHORT).show();//Toast temporal, no añadir string
-                    }
-                });
+                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                            FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                            FragmentTransaction transaction = fragmentManager.beginTransaction();
+                            transaction.setReorderingAllowed(true);
+
+                            transaction.replace(R.id.fragmentGroup, DetailGroupFragment.class, null);
+                            transaction.addToBackStack(null);
+                            transaction.commit();
+
+
+
+                            Toast.makeText(getContext(),"You cliked " + oneGroup[position],Toast.LENGTH_SHORT).show();//Toast temporal, no añadir string
+                        }
+                    });
 
 
                 }else {

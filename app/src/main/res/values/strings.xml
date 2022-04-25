@@ -38,6 +38,31 @@
     <string name="settings">Opciones</string>
     <string name="group_exit">Salir del grupo</string>
     <string name="log_out">Cerrar sesion</string>
+    <string name="groupName">Group</string>
+    <string name="delete_group">Borrar Grupo</string>
+    <string name="text_erase_group">¿Estás seguro que quieres eliminar este grupo?</string>
+    <string name="noreturn_text">Esta acción no puede deshacerse</string>
+    <string name="confirmErase">Confirmar</string>
+    <string name="userTV">Introduce el id del usuario que quieres añadir</string>
+    <string name="add_user_et">Usuario</string>
+    <string name="error_user">Usuario no añadido al grupo</string>
+    <string name="confirmUser">Confirmar</string>
+
+    <!-- Add Group -->
+    <string name="añadir_usuario">Añadir usuario</string>
+    <string name="val_user">Es necesario un nombre de usuario</string>
+    <string name="userSucess">Usuario añadido</string>
+    <string name="groupDescription">Descripcion</string>
+    <string name="Btn_leave_group">Dejar grupo</string>
+    <string name="btn_shopping_list">Lista de la compra</string>
+    <string name="btn_expenses">gastos</string>
+    <string name="btn_add_task">Añadir tarea</string>
+    <string name="btn_editGroup">Editar grupo</string>
+    <string name="title_toolber_myGroup">Mi grupo</string>
+    <string name="delete_user">¿Estás seguro de que quieres eliminar al usuario de este grupo?</string>
+    <string name="leave_group">¿Está seguro de que quiere salir de este grupo?</string>
+    <string name="confirm_leave_group">Saliste del grupo</string>
+    <string name="delete_user_group">Usuario borrado del grupo</string>
     <!-- Add Group -->
     <string name="ingressGroup">Introduzca nombre del grupo y una descripción.</string>
     <string name="nameGroup">Introduzca nombre grupo</string>
