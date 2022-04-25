@@ -1,20 +1,22 @@
-package com.homies.homies.services;
+package com.homies.homies.retrofit.api;
 
-import androidx.constraintlayout.widget.Group;
+import com.homies.homies.retrofit.model.group.AddUserGroupResponse;
+import com.homies.homies.retrofit.model.group.DeleteUserGroupRequest;
+import com.homies.homies.retrofit.model.group.DeleteUserGroupResponse;
+import com.homies.homies.retrofit.model.GroupRequest;
+import com.homies.homies.retrofit.model.GroupResponse;
+import com.homies.homies.retrofit.model.UserData;
+import com.homies.homies.retrofit.model.UserRequest;
+import com.homies.homies.retrofit.model.UserResponse;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import okhttp3.MultipartBody;
-import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
-import retrofit2.http.Field;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
-import retrofit2.http.Multipart;
-import retrofit2.http.PATCH;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Path;
@@ -40,7 +42,7 @@ public interface UserService {
     Call<GroupResponse> saveGroup(@Header("Authorization")String authHeader, @Body GroupRequest groupRequest);
 
     @GET("user-data/{id}")
-    Call<UserData> userInfo(@Header("Authorization")String authHeader,@Path("id") int userId);
+    Call<UserData> userInfo(@Header("Authorization")String authHeader, @Path("id") int userId);
 
     @PUT("user-data/{id}")
     Call<UserData> updateInfo(@Header("Authorization")String authHeader,@Path("id") int userId, @Body UserRequest userRequest);

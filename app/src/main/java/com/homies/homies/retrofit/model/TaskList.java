@@ -1,6 +1,6 @@
-package com.homies.homies.services;
+package com.homies.homies.retrofit.model;
 
-public class TakeList {
+public class TaskList {
 
     private int id;
     private String nameList;
@@ -21,3 +21,4 @@ public class TakeList {
         this.nameList = nameList;
     }
 }
+

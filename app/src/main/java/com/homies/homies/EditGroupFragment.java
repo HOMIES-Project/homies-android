@@ -19,15 +19,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.bottomsheet.BottomSheetDialog;
-import com.homies.homies.services.ApiClient;
-import com.homies.homies.services.GroupRequest;
-import com.homies.homies.services.AddUserGroupRequest;
-import com.homies.homies.services.AddUserGroupResponse;
-import com.homies.homies.services.GroupResponse;
-import com.homies.homies.services.UserData;
+import com.homies.homies.retrofit.config.NetworkConfig;
+import com.homies.homies.retrofit.model.group.AddUserGroupRequest;
+import com.homies.homies.retrofit.model.group.AddUserGroupResponse;
+import com.homies.homies.retrofit.model.UserData;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -145,7 +142,7 @@ public class EditGroupFragment extends Fragment {
         userListRequest.setIdGroup(12);*/
         createUserListRequest();
 
-        Call<ArrayList<AddUserGroupResponse>> addUserGroupResponseCall = ApiClient.getService().addUserGroup("Bearer " + retrievedToken);
+        Call<ArrayList<AddUserGroupResponse>> addUserGroupResponseCall = NetworkConfig.getService().addUserGroup("Bearer " + retrievedToken);
         //AddUserGroupRequest userListRequest2 = userListRequest; //Para ver datos
         addUserGroupResponseCall.enqueue(new Callback<ArrayList<AddUserGroupResponse>>() {
             @Override

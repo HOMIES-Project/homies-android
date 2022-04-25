@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.widget.Button;
 
 import com.homies.homies.R;
-import com.homies.homies.services.UserResponse;
+import com.homies.homies.retrofit.model.UserResponse;
 import com.homies.homies.services.Adaptador;
 
 public class MainActivity extends AppCompatActivity {

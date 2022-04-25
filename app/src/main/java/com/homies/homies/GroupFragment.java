@@ -3,7 +3,6 @@ package com.homies.homies;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -23,13 +22,11 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.google.android.material.bottomsheet.BottomSheetDialog;
-import com.homies.homies.services.ApiClient;
-import com.homies.homies.services.GroupRequest;
-import com.homies.homies.services.GroupResponse;
-import com.homies.homies.services.UserData;
+import com.homies.homies.retrofit.config.NetworkConfig;
+import com.homies.homies.retrofit.model.GroupRequest;
+import com.homies.homies.retrofit.model.GroupResponse;
+import com.homies.homies.retrofit.model.UserData;
 
-import java.security.acl.Group;
 import java.util.List;
 
 import retrofit2.Call;
@@ -68,7 +65,7 @@ public class GroupFragment extends Fragment {
         SharedPreferences preferences = getActivity().getSharedPreferences("MY_APP", Context.MODE_PRIVATE);
         String retrivedToken  = preferences.getString("TOKEN",null);
         int userId  = preferences.getInt("USER_ID",0);
-        Call<UserData> groupResponseCall = ApiClient.getService().userInfo("Bearer " + retrivedToken,userId);
+        Call<UserData> groupResponseCall = NetworkConfig.getService().userInfo("Bearer " + retrivedToken,userId);
         groupResponseCall.enqueue(new Callback<UserData>() {
             @Override
             public void onResponse(Call<UserData> groupResponseCall, Response<UserData> response) {
@@ -134,7 +131,7 @@ public class GroupFragment extends Fragment {
     public void saveGroup(GroupRequest groupRequest) {
         SharedPreferences preferences = getActivity().getSharedPreferences("MY_APP", Context.MODE_PRIVATE);
         String retrivedToken  = preferences.getString("TOKEN",null);
-        Call<GroupResponse> groupResponseCall = ApiClient.getService().saveGroup("Bearer " + retrivedToken,groupRequest);
+        Call<GroupResponse> groupResponseCall = NetworkConfig.getService().saveGroup("Bearer " + retrivedToken,groupRequest);
         groupResponseCall.enqueue(new Callback<GroupResponse>() {
             @Override
             public void onResponse(Call<GroupResponse> call, Response<GroupResponse> response) {

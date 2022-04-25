@@ -1,15 +1,11 @@
-package com.homies.homies.services;
+package com.homies.homies.retrofit.config;
 
 
-import android.content.Context;
-import android.content.SharedPreferences;
-
+import com.homies.homies.retrofit.api.UserService;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
-
-import javax.inject.Singleton;
 
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
@@ -19,7 +15,7 @@ import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class ApiClient {
+public class NetworkConfig {
 
 
     private static Retrofit getRetrofit(){

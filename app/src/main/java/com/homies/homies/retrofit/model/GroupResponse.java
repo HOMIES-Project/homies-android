@@ -1,4 +1,6 @@
-package com.homies.homies.services;
+package com.homies.homies.retrofit.model;
+
+import com.homies.homies.retrofit.model.UserData;
 
 import java.util.Date;
 import java.util.List;
@@ -12,8 +14,6 @@ public class GroupResponse {
     UserData userAdmin;
     List<UserData> userData;
     private Date addGroupDate;
-
-
 
     public int getId() {
         return id;

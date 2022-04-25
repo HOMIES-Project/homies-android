@@ -1,7 +1,6 @@
 package com.homies.homies;
 
 import static android.app.Activity.RESULT_OK;
-import static android.content.ContentValues.TAG;
 
 import android.Manifest;
 import android.app.Activity;
@@ -12,25 +11,19 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
-import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 
 import android.provider.MediaStore;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Base64;
-import android.util.Log;
 import android.util.Patterns;
 import android.view.LayoutInflater;
-import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -40,30 +33,18 @@ import android.widget.Toast;
 
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.textfield.TextInputLayout;
-import com.homies.homies.databinding.ActivityGroupBinding;
-import com.homies.homies.services.ApiClient;
-import com.homies.homies.services.GroupRequest;
-import com.homies.homies.services.GroupResponse;
-import com.homies.homies.services.UserData;
-import com.homies.homies.services.UserRequest;
-import com.homies.homies.services.UserResponse;
-import com.homies.homies.user.LoginFragment;
+import com.homies.homies.retrofit.config.NetworkConfig;
+import com.homies.homies.retrofit.model.UserData;
+import com.homies.homies.retrofit.model.UserRequest;
+import com.homies.homies.retrofit.model.UserResponse;
 import com.homies.homies.user.MainActivity;
-import com.squareup.okhttp.MediaType;
-import com.squareup.okhttp.MultipartBuilder;
-import com.squareup.okhttp.RequestBody;
 
 import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
 
-import okhttp3.MultipartBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
 
 
 public class SettingsUser extends Fragment {
@@ -175,7 +156,7 @@ public class SettingsUser extends Fragment {
     public void deleteUser() {
         SharedPreferences preferences = getActivity().getSharedPreferences("MY_APP", Context.MODE_PRIVATE);
         String retrivedToken  = preferences.getString("TOKEN",null);
-        Call<UserResponse> deleteRequest = ApiClient.getService().deleteUser("Bearer " + retrivedToken, userInf().getId());
+        Call<UserResponse> deleteRequest = NetworkConfig.getService().deleteUser("Bearer " + retrivedToken, userInf().getId());
         deleteRequest.enqueue(new Callback<UserResponse>() {
             @Override
             public void onResponse(Call<UserResponse> call, Response<UserResponse> response) {
@@ -202,7 +183,7 @@ public class SettingsUser extends Fragment {
     public void userInfo() {
         SharedPreferences preferences = getActivity().getSharedPreferences("MY_APP", Context.MODE_PRIVATE);
         String retrivedToken  = preferences.getString("TOKEN",null);
-        Call<UserData> userInfo = ApiClient.getService().userInfo("Bearer " + retrivedToken, userInf().getId());
+        Call<UserData> userInfo = NetworkConfig.getService().userInfo("Bearer " + retrivedToken, userInf().getId());
         userInfo.enqueue(new Callback<UserData>() {
             @Override
             public void onResponse(Call<UserData> call, Response<UserData> response) {
@@ -269,7 +250,7 @@ public class SettingsUser extends Fragment {
             e.printStackTrace();
         }
 
-        Call<UserData> updateInfo = ApiClient.getService().updateInfo("Bearer " + retrivedToken, userInf().getId(), userData.getUser());
+        Call<UserData> updateInfo = NetworkConfig.getService().updateInfo("Bearer " + retrivedToken, userInf().getId(), userData.getUser());
         updateInfo.enqueue(new Callback<UserData>() {
             @Override
             public void onResponse(Call<UserData> call, Response<UserData> response) {
