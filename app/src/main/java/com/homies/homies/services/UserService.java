@@ -17,6 +17,7 @@ import retrofit2.http.Multipart;
 import retrofit2.http.PATCH;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
+import retrofit2.http.Path;
 
 public interface UserService {
 
@@ -55,9 +56,6 @@ public interface UserService {
 
     @GET("groups/{id}")
     Call<GroupResponse> groupInfo(@Header("Authorization")String authHeader,@Path("id") int userId);
-
-    
-
 
     @POST("groups/add-user")
     Call<ArrayList<AddUserGroupResponse>> addUserGroup(@Header("Authorization") String authHeader);

@@ -40,7 +40,7 @@ public class EditGroupFragment extends Fragment {
     EditText userInput;
     Activity activity;
     TextView group, description;
-    AddUserGroupResponse addUserGroupResponse;
+    //AddUserGroupResponse addUserGroupResponse;
 
     @Nullable
     @Override
@@ -60,10 +60,10 @@ public class EditGroupFragment extends Fragment {
 
         //Extraigo los datos del user que ha hecho login y del userAdmin del grupo
         int userId = user().getId();
-        int userAdmin = addUserGroupResponse.getUserAdmin().getId();
+        //int userAdmin = addUserGroupResponse.getUserAdmin().getId();
 
         //Si el usuario es el administrador se habilitan o deshabilitan los botones
-        if(userId == userAdmin){
+        /*if(userId == userAdmin){
             group.setFocusable(true);
             group.setFocusableInTouchMode(true);
             group.setClickable(true);
@@ -82,7 +82,7 @@ public class EditGroupFragment extends Fragment {
             description.setClickable(false);
             btnAddUser.setVisibility(View.GONE);
             btnDeleteGroup.setVisibility(View.GONE);
-        }
+        }*/
 
         btnAddUser.setOnClickListener((View.OnClickListener) view -> {
             BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(

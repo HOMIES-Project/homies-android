@@ -45,13 +45,19 @@ public class GroupRequest {
         this.groupRelation = groupRelation;
     }
 
+    public UserData getUserData() {
+        return userData;
+    }
 
+    public void setUserData(UserData userData) {
+        this.userData = userData;
+    }
 
     public String getUserAdmin() {
         return userAdmin;
     }
 
-    public void setUserAdmin(UserAdmin userAdmin) {
+    public void setUserAdmin(String userAdmin) {
         this.userAdmin = userAdmin;
     }
 
@@ -69,13 +75,5 @@ public class GroupRequest {
 
     public void setUser(int user) {
         this.user = user;
-    }
-
-    public UserData getUserData() {
-        return userData;
-    }
-
-    public void setUserData(UserData userData) {
-        this.userData = userData;
     }
 }
