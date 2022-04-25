@@ -24,7 +24,6 @@ import android.widget.Toast;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.homies.homies.MenuActivity;
 import com.homies.homies.R;
-import com.homies.homies.services.Adaptador;
 import com.homies.homies.retrofit.config.NetworkConfig;
 import com.homies.homies.retrofit.model.UserRequest;
 import com.homies.homies.retrofit.model.UserResponse;
@@ -38,7 +37,6 @@ public class LoginFragment extends Fragment {
     EditText inputUser, inputPassword, passInput;
     TextView forgotPassword;
     Activity activity;
-    Adaptador adaptador;
     ProgressBar progressBar;
 
     @Nullable
@@ -57,7 +55,6 @@ public class LoginFragment extends Fragment {
 
         logIn = login.findViewById(R.id.logIn);
         signUp = login.findViewById(R.id.signUp);
-        adaptador = new Adaptador(getParentFragmentManager());
 
         signUp.setOnClickListener(view -> {
             RegisterFragment registerFragment = new RegisterFragment();

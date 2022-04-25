@@ -22,7 +22,6 @@ import android.widget.Toast;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputLayout;
 import com.homies.homies.R;
-import com.homies.homies.services.Adaptador;
 import com.homies.homies.retrofit.config.NetworkConfig;
 import com.homies.homies.retrofit.model.UserRequest;
 
@@ -37,7 +36,6 @@ public class RegisterFragment extends Fragment {
     TextInputLayout ip_user, ip_name, ip_lastname, ip_email, ip_password, ip_repassword;
     Button btn_register, signUp, logIn;
     Activity activity;
-    Adaptador adaptador;
     boolean condition = true;
 
     @Nullable
@@ -71,7 +69,6 @@ public class RegisterFragment extends Fragment {
 
         logIn = register.findViewById(R.id.logIn);
         signUp = register.findViewById(R.id.signUp);
-        adaptador = new Adaptador(getParentFragmentManager());
 
         logIn.setOnClickListener(new View.OnClickListener() {
             @Override

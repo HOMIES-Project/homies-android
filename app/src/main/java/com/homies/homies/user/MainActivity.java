@@ -7,11 +7,9 @@ import android.widget.Button;
 
 import com.homies.homies.R;
 import com.homies.homies.retrofit.model.UserResponse;
-import com.homies.homies.services.Adaptador;
 
 public class MainActivity extends AppCompatActivity {
-    UserResponse loginResponse;
-    Adaptador adaptador;
+
     Button signUp;
     Button logIn;
     @Override
@@ -21,7 +19,6 @@ public class MainActivity extends AppCompatActivity {
 
         logIn = findViewById(R.id.logIn);
         signUp = findViewById(R.id.signUp);
-        adaptador = new Adaptador(getSupportFragmentManager());
 
 
     }
