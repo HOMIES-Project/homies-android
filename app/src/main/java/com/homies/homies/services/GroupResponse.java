@@ -1,6 +1,5 @@
 package com.homies.homies.services;
 
-import android.service.autofill.UserData;
 
 public class GroupResponse {
 
