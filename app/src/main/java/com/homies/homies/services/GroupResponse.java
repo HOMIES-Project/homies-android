@@ -1,5 +1,6 @@
 package com.homies.homies.services;
 
+
 public class GroupResponse {
 
     private int id;
@@ -8,6 +9,7 @@ public class GroupResponse {
     private String groupRelation ;
     private int user;
     UserData userdata;
+
 
 
     public int getId() {
