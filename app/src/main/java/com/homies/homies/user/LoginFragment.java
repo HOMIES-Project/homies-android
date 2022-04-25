@@ -22,7 +22,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.bottomsheet.BottomSheetDialog;
-import com.homies.homies.MenuActivity;
+import com.homies.homies.groups.MenuActivity;
 import com.homies.homies.R;
 import com.homies.homies.retrofit.config.NetworkConfig;
 import com.homies.homies.retrofit.model.UserRequest;
@@ -61,7 +61,7 @@ public class LoginFragment extends Fragment {
             FragmentTransaction fragmentTransaction = getParentFragmentManager().beginTransaction();
             fragmentTransaction.replace(R.id.fragment, registerFragment);
             fragmentTransaction.commit();
-            progressBar.setVisibility(View.VISIBLE);
+
         });
 
         forgotPassword.setOnClickListener((View.OnClickListener) view -> {
@@ -115,6 +115,7 @@ public class LoginFragment extends Fragment {
             @Override
             public void onResponse(Call<UserResponse> call, Response<UserResponse> response) {
                 if (response.isSuccessful()) {
+                    progressBar.setVisibility(View.VISIBLE);
                     String token = response.body().getToken();
                     SharedPreferences preferences = getActivity().getSharedPreferences("MY_APP", Context.MODE_PRIVATE);
                     preferences.edit().putString("TOKEN",token).apply();

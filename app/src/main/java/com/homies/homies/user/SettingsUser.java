@@ -1,4 +1,4 @@
-package com.homies.homies;
+package com.homies.homies.user;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -29,15 +29,17 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.textfield.TextInputLayout;
+import com.homies.homies.groups.MenuActivity;
+import com.homies.homies.R;
 import com.homies.homies.retrofit.config.NetworkConfig;
 import com.homies.homies.retrofit.model.UserData;
 import com.homies.homies.retrofit.model.UserRequest;
 import com.homies.homies.retrofit.model.UserResponse;
-import com.homies.homies.user.MainActivity;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -56,6 +58,7 @@ public class SettingsUser extends Fragment {
     EditText et_user,et_name, et_lastname, et_email;
     TextInputLayout ip_user, ip_name, ip_lastname, ip_email;
     Button upload, btn_save;
+    ProgressBar progressBar;
     boolean condition = true;
     private Bitmap bitmap;
 
@@ -83,6 +86,10 @@ public class SettingsUser extends Fragment {
         et_name = settings.findViewById(R.id.et_name);
         et_lastname = settings.findViewById(R.id.et_lastname);
         et_email = settings.findViewById(R.id.et_email);
+
+        progressBar = settings.findViewById(R.id.progressBar2);
+
+        progressBar.setVisibility(View.VISIBLE);
 
         ((MenuActivity)getActivity()).getSupportActionBar().setTitle("Ajustes de Usuario");
         userInfo();
@@ -188,6 +195,7 @@ public class SettingsUser extends Fragment {
             @Override
             public void onResponse(Call<UserData> call, Response<UserData> response) {
                 if (response.isSuccessful()) {
+                    progressBar.setVisibility(View.GONE);
                     UserData adslist= response.body();
 
                     String user = adslist.getUser().getLogin();

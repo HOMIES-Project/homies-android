@@ -1,4 +1,4 @@
-package com.homies.homies;
+package com.homies.homies.groups;
 
 
 import android.app.Activity;
@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,6 +23,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.homies.homies.R;
 import com.homies.homies.retrofit.config.NetworkConfig;
 import com.homies.homies.retrofit.model.GroupRequest;
 import com.homies.homies.retrofit.model.GroupResponse;
@@ -36,11 +38,11 @@ import retrofit2.Response;
 public class GroupFragment extends Fragment {
 
     ListView listView;
-    Button btnAdd, btnCancel;
     EditText inputGroup, inputDescription;
     Activity activity;
     ImageButton add;
     TextView numberUser;
+    ProgressBar progressBar;
 
 
 
@@ -54,6 +56,10 @@ public class GroupFragment extends Fragment {
         add = group.findViewById(R.id.addGroup);
         activity = getActivity();
         numberUser = group.findViewById(R.id.numberUser);
+
+        progressBar = group.findViewById(R.id.progressBar2);
+
+        progressBar.setVisibility(View.VISIBLE);
 
 
         return group;
@@ -71,6 +77,7 @@ public class GroupFragment extends Fragment {
             public void onResponse(Call<UserData> groupResponseCall, Response<UserData> response) {
 
                 if (response.isSuccessful()) {
+                    progressBar.setVisibility(View.GONE);
                 List<GroupResponse> myGroupList = response.body().getGroups();
                 String[] oneGroup = new String[myGroupList.size()];
                     String[] numbersUser = new String[myGroupList.size()];

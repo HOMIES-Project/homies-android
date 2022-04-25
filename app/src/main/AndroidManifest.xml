@@ -13,7 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Homies">
         <activity
-            android:name=".MenuActivity"
+            android:name=".groups.MenuActivity"
             android:exported="false" />
         <activity android:name=".user.MainActivity" />
         <activity

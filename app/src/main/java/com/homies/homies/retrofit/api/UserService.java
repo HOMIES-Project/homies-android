@@ -35,9 +35,6 @@ public interface UserService {
     @POST("account/reset-password/init")
     Call<Void> resetPassword(@Body String email);
 
-    @GET("groups")
-    Call<List<GroupResponse>> getGroup(@Header("Authorization") String authHeader);
-
     @POST("groups")
     Call<GroupResponse> saveGroup(@Header("Authorization")String authHeader, @Body GroupRequest groupRequest);
 

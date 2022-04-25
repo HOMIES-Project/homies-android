@@ -1,4 +1,4 @@
-package com.homies.homies;
+package com.homies.homies.groups;
 
 
 import android.app.Activity;
@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.homies.homies.R;
 import com.homies.homies.retrofit.config.NetworkConfig;
 import com.homies.homies.retrofit.model.group.AddUserGroupRequest;
 import com.homies.homies.retrofit.model.group.AddUserGroupResponse;
