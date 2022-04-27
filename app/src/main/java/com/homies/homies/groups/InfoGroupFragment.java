@@ -5,22 +5,29 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.google.android.material.textfield.TextInputLayout;
 import com.homies.homies.R;
 import com.homies.homies.retrofit.config.NetworkConfig;
+import com.homies.homies.retrofit.model.GroupResponse;
 import com.homies.homies.retrofit.model.group.AddUserGroupRequest;
 import com.homies.homies.retrofit.model.group.AddUserGroupResponse;
 import com.homies.homies.retrofit.model.UserData;
@@ -43,22 +50,30 @@ public class InfoGroupFragment extends Fragment {
     Button btnAddUser, btnCancelAction, btnConfirmUser, btnDeleteGroup, btnCancelActionGroup, btnConfirmDeleteGroup;
     EditText userInput;
     Activity activity;
-    TextView group, description;
+    EditText et_GroupName, et_detail;
+    TextInputLayout ip_groupName,ip_groupDetail;
+
     //AddUserGroupResponse addUserGroupResponse;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View editGroup = inflater.inflate(R.layout.fragment_edit_group, container, false);
+        View editGroup = inflater.inflate(R.layout.fragment_info_group, container, false);
 
         userList = editGroup.findViewById(R.id.userList);
         userList.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false));
         btnAddUser = editGroup.findViewById(R.id.btnAddUser);
+        btnCancelActionGroup = editGroup.findViewById(R.id.btnCancelActionGroup);
+        btnConfirmDeleteGroup = editGroup.findViewById(R.id.btnConfirmDeleteGroup);
         activity = getActivity();
 
-        group = editGroup.findViewById(R.id.textInputGroupName);
-        description = editGroup.findViewById(R.id.textInputDetailGroupName);
+        et_GroupName = editGroup.findViewById(R.id.et_GroupName);
+        et_detail = editGroup.findViewById(R.id.et_detail);
+
+        ip_groupName = editGroup.findViewById(R.id.ip_groupName);
+        ip_groupDetail = editGroup.findViewById(R.id.ip_groupDetail);
         btnDeleteGroup = editGroup.findViewById(R.id.btnDeleteGroup);
+        groupInfo();
 
 
 
@@ -122,6 +137,42 @@ public class InfoGroupFragment extends Fragment {
 
         return editGroup;
     }
+
+    public void groupInfo() {
+        SharedPreferences preferences = getActivity().getSharedPreferences("MY_APP", Context.MODE_PRIVATE);
+        String retrivedToken  = preferences.getString("TOKEN",null);
+        int userId  = preferences.getInt("USER_ID",0);
+        Integer idGroup  = preferences.getInt("GROUPID",0);
+        Call<GroupResponse> groupResponseCall = NetworkConfig.getService().groupInfo("Bearer " + retrivedToken,idGroup);
+        groupResponseCall.enqueue(new Callback<GroupResponse>() {
+            @Override
+            public void onResponse(Call<GroupResponse> call, Response<GroupResponse> response) {
+                if (response.isSuccessful()) {
+                    GroupResponse adslist= response.body();
+
+                    String user = adslist.getGroupName();
+                    String detail = adslist.getGroupRelationName();
+
+                    et_GroupName.setText(user);
+                    et_detail.setText(detail);
+
+                } else {
+                    String message = getString(R.string.error_login);
+                    Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<GroupResponse> call, Throwable t) {
+                String message = t.getLocalizedMessage();
+                Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+
+            }
+        });
+
+    }
+
 
 
     //Method for requesting group parameters

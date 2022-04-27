@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".DetailGroup">
+    tools:context=".groups.MenuActivity">
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/ip_groupName"
@@ -24,7 +24,7 @@
         app:startIconTint="@color/primaryColor">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/textInputGroupName"
+            android:id="@+id/et_GroupName"
             android:layout_width="match_parent"
             android:layout_height="61dp"
             android:layout_marginStart="0dp"
@@ -61,7 +61,7 @@
         app:startIconTint="@color/primaryColor">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/textInputDetailGroupName"
+            android:id="@+id/et_detail"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginStart="0dp"

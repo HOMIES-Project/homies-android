@@ -11,6 +11,7 @@ public class GroupResponse {
     private String groupKey;
     private String groupName ;
     private String groupRelation ;
+    private String groupRelationName;
     UserData userAdmin;
     List<UserData> userData;
     private Date addGroupDate;
@@ -69,5 +70,13 @@ public class GroupResponse {
 
     public void setAddGroupDate(Date addGroupDate) {
         this.addGroupDate = addGroupDate;
+    }
+
+    public String getGroupRelationName() {
+        return groupRelationName;
+    }
+
+    public void setGroupRelationName(String groupRelationName) {
+        this.groupRelationName = groupRelationName;
     }
 }

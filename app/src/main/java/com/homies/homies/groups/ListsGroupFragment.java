@@ -27,7 +27,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 
-public class ListGroupFragment extends Fragment {
+public class ListsGroupFragment extends Fragment {
 
     Button btnEditGroup;
 
@@ -35,7 +35,7 @@ public class ListGroupFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        View info = inflater.inflate(R.layout.fragment_list_group, container, false);
+        View info = inflater.inflate(R.layout.fragment_lists_group, container, false);
 
         groupInfo();
 
@@ -44,8 +44,9 @@ public class ListGroupFragment extends Fragment {
     public void groupInfo() {
         SharedPreferences preferences = getActivity().getSharedPreferences("MY_APP", Context.MODE_PRIVATE);
         String retrivedToken  = preferences.getString("TOKEN",null);
+        Integer idGroup  = preferences.getInt("GROUPID",0);
         int userId  = preferences.getInt("USER_ID",0);
-        Call<GroupResponse> groupResponseCall = NetworkConfig.getService().groupInfo("Bearer " + retrivedToken,userId);
+        Call<GroupResponse> groupResponseCall = NetworkConfig.getService().groupInfo("Bearer " + retrivedToken,idGroup);
         groupResponseCall.enqueue(new Callback<GroupResponse>() {
             @Override
             public void onResponse(Call<GroupResponse> call, Response<GroupResponse> response) {
@@ -53,13 +54,20 @@ public class ListGroupFragment extends Fragment {
                     GroupResponse adslist= response.body();
 
                     String user = adslist.getGroupName();
-                    ((MenuActivity)getActivity()).getSupportActionBar().setTitle(user);
+
+
                     ImageButton b1=new ImageButton(((MenuActivity)getActivity()));
                     b1.setImageResource(R.drawable.ic_info);
                     Toolbar.LayoutParams l3=new Toolbar.LayoutParams(Toolbar.LayoutParams.WRAP_CONTENT, Toolbar.LayoutParams.WRAP_CONTENT);
                     l3.gravity= Gravity.END;
                     b1.setLayoutParams(l3);
-                    ((MenuActivity)getActivity()).toolbar.addView(b1);
+
+                    String nameGroup = ((MenuActivity)getActivity()).getSupportActionBar().getTitle().toString();
+                    if(nameGroup  == "Grupos"){
+                        ((MenuActivity)getActivity()).toolbar.addView(b1);
+                    }
+                    ((MenuActivity)getActivity()).getSupportActionBar().setTitle(user);
+
                     b1.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {

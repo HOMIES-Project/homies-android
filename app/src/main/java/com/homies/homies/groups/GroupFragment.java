@@ -119,10 +119,12 @@ public class GroupFragment extends Fragment {
                     progressBar.setVisibility(View.GONE);
                 List<GroupResponse> myGroupList = response.body().getGroups();
                 String[] oneGroup = new String[myGroupList.size()];
+                    Integer[] numberGroup = new Integer[myGroupList.size()];
                     String[] numbersUser = new String[myGroupList.size()];
 
                 for (int i = 0; i < myGroupList.size(); i++) {
                     oneGroup[i] = myGroupList.get(i).getGroupName();
+                    numberGroup[i] = myGroupList.get(i).getId();
                     //numbersUser[i] = String.valueOf(myGroupList.get(i).getUserdata().size());
                 }
 
@@ -131,12 +133,14 @@ public class GroupFragment extends Fragment {
                     listView.setOnItemClickListener(new AdapterView.OnItemClickListener()  {
 
                         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                            SharedPreferences preferences = getActivity().getSharedPreferences("MY_APP", Context.MODE_PRIVATE);
+                            preferences.edit().putInt("GROUPID", numberGroup[position]).apply();
 
                             FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                             FragmentTransaction transaction = fragmentManager.beginTransaction();
                             transaction.setReorderingAllowed(true);
 
-                            transaction.replace(R.id.fragmentGroup, ListGroupFragment.class, null);
+                            transaction.replace(R.id.fragmentGroup, ListsGroupFragment.class, null);
                             transaction.addToBackStack(null);
                             transaction.commit();
 
