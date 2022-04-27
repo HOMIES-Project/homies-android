@@ -2,10 +2,7 @@ package com.homies.homies.groups;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.util.Base64;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,14 +21,13 @@ import androidx.fragment.app.FragmentTransaction;
 import com.homies.homies.R;
 import com.homies.homies.retrofit.config.NetworkConfig;
 import com.homies.homies.retrofit.model.GroupResponse;
-import com.homies.homies.retrofit.model.UserData;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 
-public class DetailGroupFragment extends Fragment {
+public class ListGroupFragment extends Fragment {
 
     Button btnEditGroup;
 
@@ -39,9 +35,7 @@ public class DetailGroupFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        View info = inflater.inflate(R.layout.fragment_detail_group, container, false);
-
-        btnEditGroup = info.findViewById(R.id.btn_editGroup);
+        View info = inflater.inflate(R.layout.fragment_list_group, container, false);
 
         groupInfo();
 
@@ -75,16 +69,12 @@ public class DetailGroupFragment extends Fragment {
                             transaction.setReorderingAllowed(true);
 
                             //transaction.replace(R.id.fragmentDetailGroup, EditGroupFragment.class, null);
-                            transaction.replace(R.id.fragmentGroup, EditGroupFragment.class, null);
+                            transaction.replace(R.id.fragmentGroup, InfoGroupFragment.class, null);
                             transaction.addToBackStack(null);
                             transaction.commit();
 
-
                         }
                     });
-
-
-
 
                 } else {
                     String message = getString(R.string.error_login);

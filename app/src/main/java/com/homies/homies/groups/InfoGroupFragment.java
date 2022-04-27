@@ -37,7 +37,7 @@ import retrofit2.Response;
 //
 //
 
-public class EditGroupFragment extends Fragment {
+public class InfoGroupFragment extends Fragment {
 
     RecyclerView userList;
     Button btnAddUser, btnCancelAction, btnConfirmUser, btnDeleteGroup, btnCancelActionGroup, btnConfirmDeleteGroup;

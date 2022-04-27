@@ -136,7 +136,7 @@ public class GroupFragment extends Fragment {
                             FragmentTransaction transaction = fragmentManager.beginTransaction();
                             transaction.setReorderingAllowed(true);
 
-                            transaction.replace(R.id.fragmentGroup, DetailGroupFragment.class, null);
+                            transaction.replace(R.id.fragmentGroup, ListGroupFragment.class, null);
                             transaction.addToBackStack(null);
                             transaction.commit();
 
