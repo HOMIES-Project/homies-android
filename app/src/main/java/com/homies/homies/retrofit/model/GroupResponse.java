@@ -1,17 +1,19 @@
-package com.homies.homies.services;
+package com.homies.homies.retrofit.model;
 
-import android.service.autofill.UserData;
+import com.homies.homies.retrofit.model.UserData;
 
-public class GroupRequest {
+import java.util.Date;
+import java.util.List;
+
+public class GroupResponse {
 
     private int id;
     private String groupKey;
     private String groupName ;
     private String groupRelation ;
-    UserData userData ;
-    private String userAdmin ;
-    private String taskList ;
-    private int user;
+    UserData userAdmin;
+    List<UserData> userData;
+    private Date addGroupDate;
 
     public int getId() {
         return id;
@@ -45,35 +47,27 @@ public class GroupRequest {
         this.groupRelation = groupRelation;
     }
 
-    public UserData getUserData() {
+    public List<UserData> getUserdata() {
         return userData;
     }
 
-    public void setUserData(UserData userData) {
-        this.userData = userData;
+    public void setUserdata(List<UserData> userdata) {
+        this.userData = userdata;
     }
 
-    public String getUserAdmin() {
+    public UserData getUserAdmin() {
         return userAdmin;
     }
 
-    public void setUserAdmin(String userAdmin) {
+    public void setUserAdmin(UserData userAdmin) {
         this.userAdmin = userAdmin;
     }
 
-    public String getTaskList() {
-        return taskList;
+    public Date getAddGroupDate() {
+        return addGroupDate;
     }
 
-    public void setTaskList(String taskList) {
-        this.taskList = taskList;
-    }
-
-    public int getUser() {
-        return user;
-    }
-
-    public void setUser(int user) {
-        this.user = user;
+    public void setAddGroupDate(Date addGroupDate) {
+        this.addGroupDate = addGroupDate;
     }
 }

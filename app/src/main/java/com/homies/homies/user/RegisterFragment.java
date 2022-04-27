@@ -2,12 +2,9 @@ package com.homies.homies.user;
 
 import android.app.Activity;
 import android.graphics.Color;
-import android.graphics.Paint;
 import android.os.Bundle;
 
-import androidx.annotation.ColorInt;
 import androidx.annotation.Nullable;
-import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -20,17 +17,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputLayout;
 import com.homies.homies.R;
-import com.homies.homies.services.Adaptador;
-import com.homies.homies.services.ApiClient;
-import com.homies.homies.services.UserRequest;
-import com.homies.homies.user.LoginFragment;
+import com.homies.homies.retrofit.config.NetworkConfig;
+import com.homies.homies.retrofit.model.UserRequest;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -43,7 +36,6 @@ public class RegisterFragment extends Fragment {
     TextInputLayout ip_user, ip_name, ip_lastname, ip_email, ip_password, ip_repassword;
     Button btn_register, signUp, logIn;
     Activity activity;
-    Adaptador adaptador;
     boolean condition = true;
 
     @Nullable
@@ -77,7 +69,6 @@ public class RegisterFragment extends Fragment {
 
         logIn = register.findViewById(R.id.logIn);
         signUp = register.findViewById(R.id.signUp);
-        adaptador = new Adaptador(getParentFragmentManager());
 
         logIn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -281,7 +272,7 @@ public class RegisterFragment extends Fragment {
     }
 
     public void saveUser(UserRequest userRequest) {
-        Call<Void> userResponseCall = ApiClient.getService().saveUser(userRequest);
+        Call<Void> userResponseCall = NetworkConfig.getService().saveUser(userRequest);
         userResponseCall.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {

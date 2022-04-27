@@ -1,6 +1,10 @@
-package com.homies.homies.services;
+package com.homies.homies.retrofit.model.group;
 
-public class AddUserGroupResponse {
+import com.homies.homies.retrofit.model.TaskList;
+import com.homies.homies.retrofit.model.UserAdmin;
+import com.homies.homies.retrofit.model.UserData;
+
+public class DeleteUserGroupResponse {
 
     private int id;
     private String groupKey;
@@ -13,7 +17,6 @@ public class AddUserGroupResponse {
     private String shoppingList;
     private String settingsList;
     private UserData userData;
-
 
     public int getId() {
         return id;

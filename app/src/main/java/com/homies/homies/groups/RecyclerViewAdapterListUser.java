@@ -1,4 +1,4 @@
-package com.homies.homies;
+package com.homies.homies.groups;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -9,7 +9,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.homies.homies.services.AddUserGroupResponse;
+import com.homies.homies.R;
+import com.homies.homies.retrofit.model.group.AddUserGroupResponse;
 
 import java.util.ArrayList;
 

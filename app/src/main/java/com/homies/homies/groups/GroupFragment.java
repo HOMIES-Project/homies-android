@@ -1,9 +1,8 @@
-package com.homies.homies;
+package com.homies.homies.groups;
 
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -15,6 +14,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -23,9 +24,11 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.material.bottomsheet.BottomSheetDialog;
-import com.homies.homies.services.ApiClient;
-import com.homies.homies.services.GroupRequest;
-import com.homies.homies.services.GroupResponse;
+import com.homies.homies.R;
+import com.homies.homies.retrofit.config.NetworkConfig;
+import com.homies.homies.retrofit.model.GroupRequest;
+import com.homies.homies.retrofit.model.GroupResponse;
+import com.homies.homies.retrofit.model.UserData;
 
 import java.util.List;
 
@@ -35,11 +38,13 @@ import retrofit2.Response;
 
 public class GroupFragment extends Fragment {
 
-    ListView recyclerView;
-    Button btnAdd, btnCancel;
+    ListView listView;
     EditText inputGroup, inputDescription;
     Activity activity;
     ImageButton add;
+    TextView numberUser;
+    ProgressBar progressBar;
+    Button btnCancel, btnAdd;
 
 
 
@@ -47,38 +52,83 @@ public class GroupFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View group = inflater.inflate(R.layout.fragment_group, container, false);
-        getGroup();
+        groupList();
         ((MenuActivity)getActivity()).getSupportActionBar().setTitle("Grupos");
-        recyclerView = group.findViewById(R.id.recyclerView);
+        listView = group.findViewById(R.id.listView);
         add = group.findViewById(R.id.addGroup);
         activity = getActivity();
+        numberUser = group.findViewById(R.id.numberUser);
+
+        progressBar = group.findViewById(R.id.progressBar2);
+
+        progressBar.setVisibility(View.VISIBLE);
+
+        add.setOnClickListener((View.OnClickListener) view -> {
+            BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(
+                    getActivity(), R.style.BottonSheetDialogTheme
+            );
+            View bottomSheetView = LayoutInflater.from(activity.getApplicationContext())
+                    .inflate(
+                            R.layout.dialog_layout_botton_addgroup,
+                            group.findViewById(R.id.bottonAddContainer)
+                    );
+            inputGroup = bottomSheetView.findViewById(R.id.inputGroup);
+            inputDescription = bottomSheetView.findViewById(R.id.inputDescription);
+            btnCancel = bottomSheetView.findViewById(R.id.btnCancel);
+            btnAdd = bottomSheetView.findViewById(R.id.btnAdd);
+            btnAdd.setOnClickListener(view1 -> {
+                if (inputGroup.getText().toString().trim().isEmpty()) {
+                    String message = getString(R.string.val_name);
+                    Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+                } else {
+                    saveGroup(createRequest());
+
+                    bottomSheetDialog.dismiss();
+                }
+            });
+            btnCancel.setOnClickListener(view1 -> {
+
+                bottomSheetDialog.dismiss();
+            });
+
+
+
+            bottomSheetDialog.setContentView(bottomSheetView);
+            bottomSheetDialog.show();
+        });
+
+
+
 
 
         return group;
     }
 
-
-
-
-    public void getGroup() {
+    //Method to get the list of groups where the user appears
+    public void groupList() {
 
         SharedPreferences preferences = getActivity().getSharedPreferences("MY_APP", Context.MODE_PRIVATE);
         String retrivedToken  = preferences.getString("TOKEN",null);
-        Call<List<GroupResponse>> groupResponseCall = ApiClient.getService().getGroup("Bearer " + retrivedToken);
-        groupResponseCall.enqueue(new Callback<List<GroupResponse>>() {
+        int userId  = preferences.getInt("USER_ID",0);
+        Call<UserData> groupResponseCall = NetworkConfig.getService().userInfo("Bearer " + retrivedToken,userId);
+        groupResponseCall.enqueue(new Callback<UserData>() {
             @Override
-            public void onResponse(Call<List<GroupResponse>> groupResponseCall, Response<List<GroupResponse>> response) {
+            public void onResponse(Call<UserData> groupResponseCall, Response<UserData> response) {
 
                 if (response.isSuccessful()) {
-                List<GroupResponse> myGroupList = response.body();
+                    progressBar.setVisibility(View.GONE);
+                List<GroupResponse> myGroupList = response.body().getGroups();
                 String[] oneGroup = new String[myGroupList.size()];
+                    String[] numbersUser = new String[myGroupList.size()];
 
-                    for (int i = 0; i < myGroupList.size(); i++) {
-                        oneGroup[i] = myGroupList.get(i).getGroupName();
-                    }
+                for (int i = 0; i < myGroupList.size(); i++) {
+                    oneGroup[i] = myGroupList.get(i).getGroupName();
+                    //numbersUser[i] = String.valueOf(myGroupList.get(i).getUserdata().size());
+                }
 
-                    recyclerView.setAdapter(new ArrayAdapter<String>(getActivity(), R.layout.list_item,R.id.textViewGroup , oneGroup));
-                    recyclerView.setOnItemClickListener(new AdapterView.OnItemClickListener()  {
+                    listView.setAdapter(new ArrayAdapter<String>(getActivity(), R.layout.list_item,R.id.textViewGroup , oneGroup));
+                    //listView.setAdapter(new ArrayAdapter<String>(getActivity(), R.layout.list_item,R.id.numberUser , numbersUser));
+                    listView.setOnItemClickListener(new AdapterView.OnItemClickListener()  {
 
                         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
@@ -89,8 +139,6 @@ public class GroupFragment extends Fragment {
                             transaction.replace(R.id.fragmentGroup, DetailGroupFragment.class, null);
                             transaction.addToBackStack(null);
                             transaction.commit();
-
-
 
                             Toast.makeText(getContext(),"You cliked " + oneGroup[position],Toast.LENGTH_SHORT).show();//Toast temporal, no añadir string
                         }
@@ -104,7 +152,7 @@ public class GroupFragment extends Fragment {
             }
 
             @Override
-            public void onFailure(Call<List<GroupResponse>> groupResponseCall, Throwable t) {
+            public void onFailure(Call<UserData> groupResponseCall, Throwable t) {
                 String message = t.getLocalizedMessage();
                 Toast.makeText(activity, message, Toast.LENGTH_SHORT).show();
 
@@ -123,18 +171,18 @@ public class GroupFragment extends Fragment {
 
         return groupRequest;
     }
-
+    //Method to create a new group
     public void saveGroup(GroupRequest groupRequest) {
         SharedPreferences preferences = getActivity().getSharedPreferences("MY_APP", Context.MODE_PRIVATE);
         String retrivedToken  = preferences.getString("TOKEN",null);
-        Call<GroupResponse> groupResponseCall = ApiClient.getService().saveGroup("Bearer " + retrivedToken,groupRequest);
+        Call<GroupResponse> groupResponseCall = NetworkConfig.getService().saveGroup("Bearer " + retrivedToken,groupRequest);
         groupResponseCall.enqueue(new Callback<GroupResponse>() {
             @Override
             public void onResponse(Call<GroupResponse> call, Response<GroupResponse> response) {
                 if (response.isSuccessful()) {
                     String message = getString(R.string.groupSucess);
                     Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
-                    getGroup();
+                    groupList();
                 } else {
                     String message = getString(R.string.error_login);
                     Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();

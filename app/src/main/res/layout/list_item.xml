@@ -15,6 +15,18 @@
         android:layout_margin="10dp"/>
 
     <TextView
+        android:id="@+id/numberUser"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/imageViewGroup"
+        android:layout_alignEnd="@+id/imageViewGroup"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="1dp"
+        android:layout_marginEnd="14dp"
+        android:layout_marginBottom="10dp"
+        android:textSize="16sp" />
+
+    <TextView
         android:id="@+id/textViewGroup"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

@@ -1,4 +1,6 @@
-package com.homies.homies.services;
+package com.homies.homies.retrofit.model;
+
+import java.util.List;
 
 public class UserData {
 
@@ -10,7 +12,7 @@ public class UserData {
     private String birthDate;
     private String addDate;
     UserRequest user;
-
+    List<GroupResponse> groups;
 
     public int getId() {
         return id;
@@ -74,5 +76,13 @@ public class UserData {
 
     public void setUser(UserRequest user) {
         this.user = user;
+    }
+
+    public List<GroupResponse> getGroups() {
+        return groups;
+    }
+
+    public void setGroups(List<GroupResponse> groups) {
+        this.groups = groups;
     }
 }

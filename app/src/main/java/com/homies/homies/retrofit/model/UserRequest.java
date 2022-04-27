@@ -1,4 +1,4 @@
-package com.homies.homies.services;
+package com.homies.homies.retrofit.model;
 
 public class UserRequest {
 

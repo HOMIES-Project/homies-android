@@ -1,6 +1,5 @@
 package com.homies.homies.user;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -17,17 +16,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.bottomsheet.BottomSheetDialog;
-import com.homies.homies.MenuActivity;
+import com.homies.homies.groups.MenuActivity;
 import com.homies.homies.R;
-import com.homies.homies.services.Adaptador;
-import com.homies.homies.services.ApiClient;
-import com.homies.homies.services.UserRequest;
-import com.homies.homies.services.UserResponse;
+import com.homies.homies.retrofit.config.NetworkConfig;
+import com.homies.homies.retrofit.model.UserRequest;
+import com.homies.homies.retrofit.model.UserResponse;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -38,7 +37,7 @@ public class LoginFragment extends Fragment {
     EditText inputUser, inputPassword, passInput;
     TextView forgotPassword;
     Activity activity;
-    Adaptador adaptador;
+    ProgressBar progressBar;
 
     @Nullable
     @Override
@@ -50,17 +49,19 @@ public class LoginFragment extends Fragment {
         inputPassword = login.findViewById(R.id.passwordInput);
         forgotPassword = login.findViewById(R.id.forgotPasswordTV);
 
+        progressBar = login.findViewById(R.id.progressBar2);
+
         activity = getActivity();
 
         logIn = login.findViewById(R.id.logIn);
         signUp = login.findViewById(R.id.signUp);
-        adaptador = new Adaptador(getParentFragmentManager());
 
         signUp.setOnClickListener(view -> {
             RegisterFragment registerFragment = new RegisterFragment();
             FragmentTransaction fragmentTransaction = getParentFragmentManager().beginTransaction();
             fragmentTransaction.replace(R.id.fragment, registerFragment);
             fragmentTransaction.commit();
+
         });
 
         forgotPassword.setOnClickListener((View.OnClickListener) view -> {
@@ -69,7 +70,7 @@ public class LoginFragment extends Fragment {
             );
             View bottomSheetView = LayoutInflater.from(activity.getApplicationContext())
                     .inflate(
-                            R.layout.activity_layout_botton_sheet,
+                            R.layout.dialog_layout_botton_sheet,
                             (ScrollView)login.findViewById(R.id.bottonSheetContainer)
                     );
 
@@ -109,11 +110,12 @@ public class LoginFragment extends Fragment {
     }
 
     public void loginUser(UserRequest userRequest) {
-        Call<UserResponse> loginResponseCall = ApiClient.getService().loginUser(userRequest);
+        Call<UserResponse> loginResponseCall = NetworkConfig.getService().loginUser(userRequest);
         loginResponseCall.enqueue(new Callback<UserResponse>() {
             @Override
             public void onResponse(Call<UserResponse> call, Response<UserResponse> response) {
                 if (response.isSuccessful()) {
+                    progressBar.setVisibility(View.VISIBLE);
                     String token = response.body().getToken();
                     SharedPreferences preferences = getActivity().getSharedPreferences("MY_APP", Context.MODE_PRIVATE);
                     preferences.edit().putString("TOKEN",token).apply();
@@ -136,7 +138,7 @@ public class LoginFragment extends Fragment {
     }
 
     public void resetPassword(String email) {
-        Call<Void> resetPasswordResponseCall = ApiClient.getService().resetPassword(email);
+        Call<Void> resetPasswordResponseCall = NetworkConfig.getService().resetPassword(email);
         resetPasswordResponseCall.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {

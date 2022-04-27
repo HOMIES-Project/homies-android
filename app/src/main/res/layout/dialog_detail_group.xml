@@ -16,7 +16,7 @@
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragmentDetailGroup"
-        android:name="com.homies.homies.DetailGroupFragment"
+        android:name="com.homies.homies.groups.DetailGroupFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="65dp"

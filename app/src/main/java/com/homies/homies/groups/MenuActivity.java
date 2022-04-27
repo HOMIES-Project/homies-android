@@ -1,4 +1,4 @@
-package com.homies.homies;
+package com.homies.homies.groups;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -6,16 +6,14 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Toast;
 
-import com.homies.homies.user.LoginFragment;
+import com.homies.homies.R;
+import com.homies.homies.user.SettingsUser;
 
-import java.util.Set;
 
 public class MenuActivity extends AppCompatActivity {
 
@@ -27,8 +25,6 @@ public class MenuActivity extends AppCompatActivity {
         setContentView(R.layout.activity_group);
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-
 
     }
 
@@ -43,16 +39,9 @@ public class MenuActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         if(id == R.id.opcion1) {
-            Toast.makeText(this,"OPCION1", Toast.LENGTH_LONG);
+            Toast.makeText(this,"SETTINGS", Toast.LENGTH_LONG);
             Settings();
-
-        }else if(id == R.id.opcion2){
-            Toast.makeText(this, "OPCION2", Toast.LENGTH_LONG);
-        }else if(id == R.id.opcion3) {
-            Toast.makeText(this,"OPCION3", Toast.LENGTH_LONG);
-
         }
-
         return true;
     }
 

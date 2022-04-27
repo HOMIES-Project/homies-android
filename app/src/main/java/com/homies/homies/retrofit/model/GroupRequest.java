@@ -1,16 +1,16 @@
-package com.homies.homies.services;
+package com.homies.homies.retrofit.model;
 
 
-public class GroupResponse {
+public class GroupRequest {
 
     private int id;
     private String groupKey;
     private String groupName ;
     private String groupRelation ;
+    UserData userData ;
+    private String userAdmin ;
+    private String taskList ;
     private int user;
-    UserData userdata;
-
-
 
     public int getId() {
         return id;
@@ -44,19 +44,35 @@ public class GroupResponse {
         this.groupRelation = groupRelation;
     }
 
+    public UserData getUserData() {
+        return userData;
+    }
+
+    public void setUserData(UserData userData) {
+        this.userData = userData;
+    }
+
+    public String getUserAdmin() {
+        return userAdmin;
+    }
+
+    public void setUserAdmin(String userAdmin) {
+        this.userAdmin = userAdmin;
+    }
+
+    public String getTaskList() {
+        return taskList;
+    }
+
+    public void setTaskList(String taskList) {
+        this.taskList = taskList;
+    }
+
     public int getUser() {
         return user;
     }
 
     public void setUser(int user) {
         this.user = user;
-    }
-
-    public UserData getUserdata() {
-        return userdata;
-    }
-
-    public void setUserdata(UserData userdata) {
-        this.userdata = userdata;
     }
 }
