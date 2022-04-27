@@ -6,14 +6,17 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Base64;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -36,32 +39,13 @@ public class DetailGroupFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        View main = inflater.inflate(R.layout.fragment_detail_group, container, false);
+        View info = inflater.inflate(R.layout.fragment_detail_group, container, false);
 
-        btnEditGroup = main.findViewById(R.id.btn_editGroup);
-
+        btnEditGroup = info.findViewById(R.id.btn_editGroup);
 
         groupInfo();
 
-        btnEditGroup.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-                FragmentTransaction transaction = fragmentManager.beginTransaction();
-                transaction.setReorderingAllowed(true);
-
-                //transaction.replace(R.id.fragmentDetailGroup, EditGroupFragment.class, null);
-                transaction.replace(R.id.fragmentGroup, EditGroupFragment.class, null);
-                transaction.addToBackStack(null);
-                transaction.commit();
-
-
-            }
-        });
-
-
-        return main;
+        return info;
     }
     public void groupInfo() {
         SharedPreferences preferences = getActivity().getSharedPreferences("MY_APP", Context.MODE_PRIVATE);
@@ -76,6 +60,28 @@ public class DetailGroupFragment extends Fragment {
 
                     String user = adslist.getGroupName();
                     ((MenuActivity)getActivity()).getSupportActionBar().setTitle(user);
+                    ImageButton b1=new ImageButton(((MenuActivity)getActivity()));
+                    b1.setImageResource(R.drawable.ic_info);
+                    Toolbar.LayoutParams l3=new Toolbar.LayoutParams(Toolbar.LayoutParams.WRAP_CONTENT, Toolbar.LayoutParams.WRAP_CONTENT);
+                    l3.gravity= Gravity.END;
+                    b1.setLayoutParams(l3);
+                    ((MenuActivity)getActivity()).toolbar.addView(b1);
+                    b1.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+
+                            FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                            FragmentTransaction transaction = fragmentManager.beginTransaction();
+                            transaction.setReorderingAllowed(true);
+
+                            //transaction.replace(R.id.fragmentDetailGroup, EditGroupFragment.class, null);
+                            transaction.replace(R.id.fragmentGroup, EditGroupFragment.class, null);
+                            transaction.addToBackStack(null);
+                            transaction.commit();
+
+
+                        }
+                    });
 
 
 
