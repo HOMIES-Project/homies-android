@@ -55,7 +55,7 @@
     <string name="groupDescription">Descripcion</string>
     <string name="Btn_leave_group">Dejar grupo</string>
     <string name="btn_shopping_list">Lista de la compra</string>
-    <string name="btn_expenses">gastos</string>
+    <string name="btn_expenses">Gastos</string>
     <string name="btn_add_task">Añadir tarea</string>
     <string name="btn_editGroup">Editar grupo</string>
     <string name="title_toolber_myGroup">Mi grupo</string>
@@ -63,7 +63,6 @@
     <string name="leave_group">¿Está seguro de que quiere salir de este grupo?</string>
     <string name="confirm_leave_group">Saliste del grupo</string>
     <string name="delete_user_group">Usuario borrado del grupo</string>
-    <!-- Add Group -->
     <string name="ingressGroup">Introduzca nombre del grupo y una descripción.</string>
     <string name="nameGroup">Introduzca nombre grupo</string>
     <string name="descriptionGroup">Introduzca descripción del grupo</string>
