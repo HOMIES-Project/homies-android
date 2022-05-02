@@ -30,12 +30,14 @@ import retrofit2.Response;
 public class ListsGroupFragment extends Fragment {
 
     Button btnEditGroup;
+    Toolbar toolbar;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         View info = inflater.inflate(R.layout.fragment_lists_group, container, false);
+        toolbar = ((MenuActivity)getActivity()).findViewById(R.id.toolbar);
 
         groupInfo();
 
@@ -56,21 +58,15 @@ public class ListsGroupFragment extends Fragment {
                     String user = adslist.getGroupName();
 
 
-                    ImageButton b1=new ImageButton(((MenuActivity)getActivity()));
-                    b1.setImageResource(R.drawable.ic_info);
-                    Toolbar.LayoutParams l3=new Toolbar.LayoutParams(Toolbar.LayoutParams.WRAP_CONTENT, Toolbar.LayoutParams.WRAP_CONTENT);
-                    l3.gravity= Gravity.END;
-                    b1.setLayoutParams(l3);
-
                     String nameGroup = ((MenuActivity)getActivity()).getSupportActionBar().getTitle().toString();
-                    if(nameGroup  == "Grupos"){
-                        ((MenuActivity)getActivity()).toolbar.addView(b1);
-                    }
                     ((MenuActivity)getActivity()).getSupportActionBar().setTitle(user);
 
-                    b1.setOnClickListener(new View.OnClickListener() {
+                    ((MenuActivity)getActivity()).getSupportActionBar(toolbar);
+                    toolbar.setOnClickListener(new View.OnClickListener() {
+
                         @Override
                         public void onClick(View v) {
+                            try{
 
                             FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                             FragmentTransaction transaction = fragmentManager.beginTransaction();
@@ -80,6 +76,9 @@ public class ListsGroupFragment extends Fragment {
                             transaction.replace(R.id.fragmentGroup, InfoGroupFragment.class, null);
                             transaction.addToBackStack(null);
                             transaction.commit();
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
 
                         }
                     });

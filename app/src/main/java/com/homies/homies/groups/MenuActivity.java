@@ -53,4 +53,7 @@ public class MenuActivity extends AppCompatActivity {
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
     }
+
+    public void getSupportActionBar(Toolbar toolbar) {
+    }
 }
