@@ -51,7 +51,6 @@ public class RecyclerViewAdapterListUser extends RecyclerView.Adapter<RecyclerVi
             super(itemView);
 
             textViewAdmin = itemView.findViewById(R.id.textViewAdmin);
-            textViewUser = itemView.findViewById(R.id.textViewUser);
         }
     }
 

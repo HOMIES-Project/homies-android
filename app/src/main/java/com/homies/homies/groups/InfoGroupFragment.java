@@ -9,9 +9,12 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,6 +36,7 @@ import com.homies.homies.retrofit.model.group.AddUserGroupResponse;
 import com.homies.homies.retrofit.model.UserData;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -46,7 +50,7 @@ import retrofit2.Response;
 
 public class InfoGroupFragment extends Fragment {
 
-    RecyclerView userList;
+    ListView userList;
     Button btnAddUser, btnCancelAction, btnConfirmUser, btnDeleteGroup, btnCancelActionGroup, btnConfirmDeleteGroup;
     EditText userInput;
     Activity activity;
@@ -61,7 +65,6 @@ public class InfoGroupFragment extends Fragment {
         View editGroup = inflater.inflate(R.layout.fragment_info_group, container, false);
 
         userList = editGroup.findViewById(R.id.userList);
-        userList.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false));
         btnAddUser = editGroup.findViewById(R.id.btnAddUser);
         btnCancelActionGroup = editGroup.findViewById(R.id.btnCancelActionGroup);
         btnConfirmDeleteGroup = editGroup.findViewById(R.id.btnConfirmDeleteGroup);
@@ -156,6 +159,25 @@ public class InfoGroupFragment extends Fragment {
                     et_GroupName.setText(user);
                     et_detail.setText(detail);
 
+                    List<UserData>  myUserList = response.body().getUserData();
+                    String[] oneGroup = new String[myUserList.size()];
+
+                    for (int i = 0; i < myUserList.size(); i++) {
+                        oneGroup[i] = myUserList.get(i).getUser().getLogin();
+
+                    }
+
+                    userList.setAdapter(new ArrayAdapter<String>(getActivity(), R.layout.user_item,R.id.textViewAdmin , oneGroup));
+                    userList.setOnItemClickListener(new AdapterView.OnItemClickListener()  {
+
+                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                            SharedPreferences preferences = getActivity().getSharedPreferences("MY_APP", Context.MODE_PRIVATE);
+
+
+                            Toast.makeText(getContext(),"You cliked " + oneGroup[position],Toast.LENGTH_SHORT).show();
+                        }
+                    });
+
                 } else {
                     String message = getString(R.string.error_login);
                     Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
@@ -196,8 +218,6 @@ public class InfoGroupFragment extends Fragment {
 
         SharedPreferences preferences = getActivity().getSharedPreferences("MY_APP", Context.MODE_PRIVATE);
         String retrievedToken  = preferences.getString("TOKEN",null);
-        /*userListRequest.setIdAdminGroup(6);
-        userListRequest.setIdGroup(12);*/
         createUserListRequest();
 
         Call<ArrayList<AddUserGroupResponse>> addUserGroupResponseCall = NetworkConfig.getService().addUserGroup("Bearer " + retrievedToken);
@@ -212,7 +232,7 @@ public class InfoGroupFragment extends Fragment {
                     ArrayList<AddUserGroupResponse> data = response.body();
 
                     RecyclerViewAdapterListUser adapterListUser = new RecyclerViewAdapterListUser(getContext(), data);
-                    userList.setAdapter(adapterListUser);
+
                 } else {
                     String message = getString(R.string.error_login);
                     Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
