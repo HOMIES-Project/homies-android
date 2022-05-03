@@ -79,6 +79,7 @@
     <string name="confirm">Confirmar</string>
     <string name="deleteSucess">¡Usuario eliminado!</string>
     <string name="updateInfo">Datos Actualizados</string>
+    <string name="delete_all_products">¿Estás seguro de que quieres eliminar todos los articulos comprados?</string>
 
 
 </resources>
