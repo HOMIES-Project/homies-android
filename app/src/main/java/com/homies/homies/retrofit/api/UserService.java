@@ -1,5 +1,6 @@
 package com.homies.homies.retrofit.api;
 
+import com.homies.homies.retrofit.model.AddUser;
 import com.homies.homies.retrofit.model.group.AddUserGroupResponse;
 import com.homies.homies.retrofit.model.group.DeleteUserGroupRequest;
 import com.homies.homies.retrofit.model.group.DeleteUserGroupResponse;
@@ -51,7 +52,7 @@ public interface UserService {
     Call<GroupResponse> groupInfo(@Header("Authorization")String authHeader,@Path("id") int userId);
 
     @POST("groups/add-user")
-    Call<ArrayList<AddUserGroupResponse>> addUserGroup(@Header("Authorization") String authHeader);
+    Call<GroupResponse> addUserGroup(@Header("Authorization") String authHeader, @Body AddUser addUser);
 
     @POST("groups/delete-user")
     Call<DeleteUserGroupResponse> deleteUser(@Header("Authorization") String authHeader, @Body DeleteUserGroupRequest deleteUserGroupRequest);

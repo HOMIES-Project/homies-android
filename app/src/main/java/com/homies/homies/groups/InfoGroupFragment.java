@@ -30,7 +30,10 @@ import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.textfield.TextInputLayout;
 import com.homies.homies.R;
 import com.homies.homies.retrofit.config.NetworkConfig;
+import com.homies.homies.retrofit.model.AddUser;
+import com.homies.homies.retrofit.model.GroupRequest;
 import com.homies.homies.retrofit.model.GroupResponse;
+import com.homies.homies.retrofit.model.UserRequest;
 import com.homies.homies.retrofit.model.group.AddUserGroupRequest;
 import com.homies.homies.retrofit.model.group.AddUserGroupResponse;
 import com.homies.homies.retrofit.model.UserData;
@@ -81,7 +84,7 @@ public class InfoGroupFragment extends Fragment {
 
 
         //extract the data of the logged in user and the userAdmin of the group.
-        int userId = user().getId();
+        //int userId = user().getId();
         //int userAdmin = addUserGroupResponse.getUserAdmin().getId();
 
         //If the user is the administrator, the buttons are enabled or disabled.
@@ -124,8 +127,7 @@ public class InfoGroupFragment extends Fragment {
                     Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
                 } else {
 
-                    //addUserGroup(createUserListRequest());
-                    addUserGroup();
+                    addUserGroup(createRequest());
                     bottomSheetDialog.dismiss();
                 }
             });
@@ -195,67 +197,45 @@ public class InfoGroupFragment extends Fragment {
 
     }
 
-
-
-    //Method for requesting group parameters
-    public AddUserGroupRequest createUserListRequest() {
-
-        AddUserGroupRequest addUserListRequest = new AddUserGroupRequest();
+    //Method to obtain the logged in user.
+    public AddUser createRequest() {
+        AddUser addUser = new AddUser();
         SharedPreferences preferences = getActivity().getSharedPreferences("MY_APP", Context.MODE_PRIVATE);
+        int userId  = preferences.getInt("USER_ID",0);
+        Integer idGroup  = preferences.getInt("GROUPID",0);
+        addUser.setLogin(userInput.getText().toString());
+        addUser.setIdGroup(idGroup);
+        addUser.setIdAdminGroup(userId);
 
-        int idUserAdminGroup = preferences.getInt("USERADMINGROUP_ID", 0);
-        int idGroup = preferences.getInt("GROUP_ID", 0);
-
-        addUserListRequest.setIdAdminGroup(idUserAdminGroup);
-        addUserListRequest.setLogin(userInput.getText().toString().trim());
-        addUserListRequest.setIdGroup(idGroup);
-
-        return addUserListRequest;
-
+        return addUser;
     }
-    //Method to add user to group
-    public void addUserGroup(/*AddUserGroupRequest addUserGroupRequest*/) {
 
+    public void addUserGroup(AddUser addUser) {
         SharedPreferences preferences = getActivity().getSharedPreferences("MY_APP", Context.MODE_PRIVATE);
-        String retrievedToken  = preferences.getString("TOKEN",null);
-        createUserListRequest();
-
-        Call<ArrayList<AddUserGroupResponse>> addUserGroupResponseCall = NetworkConfig.getService().addUserGroup("Bearer " + retrievedToken);
-        //AddUserGroupRequest userListRequest2 = userListRequest; //Para ver datos
-        addUserGroupResponseCall.enqueue(new Callback<ArrayList<AddUserGroupResponse>>() {
+        String retrivedToken  = preferences.getString("TOKEN",null);
+        Integer idGroup  = preferences.getInt("GROUPID",0);
+        Call<GroupResponse> userResponseCall = NetworkConfig.getService().addUserGroup("Bearer " + retrivedToken,addUser);
+        userResponseCall.enqueue(new Callback<GroupResponse>() {
             @Override
-            public void onResponse(Call<ArrayList<AddUserGroupResponse>> call, Response<ArrayList<AddUserGroupResponse>> response) {
+            public void onResponse(Call<GroupResponse> call, Response<GroupResponse> response) {
                 if (response.isSuccessful()) {
-                    String message = getString(R.string.userSucess);
+                    String message = getString(R.string.groupSucess);
                     Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
-
-                    ArrayList<AddUserGroupResponse> data = response.body();
-
-                    RecyclerViewAdapterListUser adapterListUser = new RecyclerViewAdapterListUser(getContext(), data);
-
+                    groupInfo();
                 } else {
                     String message = getString(R.string.error_login);
                     Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
                 }
             }
+
             @Override
-            public void onFailure(Call<ArrayList<AddUserGroupResponse>> call, Throwable t) {
+            public void onFailure(Call<GroupResponse> call, Throwable t) {
                 String message = t.getLocalizedMessage();
                 Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
             }
         });
     }
 
-    //Method to obtain the logged in user.
-    public UserData user() {
-        UserData userData = new UserData();
-        SharedPreferences preferences = getActivity().getSharedPreferences("MY_APP", Context.MODE_PRIVATE);
-        int userId  = preferences.getInt("USER_ID",0);
-
-        userData.setId(userId);
-
-        return userData;
-    }
 
     /*public void groupInfoUserAdmin() {
         SharedPreferences preferences = getActivity().getSharedPreferences("MY_APP", Context.MODE_PRIVATE);
