@@ -1,18 +1,9 @@
-package com.homies.homies.retrofit.model.group;
+package com.homies.homies.retrofit.model;
 
-public class DeleteUserGroupRequest {
+public class DeleteUsersGroup {
 
-    private int idAdminGroup;
     private String login;
     private int idGroup;
-
-    public int getIdAdminGroup() {
-        return idAdminGroup;
-    }
-
-    public void setIdAdminGroup(int idAdminGroup) {
-        this.idAdminGroup = idAdminGroup;
-    }
 
     public String getLogin() {
         return login;
@@ -29,4 +20,6 @@ public class DeleteUserGroupRequest {
     public void setIdGroup(int idGroup) {
         this.idGroup = idGroup;
     }
+
+
 }

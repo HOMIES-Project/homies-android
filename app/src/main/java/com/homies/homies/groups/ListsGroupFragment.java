@@ -58,10 +58,17 @@ public class ListsGroupFragment extends Fragment {
                     String user = adslist.getGroupName();
 
 
-                    String nameGroup = ((MenuActivity)getActivity()).getSupportActionBar().getTitle().toString();
-                    ((MenuActivity)getActivity()).getSupportActionBar().setTitle(user);
+                    try{
 
-                    ((MenuActivity)getActivity()).getSupportActionBar(toolbar);
+                        ((MenuActivity)getActivity()).getSupportActionBar().setTitle(user);
+                        ((MenuActivity)getActivity()).getSupportActionBar(toolbar);
+                    } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+
+
+
                     toolbar.setOnClickListener(new View.OnClickListener() {
 
                         @Override

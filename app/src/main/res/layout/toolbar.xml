@@ -8,6 +8,22 @@
     app:navigationIcon="@drawable/ic_logo_toolbar"
     android:id="@+id/toolbar">
 
+    <RelativeLayout
+        android:layout_width="50dp"
+        android:layout_height="match_parent"
+        android:layout_alignParentEnd="true"
+        android:layout_gravity="right">
+
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/img1"
+            android:layout_width="45dp"
+            android:layout_height="34dp"
+            android:layout_gravity="right"
+            android:layout_alignParentEnd="true"
+            android:src="@drawable/ic_user" />
+
+</RelativeLayout>
 
 
 

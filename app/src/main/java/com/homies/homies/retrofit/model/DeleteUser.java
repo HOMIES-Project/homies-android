@@ -1,10 +1,11 @@
-package com.homies.homies.retrofit.model.group;
+package com.homies.homies.retrofit.model;
 
-public class AddUserGroupRequest {
+public class DeleteUser {
 
     private int idAdminGroup;
     private String login;
     private int idGroup;
+
 
     public int getIdAdminGroup() {
         return idAdminGroup;
@@ -29,4 +30,6 @@ public class AddUserGroupRequest {
     public void setIdGroup(int idGroup) {
         this.idGroup = idGroup;
     }
+
+
 }

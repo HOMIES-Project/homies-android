@@ -87,14 +87,14 @@
             app:layout_constraintTop_toBottomOf="@+id/inputDescription"/>
 
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnCancel"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:layout_marginTop="20dp"
             android:layout_marginBottom="20dp"
-            android:background="@drawable/btn_custom"
+            android:background="@drawable/btn_error"
             android:fontFamily="@font/montserrat_regular"
             android:padding="1dp"
             android:text="@string/Cancel"

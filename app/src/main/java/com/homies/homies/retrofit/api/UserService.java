@@ -1,17 +1,12 @@
 package com.homies.homies.retrofit.api;
 
 import com.homies.homies.retrofit.model.AddUser;
-import com.homies.homies.retrofit.model.group.AddUserGroupResponse;
-import com.homies.homies.retrofit.model.group.DeleteUserGroupRequest;
-import com.homies.homies.retrofit.model.group.DeleteUserGroupResponse;
+import com.homies.homies.retrofit.model.DeleteUser;
 import com.homies.homies.retrofit.model.GroupRequest;
 import com.homies.homies.retrofit.model.GroupResponse;
 import com.homies.homies.retrofit.model.UserData;
 import com.homies.homies.retrofit.model.UserRequest;
 import com.homies.homies.retrofit.model.UserResponse;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -54,8 +49,8 @@ public interface UserService {
     @POST("groups/add-user")
     Call<GroupResponse> addUserGroup(@Header("Authorization") String authHeader, @Body AddUser addUser);
 
-    @POST("groups/delete-user")
-    Call<DeleteUserGroupResponse> deleteUser(@Header("Authorization") String authHeader, @Body DeleteUserGroupRequest deleteUserGroupRequest);
+    @DELETE("groups/delete-user")
+    Call<GroupResponse> deleteUserGroup(@Header("Authorization") String authHeader, @Path("id") int userId);
 
 
 
