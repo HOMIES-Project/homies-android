@@ -49,9 +49,9 @@ public class InfoGroupFragment extends Fragment {
     EditText et_GroupName, et_detail;
     TextInputLayout ip_groupName,ip_groupDetail;
     ImageButton delete;
-    ImageView imageView4;
-    List<UserData> usuarios = new ArrayList<UserData>();
-    UserAdapter adaptador = null;
+    ArrayList<GroupResponse> usuarios;
+    UserAdapter adaptador;
+    Context context;
 
 
 
@@ -67,6 +67,8 @@ public class InfoGroupFragment extends Fragment {
         btnConfirmDeleteGroup = editGroup.findViewById(R.id.btnConfirmDeleteGroup);
         activity = getActivity();
 
+        context = getActivity().getApplicationContext();
+
 
         et_GroupName = editGroup.findViewById(R.id.et_GroupName);
         et_detail = editGroup.findViewById(R.id.et_detail);
@@ -78,8 +80,8 @@ public class InfoGroupFragment extends Fragment {
         delete = editGroup.findViewById(R.id.delete);
 
 
-        adaptador = new UserAdapter(getActivity(), R.layout.user_item, usuarios);
-        userList.setAdapter(adaptador);
+        usuarios = new ArrayList<>();
+
 
 
 
@@ -236,8 +238,14 @@ public class InfoGroupFragment extends Fragment {
             @Override
             public void onResponse(Call<GroupResponse> call, Response<GroupResponse> response) {
                 if (response.isSuccessful()) {
-                    List<UserData> data = response.body().getUserData();
+
+                    GroupResponse data = response.body();
+                    adaptador = new UserAdapter(getActivity(), usuarios);
+                    userList.setAdapter(adaptador);
                     usuarios.addAll(data);
+
+
+
                     adaptador.notifyDataSetChanged();
 
 
