@@ -16,6 +16,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -25,6 +26,7 @@ import androidx.fragment.app.Fragment;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.textfield.TextInputLayout;
 import com.homies.homies.R;
+import com.homies.homies.UserAdapter;
 import com.homies.homies.retrofit.config.NetworkConfig;
 import com.homies.homies.retrofit.model.AddUser;
 import com.homies.homies.retrofit.model.DeleteUser;
@@ -47,6 +49,10 @@ public class InfoGroupFragment extends Fragment {
     EditText et_GroupName, et_detail;
     TextInputLayout ip_groupName,ip_groupDetail;
     ImageButton delete;
+    ImageView imageView4;
+    List<UserData> usuarios = new ArrayList<UserData>();
+    UserAdapter adaptador = null;
+
 
 
 
@@ -61,6 +67,7 @@ public class InfoGroupFragment extends Fragment {
         btnConfirmDeleteGroup = editGroup.findViewById(R.id.btnConfirmDeleteGroup);
         activity = getActivity();
 
+
         et_GroupName = editGroup.findViewById(R.id.et_GroupName);
         et_detail = editGroup.findViewById(R.id.et_detail);
 
@@ -71,9 +78,16 @@ public class InfoGroupFragment extends Fragment {
         delete = editGroup.findViewById(R.id.delete);
 
 
-        groupInfo();
+        adaptador = new UserAdapter(getActivity(), R.layout.user_item, usuarios);
+        userList.setAdapter(adaptador);
 
-        btnAddUser.setOnClickListener((View.OnClickListener) view -> {
+
+
+        groupInfo();
+        groupPhoto();
+
+
+            btnAddUser.setOnClickListener((View.OnClickListener) view -> {
             BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(
                     getActivity(), R.style.BottonSheetDialogTheme
             );
@@ -108,11 +122,23 @@ public class InfoGroupFragment extends Fragment {
         return editGroup;
     }
 
+    public UserData userInf() {
+        UserData userData = new UserData();
+        SharedPreferences preferences = getActivity().getSharedPreferences("MY_APP", Context.MODE_PRIVATE);
+        int userId  = preferences.getInt("USER_ID",0);
+        userData.setId(userId);
+
+        return userData;
+    }
+
+
+
     public void groupInfo() {
         SharedPreferences preferences = getActivity().getSharedPreferences("MY_APP", Context.MODE_PRIVATE);
         String retrivedToken  = preferences.getString("TOKEN",null);
         int userId  = preferences.getInt("USER_ID",0);
         Integer idGroup  = preferences.getInt("GROUPID",0);
+        String memberGroup = preferences.getString("MEMBERID","");
         Call<GroupResponse> groupResponseCall = NetworkConfig.getService().groupInfo("Bearer " + retrivedToken,idGroup);
         groupResponseCall.enqueue(new Callback<GroupResponse>() {
             @Override
@@ -120,20 +146,15 @@ public class InfoGroupFragment extends Fragment {
                 if (response.isSuccessful()) {
                     GroupResponse adslist= response.body();
 
+
                     String user = adslist.getGroupName();
                     String detail = adslist.getGroupRelationName();
-                    String photoString = adslist.getUserAdmin().getPhoto();
-
-                    /*if(photoString != null){
-                        byte[] decodedString = Base64.decode(photoString, Base64.DEFAULT);
-                        Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
-                        userList. imageView4.setImageBitmap(decodedByte);
-                    }*/
-
                     et_GroupName.setText(user);
                     et_detail.setText(detail);
 
-                    List<UserData>  myUserList = response.body().getUserData();
+
+
+                   /* List<UserData>  myUserList = response.body().getUserData();
                     String[] oneGroup = new String[myUserList.size()];
 
                     for (int i = 0; i < myUserList.size(); i++) {
@@ -141,12 +162,23 @@ public class InfoGroupFragment extends Fragment {
 
                     }
 
-                    userList.setAdapter(new ArrayAdapter<String>(getActivity(), R.layout.list_item,R.id.textViewGroup , oneGroup));
+                    userList.setAdapter(new ArrayAdapter<String>(getActivity(), R.layout.user_item,R.id.textViewAdmin , oneGroup));
+
                     userList.setOnItemClickListener(new AdapterView.OnItemClickListener()  {
 
                         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                             SharedPreferences preferences = getActivity().getSharedPreferences("MY_APP", Context.MODE_PRIVATE);
-
+                            preferences.edit().putString("MEMBERID", oneGroup[position]).apply();
+                            List<UserData>  myUserListGroup = response.body().getUserData();
+                            imageView4 = view.findViewById(R.id.imageView4);
+                            for (int i = 0; i < myUserListGroup.size(); i++) {
+                                String photoString = myUserListGroup.get(i).getPhoto();
+                                if(photoString != null){
+                                    byte[] decodedString = Base64.decode(photoString, Base64.DEFAULT);
+                                    Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+                                    imageView4.setImageBitmap(decodedByte);
+                                }
+                            }
                             BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(
                                     getActivity(), R.style.BottonSheetDialogTheme
                             );
@@ -159,7 +191,7 @@ public class InfoGroupFragment extends Fragment {
                             btnConfirmDeleteGroup = bottomSheetView.findViewById(R.id.btnConfirmDeleteGroup);
                             btnConfirmDeleteGroup.setOnClickListener(view1 -> {
 
-                                deleteUser();
+                                deleteUser(deleteRequest());
                                 bottomSheetDialog.dismiss();
 
                             });
@@ -169,11 +201,45 @@ public class InfoGroupFragment extends Fragment {
                             });
 
 
+                            Toast.makeText(getContext(),"You cliked " + oneGroup[position],Toast.LENGTH_SHORT).show();
 
                             bottomSheetDialog.setContentView(bottomSheetView);
                             bottomSheetDialog.show();
                         }
-                    });
+                    });*/
+
+                } else {
+                    String message = getString(R.string.error_login);
+                    Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<GroupResponse> call, Throwable t) {
+                String message = t.getLocalizedMessage();
+                Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+
+            }
+        });
+
+    }
+
+    public void groupPhoto() {
+        SharedPreferences preferences = getActivity().getSharedPreferences("MY_APP", Context.MODE_PRIVATE);
+        String retrivedToken  = preferences.getString("TOKEN",null);
+        int userId  = preferences.getInt("USER_ID",0);
+        Integer idGroup  = preferences.getInt("GROUPID",0);
+        String memberGroup = preferences.getString("MEMBERID","");
+        Call<GroupResponse> groupResponseCall = NetworkConfig.getService().groupPhoto("Bearer " + retrivedToken,idGroup);
+        groupResponseCall.enqueue(new Callback<GroupResponse>() {
+            @Override
+            public void onResponse(Call<GroupResponse> call, Response<GroupResponse> response) {
+                if (response.isSuccessful()) {
+                    List<UserData> data = response.body().getUserData();
+                    usuarios.addAll(data);
+                    adaptador.notifyDataSetChanged();
+
 
                 } else {
                     String message = getString(R.string.error_login);
@@ -236,7 +302,8 @@ public class InfoGroupFragment extends Fragment {
         SharedPreferences preferences = getActivity().getSharedPreferences("MY_APP", Context.MODE_PRIVATE);
         int userId  = preferences.getInt("USER_ID",0);
         Integer idGroup  = preferences.getInt("GROUPID",0);
-        deleteUser.setLogin(userInput.getText().toString());
+        String memberGroup = preferences.getString("MEMBERID","");
+        deleteUser.setLogin(memberGroup);
         deleteUser.setIdGroup(idGroup);
         deleteUser.setIdAdminGroup(userId);
 
@@ -244,11 +311,12 @@ public class InfoGroupFragment extends Fragment {
     }
 
 
-    public void deleteUser() {
+    public void deleteUser(DeleteUser deleteUser) {
         SharedPreferences preferences = getActivity().getSharedPreferences("MY_APP", Context.MODE_PRIVATE);
         String retrivedToken  = preferences.getString("TOKEN",null);
+        int userId  = preferences.getInt("USER_ID",0);
         Integer idGroup  = preferences.getInt("GROUPID",0);
-        Call<GroupResponse> userResponseCall = NetworkConfig.getService().deleteUserGroup("Bearer " + retrivedToken,deleteRequest().getIdAdminGroup());
+        Call<GroupResponse> userResponseCall = NetworkConfig.getService().deleteUserGroup("Bearer " + retrivedToken,deleteUser);
         userResponseCall.enqueue(new Callback<GroupResponse>() {
             @Override
             public void onResponse(Call<GroupResponse> call, Response<GroupResponse> response) {

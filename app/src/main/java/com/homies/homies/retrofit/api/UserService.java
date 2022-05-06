@@ -8,6 +8,8 @@ import com.homies.homies.retrofit.model.UserData;
 import com.homies.homies.retrofit.model.UserRequest;
 import com.homies.homies.retrofit.model.UserResponse;
 
+import java.util.List;
+
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
@@ -46,11 +48,14 @@ public interface UserService {
     @GET("groups/{id}")
     Call<GroupResponse> groupInfo(@Header("Authorization")String authHeader,@Path("id") int userId);
 
+    @GET("groups/{id}")
+    Call<GroupResponse> groupPhoto(@Header("Authorization")String authHeader, @Path("id") int userId);
+
     @POST("groups/add-user")
     Call<GroupResponse> addUserGroup(@Header("Authorization") String authHeader, @Body AddUser addUser);
 
-    @DELETE("groups/delete-user")
-    Call<GroupResponse> deleteUserGroup(@Header("Authorization") String authHeader, @Path("id") int userId);
+    @POST("groups/delete-user")
+    Call<GroupResponse> deleteUserGroup(@Header("Authorization") String authHeader, @Body DeleteUser deleteUser);
 
 
 
