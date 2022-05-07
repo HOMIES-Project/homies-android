@@ -13,6 +13,7 @@ public class UserData {
     private String addDate;
     UserRequest user;
     List<GroupResponse> groups;
+    DeleteUser delete;
 
     public int getId() {
         return id;
@@ -84,5 +85,13 @@ public class UserData {
 
     public void setGroups(List<GroupResponse> groups) {
         this.groups = groups;
+    }
+
+    public DeleteUser getDelete() {
+        return delete;
+    }
+
+    public void setDelete(DeleteUser delete) {
+        this.delete = delete;
     }
 }

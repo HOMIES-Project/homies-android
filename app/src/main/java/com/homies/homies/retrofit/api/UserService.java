@@ -55,7 +55,7 @@ public interface UserService {
     Call<GroupResponse> addUserGroup(@Header("Authorization") String authHeader, @Body AddUser addUser);
 
     @POST("groups/delete-user")
-    Call<GroupResponse> deleteUserGroup(@Header("Authorization") String authHeader, @Body DeleteUser deleteUser);
+    Call<GroupResponse> deleteUserGroup(@Header("Authorization") String authHeader,@Body DeleteUser deleteUser);
 
 
 
