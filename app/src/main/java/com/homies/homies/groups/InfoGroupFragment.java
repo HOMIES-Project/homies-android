@@ -22,6 +22,9 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.textfield.TextInputLayout;
@@ -42,14 +45,14 @@ import retrofit2.Response;
 
 public class InfoGroupFragment extends Fragment {
 
-    ListView userList;
+    RecyclerView userList;
     Button btnAddUser, btnCancelAction, btnConfirmUser, btnDeleteGroup, btnCancelActionGroup, btnConfirmDeleteGroup;
     EditText userInput;
     Activity activity;
     EditText et_GroupName, et_detail;
     TextInputLayout ip_groupName,ip_groupDetail;
     ImageButton delete;
-    ArrayList<GroupResponse> usuarios;
+    ArrayList<UserData> usuarios;
     UserAdapter adaptador;
     Context context;
 
@@ -81,6 +84,12 @@ public class InfoGroupFragment extends Fragment {
 
 
         usuarios = new ArrayList<>();
+        ArrayList<GroupResponse> arrayOfUsers = new ArrayList<GroupResponse>();
+
+
+        userList.setLayoutManager(new LinearLayoutManager(getActivity()));
+        userList.addItemDecoration(new DividerItemDecoration(getActivity(),DividerItemDecoration.VERTICAL));
+        adaptador = new UserAdapter();
 
 
 
@@ -240,13 +249,9 @@ public class InfoGroupFragment extends Fragment {
                 if (response.isSuccessful()) {
 
                     GroupResponse data = response.body();
-                    adaptador = new UserAdapter(getActivity(), usuarios);
+
+                    adaptador.setData(data);
                     userList.setAdapter(adaptador);
-                    usuarios.addAll(data);
-
-
-
-                    adaptador.notifyDataSetChanged();
 
 
                 } else {

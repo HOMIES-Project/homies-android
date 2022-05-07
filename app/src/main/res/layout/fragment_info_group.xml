@@ -78,7 +78,7 @@
             android:textSize="15sp" />
     </com.google.android.material.textfield.TextInputLayout>
 
-    <ListView
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/userList"
         android:layout_width="370dp"
         android:layout_height="187dp"

@@ -13,20 +13,74 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.homies.homies.retrofit.model.GroupResponse;
 import com.homies.homies.retrofit.model.UserData;
 
 import org.w3c.dom.Text;
 
+import java.security.acl.Group;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserAdapter extends ArrayAdapter<GroupResponse> {
+public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolderDatos> {
 
-
+    GroupResponse groups ;
     Context context;
-    ArrayList<GroupResponse> groups ;
+
+    public UserAdapter(){
+
+    }
+
+    public void setData(GroupResponse groups) {
+        this.groups = groups;
+        notifyDataSetChanged();
+    }
+
+    @NonNull
+    @Override
+    public ViewHolderDatos onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        context = parent.getContext();
+        View view = LayoutInflater.from(context).inflate(R.layout.user_item,null,false);
+        return new ViewHolderDatos(view);
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull ViewHolderDatos holder, int position) {
+
+        UserData groupResponse = groups.getUserData().get(position);
+
+        String textViewAdmin = groupResponse.getUser().getLogin();
+
+        holder.textViewAdmin.setText(textViewAdmin);
+        String photoString = groups.getUserdata().get(position).getPhoto();
+        if (photoString != null) {
+            byte[] decodedString = Base64.decode(photoString, Base64.DEFAULT);
+            Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+            holder.imageView4.setImageBitmap(decodedByte);
+        }
+    }
+
+    @Override
+    public int getItemCount() {
+        return groups.getUserData().size();
+    }
+    public class ViewHolderDatos extends RecyclerView.ViewHolder {
+
+        ImageView imageView4 ;
+        TextView textViewAdmin ;
+
+        public ViewHolderDatos(@NonNull View itemView) {
+            super(itemView);
+            imageView4 = itemView.findViewById(R.id.imageView4);
+            textViewAdmin = itemView.findViewById(R.id.textViewAdmin);
+        }
+
+    }
+/*
+    Context context;
+
 
 
 
@@ -56,5 +110,7 @@ public class UserAdapter extends ArrayAdapter<GroupResponse> {
             }
         }
         return convertView;
-    }
+    }*/
+
+
 }
