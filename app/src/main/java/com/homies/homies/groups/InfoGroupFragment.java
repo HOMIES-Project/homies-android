@@ -3,6 +3,7 @@ package com.homies.homies.groups;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -22,6 +23,7 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -35,6 +37,9 @@ import com.homies.homies.retrofit.model.AddUser;
 import com.homies.homies.retrofit.model.DeleteUser;
 import com.homies.homies.retrofit.model.GroupResponse;
 import com.homies.homies.retrofit.model.UserData;
+import com.homies.homies.retrofit.model.UserResponse;
+import com.homies.homies.user.MainActivity;
+import com.homies.homies.user.RegisterFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -94,7 +99,7 @@ public class InfoGroupFragment extends Fragment implements UserAdapter.ClickedIt
         groupInfo();
         groupPhoto();
 
-            btnAddUser.setOnClickListener((View.OnClickListener) view -> {
+        btnAddUser.setOnClickListener((View.OnClickListener) view -> {
             BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(
                     getActivity(), R.style.BottonSheetDialogTheme
             );
@@ -117,6 +122,33 @@ public class InfoGroupFragment extends Fragment implements UserAdapter.ClickedIt
                 }
             });
             btnCancelAction.setOnClickListener(view1 -> {
+
+                bottomSheetDialog.dismiss();
+            });
+
+            bottomSheetDialog.setContentView(bottomSheetView);
+            bottomSheetDialog.show();
+        });
+
+        btnDeleteGroup.setOnClickListener((View.OnClickListener) view -> {
+            BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(
+                    getActivity(), R.style.BottonSheetDialogTheme
+            );
+            View bottomSheetView = LayoutInflater.from(activity.getApplicationContext())
+                    .inflate(
+                            R.layout.dialog_delete_user,
+                            editGroup.findViewById(R.id.groupDeleteContainer)
+                    );
+
+            btnCancelActionGroup = bottomSheetView.findViewById(R.id.btnCancelActionGroup);
+            btnConfirmDeleteGroup = bottomSheetView.findViewById(R.id.btnConfirmUser);
+            btnConfirmDeleteGroup.setOnClickListener(view1 -> {
+
+                deleteGroup();
+                bottomSheetDialog.dismiss();
+
+            });
+            btnCancelActionGroup.setOnClickListener(view1 -> {
 
                 bottomSheetDialog.dismiss();
             });
@@ -229,7 +261,7 @@ public class InfoGroupFragment extends Fragment implements UserAdapter.ClickedIt
             @Override
             public void onResponse(Call<GroupResponse> call, Response<GroupResponse> response) {
                 if (response.isSuccessful()) {
-                    String message = getString(R.string.groupSucess);
+                    String message = getString(R.string.userSucess);
                     Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
                     groupInfo();
                     groupPhoto();
@@ -270,10 +302,39 @@ public class InfoGroupFragment extends Fragment implements UserAdapter.ClickedIt
             @Override
             public void onResponse(Call<GroupResponse> call, Response<GroupResponse> response) {
                 if (response.isSuccessful()) {
-                    String message = getString(R.string.groupSucess);
+                    String message = getString(R.string.deleteSucess);
                     Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
                     groupInfo();
                     groupPhoto();
+
+                } else {
+                    String message = getString(R.string.error_login);
+                    Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<GroupResponse> call, Throwable t) {
+                String message = t.getLocalizedMessage();
+                Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    public void deleteGroup() {
+        SharedPreferences preferences = getActivity().getSharedPreferences("MY_APP", Context.MODE_PRIVATE);
+        String retrivedToken  = preferences.getString("TOKEN",null);
+        Call<GroupResponse> deleteRequest = NetworkConfig.getService().deleteGroup("Bearer " + retrivedToken, userInf().getId());
+        deleteRequest.enqueue(new Callback<GroupResponse>() {
+            @Override
+            public void onResponse(Call<GroupResponse> call, Response<GroupResponse> response) {
+                if (response.isSuccessful()) {
+                    String message = getString(R.string.deleteGroupSucess);
+                    Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+                    GroupFragment groupFragment = new GroupFragment();
+                    FragmentTransaction fragmentTransaction = getParentFragmentManager().beginTransaction();
+                    fragmentTransaction.replace(R.id.fragmentGroup, groupFragment);
+                    fragmentTransaction.commit();
 
                 } else {
                     String message = getString(R.string.error_login);
