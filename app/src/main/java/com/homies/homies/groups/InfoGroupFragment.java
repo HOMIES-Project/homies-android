@@ -52,7 +52,7 @@ import retrofit2.Response;
 public class InfoGroupFragment extends Fragment {
 
     RecyclerView userList;
-    Button btnAddUser, btnCancelAction, btnConfirmUser, btnDeleteGroup, btnCancelActionGroup, btnConfirmDeleteGroup;
+    Button btnAddUser, btnCancelAction, btnConfirmUser, btnDeleteGroup, btnCancelActionGroup, btnConfirmDeleteGroup,btnConfirmChangeAdmin,btnCancelChangeAdmin;
     EditText userInput;
     Activity activity;
     EditText et_GroupName, et_detail;
@@ -134,12 +134,13 @@ public class InfoGroupFragment extends Fragment {
                 );
                 View bottomSheetView = LayoutInflater.from(activity.getApplicationContext())
                         .inflate(
-                                R.layout.dialog_delete_group,
-                                getActivity().findViewById(R.id.groupDeleteContainer)
+                                R.layout.dialog_change_admin,
+                                getActivity().findViewById(R.id.groupChangeAdmin)
                         );
                 btnCancelActionGroup = bottomSheetView.findViewById(R.id.btnCancelActionGroup);
-                btnConfirmDeleteGroup = bottomSheetView.findViewById(R.id.btnConfirmDeleteGroup);
-                btnConfirmDeleteGroup.setOnClickListener(view1 -> {
+                btnCancelChangeAdmin = bottomSheetView.findViewById(R.id.btnCancelChangeAdmin);
+                btnConfirmChangeAdmin = bottomSheetView.findViewById(R.id.btnConfirmChangeAdmin);
+                btnConfirmChangeAdmin.setOnClickListener(view1 -> {
 
                     changeAdmin(changeRequest());
                     bottomSheetDialog.dismiss();
