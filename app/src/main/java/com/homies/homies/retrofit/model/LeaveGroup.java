@@ -1,6 +1,6 @@
 package com.homies.homies.retrofit.model;
 
-public class DeleteUsersGroup {
+public class LeaveGroup {
 
     private String login;
     private int idGroup;
@@ -20,6 +20,4 @@ public class DeleteUsersGroup {
     public void setIdGroup(int idGroup) {
         this.idGroup = idGroup;
     }
-
-
 }

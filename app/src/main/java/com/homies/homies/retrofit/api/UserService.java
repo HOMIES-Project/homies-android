@@ -5,6 +5,7 @@ import com.homies.homies.retrofit.model.ChangeAdmin;
 import com.homies.homies.retrofit.model.DeleteUser;
 import com.homies.homies.retrofit.model.GroupRequest;
 import com.homies.homies.retrofit.model.GroupResponse;
+import com.homies.homies.retrofit.model.LeaveGroup;
 import com.homies.homies.retrofit.model.UserData;
 import com.homies.homies.retrofit.model.UserRequest;
 import com.homies.homies.retrofit.model.UserResponse;
@@ -57,6 +58,9 @@ public interface UserService {
 
     @POST("groups/delete-user")
     Call<GroupResponse> deleteUserGroup(@Header("Authorization") String authHeader,@Body DeleteUser deleteUser);
+
+    @POST("groups/delete-user")
+    Call<GroupResponse> leaveUserGroup(@Header("Authorization") String authHeader,@Path("id") int userId, @Body LeaveGroup leaveGroup);
 
     @DELETE("groups/{id}")
     Call<GroupResponse> deleteGroup(@Header("Authorization")String authHeader,@Path("id") int userId);

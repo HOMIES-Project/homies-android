@@ -37,8 +37,10 @@ import com.homies.homies.retrofit.model.AddUser;
 import com.homies.homies.retrofit.model.ChangeAdmin;
 import com.homies.homies.retrofit.model.DeleteUser;
 import com.homies.homies.retrofit.model.GroupResponse;
+import com.homies.homies.retrofit.model.LeaveGroup;
 import com.homies.homies.retrofit.model.UserData;
 import com.homies.homies.retrofit.model.UserResponse;
+import com.homies.homies.user.LoginFragment;
 import com.homies.homies.user.MainActivity;
 import com.homies.homies.user.RegisterFragment;
 
@@ -52,7 +54,8 @@ import retrofit2.Response;
 public class InfoGroupFragment extends Fragment {
 
     RecyclerView userList;
-    Button btnAddUser, btnCancelAction, btnConfirmUser, btnDeleteGroup, btnCancelActionGroup, btnConfirmDeleteGroup,btnConfirmChangeAdmin,btnCancelChangeAdmin;
+    Button btnAddUser, btnCancelAction, btnConfirmUser, btnDeleteGroup, btnCancelActionGroup, btnConfirmDeleteGroup,
+            btnConfirmChangeAdmin,btnCancelChangeAdmin,btnLeaveGroup,btnConfirmLeaveGroup;
     EditText userInput;
     Activity activity;
     EditText et_GroupName, et_detail;
@@ -75,6 +78,7 @@ public class InfoGroupFragment extends Fragment {
         btnAddUser = editGroup.findViewById(R.id.btnAddUser);
         btnCancelActionGroup = editGroup.findViewById(R.id.btnCancelActionGroup);
         btnConfirmDeleteGroup = editGroup.findViewById(R.id.btnConfirmDeleteGroup);
+        btnLeaveGroup = editGroup.findViewById(R.id.btnLeaveGroup);
         activity = getActivity();
 
         context = getActivity().getApplicationContext();
@@ -156,10 +160,6 @@ public class InfoGroupFragment extends Fragment {
             }
         });
 
-        groupInfo();
-        groupPhoto();
-
-
         btnAddUser.setOnClickListener((View.OnClickListener) view -> {
             BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(
                     getActivity(), R.style.BottonSheetDialogTheme
@@ -205,6 +205,33 @@ public class InfoGroupFragment extends Fragment {
             btnConfirmDeleteGroup = bottomSheetView.findViewById(R.id.btnConfirmUser);
             btnConfirmDeleteGroup.setOnClickListener(view1 -> {
 
+                leaveGroup(leaveRequest());
+                bottomSheetDialog.dismiss();
+
+            });
+            btnCancelActionGroup.setOnClickListener(view1 -> {
+
+                bottomSheetDialog.dismiss();
+            });
+
+            bottomSheetDialog.setContentView(bottomSheetView);
+            bottomSheetDialog.show();
+        });
+
+        btnLeaveGroup.setOnClickListener((View.OnClickListener) view -> {
+            BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(
+                    getActivity(), R.style.BottonSheetDialogTheme
+            );
+            View bottomSheetView = LayoutInflater.from(activity.getApplicationContext())
+                    .inflate(
+                            R.layout.dialog_leave_group,
+                            editGroup.findViewById(R.id.groupLeaveContainer)
+                    );
+
+            btnCancelActionGroup = bottomSheetView.findViewById(R.id.btnCancelActionGroup);
+            btnConfirmLeaveGroup = bottomSheetView.findViewById(R.id.btnConfirmLeaveGroup);
+            btnConfirmLeaveGroup.setOnClickListener(view1 -> {
+
                 deleteGroup();
                 bottomSheetDialog.dismiss();
 
@@ -218,6 +245,8 @@ public class InfoGroupFragment extends Fragment {
             bottomSheetDialog.show();
         });
 
+        groupInfo();
+        groupPhoto();
 
         return editGroup;
     }
@@ -346,14 +375,12 @@ public class InfoGroupFragment extends Fragment {
         int userId  = preferences.getInt("USER_ID",0);
         Integer idGroup  = preferences.getInt("GROUPID",0);
         String memberGroup = preferences.getString("MEMBERID",null);
-        //preferences.edit().remove("MEMBERID").commit();
         deleteUser.setLogin(memberGroup);
         deleteUser.setIdGroup(idGroup);
         deleteUser.setIdAdminGroup(userId);
 
         return deleteUser;
     }
-
 
     public void deleteUser(DeleteUser deleteUser) {
         SharedPreferences preferences = getActivity().getSharedPreferences("MY_APP", Context.MODE_PRIVATE);
@@ -367,6 +394,48 @@ public class InfoGroupFragment extends Fragment {
                     Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
                     groupInfo();
                     groupPhoto();
+
+                } else {
+                    String message = getString(R.string.error_login);
+                    Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<GroupResponse> call, Throwable t) {
+                String message = t.getLocalizedMessage();
+                Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    public LeaveGroup leaveRequest() {
+        LeaveGroup leaveGroup = new LeaveGroup();
+        SharedPreferences preferences = getActivity().getSharedPreferences("MY_APP", Context.MODE_PRIVATE);
+
+        Integer idGroup  = preferences.getInt("GROUPID",0);
+        String memberGroup = preferences.getString("MEMBERID",null);
+        leaveGroup.setLogin(memberGroup);
+        leaveGroup.setIdGroup(idGroup);
+
+        return leaveGroup;
+    }
+
+    public void leaveGroup(LeaveGroup leaveGroup) {
+        SharedPreferences preferences = getActivity().getSharedPreferences("MY_APP", Context.MODE_PRIVATE);
+        String retrivedToken  = preferences.getString("TOKEN",null);
+        int userId  = preferences.getInt("USER_ID",0);
+        Call<GroupResponse> userResponseCall = NetworkConfig.getService().leaveUserGroup("Bearer " + retrivedToken,userId,leaveGroup);
+        userResponseCall.enqueue(new Callback<GroupResponse>() {
+            @Override
+            public void onResponse(Call<GroupResponse> call, Response<GroupResponse> response) {
+                if (response.isSuccessful()) {
+                    String message = getString(R.string.deleteSucess);
+                    Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+                    GroupFragment groupFragment = new GroupFragment();
+                    FragmentTransaction fragmentTransaction = getParentFragmentManager().beginTransaction();
+                    fragmentTransaction.replace(R.id.fragment, groupFragment);
+                    fragmentTransaction.commit();
 
                 } else {
                     String message = getString(R.string.error_login);
