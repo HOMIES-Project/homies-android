@@ -8,7 +8,9 @@ import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -18,6 +20,7 @@ import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.homies.homies.groups.InfoGroupFragment;
 import com.homies.homies.retrofit.model.DeleteUser;
 import com.homies.homies.retrofit.model.GroupResponse;
 import com.homies.homies.retrofit.model.UserData;
@@ -34,9 +37,12 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolderDato
     Context context;
     ClickedItem clickedItem;
 
+    InfoGroupFragment infoGroupFragment = new InfoGroupFragment();
+
     public UserAdapter(ClickedItem clickedItem) {
         this.clickedItem = clickedItem;
     }
+
 
     public void setData(GroupResponse groups) {
         this.groups = groups;
@@ -56,8 +62,6 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolderDato
 
         UserData groupResponse = groups.getUserData().get(position);
 
-        DeleteUser delete = groups.getUserAdmin().getDelete();
-
         String textViewAdmin = groupResponse.getUser().getLogin();
 
         holder.textViewAdmin.setText(textViewAdmin);
@@ -76,11 +80,22 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolderDato
                 clickedItem.ClickedUser(groupResponse);
             }
         });
+        holder.textViewAdmin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                clickedItem.Clicked(groupResponse);
+            }
+        });
     }
 
     public interface ClickedItem{
         public void ClickedUser(UserData groupResponse);
+        public void Clicked(UserData groupResponse);
 
+    }
+    public void setOnItemClickListener(ClickedItem listener) {
+        clickedItem = listener;
     }
 
     @Override
