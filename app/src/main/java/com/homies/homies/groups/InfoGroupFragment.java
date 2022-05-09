@@ -79,6 +79,7 @@ public class InfoGroupFragment extends Fragment {
         btnCancelActionGroup = editGroup.findViewById(R.id.btnCancelActionGroup);
         btnConfirmDeleteGroup = editGroup.findViewById(R.id.btnConfirmDeleteGroup);
         btnLeaveGroup = editGroup.findViewById(R.id.btnLeaveGroup);
+
         activity = getActivity();
 
         context = getActivity().getApplicationContext();
@@ -91,7 +92,7 @@ public class InfoGroupFragment extends Fragment {
         ip_groupDetail = editGroup.findViewById(R.id.ip_groupDetail);
         btnDeleteGroup = editGroup.findViewById(R.id.btnDeleteGroup);
 
-        delete = editGroup.findViewById(R.id.delete);
+        delete = userList.findViewById(R.id.delete);
 
 
         usuarios = new ArrayList<>();
@@ -261,10 +262,15 @@ public class InfoGroupFragment extends Fragment {
     }
 
     public void groupInfo() {
+        DeleteUser deleteUser = new DeleteUser();
         SharedPreferences preferences = getActivity().getSharedPreferences("MY_APP", Context.MODE_PRIVATE);
         String retrivedToken  = preferences.getString("TOKEN",null);
         int userId  = preferences.getInt("USER_ID",0);
+        String userGroup = preferences.getString("USER_NAME",null);
         Integer idGroup  = preferences.getInt("GROUPID",0);
+
+        deleteUser.setIdGroup(idGroup);
+        deleteUser.setIdAdminGroup(userId);
 
         Call<GroupResponse> groupResponseCall = NetworkConfig.getService().groupInfo("Bearer " + retrivedToken,idGroup);
         groupResponseCall.enqueue(new Callback<GroupResponse>() {
@@ -277,6 +283,12 @@ public class InfoGroupFragment extends Fragment {
                     String detail = adslist.getGroupRelationName();
                     et_GroupName.setText(user);
                     et_detail.setText(detail);
+
+                    if (adslist.getUserAdmin().getId() != userId){
+
+                        btnAddUser.setVisibility(View.GONE);
+                        btnDeleteGroup.setVisibility(View.GONE);
+                    }
 
                 } else {
                     String message = getString(R.string.error_login);
@@ -310,6 +322,11 @@ public class InfoGroupFragment extends Fragment {
 
                     adaptador.setData(data);
                     userList.setAdapter(adaptador);
+
+                    if (data.getUserAdmin().getId() != userId){
+
+
+                    }
 
 
                 } else {
