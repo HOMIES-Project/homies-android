@@ -8,6 +8,7 @@ import com.homies.homies.retrofit.model.GroupResponse;
 import com.homies.homies.retrofit.model.UserData;
 import com.homies.homies.retrofit.model.UserRequest;
 import com.homies.homies.retrofit.model.UserResponse;
+import com.homies.homies.retrofit.model.tasksModels.UserTasksListModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -55,6 +56,9 @@ public interface UserService {
 
     @POST("groups/delete-user")
     Call<DeleteUserGroupResponse> deleteUser(@Header("Authorization") String authHeader, @Body DeleteUserGroupRequest deleteUserGroupRequest);
+
+    @GET("/task-lists-user/{id}/{login}")
+    Call<List<UserTasksListModel>> getUserTasks(@Header("Authorization") String authHeader, @Path("id") int userId, @Path("login") String login);
 
 
 

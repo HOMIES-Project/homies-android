@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,17 +27,25 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.textfield.TextInputLayout;
 import com.homies.homies.R;
+import com.homies.homies.retrofit.api.UserService;
 import com.homies.homies.retrofit.config.NetworkConfig;
 import com.homies.homies.retrofit.model.GroupResponse;
 import com.homies.homies.retrofit.model.group.AddUserGroupRequest;
 import com.homies.homies.retrofit.model.group.AddUserGroupResponse;
 import com.homies.homies.retrofit.model.UserData;
+import com.homies.homies.retrofit.model.tasksModels.UserTasksListModel;
+import com.homies.homies.user.MainActivity;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+
+import static android.widget.Toast.makeText;
 
 //
 //
@@ -46,7 +55,7 @@ import retrofit2.Response;
 
 public class InfoGroupFragment extends Fragment {
 
-    RecyclerView userList;
+    TextView userList;
     Button btnAddUser, btnCancelAction, btnConfirmUser, btnDeleteGroup, btnCancelActionGroup, btnConfirmDeleteGroup;
     EditText userInput;
     Activity activity;
@@ -61,7 +70,7 @@ public class InfoGroupFragment extends Fragment {
         View editGroup = inflater.inflate(R.layout.fragment_info_group, container, false);
 
         userList = editGroup.findViewById(R.id.userList);
-        userList.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false));
+
         btnAddUser = editGroup.findViewById(R.id.btnAddUser);
         btnCancelActionGroup = editGroup.findViewById(R.id.btnCancelActionGroup);
         btnConfirmDeleteGroup = editGroup.findViewById(R.id.btnConfirmDeleteGroup);
@@ -74,6 +83,7 @@ public class InfoGroupFragment extends Fragment {
         ip_groupDetail = editGroup.findViewById(R.id.ip_groupDetail);
         btnDeleteGroup = editGroup.findViewById(R.id.btnDeleteGroup);
         groupInfo();
+        getUserTasks();
 
 
 
@@ -118,7 +128,7 @@ public class InfoGroupFragment extends Fragment {
             btnConfirmUser.setOnClickListener(view1 -> {
                 if (userInput.getText().toString().trim().isEmpty()) {
                     String message = getString(R.string.val_user);
-                    Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+                    makeText(getContext(), message, Toast.LENGTH_SHORT).show();
                 } else {
 
                     //addUserGroup(createUserListRequest());
@@ -136,6 +146,41 @@ public class InfoGroupFragment extends Fragment {
         });
 
         return editGroup;
+    }
+
+    //TRAEMOS Y PINTAMOS LISTADO DE TAREAS DEL USER
+    private void getUserTasks(){
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("https://homies-back-app.herokuapp.com/api")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        UserService userService = retrofit.create(UserService.class);
+
+        Call<List<UserTasksListModel>> call = userService.getUserTasks();
+
+        call.enqueue(new Callback<List<UserTasksListModel>>() {
+            @Override
+            public void onResponse(Call<List<UserTasksListModel>> call, Response<List<UserTasksListModel>> response) {
+                if(!response.isSuccessful()){
+                    userList.setText("codigo" + response.code());
+                    Log.d("respuesta", "falta datos");
+                    return;
+                }
+                List<UserTasksListModel> tasksList = response.body();
+
+                for(UserTasksListModel userTasksListModel: tasksList){
+                    String content = "";
+                    content += "Tarea:"+ userTasksListModel.getLogin() + "\n";
+                    userList.append(content);
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<UserTasksListModel>> call, Throwable t) {
+                Log.d("respuesta", "error");
+            }
+        });
     }
 
     public void groupInfo() {
@@ -158,7 +203,7 @@ public class InfoGroupFragment extends Fragment {
 
                 } else {
                     String message = getString(R.string.error_login);
-                    Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+                    makeText(getContext(), message, Toast.LENGTH_SHORT).show();
                 }
 
             }
@@ -166,7 +211,7 @@ public class InfoGroupFragment extends Fragment {
             @Override
             public void onFailure(Call<GroupResponse> call, Throwable t) {
                 String message = t.getLocalizedMessage();
-                Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+                makeText(getContext(), message, Toast.LENGTH_SHORT).show();
 
             }
         });
@@ -207,21 +252,21 @@ public class InfoGroupFragment extends Fragment {
             public void onResponse(Call<ArrayList<AddUserGroupResponse>> call, Response<ArrayList<AddUserGroupResponse>> response) {
                 if (response.isSuccessful()) {
                     String message = getString(R.string.userSucess);
-                    Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+                    makeText(getContext(), message, Toast.LENGTH_SHORT).show();
 
                     ArrayList<AddUserGroupResponse> data = response.body();
 
                     RecyclerViewAdapterListUser adapterListUser = new RecyclerViewAdapterListUser(getContext(), data);
-                    userList.setAdapter(adapterListUser);
+                    //userList.setAdapter(adapterListUser);
                 } else {
                     String message = getString(R.string.error_login);
-                    Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+                    makeText(getContext(), message, Toast.LENGTH_SHORT).show();
                 }
             }
             @Override
             public void onFailure(Call<ArrayList<AddUserGroupResponse>> call, Throwable t) {
                 String message = t.getLocalizedMessage();
-                Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+                makeText(getContext(), message, Toast.LENGTH_SHORT).show();
             }
         });
     }
