@@ -68,5 +68,8 @@ public interface UserService {
     @POST("groups/change-admin")
     Call<GroupResponse> changeAdmin(@Header("Authorization")String authHeader,@Body ChangeAdmin changeAdmin);
 
+    @PUT("groups/{id}")
+    Call<GroupResponse> updateInfoGroup(@Header("Authorization")String authHeader,@Path("id") int userId, @Body GroupRequest groupRequest);
+
 
 }

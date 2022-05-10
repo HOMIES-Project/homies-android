@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.util.Base64;
 import android.view.LayoutInflater;
@@ -36,14 +37,17 @@ import com.homies.homies.retrofit.config.NetworkConfig;
 import com.homies.homies.retrofit.model.AddUser;
 import com.homies.homies.retrofit.model.ChangeAdmin;
 import com.homies.homies.retrofit.model.DeleteUser;
+import com.homies.homies.retrofit.model.GroupRequest;
 import com.homies.homies.retrofit.model.GroupResponse;
 import com.homies.homies.retrofit.model.LeaveGroup;
 import com.homies.homies.retrofit.model.UserData;
+import com.homies.homies.retrofit.model.UserRequest;
 import com.homies.homies.retrofit.model.UserResponse;
 import com.homies.homies.user.LoginFragment;
 import com.homies.homies.user.MainActivity;
 import com.homies.homies.user.RegisterFragment;
 
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -288,6 +292,12 @@ public class InfoGroupFragment extends Fragment {
 
                         btnAddUser.setVisibility(View.GONE);
                         btnDeleteGroup.setVisibility(View.GONE);
+                        et_GroupName.setFocusable(false);
+                        et_GroupName.setFocusableInTouchMode(false);
+                        et_GroupName.setClickable(false);
+                        et_detail.setFocusable(false);
+                        et_detail.setFocusableInTouchMode(false);
+                        et_detail.setClickable(false);
                     }
 
                 } else {
@@ -530,5 +540,47 @@ public class InfoGroupFragment extends Fragment {
                 Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    public GroupRequest createRequestGroup() {
+        GroupRequest groupRequest = new GroupRequest();
+        SharedPreferences preferences = getActivity().getSharedPreferences("MY_APP", Context.MODE_PRIVATE);
+        int userId  = preferences.getInt("USER_ID",0);
+        groupRequest.setUser(userId);
+        groupRequest.setGroupName(et_GroupName.getText().toString());
+        groupRequest.setGroupRelation(et_detail.getText().toString());
+
+
+        return groupRequest;
+    }
+
+    public void updateInfoGroup() {
+        SharedPreferences preferences = getActivity().getSharedPreferences("MY_APP", Context.MODE_PRIVATE);
+        String retrivedToken  = preferences.getString("TOKEN",null);
+        Call<GroupResponse> updateInfo = NetworkConfig.getService().updateInfoGroup("Bearer " + retrivedToken, userInf().getId(),createRequestGroup());
+        updateInfo.enqueue(new Callback<GroupResponse>() {
+            @Override
+            public void onResponse(Call<GroupResponse> call, Response<GroupResponse> response) {
+                if (response.isSuccessful()) {
+
+
+                    String message = getString(R.string.updateInfo);
+                    Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+
+
+                } else {
+                    String message = getString(R.string.error_login);
+                    Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<GroupResponse> call, Throwable t) {
+                String message = t.getLocalizedMessage();
+                Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+            }
+        });
+
     }
 }
