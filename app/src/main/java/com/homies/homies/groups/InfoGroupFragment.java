@@ -323,10 +323,7 @@ public class InfoGroupFragment extends Fragment {
                     adaptador.setData(data);
                     userList.setAdapter(adaptador);
 
-                    if (data.getUserAdmin().getId() != userId){
 
-
-                    }
 
 
                 } else {
