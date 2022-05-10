@@ -107,6 +107,7 @@ public class InfoGroupFragment extends Fragment {
         userList.addItemDecoration(new DividerItemDecoration(getActivity(),DividerItemDecoration.VERTICAL));
         adaptador = new UserAdapter(clickedItem);
 
+        //events within the listview
         adaptador.setOnItemClickListener(new UserAdapter.ClickedItem() {
             @Override
             public void ClickedUser(UserData groupResponse) {
@@ -165,6 +166,7 @@ public class InfoGroupFragment extends Fragment {
             }
         });
 
+        //Add User
         btnAddUser.setOnClickListener((View.OnClickListener) view -> {
             BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(
                     getActivity(), R.style.BottonSheetDialogTheme
@@ -196,6 +198,7 @@ public class InfoGroupFragment extends Fragment {
             bottomSheetDialog.show();
         });
 
+        //Delete group
         btnDeleteGroup.setOnClickListener((View.OnClickListener) view -> {
             BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(
                     getActivity(), R.style.BottonSheetDialogTheme
@@ -223,6 +226,7 @@ public class InfoGroupFragment extends Fragment {
             bottomSheetDialog.show();
         });
 
+        //Leave group
         btnLeaveGroup.setOnClickListener((View.OnClickListener) view -> {
             BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(
                     getActivity(), R.style.BottonSheetDialogTheme
@@ -252,10 +256,12 @@ public class InfoGroupFragment extends Fragment {
 
         groupInfo();
         groupPhoto();
+        //updateInfoGroup();
 
         return editGroup;
     }
 
+    //data to obtain information from the group
     public UserData userInf() {
         UserData userData = new UserData();
         SharedPreferences preferences = getActivity().getSharedPreferences("MY_APP", Context.MODE_PRIVATE);
@@ -265,6 +271,7 @@ public class InfoGroupFragment extends Fragment {
         return userData;
     }
 
+    //method of obtaining group information
     public void groupInfo() {
         DeleteUser deleteUser = new DeleteUser();
         SharedPreferences preferences = getActivity().getSharedPreferences("MY_APP", Context.MODE_PRIVATE);
@@ -317,6 +324,7 @@ public class InfoGroupFragment extends Fragment {
 
     }
 
+    //method for obtaining listing information
     public void groupPhoto() {
         SharedPreferences preferences = getActivity().getSharedPreferences("MY_APP", Context.MODE_PRIVATE);
         String retrivedToken  = preferences.getString("TOKEN",null);
@@ -333,16 +341,11 @@ public class InfoGroupFragment extends Fragment {
                     adaptador.setData(data);
                     userList.setAdapter(adaptador);
 
-
-
-
                 } else {
                     String message = getString(R.string.error_login);
                     Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
                 }
-
             }
-
             @Override
             public void onFailure(Call<GroupResponse> call, Throwable t) {
                 String message = t.getLocalizedMessage();
@@ -366,6 +369,7 @@ public class InfoGroupFragment extends Fragment {
         return addUser;
     }
 
+    //data to add user
     public void addUserGroup(AddUser addUser) {
         SharedPreferences preferences = getActivity().getSharedPreferences("MY_APP", Context.MODE_PRIVATE);
         String retrivedToken  = preferences.getString("TOKEN",null);
@@ -392,7 +396,7 @@ public class InfoGroupFragment extends Fragment {
             }
         });
     }
-
+    //data to delete user
     public DeleteUser deleteRequest() {
         DeleteUser deleteUser = new DeleteUser();
         SharedPreferences preferences = getActivity().getSharedPreferences("MY_APP", Context.MODE_PRIVATE);
@@ -406,6 +410,7 @@ public class InfoGroupFragment extends Fragment {
         return deleteUser;
     }
 
+    //method to delete user
     public void deleteUser(DeleteUser deleteUser) {
         SharedPreferences preferences = getActivity().getSharedPreferences("MY_APP", Context.MODE_PRIVATE);
         String retrivedToken  = preferences.getString("TOKEN",null);
@@ -433,6 +438,7 @@ public class InfoGroupFragment extends Fragment {
         });
     }
 
+    //data to leave the group
     public LeaveGroup leaveRequest() {
         LeaveGroup leaveGroup = new LeaveGroup();
         SharedPreferences preferences = getActivity().getSharedPreferences("MY_APP", Context.MODE_PRIVATE);
@@ -445,6 +451,7 @@ public class InfoGroupFragment extends Fragment {
         return leaveGroup;
     }
 
+    //method for leaving the group
     public void leaveGroup(LeaveGroup leaveGroup) {
         SharedPreferences preferences = getActivity().getSharedPreferences("MY_APP", Context.MODE_PRIVATE);
         String retrivedToken  = preferences.getString("TOKEN",null);
@@ -474,7 +481,7 @@ public class InfoGroupFragment extends Fragment {
             }
         });
     }
-
+    //method to delete the group
     public void deleteGroup() {
         SharedPreferences preferences = getActivity().getSharedPreferences("MY_APP", Context.MODE_PRIVATE);
         String retrivedToken  = preferences.getString("TOKEN",null);
@@ -504,6 +511,7 @@ public class InfoGroupFragment extends Fragment {
         });
     }
 
+    //to change administrator
     public ChangeAdmin changeRequest() {
         ChangeAdmin changeAdmin = new ChangeAdmin();
         SharedPreferences preferences = context.getSharedPreferences("MY_APP", Context.MODE_PRIVATE);
@@ -517,6 +525,7 @@ public class InfoGroupFragment extends Fragment {
         return changeAdmin;
     }
 
+    //method to change administrator
     public void changeAdmin(ChangeAdmin changeAdmin) {
         SharedPreferences preferences = getActivity().getSharedPreferences("MY_APP", Context.MODE_PRIVATE);
         String retrivedToken  = preferences.getString("TOKEN",null);
@@ -541,7 +550,7 @@ public class InfoGroupFragment extends Fragment {
             }
         });
     }
-
+    //data to update the group
     public GroupRequest createRequestGroup() {
         GroupRequest groupRequest = new GroupRequest();
         SharedPreferences preferences = getActivity().getSharedPreferences("MY_APP", Context.MODE_PRIVATE);
@@ -553,7 +562,7 @@ public class InfoGroupFragment extends Fragment {
 
         return groupRequest;
     }
-
+    //method to update the group
     public void updateInfoGroup() {
         SharedPreferences preferences = getActivity().getSharedPreferences("MY_APP", Context.MODE_PRIVATE);
         String retrivedToken  = preferences.getString("TOKEN",null);
