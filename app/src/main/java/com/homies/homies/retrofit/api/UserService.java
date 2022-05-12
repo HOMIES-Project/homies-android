@@ -75,7 +75,7 @@ public interface UserService {
     Call<DeleteUserTaskResponse> deleteUserTask(@Header("Authorization") String authHeader, @Body DeleteUserTaskRequest deleteUserTaskRequest);
 
     @GET("task-lists")
-    Call<GetAllTaskResponse> getAllTask()
+    Call<Void> getAllTask(@Header("Authorization") String authHeader, @Body GetAllTaskResponse getAllTaskResponse);
 
     @GET("task-lists-user/{id}/{login}")
     Call<List<UserTasksListModel>> getUserTasks(@Header("Authorization") String authHeader, @Path("id") int userId, @Path("login") String login);
