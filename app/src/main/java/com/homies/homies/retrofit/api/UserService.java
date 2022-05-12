@@ -1,15 +1,15 @@
 package com.homies.homies.retrofit.api;
 
-import com.homies.homies.retrofit.model.group.AddUserGroupResponse;
-import com.homies.homies.retrofit.model.group.DeleteUserGroupRequest;
-import com.homies.homies.retrofit.model.group.DeleteUserGroupResponse;
+import com.homies.homies.retrofit.model.AddUser;
+import com.homies.homies.retrofit.model.ChangeAdmin;
+import com.homies.homies.retrofit.model.DeleteUser;
 import com.homies.homies.retrofit.model.GroupRequest;
 import com.homies.homies.retrofit.model.GroupResponse;
+import com.homies.homies.retrofit.model.LeaveGroup;
 import com.homies.homies.retrofit.model.UserData;
 import com.homies.homies.retrofit.model.UserRequest;
 import com.homies.homies.retrofit.model.UserResponse;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -50,14 +50,26 @@ public interface UserService {
     @GET("groups/{id}")
     Call<GroupResponse> groupInfo(@Header("Authorization")String authHeader,@Path("id") int userId);
 
+    @GET("groups/{id}")
+    Call<GroupResponse> groupPhoto(@Header("Authorization")String authHeader, @Path("id") int userId);
+
     @POST("groups/add-user")
-    Call<ArrayList<AddUserGroupResponse>> addUserGroup(@Header("Authorization") String authHeader);
+    Call<GroupResponse> addUserGroup(@Header("Authorization") String authHeader, @Body AddUser addUser);
 
     @POST("groups/delete-user")
-    Call<DeleteUserGroupResponse> deleteUser(@Header("Authorization") String authHeader, @Body DeleteUserGroupRequest deleteUserGroupRequest);
+    Call<GroupResponse> deleteUserGroup(@Header("Authorization") String authHeader,@Body DeleteUser deleteUser);
 
+    @POST("groups/delete-user")
+    Call<GroupResponse> leaveUserGroup(@Header("Authorization") String authHeader,@Path("id") int userId, @Body LeaveGroup leaveGroup);
 
+    @DELETE("groups/{id}")
+    Call<GroupResponse> deleteGroup(@Header("Authorization")String authHeader,@Path("id") int userId);
 
+    @POST("groups/change-admin")
+    Call<GroupResponse> changeAdmin(@Header("Authorization")String authHeader,@Body ChangeAdmin changeAdmin);
+
+    @PUT("groups/{id}")
+    Call<GroupResponse> updateInfoGroup(@Header("Authorization")String authHeader,@Path("id") int userId, @Body GroupRequest groupRequest);
 
 
 }

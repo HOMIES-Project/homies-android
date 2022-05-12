@@ -70,6 +70,11 @@
     <string name="Cancel">Cancelar</string>
     <string name="val_name">Es necesario asiganr al grupo un nombre</string>
     <string name="groupSucess">¡Grupo creado!</string>
+    <string name="deleteGroupSucess">¡Grupo eliminado!</string>
+    <string name="changeAdmin">Hacer Admin. del grupo</string>
+
+    <string name="change_admin">¿Está seguro de que quiere cambiar de administrador?</string>
+
 
     <!-- Settings User -->
     <string name="saveChanges">Guardar Cambios</string>
