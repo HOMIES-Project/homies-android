@@ -1,6 +1,5 @@
 package com.homies.homies.retrofit.api;
 
-import com.homies.homies.retrofit.model.TaskList;
 import com.homies.homies.retrofit.model.group.AddUserGroupResponse;
 import com.homies.homies.retrofit.model.group.DeleteUserGroupRequest;
 import com.homies.homies.retrofit.model.group.DeleteUserGroupResponse;
@@ -9,12 +8,11 @@ import com.homies.homies.retrofit.model.GroupResponse;
 import com.homies.homies.retrofit.model.UserData;
 import com.homies.homies.retrofit.model.UserRequest;
 import com.homies.homies.retrofit.model.UserResponse;
-import com.homies.homies.retrofit.model.tasksModels.AddUserTask;
-import com.homies.homies.retrofit.model.tasksModels.CreateNewTask;
-import com.homies.homies.retrofit.model.tasksModels.DeleteUserTask;
-import com.homies.homies.retrofit.model.tasksModels.TaskListResponse;
-import com.homies.homies.retrofit.model.tasksModels.UpdateTask;
-import com.homies.homies.retrofit.model.tasksModels.UserTasksListModel;
+import com.homies.homies.retrofit.model.tasks.AddUserTask;
+import com.homies.homies.retrofit.model.tasks.CreateNewTask;
+import com.homies.homies.retrofit.model.tasks.DeleteUserTask;
+import com.homies.homies.retrofit.model.tasks.TaskListResponse;
+import com.homies.homies.retrofit.model.tasks.UpdateTask;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -86,7 +84,7 @@ public interface UserService {
 
     @GET("task-lists-user/{id}/{login}")
     Call<List<TaskListResponse>> getUserTasks(@Header("Authorization") String authHeader, @Path("id") int userId, @Path("login") String login);
-    
+
     @PUT("tasks/update-tasks")
     Call<TaskListResponse> updateTasks(@Header("Authorization") String authHeader, @Body UpdateTask updateTask);
 

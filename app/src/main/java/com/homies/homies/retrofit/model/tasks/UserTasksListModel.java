@@ -1,4 +1,4 @@
-package com.homies.homies.retrofit.model.tasksModels;
+package com.homies.homies.retrofit.model.tasks;
 
 public class UserTasksListModel {
 

@@ -6,23 +6,16 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
-import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.textfield.TextInputLayout;
@@ -33,8 +26,7 @@ import com.homies.homies.retrofit.model.GroupResponse;
 import com.homies.homies.retrofit.model.group.AddUserGroupRequest;
 import com.homies.homies.retrofit.model.group.AddUserGroupResponse;
 import com.homies.homies.retrofit.model.UserData;
-import com.homies.homies.retrofit.model.tasksModels.UserTasksListModel;
-import com.homies.homies.user.MainActivity;
+import com.homies.homies.retrofit.model.tasks.UserTasksListModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -83,7 +75,7 @@ public class InfoGroupFragment extends Fragment {
         ip_groupDetail = editGroup.findViewById(R.id.ip_groupDetail);
         btnDeleteGroup = editGroup.findViewById(R.id.btnDeleteGroup);
         groupInfo();
-        getUserTasks();
+        //getUserTasks();
 
 
 
@@ -148,7 +140,7 @@ public class InfoGroupFragment extends Fragment {
         return editGroup;
     }
 
-    //TRAEMOS Y PINTAMOS LISTADO DE TAREAS DEL USER
+ /*   //TRAEMOS Y PINTAMOS LISTADO DE TAREAS DEL USER
     private void getUserTasks(){
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://homies-back-app.herokuapp.com/api")
@@ -182,7 +174,7 @@ public class InfoGroupFragment extends Fragment {
             }
         });
     }
-
+*/
     public void groupInfo() {
         SharedPreferences preferences = getActivity().getSharedPreferences("MY_APP", Context.MODE_PRIVATE);
         String retrivedToken  = preferences.getString("TOKEN",null);

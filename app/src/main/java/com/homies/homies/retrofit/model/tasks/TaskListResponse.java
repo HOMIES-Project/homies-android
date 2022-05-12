@@ -1,4 +1,4 @@
-package com.homies.homies.retrofit.model.tasksModels;
+package com.homies.homies.retrofit.model.tasks;
 
 import com.homies.homies.retrofit.model.TaskList;
 import com.homies.homies.retrofit.model.UserAdmin;

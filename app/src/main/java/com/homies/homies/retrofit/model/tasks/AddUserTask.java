@@ -1,6 +1,7 @@
-package com.homies.homies.retrofit.model.tasksModels;
+package com.homies.homies.retrofit.model.tasks;
 
-public class DeleteUserTask {
+public class AddUserTask {
+
     private int idTask;
     private String login;
     private int idList;
