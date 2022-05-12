@@ -1,6 +1,10 @@
 package com.homies.homies.retrofit.model.tasksModels;
 
-public class TaskEntity {
+import com.homies.homies.retrofit.model.TaskList;
+import com.homies.homies.retrofit.model.UserAdmin;
+import com.homies.homies.retrofit.model.UserData;
+
+public class TaskListResponse {
 
     private int id;
     private String taskName;
@@ -11,6 +15,10 @@ public class TaskEntity {
     private String photo;
     private String photoContentType;
     private int puntuacion;
+    private TaskList taskList;
+    private UserData userData;
+    private String userCreator;
+    private UserAdmin userAdmin;
 
     public int getId() {
         return id;
@@ -82,5 +90,37 @@ public class TaskEntity {
 
     public void setPuntuacion(int puntuacion) {
         this.puntuacion = puntuacion;
+    }
+
+    public TaskList getTaskList() {
+        return taskList;
+    }
+
+    public void setTaskList(TaskList taskList) {
+        this.taskList = taskList;
+    }
+
+    public UserData getUserData() {
+        return userData;
+    }
+
+    public void setUserData(UserData userData) {
+        this.userData = userData;
+    }
+
+    public String getUserCreator() {
+        return userCreator;
+    }
+
+    public void setUserCreator(String userCreator) {
+        this.userCreator = userCreator;
+    }
+
+    public UserAdmin getUserAdmin() {
+        return userAdmin;
+    }
+
+    public void setUserAdmin(UserAdmin userAdmin) {
+        this.userAdmin = userAdmin;
     }
 }

@@ -1,19 +1,17 @@
 package com.homies.homies.retrofit.model.tasksModels;
 
-public class UpdateTaskRequest {
-
-    private int idTask;
+public class CreateNewTask {
+    private int user;
     private int idGroup;
-    private String login;
     private String taskName;
     private String description;
 
-    public int getIdTask() {
-        return idTask;
+    public int getUser() {
+        return user;
     }
 
-    public void setIdTask(int idTask) {
-        this.idTask = idTask;
+    public void setUser(int user) {
+        this.user = user;
     }
 
     public int getIdGroup() {
@@ -22,14 +20,6 @@ public class UpdateTaskRequest {
 
     public void setIdGroup(int idGroup) {
         this.idGroup = idGroup;
-    }
-
-    public String getLogin() {
-        return login;
-    }
-
-    public void setLogin(String login) {
-        this.login = login;
     }
 
     public String getTaskName() {
