@@ -13,6 +13,7 @@ import com.homies.homies.retrofit.model.tasksModels.AddUserTask;
 import com.homies.homies.retrofit.model.tasksModels.CreateNewTask;
 import com.homies.homies.retrofit.model.tasksModels.DeleteUserTask;
 import com.homies.homies.retrofit.model.tasksModels.TaskListResponse;
+import com.homies.homies.retrofit.model.tasksModels.UpdateTask;
 import com.homies.homies.retrofit.model.tasksModels.UserTasksListModel;
 
 import java.util.ArrayList;
@@ -71,20 +72,22 @@ public interface UserService {
     @POST("tasks/add-user")
     Call<TaskListResponse> addUserTask(@Header("Authorization") String authHeader, @Body AddUserTask addUserTask);
 
-    @POST("task/delete-user")
+    @DELETE("task/delete-user")
     Call<TaskListResponse> deleteUserTask(@Header("Authorization") String authHeader, @Body DeleteUserTask deleteUserTask);
 
-    @POST("/task/delete-task/{id}")
+    @DELETE("/task/delete-task/{id}")
     Call<Void> deleteTask(@Header("Authorization") String authHeader, @Path("id") int userId);
 
     @GET("task-lists")
-    Call<Void> getAllTask(@Header("Authorization") String authHeader, @Body GetAllTask getAllTaskResponse);
+    Call<List<TaskListResponse>> getAllTask(@Header("Authorization") String authHeader);
+
+    @GET("task-lists/{id}")
+    Call<TaskListResponse> getTask(@Header("Authorization") String authHeader);
 
     @GET("task-lists-user/{id}/{login}")
-    Call<List<UserTasksListModel>> getUserTasks(@Header("Authorization") String authHeader, @Path("id") int userId, @Path("login") String login);
-
-
-
-
+    Call<List<TaskListResponse>> getUserTasks(@Header("Authorization") String authHeader, @Path("id") int userId, @Path("login") String login);
+    
+    @PUT("tasks/update-tasks")
+    Call<TaskListResponse> updateTasks(@Header("Authorization") String authHeader, @Body UpdateTask updateTask);
 
 }
