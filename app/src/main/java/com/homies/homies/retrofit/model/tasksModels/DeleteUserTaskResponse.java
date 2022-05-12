@@ -1,6 +1,6 @@
 package com.homies.homies.retrofit.model.tasksModels;
 
-public class addUserTaskRequest {
+public class DeleteUserTaskResponse {
 
     private int idTask;
     private String login;

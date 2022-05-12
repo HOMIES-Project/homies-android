@@ -3,7 +3,7 @@ package com.homies.homies.retrofit.model.tasksModels;
 
 import com.homies.homies.retrofit.model.GroupResponse;
 
-public class getAllTaskResponse {
+public class GetAllTaskResponse {
 
     private int id;
     private String nameList;

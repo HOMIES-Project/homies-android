@@ -2,7 +2,7 @@ package com.homies.homies.retrofit.model.tasksModels;
 
 import com.homies.homies.retrofit.model.GroupResponse;
 
-public class getOneTaskResponse {
+public class GetOneTaskResponse {
 
     private int id;
     private String nameList;

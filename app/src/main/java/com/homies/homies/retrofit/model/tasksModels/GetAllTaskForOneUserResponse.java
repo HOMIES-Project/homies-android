@@ -4,7 +4,7 @@ package com.homies.homies.retrofit.model.tasksModels;
 import com.homies.homies.retrofit.model.TaskList;
 import com.homies.homies.retrofit.model.UserData;
 
-public class getAllTaskForOneUserResponse {
+public class GetAllTaskForOneUserResponse {
     private int id;
     private String taskName;
     private String dataCreate;

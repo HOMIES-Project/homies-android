@@ -8,6 +8,13 @@ import com.homies.homies.retrofit.model.GroupResponse;
 import com.homies.homies.retrofit.model.UserData;
 import com.homies.homies.retrofit.model.UserRequest;
 import com.homies.homies.retrofit.model.UserResponse;
+import com.homies.homies.retrofit.model.tasksModels.AddUserTaskRequest;
+import com.homies.homies.retrofit.model.tasksModels.AddUserTaskResponse;
+import com.homies.homies.retrofit.model.tasksModels.CreateNewTaskRequest;
+import com.homies.homies.retrofit.model.tasksModels.CreateNewTaskResponse;
+import com.homies.homies.retrofit.model.tasksModels.DeleteUserTaskRequest;
+import com.homies.homies.retrofit.model.tasksModels.DeleteUserTaskResponse;
+import com.homies.homies.retrofit.model.tasksModels.GetAllTaskResponse;
 import com.homies.homies.retrofit.model.tasksModels.UserTasksListModel;
 
 import java.util.ArrayList;
@@ -57,7 +64,20 @@ public interface UserService {
     @POST("groups/delete-user")
     Call<DeleteUserGroupResponse> deleteUser(@Header("Authorization") String authHeader, @Body DeleteUserGroupRequest deleteUserGroupRequest);
 
-    @GET("/task-lists-user/{id}/{login}")
+
+    @POST("tasks")
+    Call<CreateNewTaskResponse> createNewTask(@Header("Authorization") String authHeader, @Body CreateNewTaskRequest createNewTaskRequest);
+
+    @POST("tasks/add-user")
+    Call<AddUserTaskResponse> addUserTask(@Header("Authorization") String authHeader, @Body AddUserTaskRequest addUserTaskRequest);
+
+    @POST("task/delete-user")
+    Call<DeleteUserTaskResponse> deleteUserTask(@Header("Authorization") String authHeader, @Body DeleteUserTaskRequest deleteUserTaskRequest);
+
+    @GET("task-lists")
+    Call<GetAllTaskResponse> getAllTask()
+
+    @GET("task-lists-user/{id}/{login}")
     Call<List<UserTasksListModel>> getUserTasks(@Header("Authorization") String authHeader, @Path("id") int userId, @Path("login") String login);
 
 

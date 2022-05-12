@@ -5,7 +5,7 @@ import android.service.autofill.UserData;
 import com.homies.homies.retrofit.model.TaskList;
 import com.homies.homies.retrofit.model.UserAdmin;
 
-public class createNewTaskResponse {
+public class CreateNewTaskResponse {
 
     private int id;
     private int groupKey;
