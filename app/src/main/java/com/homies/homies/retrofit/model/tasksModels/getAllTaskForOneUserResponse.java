@@ -1,16 +1,20 @@
 package com.homies.homies.retrofit.model.tasksModels;
 
-public class TaskEntity {
 
+import com.homies.homies.retrofit.model.TaskList;
+import com.homies.homies.retrofit.model.UserData;
+
+public class getAllTaskForOneUserResponse {
     private int id;
     private String taskName;
     private String dataCreate;
     private String dataEnd;
-    private String description;
+    private String dataDescription;
     private boolean cancel;
     private String photo;
-    private String photoContentType;
-    private int puntuacion;
+    private TaskList taskList;
+    private UserData userData;
+    private UserData userAssigneds;
 
     public int getId() {
         return id;
@@ -44,12 +48,12 @@ public class TaskEntity {
         this.dataEnd = dataEnd;
     }
 
-    public String getDescription() {
-        return description;
+    public String getDataDescription() {
+        return dataDescription;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setDataDescription(String dataDescription) {
+        this.dataDescription = dataDescription;
     }
 
     public boolean isCancel() {
@@ -68,19 +72,27 @@ public class TaskEntity {
         this.photo = photo;
     }
 
-    public String getPhotoContentType() {
-        return photoContentType;
+    public TaskList getTaskList() {
+        return taskList;
     }
 
-    public void setPhotoContentType(String photoContentType) {
-        this.photoContentType = photoContentType;
+    public void setTaskList(TaskList taskList) {
+        this.taskList = taskList;
     }
 
-    public int getPuntuacion() {
-        return puntuacion;
+    public UserData getUserData() {
+        return userData;
     }
 
-    public void setPuntuacion(int puntuacion) {
-        this.puntuacion = puntuacion;
+    public void setUserData(UserData userData) {
+        this.userData = userData;
+    }
+
+    public UserData getUserAssigneds() {
+        return userAssigneds;
+    }
+
+    public void setUserAssigneds(UserData userAssigneds) {
+        this.userAssigneds = userAssigneds;
     }
 }
