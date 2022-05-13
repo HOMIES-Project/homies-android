@@ -79,6 +79,11 @@
     <string name="confirm">Confirmar</string>
     <string name="deleteSucess">¡Usuario eliminado!</string>
     <string name="updateInfo">Datos Actualizados</string>
+    <string name="task_text_dialog">Debes de introducir al menos una tarea y un miembro</string>
+    <string name="btn_confirm_task">Crear Tarea</string>
+    <string name="btn_cancel_task">Cancelar</string>
+    <string name="description_task_et">Introduce la descripción de la tarea</string>
+    <string name="task_et">Introduce Tarea</string>
 
 
 </resources>
