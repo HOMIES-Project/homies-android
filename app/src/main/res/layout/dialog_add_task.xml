@@ -39,11 +39,10 @@
             android:layout_marginTop="20dp"
             android:spinnerMode="dropdown"
             android:background="@drawable/rounded_edittext"
-            android:drawableLeft="@drawable/ic_user"
+            android:drawableStart="@drawable/ic_user"
             android:drawablePadding="10dp"
             android:drawableTint="@color/fieldTextColor"
             android:fontFamily="@font/montserrat_regular"
-            android:hint="Selecciona miembro"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textTaskDialog" />
 

@@ -8,6 +8,7 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -39,6 +40,7 @@ public class ListsGroupFragment extends Fragment {
     EditText userTask, descriptionTask;
     Spinner listUserTask;
 
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -46,6 +48,10 @@ public class ListsGroupFragment extends Fragment {
         View info = inflater.inflate(R.layout.fragment_lists_group, container, false);
 
         groupInfo();
+
+
+
+
 
         btnAddTask = info.findViewById(R.id.btn_addTask);
 
@@ -62,6 +68,11 @@ public class ListsGroupFragment extends Fragment {
             btnCreateTask = bottomSheetView.findViewById(R.id.btnCreateTask);
             btnCancelTask = bottomSheetView.findViewById(R.id.btnCancelTask);
             listUserTask = bottomSheetView.findViewById(R.id.listUserTask);
+
+            String [] usersGroup = {"Selecciona miembro","Antonio", "Juan"};
+            ArrayAdapter <String> adapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_dropdown_item, usersGroup);
+            listUserTask.setAdapter(adapter);
+
             descriptionTask = bottomSheetView.findViewById(R.id.descriptionTask);
 
             btnCreateTask.setOnClickListener(view1 -> {
@@ -90,6 +101,9 @@ public class ListsGroupFragment extends Fragment {
 
 
     }
+
+
+
     public void groupInfo() {
         SharedPreferences preferences = getActivity().getSharedPreferences("MY_APP", Context.MODE_PRIVATE);
         String retrivedToken  = preferences.getString("TOKEN",null);
