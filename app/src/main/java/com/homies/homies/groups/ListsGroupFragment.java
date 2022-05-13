@@ -1,5 +1,6 @@
 package com.homies.homies.groups;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -8,7 +9,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -18,6 +21,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.homies.homies.R;
 import com.homies.homies.retrofit.config.NetworkConfig;
 import com.homies.homies.retrofit.model.GroupResponse;
@@ -26,10 +30,14 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static android.widget.Toast.makeText;
+
 
 public class ListsGroupFragment extends Fragment {
 
-    Button btnEditGroup;
+    Button btnEditGroup, btnAddTask, btnCreateTask, btnCancelTask;
+    EditText userTask, descriptionTask;
+    Spinner listUserTask;
 
     @Nullable
     @Override
@@ -39,7 +47,48 @@ public class ListsGroupFragment extends Fragment {
 
         groupInfo();
 
+        btnAddTask = info.findViewById(R.id.btn_addTask);
+
+        btnAddTask.setOnClickListener((View.OnClickListener) view -> {
+            BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(
+                    getActivity(), R.style.BottonSheetDialogTheme
+            );
+            View bottomSheetView = LayoutInflater.from(getContext())
+                    .inflate(
+                            R.layout.dialog_add_task,
+                            info.findViewById(R.id.addTask)
+                    );
+            userTask = bottomSheetView.findViewById(R.id.userTask);
+            btnCreateTask = bottomSheetView.findViewById(R.id.btnCreateTask);
+            btnCancelTask = bottomSheetView.findViewById(R.id.btnCancelTask);
+            listUserTask = bottomSheetView.findViewById(R.id.listUserTask);
+            descriptionTask = bottomSheetView.findViewById(R.id.descriptionTask);
+
+            btnCreateTask.setOnClickListener(view1 -> {
+                if (listUserTask.toString().trim().isEmpty()) {
+                    String message = getString(R.string.val_user);
+                    makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+                } else {
+
+
+                    bottomSheetDialog.dismiss();
+                }
+            });
+            btnCancelTask.setOnClickListener(view1 -> {
+
+                bottomSheetDialog.dismiss();
+            });
+
+            bottomSheetDialog.setContentView(bottomSheetView);
+            bottomSheetDialog.show();
+        });
+
+
+
+
         return info;
+
+
     }
     public void groupInfo() {
         SharedPreferences preferences = getActivity().getSharedPreferences("MY_APP", Context.MODE_PRIVATE);
