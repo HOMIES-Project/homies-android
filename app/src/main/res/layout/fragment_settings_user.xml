@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -12,18 +12,17 @@
         android:id="@+id/re"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        android:orientation="vertical"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0">
+        app:layout_constraintTop_toTopOf="parent">
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/imageView3"
             android:layout_width="177dp"
             android:layout_height="177dp"
-            android:layout_marginBottom="25dp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="24dp"
             android:src="@drawable/rounded_photo"
             app:civ_border_color="@color/secondaryColor"
             app:civ_border_width="2dp"
@@ -58,10 +57,11 @@
             app:endIconMode="clear_text"
             app:errorTextAppearance="@style/error_appearance"
             app:helperText="@string/helperRequired"
+            android:hint="@string/username"
             app:helperTextTextColor="@color/primaryLightColor"
             app:layout_constraintBottom_toTopOf="@+id/linear"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:startIconDrawable="@drawable/ic_user"
             app:startIconTint="@color/primaryColor">
@@ -76,7 +76,6 @@
                 android:layout_marginBottom="0dp"
                 android:background="@drawable/rounded_edittext"
                 android:fontFamily="@font/montserrat_regular"
-                android:hint="@string/username"
                 android:inputType="textEmailAddress"
                 android:maxLength="20"
                 android:padding="15dp"
@@ -92,7 +91,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
-            android:layout_marginBottom="8dp"
+            android:layout_marginBottom="12dp"
             android:padding="1dp"
             app:boxStrokeWidth="0dp"
             app:boxStrokeWidthFocused="0dp"
@@ -116,6 +115,7 @@
                 app:boxStrokeWidthFocused="0dp"
                 app:counterEnabled="true"
                 app:counterMaxLength="50"
+                android:hint="@string/your_first_name"
                 app:endIconMode="clear_text"
                 app:errorTextAppearance="@style/error_appearance"
                 app:layout_constraintEnd_toStartOf="@+id/ip_lastname">
@@ -130,7 +130,6 @@
                     android:layout_marginBottom="0dp"
                     android:background="@drawable/rounded_edittext"
                     android:fontFamily="@font/montserrat_regular"
-                    android:hint="@string/your_first_name"
                     android:inputType="textPersonName"
                     android:maxLength="50"
                     android:padding="15dp"
@@ -149,6 +148,7 @@
                 android:layout_marginBottom="0dp"
                 android:layout_weight="1"
                 android:padding="1dp"
+                android:hint="@string/your_last_name"
                 app:boxStrokeWidth="0dp"
                 app:boxStrokeWidthFocused="0dp"
                 app:counterEnabled="true"
@@ -169,7 +169,6 @@
                     android:layout_marginBottom="0dp"
                     android:background="@drawable/rounded_edittext"
                     android:fontFamily="@font/montserrat_regular"
-                    android:hint="@string/your_last_name"
                     android:inputType="textPersonName"
                     android:maxLength="50"
                     android:padding="15dp"
@@ -186,16 +185,17 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
-            android:layout_marginBottom="72dp"
+            android:layout_marginBottom="224dp"
             android:padding="1dp"
             app:boxStrokeWidth="0dp"
             app:boxStrokeWidthFocused="0dp"
             app:errorTextAppearance="@style/error_appearance"
             app:helperText="@string/helperRequired"
+            android:hint="@string/e_mail"
             app:helperTextTextColor="@color/primaryLightColor"
             app:layout_constraintBottom_toBottomOf="@+id/btn_save"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:startIconDrawable="@drawable/ic_email"
             app:startIconTint="@color/primaryColor">
@@ -210,7 +210,70 @@
                 android:layout_marginBottom="0dp"
                 android:background="@drawable/rounded_edittext"
                 android:fontFamily="@font/montserrat_regular"
-                android:hint="@string/e_mail"
+                android:inputType="textEmailAddress"
+                android:padding="15dp"
+                android:textColor="@color/fieldTextColor"
+                android:textSize="15sp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/ip_phone"
+            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="56dp"
+            android:padding="1dp"
+            app:boxStrokeWidth="0dp"
+            app:boxStrokeWidthFocused="0dp"
+            app:layout_constraintBottom_toBottomOf="@+id/btn_save"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:hint="@string/phone"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:startIconDrawable="@drawable/ic_phone"
+            app:startIconTint="@color/primaryColor">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_phone"
+                android:layout_width="match_parent"
+                android:layout_height="61dp"
+                android:background="@drawable/rounded_edittext"
+                android:fontFamily="@font/montserrat_regular"
+                android:inputType="textEmailAddress"
+                android:padding="15dp"
+                android:textColor="@color/fieldTextColor"
+                android:textSize="15sp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/ip_birthday"
+            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:padding="1dp"
+            app:boxStrokeWidth="0dp"
+            app:boxStrokeWidthFocused="0dp"
+            app:errorTextAppearance="@style/error_appearance"
+            app:helperText="@string/helperRequired"
+            app:helperTextTextColor="@color/primaryLightColor"
+            app:layout_constraintBottom_toTopOf="@+id/ip_phone"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:hint="@string/birthday"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:startIconDrawable="@drawable/ic_calendar"
+            app:startIconTint="@color/primaryColor">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_birthday"
+                android:layout_width="match_parent"
+                android:layout_height="61dp"
+                android:background="@drawable/rounded_edittext"
+                android:fontFamily="@font/montserrat_regular"
                 android:inputType="textEmailAddress"
                 android:padding="15dp"
                 android:textColor="@color/fieldTextColor"
@@ -224,7 +287,7 @@
             android:layout_centerInParent="true"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
-            android:layout_marginBottom="48dp"
+            android:layout_marginBottom="30dp"
             android:background="@drawable/btn_custom"
             android:fontFamily="@font/montserrat_regular"
             android:padding="1dp"
@@ -233,7 +296,7 @@
             android:textColor="@color/primaryTextColor"
             app:layout_constraintBottom_toTopOf="@+id/btn_delete"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.507"
+            app:layout_constraintHorizontal_bias="0.492"
             app:layout_constraintStart_toStartOf="parent" />
 
         <androidx.appcompat.widget.AppCompatButton
@@ -241,7 +304,6 @@
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:layout_marginBottom="80dp"
             android:background="@drawable/btn_red"
             android:fontFamily="@font/montserrat_regular"
             android:padding="1dp"
@@ -250,6 +312,7 @@
             android:textColor="@color/primaryTextColor"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.495"
             app:layout_constraintStart_toStartOf="parent" />
 
         <ProgressBar
@@ -270,4 +333,4 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

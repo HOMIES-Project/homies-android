@@ -210,10 +210,12 @@ public class InfoGroupFragment extends Fragment {
                     );
 
             btnCancelActionGroup = bottomSheetView.findViewById(R.id.btnCancelActionGroup);
-            btnConfirmDeleteGroup = bottomSheetView.findViewById(R.id.btnConfirmUser);
+            btnConfirmDeleteGroup = bottomSheetView.findViewById(R.id.btnConfirmDeleteGroup);
             btnConfirmDeleteGroup.setOnClickListener(view1 -> {
 
-                leaveGroup(leaveRequest());
+                deleteGroup();
+
+
                 bottomSheetDialog.dismiss();
 
             });
@@ -241,7 +243,7 @@ public class InfoGroupFragment extends Fragment {
             btnConfirmLeaveGroup = bottomSheetView.findViewById(R.id.btnConfirmLeaveGroup);
             btnConfirmLeaveGroup.setOnClickListener(view1 -> {
 
-                deleteGroup();
+                leaveGroup(leaveRequest());
                 bottomSheetDialog.dismiss();
 
             });
@@ -456,7 +458,7 @@ public class InfoGroupFragment extends Fragment {
         SharedPreferences preferences = getActivity().getSharedPreferences("MY_APP", Context.MODE_PRIVATE);
         String retrivedToken  = preferences.getString("TOKEN",null);
         int userId  = preferences.getInt("USER_ID",0);
-        Call<GroupResponse> userResponseCall = NetworkConfig.getService().leaveUserGroup("Bearer " + retrivedToken,userId,leaveGroup);
+        Call<GroupResponse> userResponseCall = NetworkConfig.getService().leaveUserGroup("Bearer " + retrivedToken,leaveGroup);
         userResponseCall.enqueue(new Callback<GroupResponse>() {
             @Override
             public void onResponse(Call<GroupResponse> call, Response<GroupResponse> response) {
@@ -485,7 +487,10 @@ public class InfoGroupFragment extends Fragment {
     public void deleteGroup() {
         SharedPreferences preferences = getActivity().getSharedPreferences("MY_APP", Context.MODE_PRIVATE);
         String retrivedToken  = preferences.getString("TOKEN",null);
-        Call<GroupResponse> deleteRequest = NetworkConfig.getService().deleteGroup("Bearer " + retrivedToken, userInf().getId());
+        int userId  = preferences.getInt("USER_ID",0);
+        String userGroup = preferences.getString("USER_NAME",null);
+        Integer idGroup  = preferences.getInt("GROUPID",0);
+        Call<GroupResponse> deleteRequest = NetworkConfig.getService().deleteGroup("Bearer " + retrivedToken, idGroup);
         deleteRequest.enqueue(new Callback<GroupResponse>() {
             @Override
             public void onResponse(Call<GroupResponse> call, Response<GroupResponse> response) {

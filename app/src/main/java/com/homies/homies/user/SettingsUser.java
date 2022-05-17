@@ -55,8 +55,8 @@ public class SettingsUser extends Fragment {
     ImageView imageView3;
     Button btn_delete, btnConfirm;
     Activity activity;
-    EditText et_user,et_name, et_lastname, et_email;
-    TextInputLayout ip_user, ip_name, ip_lastname, ip_email;
+    EditText et_user,et_name, et_lastname, et_email,et_phone,et_birthday;
+    TextInputLayout ip_user, ip_name, ip_lastname, ip_email,ip_phone,ip_birthday;
     Button upload, btn_save;
     ProgressBar progressBar;
     boolean condition = true;
@@ -75,6 +75,8 @@ public class SettingsUser extends Fragment {
         ip_name = settings.findViewById(R.id.ip_name);
         ip_lastname = settings.findViewById(R.id.ip_lastname);
         ip_email = settings.findViewById(R.id.ip_email);
+        ip_phone = settings.findViewById(R.id.ip_phone);
+        ip_birthday = settings.findViewById(R.id.ip_birthday);
 
         imageView3 = settings.findViewById(R.id.imageView3);
 
@@ -86,6 +88,8 @@ public class SettingsUser extends Fragment {
         et_name = settings.findViewById(R.id.et_name);
         et_lastname = settings.findViewById(R.id.et_lastname);
         et_email = settings.findViewById(R.id.et_email);
+        et_phone = settings.findViewById(R.id.et_phone);
+        et_birthday = settings.findViewById(R.id.et_birthday);
 
         progressBar = settings.findViewById(R.id.progressBar2);
 
@@ -203,6 +207,8 @@ public class SettingsUser extends Fragment {
                     String lastName = adslist.getUser().getLastName();
                     String email = adslist.getUser().getEmail();
                     String photoString = adslist.getPhoto();
+                    String phone = adslist.getPhone();
+                    String birthday = adslist.getBirthDate();
 
                     if(photoString != null){
                         byte[] decodedString = Base64.decode(photoString, Base64.DEFAULT);
@@ -214,6 +220,8 @@ public class SettingsUser extends Fragment {
                     et_name.setText(name);
                     et_lastname.setText(lastName);
                     et_email.setText(email);
+                    et_phone.setText(phone);
+                    et_birthday.setText(birthday);
 
                 } else {
                     String message = getString(R.string.error_login);
@@ -242,7 +250,8 @@ public class SettingsUser extends Fragment {
         userData.getUser().setLogin(et_user.getText().toString());
         userData.getUser().setEmail(et_email.getText().toString());
         userData.getUser().setLangKey("en");
-        userData.getUser().setPhone(null);
+        userData.getUser().setPhone(et_phone.getText().toString());
+        userData.getUser().setPhone(et_birthday.getText().toString());
 
         try {
             BitmapDrawable drawable = (BitmapDrawable) imageView3.getDrawable();
