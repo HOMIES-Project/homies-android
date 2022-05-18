@@ -68,7 +68,7 @@ public interface UserService {
     Call<TaskListResponse> createNewTask(@Header("Authorization") String authHeader, @Body CreateNewTask createNewTask);
 
     @POST("tasks/add-user")
-    Call<TaskListResponse> addUserTask(@Header("Authorization") String authHeader, @Body AddUserTask addUserTask);
+    Call<List<TaskListResponse>> addUserTask(@Header("Authorization") String authHeader, @Body AddUserTask addUserTask);
 
     @DELETE("task/delete-user")
     Call<TaskListResponse> deleteUserTask(@Header("Authorization") String authHeader, @Body DeleteUserTask deleteUserTask);

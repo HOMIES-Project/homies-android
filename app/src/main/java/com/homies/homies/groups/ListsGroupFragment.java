@@ -1,10 +1,8 @@
 package com.homies.homies.groups;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -28,9 +26,12 @@ import com.homies.homies.R;
 import com.homies.homies.retrofit.config.NetworkConfig;
 import com.homies.homies.retrofit.model.GroupResponse;
 import com.homies.homies.retrofit.model.UserData;
+import com.homies.homies.retrofit.model.group.AddUserGroupResponse;
 import com.homies.homies.retrofit.model.tasks.AddUserTask;
+import com.homies.homies.retrofit.model.tasks.CreateNewTask;
 import com.homies.homies.retrofit.model.tasks.TaskListResponse;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -45,6 +46,8 @@ public class ListsGroupFragment extends Fragment {
     Button btnEditGroup, btnAddTask, btnCreateTask, btnCancelTask;
     EditText userTask, descriptionTask;
     Spinner listUserTask;
+    ArrayList<String> userList;
+    ArrayList<UserData> userData;
 
 
     @Nullable
@@ -74,8 +77,12 @@ public class ListsGroupFragment extends Fragment {
             listUserTask = bottomSheetView.findViewById(R.id.listUserTask);
 
 
+            AddUserTask addUserTask = new AddUserTask();
+            groupUsers(addUserTask);
 
-
+            /*ArrayAdapter<String> adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, groupUsers(addUserTask));
+            listUserTask.setAdapter(adapter);*/
+            
 
             descriptionTask = bottomSheetView.findViewById(R.id.descriptionTask);
 
@@ -164,69 +171,66 @@ public class ListsGroupFragment extends Fragment {
 
     }
 
-    /*public void groupUsers() {
-        SharedPreferences preferences = getActivity().getSharedPreferences("MY_APP", Context.MODE_PRIVATE);
-        String retrivedToken = preferences.getString("TOKEN", null);
-        Integer idGroup = preferences.getInt("GROUPID", 0);
-        int userId = preferences.getInt("USER_ID", 0);
-        Call<GroupResponse> groupResponseCall = NetworkConfig.getService().groupInfo("Bearer " + retrivedToken, idGroup);
-        groupResponseCall.enqueue(new Callback<GroupResponse>() {
-            @Override
-            public void onResponse(Call<GroupResponse> call, Response<GroupResponse> response) {
-                if (response.isSuccessful()) {
-                    GroupResponse userList = response.body();
-
-                    List<UserData> users = userList.getUserdata();
-                    //ArrayAdapter <String> adapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_dropdown_item, users);
-                    //listUserTask.setAdapter(adapter);
-                } else {
-                    String message = getString(R.string.error_login);
-                    Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
-                }
-
-
-            }
-
-            @Override
-            public void onFailure(Call<GroupResponse> call, Throwable t) {
-                String message = t.getLocalizedMessage();
-                Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
-
-            }
-        });
-    }*/
+    //*****************in development*****************
     public void groupUsers(AddUserTask addUserTask) {
         SharedPreferences preferences = getActivity().getSharedPreferences("MY_APP", Context.MODE_PRIVATE);
         String retrivedToken = preferences.getString("TOKEN", null);
-        Integer idGroup = preferences.getInt("GROUPID", 0);
-        int userId = preferences.getInt("USER_ID", 0);
-        Call<TaskListResponse> taskListResponseCall = NetworkConfig.getService().addUserTask("Bearer " + retrivedToken, addUserTask);
+        /*Integer idGroup = preferences.getInt("GROUPID", 0);
+        int userId = preferences.getInt("USER_ID", 0);*/
+        ArrayList<List<UserData>> userName = new ArrayList<>();
+
+
+        Call<List<TaskListResponse>> call = NetworkConfig.getService().addUserTask("Bearer " + retrivedToken, addUserTask);
+        call.enqueue(new Callback<List<TaskListResponse>>() {
+            @Override
+            public void onResponse(Call<List<TaskListResponse>> call, Response<List<TaskListResponse>> response) {
+                for (TaskListResponse p : response.body()) {
+                    userName.add(p.getUserAssigneds());
+
+                }
+                ArrayAdapter<String> adapter = new ArrayAdapter (getContext(),android.R.layout.simple_spinner_item,  userName);
+                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                listUserTask.setAdapter(adapter);
+            }
+
+            @Override
+            public void onFailure(Call<List<TaskListResponse>> call, Throwable t) {
+                t.printStackTrace();
+                Toast.makeText(getContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    //*****************in development*****************
+    public void addTask(CreateNewTask createNewTask){
+        SharedPreferences preferences = getActivity().getSharedPreferences("MY_APP", Context.MODE_PRIVATE);
+        String retrivedToken = preferences.getString("TOKEN", null);
+
+        Call<TaskListResponse> taskListResponseCall = NetworkConfig.getService().createNewTask("Bearer " + retrivedToken, createNewTask);
+
         taskListResponseCall.enqueue(new Callback<TaskListResponse>() {
             @Override
             public void onResponse(Call<TaskListResponse> call, Response<TaskListResponse> response) {
                 if (response.isSuccessful()) {
-                    TaskListResponse taskListResponse = response.body();
+                    String message = "Tarea añadida";
+                    makeText(getContext(), message, Toast.LENGTH_SHORT).show();
 
-                    //String[] users = (String[]) groupResponse.getUserdata().toArray();
-                    //String[] users = (String[]) groupResponse.getUserAdmin().getGroups().toArray();
-                    String[] user = (String[]) taskListResponse.getUserData().getGroups().toArray();
-                    ArrayAdapter <String> adapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_dropdown_item, user);
-                    listUserTask.setAdapter(adapter);
+                   // <TaskListResponse> data = response.body();
+
+                   // RecyclerViewAdapterListUser adapterListUser = new RecyclerViewAdapterListUser(getContext(), data);
+                    //userList.setAdapter(adapterListUser);
                 } else {
                     String message = getString(R.string.error_login);
-                    Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+                    makeText(getContext(), message, Toast.LENGTH_SHORT).show();
                 }
-
-
             }
-
             @Override
             public void onFailure(Call<TaskListResponse> call, Throwable t) {
                 String message = t.getLocalizedMessage();
-                Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
-
+                makeText(getContext(), message, Toast.LENGTH_SHORT).show();
             }
         });
+
     }
 
 

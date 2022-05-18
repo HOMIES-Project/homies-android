@@ -4,6 +4,9 @@ import com.homies.homies.retrofit.model.TaskList;
 import com.homies.homies.retrofit.model.UserAdmin;
 import com.homies.homies.retrofit.model.UserData;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class TaskListResponse {
 
     private int id;
@@ -19,6 +22,7 @@ public class TaskListResponse {
     private UserData userData;
     private String userCreator;
     private UserAdmin userAdmin;
+    private List<UserData> userAssigneds;
 
     public int getId() {
         return id;
@@ -123,4 +127,13 @@ public class TaskListResponse {
     public void setUserAdmin(UserAdmin userAdmin) {
         this.userAdmin = userAdmin;
     }
+
+    public List<UserData> getUserAssigneds() {
+        return userAssigneds;
+    }
+
+    public void setUserAssigneds(List<UserData> userAssigneds) {
+        this.userAssigneds = userAssigneds;
+    }
 }
+
