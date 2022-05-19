@@ -59,7 +59,7 @@ public class InfoGroupFragment extends Fragment {
 
     RecyclerView userList;
     Button btnAddUser, btnCancelAction, btnConfirmUser, btnDeleteGroup, btnCancelActionGroup, btnConfirmDeleteGroup,
-            btnConfirmChangeAdmin,btnCancelChangeAdmin,btnLeaveGroup,btnConfirmLeaveGroup;
+            btnConfirmChangeAdmin,btnCancelChangeAdmin,btnLeaveGroup,btnConfirmLeaveGroup,act;
     EditText userInput;
     Activity activity;
     EditText et_GroupName, et_detail;
@@ -83,6 +83,7 @@ public class InfoGroupFragment extends Fragment {
         btnCancelActionGroup = editGroup.findViewById(R.id.btnCancelActionGroup);
         btnConfirmDeleteGroup = editGroup.findViewById(R.id.btnConfirmDeleteGroup);
         btnLeaveGroup = editGroup.findViewById(R.id.btnLeaveGroup);
+        act = editGroup.findViewById(R.id.act);
 
         activity = getActivity();
 
@@ -256,9 +257,17 @@ public class InfoGroupFragment extends Fragment {
             bottomSheetDialog.show();
         });
 
+        act.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                updateInfoGroup(createRequestGroup());
+            }
+        });
+
+        userInfo();
         groupInfo();
         groupPhoto();
-        //updateInfoGroup();
+
 
         return editGroup;
     }
@@ -444,21 +453,46 @@ public class InfoGroupFragment extends Fragment {
     public LeaveGroup leaveRequest() {
         LeaveGroup leaveGroup = new LeaveGroup();
         SharedPreferences preferences = getActivity().getSharedPreferences("MY_APP", Context.MODE_PRIVATE);
-
         Integer idGroup  = preferences.getInt("GROUPID",0);
-        String memberGroup = preferences.getString("MEMBERID",null);
-        leaveGroup.setLogin(memberGroup);
+        String username = preferences.getString("USER_NAME",null);
+        leaveGroup.setLogin(username);
         leaveGroup.setIdGroup(idGroup);
 
         return leaveGroup;
+    }
+
+    public void userInfo() {
+        SharedPreferences preferences = getActivity().getSharedPreferences("MY_APP", Context.MODE_PRIVATE);
+        String retrivedToken  = preferences.getString("TOKEN",null);
+        Call<UserData> userInfo = NetworkConfig.getService().userInfo("Bearer " + retrivedToken, userInf().getId());
+        userInfo.enqueue(new Callback<UserData>() {
+            @Override
+            public void onResponse(Call<UserData> call, Response<UserData> response) {
+                if (response.isSuccessful()) {
+                    preferences.edit().putString("USER_NAME",response.body().getUser().getLogin()).apply();
+
+                } else {
+                    String message = getString(R.string.error_login);
+                    Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<UserData> call, Throwable t) {
+                String message = t.getLocalizedMessage();
+                Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+
+            }
+        });
+
     }
 
     //method for leaving the group
     public void leaveGroup(LeaveGroup leaveGroup) {
         SharedPreferences preferences = getActivity().getSharedPreferences("MY_APP", Context.MODE_PRIVATE);
         String retrivedToken  = preferences.getString("TOKEN",null);
-        int userId  = preferences.getInt("USER_ID",0);
-        Call<GroupResponse> userResponseCall = NetworkConfig.getService().leaveUserGroup("Bearer " + retrivedToken,leaveGroup);
+        Call<GroupResponse> userResponseCall = NetworkConfig.getService().leaveUserGroup("Bearer " + retrivedToken,leaveRequest());
         userResponseCall.enqueue(new Callback<GroupResponse>() {
             @Override
             public void onResponse(Call<GroupResponse> call, Response<GroupResponse> response) {
@@ -568,9 +602,12 @@ public class InfoGroupFragment extends Fragment {
         return groupRequest;
     }
     //method to update the group
-    public void updateInfoGroup() {
+    public void updateInfoGroup(GroupRequest groupRequest) {
         SharedPreferences preferences = getActivity().getSharedPreferences("MY_APP", Context.MODE_PRIVATE);
+        Integer idGroup  = preferences.getInt("GROUPID",0);
+        int userId  = preferences.getInt("USER_ID",0);
         String retrivedToken  = preferences.getString("TOKEN",null);
+
         Call<GroupResponse> updateInfo = NetworkConfig.getService().updateInfoGroup("Bearer " + retrivedToken, userInf().getId(),createRequestGroup());
         updateInfo.enqueue(new Callback<GroupResponse>() {
             @Override
