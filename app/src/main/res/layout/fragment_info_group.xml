@@ -5,13 +5,23 @@
     android:layout_height="match_parent"
     tools:context=".groups.MenuActivity">
 
+    <Button
+        android:id="@+id/act"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="10dp"
+        android:gravity="center"
+        android:text="Actualizar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/ip_groupName"
         style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="32dp"
         android:layout_marginEnd="20dp"
         android:padding="1dp"
         app:boxStrokeWidth="0dp"
@@ -19,7 +29,7 @@
         app:errorTextAppearance="@style/error_appearance"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/act"
         app:startIconDrawable="@drawable/ic_group_name_home"
         app:startIconTint="@color/primaryColor">
 
