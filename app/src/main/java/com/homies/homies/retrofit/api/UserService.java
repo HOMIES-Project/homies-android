@@ -78,4 +78,31 @@ public interface UserService {
     Call<GroupResponse> updateInfoGroup(@Header("Authorization")String authHeader,@Path("id") int userId, @Body GroupRequest groupRequest);
 
 
+    //task funtions
+
+    @POST("tasks")
+    Call<TaskListResponse> createNewTask(@Header("Authorization") String authHeader, @Body CreateNewTask createNewTask);
+
+    @POST("tasks/add-user")
+    Call<List<TaskListResponse>> addUserTask(@Header("Authorization") String authHeader, @Body AddUserTask addUserTask);
+
+    @DELETE("task/delete-user")
+    Call<TaskListResponse> deleteUserTask(@Header("Authorization") String authHeader, @Body DeleteUserTask deleteUserTask);
+
+    @DELETE("/task/delete-task/{id}")
+    Call<Void> deleteTask(@Header("Authorization") String authHeader, @Path("id") int userId);
+
+    @GET("task-lists")
+    Call<List<TaskListResponse>> getAllTask(@Header("Authorization") String authHeader);
+
+    @GET("task-lists/{id}")
+    Call<TaskListResponse> getTask(@Header("Authorization") String authHeader);
+
+    @GET("task-lists-user/{id}/{login}")
+    Call<List<TaskListResponse>> getUserTasks(@Header("Authorization") String authHeader, @Path("id") int userId, @Path("login") String login);
+
+    @PUT("tasks/update-tasks")
+    Call<TaskListResponse> updateTasks(@Header("Authorization") String authHeader, @Body UpdateTask updateTask);
+
+
 }
