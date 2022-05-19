@@ -54,8 +54,6 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class InfoGroupFragment extends Fragment {
 
@@ -184,7 +182,7 @@ public class InfoGroupFragment extends Fragment {
             btnConfirmUser.setOnClickListener(view1 -> {
                 if (userInput.getText().toString().trim().isEmpty()) {
                     String message = getString(R.string.val_user);
-                    makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
                 } else {
 
                     addUserGroup(createRequest());
@@ -212,10 +210,12 @@ public class InfoGroupFragment extends Fragment {
                     );
 
             btnCancelActionGroup = bottomSheetView.findViewById(R.id.btnCancelActionGroup);
-            btnConfirmDeleteGroup = bottomSheetView.findViewById(R.id.btnConfirmUser);
+            btnConfirmDeleteGroup = bottomSheetView.findViewById(R.id.btnConfirmDeleteGroup);
             btnConfirmDeleteGroup.setOnClickListener(view1 -> {
 
-                leaveGroup(leaveRequest());
+                deleteGroup();
+
+
                 bottomSheetDialog.dismiss();
 
             });
@@ -243,7 +243,7 @@ public class InfoGroupFragment extends Fragment {
             btnConfirmLeaveGroup = bottomSheetView.findViewById(R.id.btnConfirmLeaveGroup);
             btnConfirmLeaveGroup.setOnClickListener(view1 -> {
 
-                deleteGroup();
+                leaveGroup(leaveRequest());
                 bottomSheetDialog.dismiss();
 
             });
@@ -311,7 +311,7 @@ public class InfoGroupFragment extends Fragment {
 
                 } else {
                     String message = getString(R.string.error_login);
-                    makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
                 }
 
             }
@@ -319,7 +319,7 @@ public class InfoGroupFragment extends Fragment {
             @Override
             public void onFailure(Call<GroupResponse> call, Throwable t) {
                 String message = t.getLocalizedMessage();
-                makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
 
             }
         });
@@ -428,14 +428,14 @@ public class InfoGroupFragment extends Fragment {
 
                 } else {
                     String message = getString(R.string.error_login);
-                    makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<GroupResponse> call, Throwable t) {
                 String message = t.getLocalizedMessage();
-                makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -458,7 +458,7 @@ public class InfoGroupFragment extends Fragment {
         SharedPreferences preferences = getActivity().getSharedPreferences("MY_APP", Context.MODE_PRIVATE);
         String retrivedToken  = preferences.getString("TOKEN",null);
         int userId  = preferences.getInt("USER_ID",0);
-        Call<GroupResponse> userResponseCall = NetworkConfig.getService().leaveUserGroup("Bearer " + retrivedToken,userId,leaveGroup);
+        Call<GroupResponse> userResponseCall = NetworkConfig.getService().leaveUserGroup("Bearer " + retrivedToken,leaveGroup);
         userResponseCall.enqueue(new Callback<GroupResponse>() {
             @Override
             public void onResponse(Call<GroupResponse> call, Response<GroupResponse> response) {
@@ -467,7 +467,7 @@ public class InfoGroupFragment extends Fragment {
                     Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
                     GroupFragment groupFragment = new GroupFragment();
                     FragmentTransaction fragmentTransaction = getParentFragmentManager().beginTransaction();
-                    fragmentTransaction.replace(R.id.fragment, groupFragment);
+                    fragmentTransaction.replace(R.id.fragmentGroup, groupFragment);
                     fragmentTransaction.commit();
 
                 } else {
@@ -487,7 +487,10 @@ public class InfoGroupFragment extends Fragment {
     public void deleteGroup() {
         SharedPreferences preferences = getActivity().getSharedPreferences("MY_APP", Context.MODE_PRIVATE);
         String retrivedToken  = preferences.getString("TOKEN",null);
-        Call<GroupResponse> deleteRequest = NetworkConfig.getService().deleteGroup("Bearer " + retrivedToken, userInf().getId());
+        int userId  = preferences.getInt("USER_ID",0);
+        String userGroup = preferences.getString("USER_NAME",null);
+        Integer idGroup  = preferences.getInt("GROUPID",0);
+        Call<GroupResponse> deleteRequest = NetworkConfig.getService().deleteGroup("Bearer " + retrivedToken, idGroup);
         deleteRequest.enqueue(new Callback<GroupResponse>() {
             @Override
             public void onResponse(Call<GroupResponse> call, Response<GroupResponse> response) {
