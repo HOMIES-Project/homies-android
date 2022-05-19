@@ -614,16 +614,13 @@ public class InfoGroupFragment extends Fragment {
             public void onResponse(Call<GroupResponse> call, Response<GroupResponse> response) {
                 if (response.isSuccessful()) {
 
-
                     String message = getString(R.string.updateInfo);
                     Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
-
 
                 } else {
                     String message = getString(R.string.error_login);
                     Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
                 }
-
             }
 
             @Override

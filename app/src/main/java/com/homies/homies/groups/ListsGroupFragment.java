@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -21,10 +22,14 @@ import androidx.fragment.app.FragmentTransaction;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.homies.homies.R;
 import com.homies.homies.retrofit.config.NetworkConfig;
+import com.homies.homies.retrofit.model.AddUser;
 import com.homies.homies.retrofit.model.GroupResponse;
+import com.homies.homies.retrofit.model.UserData;
 import com.homies.homies.retrofit.model.tasks.AddUserTask;
 import com.homies.homies.retrofit.model.tasks.CreateNewTask;
 import com.homies.homies.retrofit.model.tasks.TaskListResponse;
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -68,8 +73,9 @@ public class ListsGroupFragment extends Fragment {
             listUserTask = bottomSheetView.findViewById(R.id.listUserTask);
 
 
-            AddUserTask addUserTask = new AddUserTask();
-            groupUsers(addUserTask);
+
+            groupUsers(userListTask());
+            addTask(createNewTask());
 
             /*ArrayAdapter<String> adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, groupUsers(addUserTask));
             listUserTask.setAdapter(adapter);*/
@@ -170,30 +176,29 @@ public class ListsGroupFragment extends Fragment {
     public void groupUsers(AddUserTask addUserTask) {
         SharedPreferences preferences = getActivity().getSharedPreferences("MY_APP", Context.MODE_PRIVATE);
         String retrivedToken = preferences.getString("TOKEN", null);
-        /*Integer idGroup = preferences.getInt("GROUPID", 0);
-        int userId = preferences.getInt("USER_ID", 0);*/
-        //ArrayList<List<UserData>> userName = new ArrayList<>();
 
 
-        /*Call<List<TaskListResponse>> call = NetworkConfig.getService().addUserTask("Bearer " + retrivedToken, addUserTask);
-        call.enqueue(new Callback<List<TaskListResponse>>() {
+        Call<TaskListResponse> call = NetworkConfig.getService().addUserTask("Bearer " + retrivedToken, addUserTask);
+        call.enqueue(new Callback<TaskListResponse>() {
             @Override
-            public void onResponse(Call<List<TaskListResponse>> call, Response<List<TaskListResponse>> response) {
-                for (TaskListResponse p : response.body()) {
-                    userName.add(p.getUserAssigneds());
+            public void onResponse(Call<TaskListResponse> call, Response<TaskListResponse> response) {
+                userListTask();
 
-                }
-                ArrayAdapter<String> adapter = new ArrayAdapter (getContext(),android.R.layout.simple_spinner_item,  userName);
+
+                /*String userAssigned = userListTask().getLogin();
+                response.body().setUserAssigneds(userAssigned);
+
+                ArrayAdapter<String> adapter = new ArrayAdapter (getContext(),android.R.layout.simple_spinner_item, user);
                 adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                listUserTask.setAdapter(adapter);
+                listUserTask.setAdapter(adapter);*/
             }
 
             @Override
-            public void onFailure(Call<List<TaskListResponse>> call, Throwable t) {
+            public void onFailure(Call<TaskListResponse> call, Throwable t) {
                 t.printStackTrace();
                 Toast.makeText(getContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
             }
-        });*/
+        });
     }
 
     //*****************in development*****************
@@ -226,6 +231,39 @@ public class ListsGroupFragment extends Fragment {
             }
         });
 
+    }
+
+    public AddUserTask userListTask(){
+
+        AddUserTask addUserTask = new AddUserTask();
+        SharedPreferences preferences = getActivity().getSharedPreferences("MY_APP", Context.MODE_PRIVATE);
+
+        int idTask  = preferences.getInt("ID_TASK",0);
+        String login = preferences.getString("NAME_USER", null);
+        int idList = preferences.getInt("ID_LIST", 0);
+
+        addUserTask.setIdTask(idTask);
+        addUserTask.setLogin(login);
+        addUserTask.setIdList(idList);
+
+        return addUserTask;
+    }
+
+    public CreateNewTask createNewTask (){
+        CreateNewTask createNewTask = new CreateNewTask();
+        SharedPreferences preferences = getActivity().getSharedPreferences("MY_APP", Context.MODE_PRIVATE);
+
+        int user = preferences.getInt("USER_TASK", 0);
+        int idGroup = preferences.getInt("ID_GROUP_TASK", 0);
+        String taskName = preferences.getString("TASK_NAME", null);
+        String description = preferences.getString("TASK_DESCRIPTION", null);
+
+        createNewTask.setUser(user);
+        createNewTask.setIdGroup(idGroup);
+        createNewTask.setTaskName(taskName);
+        createNewTask.setDescription(description);
+
+        return createNewTask;
     }
 
 
