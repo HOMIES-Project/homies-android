@@ -3,14 +3,11 @@ package com.homies.homies.groups;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -25,14 +22,9 @@ import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.homies.homies.R;
 import com.homies.homies.retrofit.config.NetworkConfig;
 import com.homies.homies.retrofit.model.GroupResponse;
-import com.homies.homies.retrofit.model.UserData;
-import com.homies.homies.retrofit.model.group.AddUserGroupResponse;
 import com.homies.homies.retrofit.model.tasks.AddUserTask;
 import com.homies.homies.retrofit.model.tasks.CreateNewTask;
 import com.homies.homies.retrofit.model.tasks.TaskListResponse;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -43,9 +35,10 @@ import static android.widget.Toast.makeText;
 
 public class ListsGroupFragment extends Fragment {
 
-    Button btnEditGroup;
+    Button btnEditGroup, btnAddTask, btnCreateTask, btnCancelTask;
     Toolbar toolbar;
-
+    EditText userTask, descriptionTask;
+    Spinner listUserTask;
 
     @Nullable
     @Override
