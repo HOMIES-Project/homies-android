@@ -177,10 +177,10 @@ public class ListsGroupFragment extends Fragment {
         String retrivedToken = preferences.getString("TOKEN", null);
         /*Integer idGroup = preferences.getInt("GROUPID", 0);
         int userId = preferences.getInt("USER_ID", 0);*/
-        ArrayList<List<UserData>> userName = new ArrayList<>();
+        //ArrayList<List<UserData>> userName = new ArrayList<>();
 
 
-        Call<List<TaskListResponse>> call = NetworkConfig.getService().addUserTask("Bearer " + retrivedToken, addUserTask);
+        /*Call<List<TaskListResponse>> call = NetworkConfig.getService().addUserTask("Bearer " + retrivedToken, addUserTask);
         call.enqueue(new Callback<List<TaskListResponse>>() {
             @Override
             public void onResponse(Call<List<TaskListResponse>> call, Response<List<TaskListResponse>> response) {
@@ -198,7 +198,7 @@ public class ListsGroupFragment extends Fragment {
                 t.printStackTrace();
                 Toast.makeText(getContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
             }
-        });
+        });*/
     }
 
     //*****************in development*****************
