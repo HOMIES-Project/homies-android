@@ -65,11 +65,10 @@ public interface UserService {
     Call<GroupResponse> deleteUserGroup(@Header("Authorization") String authHeader,@Body DeleteUser deleteUser);
 
     @POST("groups/delete-user")
-    Call<GroupResponse> leaveUserGroup(@Header("Authorization") String authHeader,@Path("id") int userId, @Body LeaveGroup leaveGroup);
+    Call<GroupResponse> leaveUserGroup(@Header("Authorization") String authHeader, @Body LeaveGroup leaveGroup);
 
     @DELETE("groups/{id}")
     Call<GroupResponse> deleteGroup(@Header("Authorization")String authHeader,@Path("id") int userId);
-    //task funtions
 
     @POST("groups/change-admin")
     Call<GroupResponse> changeAdmin(@Header("Authorization")String authHeader,@Body ChangeAdmin changeAdmin);
