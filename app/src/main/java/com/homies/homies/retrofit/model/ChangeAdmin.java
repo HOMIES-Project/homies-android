@@ -1,6 +1,6 @@
-package com.homies.homies.retrofit.model.group;
+package com.homies.homies.retrofit.model;
 
-public class DeleteUserGroupRequest {
+public class ChangeAdmin {
 
     private int idAdminGroup;
     private String login;

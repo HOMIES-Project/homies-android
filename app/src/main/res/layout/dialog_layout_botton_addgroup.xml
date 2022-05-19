@@ -94,7 +94,7 @@
             android:layout_centerInParent="true"
             android:layout_marginTop="20dp"
             android:layout_marginBottom="20dp"
-            android:background="@drawable/btn_custom"
+            android:background="@drawable/btn_error"
             android:fontFamily="@font/montserrat_regular"
             android:padding="1dp"
             android:text="@string/Cancel"
