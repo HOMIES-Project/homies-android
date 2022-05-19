@@ -1,5 +1,8 @@
 package com.homies.homies.retrofit.model;
 
+import java.time.LocalDate;
+import java.util.Date;
+
 public class UserRequest {
 
     private String password;
@@ -11,6 +14,7 @@ public class UserRequest {
     private String token;
     private String key;
     private String langKey;
+    private String birthDate;
     private String photo;
     private String phone;
 
@@ -101,5 +105,13 @@ public class UserRequest {
 
     public void setPhoto(String photo) {
         this.photo = photo;
+    }
+
+    public String getBirthDate() {
+        return birthDate;
+    }
+
+    public void setBirthDate(String birthDate) {
+        this.birthDate = birthDate;
     }
 }

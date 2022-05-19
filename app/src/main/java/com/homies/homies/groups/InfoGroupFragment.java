@@ -467,7 +467,7 @@ public class InfoGroupFragment extends Fragment {
                     Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
                     GroupFragment groupFragment = new GroupFragment();
                     FragmentTransaction fragmentTransaction = getParentFragmentManager().beginTransaction();
-                    fragmentTransaction.replace(R.id.fragment, groupFragment);
+                    fragmentTransaction.replace(R.id.fragmentGroup, groupFragment);
                     fragmentTransaction.commit();
 
                 } else {

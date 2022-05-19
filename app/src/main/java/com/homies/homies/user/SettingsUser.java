@@ -43,6 +43,8 @@ import com.homies.homies.retrofit.model.UserResponse;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.util.Date;
+import java.util.regex.Pattern;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -251,7 +253,7 @@ public class SettingsUser extends Fragment {
         userData.getUser().setEmail(et_email.getText().toString());
         userData.getUser().setLangKey("en");
         userData.getUser().setPhone(et_phone.getText().toString());
-        userData.getUser().setPhone(et_birthday.getText().toString());
+        userData.getUser().setBirthDate(et_birthday.getText().toString());
 
         try {
             BitmapDrawable drawable = (BitmapDrawable) imageView3.getDrawable();
@@ -298,6 +300,39 @@ public class SettingsUser extends Fragment {
     }
     // Validations when interacting with form fields
     private void validateFields() {
+
+        //region validationPhone
+
+        et_phone.addTextChangedListener(new TextWatcher() {
+
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                String phoneInput = et_phone.getText().toString().trim();
+                if (phoneInput.isEmpty()) {
+                    ip_phone.setError(getString(R.string.fieldEmpty));
+                    condition = false;
+                }
+                if (phoneInput.length() < 8) {
+                    ip_phone.setError(getString(R.string.val_email));
+                    condition = false;
+                } else if (!Patterns.PHONE.matcher(phoneInput).matches()) {
+                    ip_phone.setError(getString(R.string.fieldEmail));
+                    condition = false;
+                } else {
+                    ip_phone.setErrorEnabled(false);
+                }
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+        //endregion
+
         //region validationUser
 
         et_user.addTextChangedListener(new TextWatcher() {
