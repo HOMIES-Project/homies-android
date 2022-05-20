@@ -1,5 +1,6 @@
 package com.homies.homies.groups;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -18,17 +19,22 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.homies.homies.R;
+import com.homies.homies.ToDoAdapter;
 import com.homies.homies.retrofit.config.NetworkConfig;
 import com.homies.homies.retrofit.model.AddUser;
 import com.homies.homies.retrofit.model.GroupResponse;
+import com.homies.homies.retrofit.model.ToDoModel;
 import com.homies.homies.retrofit.model.UserData;
 import com.homies.homies.retrofit.model.tasks.AddUserTask;
 import com.homies.homies.retrofit.model.tasks.CreateNewTask;
 import com.homies.homies.retrofit.model.tasks.TaskListResponse;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -44,6 +50,14 @@ public class ListsGroupFragment extends Fragment {
     Toolbar toolbar;
     EditText userTask, descriptionTask;
     Spinner listUserTask;
+    private RecyclerView toDoList;
+    private ToDoAdapter tasksAdapter;
+    Activity activity;
+    Context context;
+
+    ArrayList<ToDoModel> taskList;
+    ToDoAdapter.ClickedTask clickedTask;
+
 
     @Nullable
     @Override
@@ -52,9 +66,18 @@ public class ListsGroupFragment extends Fragment {
         View info = inflater.inflate(R.layout.fragment_lists_group, container, false);
         toolbar = ((MenuActivity)getActivity()).findViewById(R.id.toolbar);
 
+        activity = getActivity();
+        context = getActivity().getApplicationContext();
         groupInfo();
 
+        taskList = new ArrayList<>();
+        toDoList.setLayoutManager(new LinearLayoutManager(getContext()));
+        tasksAdapter = new ToDoAdapter(clickedTask);
+        toDoList.setAdapter(tasksAdapter);
 
+        //events within the listview
+        tasksAdapter.setOnItemClickListener(new ToDoAdapter.ClickedTask() {
+        });
 
         btnAddTask = info.findViewById(R.id.btn_addTask);
 
