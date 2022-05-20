@@ -7,14 +7,17 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.SpinnerAdapter;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -49,13 +52,12 @@ public class ListsGroupFragment extends Fragment {
     Button btnEditGroup, btnAddTask, btnCreateTask, btnCancelTask;
     Toolbar toolbar;
     EditText userTask, descriptionTask;
-    Spinner listUserTask;
-    private RecyclerView toDoList;
+    Spinner spinner;
+    RecyclerView toDoList;
     private ToDoAdapter tasksAdapter;
     Activity activity;
     Context context;
 
-    ArrayList<ToDoModel> taskList;
     ToDoAdapter.ClickedTask clickedTask;
 
 
@@ -65,19 +67,19 @@ public class ListsGroupFragment extends Fragment {
 
         View info = inflater.inflate(R.layout.fragment_lists_group, container, false);
         toolbar = ((MenuActivity)getActivity()).findViewById(R.id.toolbar);
-
+        toDoList = info.findViewById(R.id.toDoList);
         activity = getActivity();
         context = getActivity().getApplicationContext();
         groupInfo();
 
-        taskList = new ArrayList<>();
-        toDoList.setLayoutManager(new LinearLayoutManager(getContext()));
-        tasksAdapter = new ToDoAdapter(clickedTask);
-        toDoList.setAdapter(tasksAdapter);
+
+        
+        //toDoList.setLayoutManager(new LinearLayoutManager(getActivity()));
+        //tasksAdapter = new ToDoAdapter(clickedTask);
+        //toDoList.setAdapter(tasksAdapter);
 
         //events within the listview
-        tasksAdapter.setOnItemClickListener(new ToDoAdapter.ClickedTask() {
-        });
+        //tasksAdapter.setOnItemClickListener(new ToDoAdapter.ClickedTask() {});
 
         btnAddTask = info.findViewById(R.id.btn_addTask);
 
@@ -93,21 +95,19 @@ public class ListsGroupFragment extends Fragment {
             userTask = bottomSheetView.findViewById(R.id.userTask);
             btnCreateTask = bottomSheetView.findViewById(R.id.btnCreateTask);
             btnCancelTask = bottomSheetView.findViewById(R.id.btnCancelTask);
-            listUserTask = bottomSheetView.findViewById(R.id.listUserTask);
+            spinner = bottomSheetView.findViewById(R.id.spinnerTask);
 
-
+            spinnerList();
 
             groupUsers(userListTask());
             addTask(createNewTask());
 
-            /*ArrayAdapter<String> adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, groupUsers(addUserTask));
-            listUserTask.setAdapter(adapter);*/
-            
 
             descriptionTask = bottomSheetView.findViewById(R.id.descriptionTask);
 
             btnCreateTask.setOnClickListener(view1 -> {
-                if (listUserTask.toString().trim().isEmpty()) {
+
+                if (spinner.toString().trim().isEmpty()) {
                     String message = getString(R.string.val_user);
                     makeText(getContext(), message, Toast.LENGTH_SHORT).show();
                 } else {
@@ -131,6 +131,8 @@ public class ListsGroupFragment extends Fragment {
 
 
 
+
+
     public void groupInfo() {
         SharedPreferences preferences = getActivity().getSharedPreferences("MY_APP", Context.MODE_PRIVATE);
         String retrivedToken  = preferences.getString("TOKEN",null);
@@ -142,7 +144,6 @@ public class ListsGroupFragment extends Fragment {
             public void onResponse(Call<GroupResponse> call, Response<GroupResponse> response) {
                 if (response.isSuccessful()) {
                     GroupResponse adslist= response.body();
-
                     String user = adslist.getGroupName();
 
 
@@ -153,9 +154,6 @@ public class ListsGroupFragment extends Fragment {
                     } catch (Exception e) {
                     e.printStackTrace();
                 }
-
-
-
 
                     toolbar.setOnClickListener(new View.OnClickListener() {
 
@@ -192,7 +190,49 @@ public class ListsGroupFragment extends Fragment {
 
             }
         });
+    }
 
+    public void spinnerList() {
+
+        SharedPreferences preferences = getActivity().getSharedPreferences("MY_APP", Context.MODE_PRIVATE);
+        String retrivedToken  = preferences.getString("TOKEN",null);
+        int userId  = preferences.getInt("USER_ID",0);
+        Integer idGroup  = preferences.getInt("GROUPID",0);
+        Call<GroupResponse> groupResponseCall = NetworkConfig.getService().groupInfo("Bearer " + retrivedToken,idGroup);
+        groupResponseCall.enqueue(new Callback<GroupResponse>() {
+            @Override
+            public void onResponse(Call<GroupResponse> groupResponseCall, Response<GroupResponse> response) {
+
+                if (response.isSuccessful()) {
+
+                    List<UserData> myGroupList = response.body().getUserdata();
+                    String[] oneGroup = new String[myGroupList.size()];
+                    Integer[] numberGroup = new Integer[myGroupList.size()];
+
+                    for (int i = 0; i < myGroupList.size(); i++) {
+                        oneGroup[i] = myGroupList.get(i).getUser().getLogin();
+                        numberGroup[i] = myGroupList.get(i).getId();
+                    }
+
+                    ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),
+                            android.R.layout.simple_spinner_item, oneGroup);
+                    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    spinner.setAdapter(adapter);
+
+                }else {
+                    String message = getString(R.string.error_login);
+                    Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<GroupResponse> groupResponseCall, Throwable t) {
+                String message = t.getLocalizedMessage();
+                Toast.makeText(activity, message, Toast.LENGTH_SHORT).show();
+
+            }
+
+        });
     }
 
     //*****************in development*****************
@@ -288,6 +328,8 @@ public class ListsGroupFragment extends Fragment {
 
         return createNewTask;
     }
+
+
 
 
 }

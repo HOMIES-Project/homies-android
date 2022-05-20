@@ -32,7 +32,8 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <Spinner
-            android:id="@+id/listUserTask"
+            android:id="@+id/spinnerTask"
+            android:hint="Select Name"
             android:layout_width="250dp"
             android:layout_height="61dp"
             android:layout_marginStart="20dp"
@@ -64,7 +65,7 @@
             android:padding="15dp"
             android:textSize="15sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/listUserTask" />
+            app:layout_constraintTop_toBottomOf="@+id/spinnerTask" />
 
 
         <EditText

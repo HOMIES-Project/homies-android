@@ -69,6 +69,7 @@ public class ToDoAdapter extends RecyclerView.Adapter<ToDoAdapter.ViewHolder> {
 
     @Override
     public int getItemCount() {
+        //Aqui hay que poner el modal correcto
         return taskList.getUserAssigneds().size();
     }
 
