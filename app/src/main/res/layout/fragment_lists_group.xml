@@ -46,8 +46,8 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/Btn_expenses" />
 
-        <ListView
-            android:id="@+id/taskList"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/toDoList"
             android:layout_width="357dp"
             android:layout_height="411dp"
             android:layout_marginStart="20dp"
@@ -56,7 +56,9 @@
             android:background="@drawable/border_list"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/Btn_shoppingList" />
+            app:layout_constraintTop_toBottomOf="@+id/Btn_shoppingList"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            android:nestedScrollingEnabled="true"/>
 
 
         <Button
