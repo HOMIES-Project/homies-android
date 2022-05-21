@@ -2,28 +2,18 @@ package com.homies.homies;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.homies.homies.groups.InfoGroupFragment;
 import com.homies.homies.groups.ListsGroupFragment;
-import com.homies.homies.groups.MenuActivity;
-import com.homies.homies.retrofit.model.GroupResponse;
-import com.homies.homies.retrofit.model.ToDoModel;
-import com.homies.homies.retrofit.model.UserData;
 import com.homies.homies.retrofit.model.tasks.TaskListResponse;
-import com.homies.homies.retrofit.model.tasks.UserTasksListModel;
-
-import java.util.List;
 
 public class ToDoAdapter extends RecyclerView.Adapter<ToDoAdapter.ViewHolder> {
 
@@ -37,7 +27,8 @@ public class ToDoAdapter extends RecyclerView.Adapter<ToDoAdapter.ViewHolder> {
     public ToDoAdapter( ClickedTask clickedTask) {
         this.clickedTask = clickedTask;
     }
-    public void setData(GroupResponse groups) {
+
+    public void setData(TaskListResponse taskList) {
         this.taskList = taskList;
         notifyDataSetChanged();
     }
@@ -46,8 +37,7 @@ public class ToDoAdapter extends RecyclerView.Adapter<ToDoAdapter.ViewHolder> {
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         context = parent.getContext();
-        View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.task_item, parent, false);
+        View itemView = LayoutInflater.from(context).inflate(R.layout.task_item, null, false);
         return new ViewHolder(itemView);
     }
 
@@ -60,7 +50,8 @@ public class ToDoAdapter extends RecyclerView.Adapter<ToDoAdapter.ViewHolder> {
     }
 
     public interface ClickedTask{
-
+        void ClickedTaskUser(TaskListResponse taskListResponse);
+        void Clicked(TaskListResponse taskListResponse);
     }
 
     public void setOnItemClickListener(ClickedTask listener) {

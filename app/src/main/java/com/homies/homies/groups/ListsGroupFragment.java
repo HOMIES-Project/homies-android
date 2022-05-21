@@ -74,9 +74,9 @@ public class ListsGroupFragment extends Fragment {
 
 
         
-        //toDoList.setLayoutManager(new LinearLayoutManager(getActivity()));
-        //tasksAdapter = new ToDoAdapter(clickedTask);
-        //toDoList.setAdapter(tasksAdapter);
+        toDoList.setLayoutManager(new LinearLayoutManager(getActivity()));
+        tasksAdapter = new ToDoAdapter(clickedTask);
+        toDoList.setAdapter(tasksAdapter);
 
         //events within the listview
         //tasksAdapter.setOnItemClickListener(new ToDoAdapter.ClickedTask() {});
@@ -99,7 +99,7 @@ public class ListsGroupFragment extends Fragment {
 
             spinnerList();
 
-            groupUsers(userListTask());
+            //groupUsers(userListTask());
             addTask(createNewTask());
 
 
@@ -245,7 +245,7 @@ public class ListsGroupFragment extends Fragment {
         call.enqueue(new Callback<TaskListResponse>() {
             @Override
             public void onResponse(Call<TaskListResponse> call, Response<TaskListResponse> response) {
-                userListTask();
+                //userListTask();
 
 
                 /*String userAssigned = userListTask().getLogin();
