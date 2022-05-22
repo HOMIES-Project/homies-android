@@ -13,49 +13,50 @@
         tools:context=".LayoutActivity">
 
 
-
         <EditText
             android:id="@+id/et_password"
             android:layout_width="match_parent"
             android:layout_height="61dp"
-            android:layout_marginStart="0dp"
-            android:layout_marginTop="0dp"
-            android:layout_marginEnd="0dp"
-            android:layout_marginBottom="0dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginBottom="16dp"
             android:background="@drawable/rounded_edittext"
+            android:drawableStart="@drawable/ic_lock_password"
+            android:drawablePadding="5sp"
+            android:drawableTint="@color/primaryColor"
             android:fontFamily="@font/montserrat_regular"
             android:hint="@string/oldpassword"
             android:inputType="textPassword"
             android:padding="15dp"
+            android:textColor="@color/fieldTextColor"
+            android:textSize="15sp"
             app:layout_constraintBottom_toTopOf="@+id/et_newpassword"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:startIconDrawable="@drawable/ic_lock_password"
-            android:textColor="@color/fieldTextColor"
-            android:textSize="15sp" />
+            app:layout_constraintTop_toTopOf="parent" />
 
 
         <EditText
             android:id="@+id/et_newpassword"
             android:layout_width="match_parent"
             android:layout_height="61dp"
-            android:layout_marginStart="0dp"
-            android:layout_marginTop="0dp"
-            android:layout_marginEnd="0dp"
-            android:layout_marginBottom="0dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
             android:background="@drawable/rounded_edittext"
             android:fontFamily="@font/montserrat_regular"
             android:hint="@string/newpassword"
             android:inputType="textPassword"
             android:padding="15dp"
+            android:textColor="@color/fieldTextColor"
+            android:textSize="15sp"
             app:layout_constraintBottom_toTopOf="@+id/btnAdd"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:startIconDrawable="@drawable/ic_lock_password"
-            android:textColor="@color/fieldTextColor"
-            android:textSize="15sp" />
+            android:drawableStart="@drawable/ic_lock_password"
+            android:drawablePadding="5sp"
+            android:drawableTint="@color/primaryColor"/>
 
 
     <Button
@@ -67,28 +68,27 @@
         android:background="@drawable/btn_custom"
         android:fontFamily="@font/montserrat_regular"
         android:padding="1dp"
-        android:text="@string/addButton"
+        android:text="@string/changePass"
         android:textAllCaps="false"
         android:textColor="@color/primaryTextColor"
         app:layout_constraintEnd_toStartOf="@+id/btnCancel"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/et_newpassword" />
 
-    <Button
-        android:id="@+id/btnCancel"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:layout_marginTop="120dp"
-        android:background="@drawable/btn_error"
-        android:fontFamily="@font/montserrat_regular"
-        android:padding="1dp"
-        android:text="@string/Cancel"
-        android:textAllCaps="false"
-        android:textColor="@color/primaryTextColor"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/btnAdd"
-        app:layout_constraintTop_toTopOf="@+id/et_newpassword" />
+        <Button
+            android:id="@+id/btnCancel"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:background="@drawable/btn_error"
+            android:fontFamily="@font/montserrat_regular"
+            android:padding="1dp"
+            android:text="@string/Cancel"
+            android:textAllCaps="false"
+            android:textColor="@color/primaryTextColor"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/btnAdd"
+            tools:layout_editor_absoluteY="182dp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
