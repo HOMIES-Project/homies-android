@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -7,32 +7,14 @@
     android:background="@drawable/botton_sheet_background"
     android:id="@+id/changePass">
 
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/ip_password"
-        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="1dp"
-        android:padding="1dp"
-        app:boxStrokeWidth="0dp"
-        app:boxStrokeWidthFocused="0dp"
-        app:endIconMode="password_toggle"
-        app:errorTextAppearance="@style/error_appearance"
-        app:helperText="@string/helperRequired"
-        app:helperTextTextColor="@color/primaryLightColor"
-        app:layout_constraintBottom_toTopOf="@+id/ip_newpassword"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:startIconDrawable="@drawable/ic_lock_password"
-        app:startIconTint="@color/primaryColor">
+        tools:context=".LayoutActivity">
 
 
-        <com.google.android.material.textfield.TextInputEditText
+
+        <EditText
             android:id="@+id/et_password"
             android:layout_width="match_parent"
             android:layout_height="61dp"
@@ -45,34 +27,16 @@
             android:hint="@string/oldpassword"
             android:inputType="textPassword"
             android:padding="15dp"
+            app:layout_constraintBottom_toTopOf="@+id/et_newpassword"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:startIconDrawable="@drawable/ic_lock_password"
             android:textColor="@color/fieldTextColor"
             android:textSize="15sp" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/ip_newpassword"
-        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="36dp"
-        android:padding="1dp"
-        app:boxStrokeWidth="0dp"
-        app:boxStrokeWidthFocused="0dp"
-        app:endIconMode="password_toggle"
-        app:errorTextAppearance="@style/error_appearance"
-        app:helperText="@string/helperRequired"
-        app:helperTextTextColor="@color/primaryLightColor"
-        app:layout_constraintBottom_toTopOf="@+id/btnAdd"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:startIconDrawable="@drawable/ic_lock_password"
-        app:startIconTint="@color/primaryColor">
 
 
-        <com.google.android.material.textfield.TextInputEditText
+        <EditText
             android:id="@+id/et_newpassword"
             android:layout_width="match_parent"
             android:layout_height="61dp"
@@ -85,9 +49,13 @@
             android:hint="@string/newpassword"
             android:inputType="textPassword"
             android:padding="15dp"
+            app:layout_constraintBottom_toTopOf="@+id/btnAdd"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:startIconDrawable="@drawable/ic_lock_password"
             android:textColor="@color/fieldTextColor"
             android:textSize="15sp" />
-    </com.google.android.material.textfield.TextInputLayout>
 
 
     <Button
@@ -104,7 +72,7 @@
         android:textColor="@color/primaryTextColor"
         app:layout_constraintEnd_toStartOf="@+id/btnCancel"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ip_newpassword" />
+        app:layout_constraintTop_toBottomOf="@+id/et_newpassword" />
 
     <Button
         android:id="@+id/btnCancel"
@@ -120,6 +88,7 @@
         android:textColor="@color/primaryTextColor"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/btnAdd"
-        app:layout_constraintTop_toTopOf="@+id/ip_newpassword" />
+        app:layout_constraintTop_toTopOf="@+id/et_newpassword" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

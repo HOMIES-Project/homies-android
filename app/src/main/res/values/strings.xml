@@ -89,6 +89,7 @@
     <string name="oldpassword">Contraseña actual</string>
     <string name="newpassword">Contraseña nueva</string>
     <string name="changePass">Cambiar Contraseña</string>
+    <string name="changeSucess">¡Contraseña cambiada!</string>
 
 
 

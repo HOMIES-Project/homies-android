@@ -17,6 +17,8 @@ import android.os.Bundle;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.provider.MediaStore;
 import android.text.Editable;
@@ -34,9 +36,12 @@ import android.widget.Toast;
 
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.textfield.TextInputLayout;
+import com.homies.homies.groups.ListsGroupFragment;
 import com.homies.homies.groups.MenuActivity;
 import com.homies.homies.R;
 import com.homies.homies.retrofit.config.NetworkConfig;
+import com.homies.homies.retrofit.model.ChangePass;
+import com.homies.homies.retrofit.model.LeaveGroup;
 import com.homies.homies.retrofit.model.UserData;
 import com.homies.homies.retrofit.model.UserRequest;
 import com.homies.homies.retrofit.model.UserResponse;
@@ -55,10 +60,10 @@ public class SettingsUser extends Fragment {
 
 
     ImageView imageView3;
-    Button btn_delete, btnConfirm;
+    Button btn_delete, btnConfirm,btn_change,btnAdd,btnCancel;
     Activity activity;
-    EditText et_user,et_name, et_lastname, et_email,et_phone,et_birthday;
-    TextInputLayout ip_user, ip_name, ip_lastname, ip_email,ip_phone,ip_birthday;
+    EditText et_user,et_name, et_lastname, et_email,et_phone,et_birthday,et_password,et_newpassword;
+    TextInputLayout ip_user, ip_name, ip_lastname, ip_email,ip_phone,ip_birthday,ip_password,ip_newpassword;
     Button upload, btn_save;
     ProgressBar progressBar;
     boolean condition = true;
@@ -83,6 +88,7 @@ public class SettingsUser extends Fragment {
         imageView3 = settings.findViewById(R.id.imageView3);
 
         btn_delete = settings.findViewById(R.id.btn_delete);
+        btn_change = settings.findViewById(R.id.btn_change);
         btn_save = settings.findViewById(R.id.btn_save);
         upload = settings.findViewById(R.id.upload);
         activity = getActivity();
@@ -147,6 +153,38 @@ public class SettingsUser extends Fragment {
 
                     bottomSheetDialog.dismiss();
 
+            });
+
+            bottomSheetDialog.setContentView(bottomSheetView);
+            bottomSheetDialog.show();
+        });
+
+        btn_change.setOnClickListener((View.OnClickListener) view -> {
+            BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(
+                    getActivity(), R.style.BottonSheetDialogTheme
+            );
+            View bottomSheetView = LayoutInflater.from(activity.getApplicationContext())
+                    .inflate(
+                            R.layout.dialog_change_pass,
+                            settings.findViewById(R.id.changePass)
+                    );
+
+
+            et_password = bottomSheetView.findViewById(R.id.et_password);
+            et_newpassword = bottomSheetView.findViewById(R.id.et_newpassword);
+            btnAdd = bottomSheetView.findViewById(R.id.btnAdd);
+            btnCancel = bottomSheetView.findViewById(R.id.btnCancel);
+            btnAdd.setOnClickListener(view1 -> {
+
+                changePass(changeRequest());
+
+
+                bottomSheetDialog.dismiss();
+
+            });
+            btnCancel.setOnClickListener(view1 -> {
+
+                bottomSheetDialog.dismiss();
             });
 
             bottomSheetDialog.setContentView(bottomSheetView);
@@ -412,6 +450,54 @@ public class SettingsUser extends Fragment {
         }
     }
     //endregion
+
+
+    public ChangePass changeRequest() {
+        ChangePass changePass = new ChangePass();
+        SharedPreferences preferences = getActivity().getSharedPreferences("MY_APP", Context.MODE_PRIVATE);
+        changePass.setCurrentPassword(et_password.getText().toString());
+        changePass.setNewPassword(et_newpassword.getText().toString());
+
+        return changePass;
+    }
+
+    //Method to change pass
+    public void changePass(ChangePass changePass) {
+        SharedPreferences preferences = getActivity().getSharedPreferences("MY_APP", Context.MODE_PRIVATE);
+        String retrivedToken  = preferences.getString("TOKEN",null);
+        int userId  = preferences.getInt("USER_ID",0);
+        Call<Void> deleteRequest = NetworkConfig.getService().changePassword("Bearer " + retrivedToken,changeRequest());
+        deleteRequest.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if (response.isSuccessful()) {
+                    String message = getString(R.string.changeSucess);
+                    Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+
+
+                    FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                    FragmentTransaction transaction = fragmentManager.beginTransaction();
+                    transaction.setReorderingAllowed(true);
+
+                    transaction.replace(R.id.fragmentGroup, SettingsUser.class, null);
+                    transaction.addToBackStack(null);
+                    transaction.commit();
+
+                } else {
+                    String message = getString(R.string.error_login);
+                    Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                String message = t.getLocalizedMessage();
+                Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {

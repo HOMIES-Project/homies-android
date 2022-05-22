@@ -2,6 +2,7 @@ package com.homies.homies.retrofit.api;
 
 import com.homies.homies.retrofit.model.AddUser;
 import com.homies.homies.retrofit.model.ChangeAdmin;
+import com.homies.homies.retrofit.model.ChangePass;
 import com.homies.homies.retrofit.model.DeleteUser;
 import com.homies.homies.retrofit.model.GroupRequest;
 import com.homies.homies.retrofit.model.GroupResponse;
@@ -30,7 +31,7 @@ public interface UserService {
     Call<Void> saveUser(@Body UserRequest userRequest);
 
     @POST("account/change-password")
-    Call<UserResponse> changePassword(@Body UserRequest userRequest);
+    Call<Void> changePassword(@Header("Authorization")String authHeader,@Body ChangePass changePass);
 
     @POST("account/reset-password/init")
     Call<Void> resetPassword(@Body String email);
