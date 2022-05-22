@@ -471,17 +471,27 @@ public class SettingsUser extends Fragment {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
                 if (response.isSuccessful()) {
-                    String message = getString(R.string.changeSucess);
-                    Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+
+                    if (et_newpassword.length() < 8) {
+                        ip_password.setError(getString(R.string.val_passMin));
+                        condition = false;
+                        String message = getString(R.string.val_passMin);
+                        Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+
+                    }else {
+                        String message = getString(R.string.changeSucess);
+                        Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
 
 
-                    FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-                    FragmentTransaction transaction = fragmentManager.beginTransaction();
-                    transaction.setReorderingAllowed(true);
+                        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                        FragmentTransaction transaction = fragmentManager.beginTransaction();
+                        transaction.setReorderingAllowed(true);
 
-                    transaction.replace(R.id.fragmentGroup, SettingsUser.class, null);
-                    transaction.addToBackStack(null);
-                    transaction.commit();
+                        transaction.replace(R.id.fragmentGroup, SettingsUser.class, null);
+                        transaction.addToBackStack(null);
+                        transaction.commit();
+                    }
+
 
                 } else {
                     String message = getString(R.string.error_login);
