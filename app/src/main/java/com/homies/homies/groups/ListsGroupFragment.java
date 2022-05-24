@@ -21,6 +21,7 @@ import androidx.fragment.app.FragmentTransaction;
 import com.homies.homies.R;
 import com.homies.homies.retrofit.config.NetworkConfig;
 import com.homies.homies.retrofit.model.GroupResponse;
+import com.homies.homies.user.LoginFragment;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -29,7 +30,7 @@ import retrofit2.Response;
 
 public class ListsGroupFragment extends Fragment {
 
-    Button btnEditGroup;
+    Button btnEditGroup,btn_expenses;
     Toolbar toolbar;
 
     @Nullable
@@ -38,6 +39,19 @@ public class ListsGroupFragment extends Fragment {
 
         View info = inflater.inflate(R.layout.fragment_lists_group, container, false);
         toolbar = ((MenuActivity)getActivity()).findViewById(R.id.toolbar);
+        btn_expenses = info.findViewById(R.id.btn_expenses);
+
+        btn_expenses.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ListExpensesFragment listExpensesFragment = new ListExpensesFragment();
+                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.fragmentGroup, listExpensesFragment);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
+            }
+        });
 
         groupInfo();
 
