@@ -4,6 +4,8 @@
     <string name="username">Usuario</string>
     <string name="password">Contraseña</string>
     <string name="e_mail">Email</string>
+    <string name="phone">Telefono</string>
+    <string name="birthday">F.Nacimiento</string>
     <string name="register">Registrarse</string>
     <string name="re_type_password">Repetir Contraseña</string>
     <string name="your_first_name">Nombre</string>
@@ -84,6 +86,11 @@
     <string name="confirm">Confirmar</string>
     <string name="deleteSucess">¡Usuario eliminado!</string>
     <string name="updateInfo">Datos Actualizados</string>
+    <string name="oldpassword">Contraseña actual</string>
+    <string name="newpassword">Contraseña nueva</string>
+    <string name="changePass">Cambiar Contraseña</string>
+    <string name="changeSucess">¡Contraseña cambiada!</string>
+
 
 
 </resources>
