@@ -7,6 +7,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -19,6 +20,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.homies.homies.R;
+import com.homies.homies.SplashActivity;
 import com.homies.homies.retrofit.config.NetworkConfig;
 import com.homies.homies.retrofit.model.UserData;
 import com.homies.homies.user.SettingsUser;
@@ -33,7 +35,7 @@ public class MenuActivity extends AppCompatActivity {
     Toolbar toolbar;
     private Bitmap bitmap;
     private Menu menu;
-    ImageView img1;
+    ImageView img1,img2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,13 +43,22 @@ public class MenuActivity extends AppCompatActivity {
         setContentView(R.layout.activity_group);
         toolbar = findViewById(R.id.toolbar);
         img1 = toolbar.findViewById(R.id.img1);
+        img2 = toolbar.findViewById(R.id.img2);
         setSupportActionBar(toolbar);
         userInfo();
-        img1.setOnClickListener(new View.OnClickListener() {
+        img2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Settings();
             }
+
+        });
+        img1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                logoutUser();
+            }
+
         });
     }
 
@@ -58,6 +69,12 @@ public class MenuActivity extends AppCompatActivity {
         fragmentTransaction.replace(R.id.fragmentGroup, settingsUser);
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
+    }
+
+    public void logoutUser() {
+        Intent intent = new Intent ( MenuActivity.this, SplashActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
     }
 
     public void getSupportActionBar(Toolbar toolbar) {
