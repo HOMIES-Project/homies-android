@@ -31,7 +31,7 @@ import com.homies.homies.ToDoAdapter;
 import com.homies.homies.retrofit.config.NetworkConfig;
 import com.homies.homies.retrofit.model.AddUser;
 import com.homies.homies.retrofit.model.GroupResponse;
-<<<<<<< HEAD
+
 import com.homies.homies.retrofit.model.ToDoModel;
 import com.homies.homies.retrofit.model.UserData;
 import com.homies.homies.retrofit.model.tasks.AddUserTask;
@@ -40,9 +40,8 @@ import com.homies.homies.retrofit.model.tasks.TaskListResponse;
 
 import java.util.ArrayList;
 import java.util.List;
-=======
+
 import com.homies.homies.user.LoginFragment;
->>>>>>> develop
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -53,11 +52,9 @@ import static android.widget.Toast.makeText;
 
 public class ListsGroupFragment extends Fragment {
 
-<<<<<<< HEAD
-    Button btnEditGroup, btnAddTask, btnCreateTask, btnCancelTask;
-=======
-    Button btnEditGroup,btn_expenses;
->>>>>>> develop
+
+    Button btnEditGroup, btnAddTask, btnCreateTask, btnCancelTask, btn_expenses;
+
     Toolbar toolbar;
     EditText userTask, descriptionTask;
     Spinner spinner;
@@ -75,11 +72,10 @@ public class ListsGroupFragment extends Fragment {
 
         View info = inflater.inflate(R.layout.fragment_lists_group, container, false);
         toolbar = ((MenuActivity)getActivity()).findViewById(R.id.toolbar);
-<<<<<<< HEAD
+
         toDoList = info.findViewById(R.id.toDoList);
         activity = getActivity();
         context = getActivity().getApplicationContext();
-=======
         btn_expenses = info.findViewById(R.id.btn_expenses);
 
         btn_expenses.setOnClickListener(new View.OnClickListener() {
@@ -94,7 +90,6 @@ public class ListsGroupFragment extends Fragment {
             }
         });
 
->>>>>>> develop
         groupInfo();
 
 
