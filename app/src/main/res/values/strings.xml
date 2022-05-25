@@ -90,11 +90,20 @@
     <string name="newpassword">Contraseña nueva</string>
     <string name="changePass">Cambiar Contraseña</string>
     <string name="changeSucess">¡Contraseña cambiada!</string>
+<<<<<<< HEAD
     <string name="btn_cancel_task">cancelar</string>
     <string name="btn_confirm_task">confirmar</string>
     <string name="description_task_et">descripción</string>
     <string name="task_et">tarea</string>
     <string name="task_text_dialog">Debes de introducir al menos una tarea y un usuario</string>
+=======
+
+    <!-- List Expenses -->
+    <string name="balance">Saldo</string>
+    <string name="expenses">Gastos</string>
+    <string name="noexpenses">No hay ningun gasto aun</string>
+
+>>>>>>> develop
 
 
 </resources>
