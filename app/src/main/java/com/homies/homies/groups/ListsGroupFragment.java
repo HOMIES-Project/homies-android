@@ -32,6 +32,7 @@ import com.homies.homies.retrofit.config.NetworkConfig;
 import com.homies.homies.retrofit.model.AddUser;
 import com.homies.homies.retrofit.model.GroupResponse;
 
+import com.homies.homies.retrofit.model.TaskList;
 import com.homies.homies.retrofit.model.ToDoModel;
 import com.homies.homies.retrofit.model.UserData;
 import com.homies.homies.retrofit.model.tasks.AddUserTask;
@@ -284,7 +285,7 @@ public class ListsGroupFragment extends Fragment {
         });
     }
 
-    //*****************in development*****************
+    //*****************in development***************** FALTA AÑADIR TAREA
     public void addTask(CreateNewTask createNewTask){
         SharedPreferences preferences = getActivity().getSharedPreferences("MY_APP", Context.MODE_PRIVATE);
         String retrivedToken = preferences.getString("TOKEN", null);
@@ -298,10 +299,15 @@ public class ListsGroupFragment extends Fragment {
                     String message = "Tarea añadida";
                     makeText(getContext(), message, Toast.LENGTH_SHORT).show();
 
-                   // <TaskListResponse> data = response.body();
 
-                   // RecyclerViewAdapterListUser adapterListUser = new RecyclerViewAdapterListUser(getContext(), data);
-                    //userList.setAdapter(adapterListUser);
+                   //<TaskListResponse> data = response.body();
+
+                   //RecyclerViewAdapterListUser adapterListUser = new RecyclerViewAdapterListUser(getContext(), data);
+                   //userList.setAdapter(adapterListUser);
+
+
+
+
                 } else {
                     String message = getString(R.string.error_login);
                     makeText(getContext(), message, Toast.LENGTH_SHORT).show();
@@ -332,7 +338,7 @@ public class ListsGroupFragment extends Fragment {
         return addUserTask;
     }
 
-    public CreateNewTask createNewTask (){
+    public CreateNewTask createNewTask(){
         CreateNewTask createNewTask = new CreateNewTask();
         SharedPreferences preferences = getActivity().getSharedPreferences("MY_APP", Context.MODE_PRIVATE);
 
