@@ -95,6 +95,13 @@
     <string name="balance">Saldo</string>
     <string name="expenses">Gastos</string>
     <string name="noexpenses">No hay ningun gasto aun</string>
+    <string name="dialogExpenses">Escriba su gasto y a quién va dirigido</string>
+    <string name="descriptionExpenses">Descripción del Gasto</string>
+    <string name="selectMember">Elige un miembro</string>
+    <string name="forWhom">Para quien</string>
+    <string name="expenditure">Introduzca el gasto</string>
+    <string name="createExpenses">Crear Gasto</string>
+    <string name="expenseSucess">Gasto Creado</string>
 
 
 
