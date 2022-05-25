@@ -6,7 +6,7 @@
     android:layout_height="match_parent">
 
     <Button
-        android:id="@+id/Btn_expenses"
+        android:id="@+id/btn_expenses"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
@@ -36,7 +36,7 @@
         android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Btn_expenses"
+        app:layout_constraintTop_toBottomOf="@+id/btn_expenses"
         android:drawableLeft="@drawable/ic_shop"/>
 
     <ListView

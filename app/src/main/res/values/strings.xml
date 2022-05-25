@@ -91,6 +91,11 @@
     <string name="changePass">Cambiar Contraseña</string>
     <string name="changeSucess">¡Contraseña cambiada!</string>
 
+    <!-- List Expenses -->
+    <string name="balance">Saldo</string>
+    <string name="expenses">Gastos</string>
+    <string name="noexpenses">No hay ningun gasto aun</string>
+
 
 
 </resources>
