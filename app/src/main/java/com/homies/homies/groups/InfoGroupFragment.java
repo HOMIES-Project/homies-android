@@ -23,6 +23,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.DividerItemDecoration;
@@ -69,6 +70,7 @@ public class InfoGroupFragment extends Fragment {
     UserAdapter adaptador;
     Context context;
     UserAdapter.ClickedItem clickedItem;
+    Toolbar toolbar;
 
 
 
@@ -78,6 +80,7 @@ public class InfoGroupFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View editGroup = inflater.inflate(R.layout.fragment_info_group, container, false);
 
+        toolbar = ((MenuActivity)getActivity()).findViewById(R.id.toolbar);
         userList = editGroup.findViewById(R.id.userList);
         btnAddUser = editGroup.findViewById(R.id.btnAddUser);
         btnCancelActionGroup = editGroup.findViewById(R.id.btnCancelActionGroup);
@@ -261,6 +264,7 @@ public class InfoGroupFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 updateInfoGroup(createRequestGroup());
+
             }
         });
 
@@ -607,12 +611,24 @@ public class InfoGroupFragment extends Fragment {
         Integer idGroup  = preferences.getInt("GROUPID",0);
         int userId  = preferences.getInt("USER_ID",0);
         String retrivedToken  = preferences.getString("TOKEN",null);
-
-        Call<GroupResponse> updateInfo = NetworkConfig.getService().updateInfoGroup("Bearer " + retrivedToken, userInf().getId(),createRequestGroup());
+        int idGroup = preferences.getInt("GROUPID",0);
+        Call<GroupResponse> updateInfo = NetworkConfig.getService().updateInfoGroup("Bearer " + retrivedToken, idGroup,createRequestGroup());
         updateInfo.enqueue(new Callback<GroupResponse>() {
             @Override
             public void onResponse(Call<GroupResponse> call, Response<GroupResponse> response) {
                 if (response.isSuccessful()) {
+                    GroupResponse adslist= response.body();
+
+                    String title = adslist.getGroupName();
+
+                    try{
+
+                        ((MenuActivity)getActivity()).getSupportActionBar().setTitle(title);
+                        ((MenuActivity)getActivity()).getSupportActionBar(toolbar);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    groupInfo();
 
                     String message = getString(R.string.updateInfo);
                     Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
