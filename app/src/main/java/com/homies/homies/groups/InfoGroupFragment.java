@@ -608,7 +608,7 @@ public class InfoGroupFragment extends Fragment {
     //method to update the group
     public void updateInfoGroup(GroupRequest groupRequest) {
         SharedPreferences preferences = getActivity().getSharedPreferences("MY_APP", Context.MODE_PRIVATE);
-        Integer idGroup  = preferences.getInt("GROUPID",0);
+        //int idGroup  = preferences.getInt("GROUPID",0);
         int userId  = preferences.getInt("USER_ID",0);
         String retrivedToken  = preferences.getString("TOKEN",null);
         int idGroup = preferences.getInt("GROUPID",0);
