@@ -74,9 +74,9 @@ public class ListsGroupFragment extends Fragment {
 
 
         
-        toDoList.setLayoutManager(new LinearLayoutManager(getActivity()));
-        tasksAdapter = new ToDoAdapter(clickedTask);
-        toDoList.setAdapter(tasksAdapter);
+        //toDoList.setLayoutManager(new LinearLayoutManager(getActivity()));
+        //tasksAdapter = new ToDoAdapter(clickedTask);
+        //toDoList.setAdapter(tasksAdapter);
 
         //events within the listview
         //tasksAdapter.setOnItemClickListener(new ToDoAdapter.ClickedTask() {});
