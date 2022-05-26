@@ -17,6 +17,8 @@ import android.os.Bundle;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.provider.MediaStore;
 import android.text.Editable;
@@ -34,15 +36,20 @@ import android.widget.Toast;
 
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.textfield.TextInputLayout;
+import com.homies.homies.groups.ListsGroupFragment;
 import com.homies.homies.groups.MenuActivity;
 import com.homies.homies.R;
 import com.homies.homies.retrofit.config.NetworkConfig;
+import com.homies.homies.retrofit.model.ChangePass;
+import com.homies.homies.retrofit.model.LeaveGroup;
 import com.homies.homies.retrofit.model.UserData;
 import com.homies.homies.retrofit.model.UserRequest;
 import com.homies.homies.retrofit.model.UserResponse;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.util.Date;
+import java.util.regex.Pattern;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -53,10 +60,10 @@ public class SettingsUser extends Fragment {
 
 
     ImageView imageView3;
-    Button btn_delete, btnConfirm;
+    Button btn_delete, btnConfirm,btn_change,btnAdd,btnCancel;
     Activity activity;
-    EditText et_user,et_name, et_lastname, et_email;
-    TextInputLayout ip_user, ip_name, ip_lastname, ip_email;
+    EditText et_user,et_name, et_lastname, et_email,et_phone,et_birthday,et_password,et_newpassword;
+    TextInputLayout ip_user, ip_name, ip_lastname, ip_email,ip_phone,ip_birthday,ip_password,ip_newpassword;
     Button upload, btn_save;
     ProgressBar progressBar;
     boolean condition = true;
@@ -75,10 +82,13 @@ public class SettingsUser extends Fragment {
         ip_name = settings.findViewById(R.id.ip_name);
         ip_lastname = settings.findViewById(R.id.ip_lastname);
         ip_email = settings.findViewById(R.id.ip_email);
+        ip_phone = settings.findViewById(R.id.ip_phone);
+        ip_birthday = settings.findViewById(R.id.ip_birthday);
 
         imageView3 = settings.findViewById(R.id.imageView3);
 
         btn_delete = settings.findViewById(R.id.btn_delete);
+        btn_change = settings.findViewById(R.id.btn_change);
         btn_save = settings.findViewById(R.id.btn_save);
         upload = settings.findViewById(R.id.upload);
         activity = getActivity();
@@ -86,6 +96,8 @@ public class SettingsUser extends Fragment {
         et_name = settings.findViewById(R.id.et_name);
         et_lastname = settings.findViewById(R.id.et_lastname);
         et_email = settings.findViewById(R.id.et_email);
+        et_phone = settings.findViewById(R.id.et_phone);
+        et_birthday = settings.findViewById(R.id.et_birthday);
 
         progressBar = settings.findViewById(R.id.progressBar2);
 
@@ -141,6 +153,38 @@ public class SettingsUser extends Fragment {
 
                     bottomSheetDialog.dismiss();
 
+            });
+
+            bottomSheetDialog.setContentView(bottomSheetView);
+            bottomSheetDialog.show();
+        });
+
+        btn_change.setOnClickListener((View.OnClickListener) view -> {
+            BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(
+                    getActivity(), R.style.BottonSheetDialogTheme
+            );
+            View bottomSheetView = LayoutInflater.from(activity.getApplicationContext())
+                    .inflate(
+                            R.layout.dialog_change_pass,
+                            settings.findViewById(R.id.changePass)
+                    );
+
+
+            et_password = bottomSheetView.findViewById(R.id.et_password);
+            et_newpassword = bottomSheetView.findViewById(R.id.et_newpassword);
+            btnAdd = bottomSheetView.findViewById(R.id.btnAdd);
+            btnCancel = bottomSheetView.findViewById(R.id.btnCancel);
+            btnAdd.setOnClickListener(view1 -> {
+
+                changePass(changeRequest());
+
+
+                bottomSheetDialog.dismiss();
+
+            });
+            btnCancel.setOnClickListener(view1 -> {
+
+                bottomSheetDialog.dismiss();
             });
 
             bottomSheetDialog.setContentView(bottomSheetView);
@@ -203,6 +247,8 @@ public class SettingsUser extends Fragment {
                     String lastName = adslist.getUser().getLastName();
                     String email = adslist.getUser().getEmail();
                     String photoString = adslist.getPhoto();
+                    String phone = adslist.getPhone();
+                    String birthday = adslist.getBirthDate();
 
                     if(photoString != null){
                         byte[] decodedString = Base64.decode(photoString, Base64.DEFAULT);
@@ -214,6 +260,8 @@ public class SettingsUser extends Fragment {
                     et_name.setText(name);
                     et_lastname.setText(lastName);
                     et_email.setText(email);
+                    et_phone.setText(phone);
+                    et_birthday.setText(birthday);
 
                 } else {
                     String message = getString(R.string.error_login);
@@ -242,7 +290,8 @@ public class SettingsUser extends Fragment {
         userData.getUser().setLogin(et_user.getText().toString());
         userData.getUser().setEmail(et_email.getText().toString());
         userData.getUser().setLangKey("en");
-        userData.getUser().setPhone(null);
+        userData.getUser().setPhone(et_phone.getText().toString());
+        userData.getUser().setBirthDate(et_birthday.getText().toString());
 
         try {
             BitmapDrawable drawable = (BitmapDrawable) imageView3.getDrawable();
@@ -289,6 +338,39 @@ public class SettingsUser extends Fragment {
     }
     // Validations when interacting with form fields
     private void validateFields() {
+
+        //region validationPhone
+
+        et_phone.addTextChangedListener(new TextWatcher() {
+
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                String phoneInput = et_phone.getText().toString().trim();
+                if (phoneInput.isEmpty()) {
+                    ip_phone.setError(getString(R.string.fieldEmpty));
+                    condition = false;
+                }
+                if (phoneInput.length() < 8) {
+                    ip_phone.setError(getString(R.string.val_email));
+                    condition = false;
+                } else if (!Patterns.PHONE.matcher(phoneInput).matches()) {
+                    ip_phone.setError(getString(R.string.fieldEmail));
+                    condition = false;
+                } else {
+                    ip_phone.setErrorEnabled(false);
+                }
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+        //endregion
+
         //region validationUser
 
         et_user.addTextChangedListener(new TextWatcher() {
@@ -368,6 +450,64 @@ public class SettingsUser extends Fragment {
         }
     }
     //endregion
+
+
+    public ChangePass changeRequest() {
+        ChangePass changePass = new ChangePass();
+        SharedPreferences preferences = getActivity().getSharedPreferences("MY_APP", Context.MODE_PRIVATE);
+        changePass.setCurrentPassword(et_password.getText().toString());
+        changePass.setNewPassword(et_newpassword.getText().toString());
+
+        return changePass;
+    }
+
+    //Method to change pass
+    public void changePass(ChangePass changePass) {
+        SharedPreferences preferences = getActivity().getSharedPreferences("MY_APP", Context.MODE_PRIVATE);
+        String retrivedToken  = preferences.getString("TOKEN",null);
+        int userId  = preferences.getInt("USER_ID",0);
+        Call<Void> deleteRequest = NetworkConfig.getService().changePassword("Bearer " + retrivedToken,changeRequest());
+        deleteRequest.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if (response.isSuccessful()) {
+
+                    if (et_newpassword.length() < 8) {
+                        ip_password.setError(getString(R.string.val_passMin));
+                        condition = false;
+                        String message = getString(R.string.val_passMin);
+                        Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+
+                    }else {
+                        String message = getString(R.string.changeSucess);
+                        Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+
+
+                        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                        FragmentTransaction transaction = fragmentManager.beginTransaction();
+                        transaction.setReorderingAllowed(true);
+
+                        transaction.replace(R.id.fragmentGroup, SettingsUser.class, null);
+                        transaction.addToBackStack(null);
+                        transaction.commit();
+                    }
+
+
+                } else {
+                    String message = getString(R.string.error_login);
+                    Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                String message = t.getLocalizedMessage();
+                Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {

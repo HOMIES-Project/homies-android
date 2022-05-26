@@ -4,6 +4,8 @@
     <string name="username">Usuario</string>
     <string name="password">Contraseña</string>
     <string name="e_mail">Email</string>
+    <string name="phone">Telefono</string>
+    <string name="birthday">F.Nacimiento</string>
     <string name="register">Registrarse</string>
     <string name="re_type_password">Repetir Contraseña</string>
     <string name="your_first_name">Nombre</string>
@@ -70,6 +72,11 @@
     <string name="Cancel">Cancelar</string>
     <string name="val_name">Es necesario asiganr al grupo un nombre</string>
     <string name="groupSucess">¡Grupo creado!</string>
+    <string name="deleteGroupSucess">¡Grupo eliminado!</string>
+    <string name="changeAdmin">Hacer Admin. del grupo</string>
+
+    <string name="change_admin">¿Está seguro de que quiere cambiar de administrador?</string>
+
 
     <!-- Settings User -->
     <string name="saveChanges">Guardar Cambios</string>
@@ -79,7 +86,40 @@
     <string name="confirm">Confirmar</string>
     <string name="deleteSucess">¡Usuario eliminado!</string>
     <string name="updateInfo">Datos Actualizados</string>
+    <string name="oldpassword">Contraseña actual</string>
+    <string name="newpassword">Contraseña nueva</string>
+    <string name="changePass">Cambiar Contraseña</string>
+    <string name="changeSucess">¡Contraseña cambiada!</string>
+
+
+    <!-- Shopping List -->
     <string name="delete_all_products">¿Estás seguro de que quieres eliminar todos los articulos comprados?</string>
+    <string name="por_comprar">Por comprar</string>
+    <string name="comprado">Comprado</string>
+    <string name="borrar_todo">Borrar todo</string>
+
+    <!-- Task List -->
+    <string name="btn_cancel_task">cancelar</string>
+    <string name="btn_confirm_task">confirmar</string>
+    <string name="description_task_et">descripción</string>
+    <string name="task_et">tarea</string>
+    <string name="task_text_dialog">Debes de introducir al menos una tarea y un usuario</string>
+=======
+
+    <!-- List Expenses -->
+    <string name="balance">Saldo</string>
+    <string name="expenses">Gastos</string>
+    <string name="noexpenses">No hay ningun gasto aun</string>
+    <string name="dialogExpenses">Escriba su gasto y a quién va dirigido</string>
+    <string name="descriptionExpenses">Descripción del Gasto</string>
+    <string name="selectMember">Elige un miembro</string>
+    <string name="forWhom">Para quien</string>
+    <string name="expenditure">Introduzca el gasto</string>
+    <string name="createExpenses">Crear Gasto</string>
+    <string name="expenseSucess">Gasto Creado</string>
+
+
+    >>>>>>> develop
 
 
 </resources>

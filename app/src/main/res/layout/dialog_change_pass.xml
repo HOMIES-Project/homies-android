@@ -1,99 +1,88 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/botton_sheet_background"
-    android:id="@+id/bottonAddContainer">
+    android:id="@+id/changePass">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         tools:context=".LayoutActivity">
 
-        <TextView
-            android:id="@+id/ingressGroup"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="25dp"
-            android:layout_marginEnd="20dp"
-            android:padding="15dp"
+
+        <EditText
+            android:id="@+id/et_password"
+            android:layout_width="match_parent"
+            android:layout_height="61dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/rounded_edittext"
+            android:drawableStart="@drawable/ic_lock_password"
+            android:drawablePadding="5sp"
+            android:drawableTint="@color/primaryColor"
             android:fontFamily="@font/montserrat_regular"
-            android:text="@string/ingressGroup"
-            android:textSize="17sp"
+            android:hint="@string/oldpassword"
+            android:inputType="textPassword"
+            android:padding="15dp"
+            android:textColor="@color/fieldTextColor"
+            android:textSize="15sp"
+            app:layout_constraintBottom_toTopOf="@+id/et_newpassword"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <EditText
-            android:id="@+id/inputGroup"
-            android:layout_width="match_parent"
-            android:layout_height="61dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="25dp"
-            android:layout_marginEnd="20dp"
-            android:background="@drawable/rounded_edittext"
-            android:fontFamily="@font/montserrat_regular"
-            android:hint="@string/nameGroup"
-            android:inputType="textEmailAddress"
-            android:maxLength="50"
-            android:padding="15dp"
-            android:textSize="15sp"
-            android:drawableTint="@color/primaryColor"
-            android:drawableStart="@drawable/ic_people"
-            android:drawablePadding="10dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/ingressGroup" />
 
         <EditText
-            android:id="@+id/inputDescription"
+            android:id="@+id/et_newpassword"
             android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="25dp"
-            android:layout_marginEnd="20dp"
+            android:layout_height="61dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
             android:background="@drawable/rounded_edittext"
             android:fontFamily="@font/montserrat_regular"
-            android:hint="@string/descriptionGroup"
-            android:inputType="textEmailAddress"
-            android:maxLength="50"
+            android:hint="@string/newpassword"
+            android:inputType="textPassword"
             android:padding="15dp"
+            android:textColor="@color/fieldTextColor"
             android:textSize="15sp"
-            android:drawableTint="@color/primaryColor"
-            android:drawableStart="@drawable/ic_mode_edit"
-            android:drawablePadding="10dp"
+            app:layout_constraintBottom_toTopOf="@+id/btnAdd"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/inputGroup" />
+            android:drawableStart="@drawable/ic_lock_password"
+            android:drawablePadding="5sp"
+            android:drawableTint="@color/primaryColor"/>
+
 
         <Button
             android:id="@+id/btnAdd"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="20dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="56dp"
             android:background="@drawable/btn_custom"
             android:fontFamily="@font/montserrat_regular"
             android:padding="1dp"
-            android:text="@string/addButton"
+            android:text="@string/changePass"
             android:textAllCaps="false"
             android:textColor="@color/primaryTextColor"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/btnCancel"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/inputDescription"/>
-
+            app:layout_constraintTop_toBottomOf="@+id/et_newpassword" />
 
         <Button
             android:id="@+id/btnCancel"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="20dp"
+            android:layout_marginTop="36dp"
+            android:layout_marginBottom="16dp"
             android:background="@drawable/btn_error"
             android:fontFamily="@font/montserrat_regular"
             android:padding="1dp"
@@ -101,9 +90,9 @@
             android:textAllCaps="false"
             android:textColor="@color/primaryTextColor"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/btnAdd"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/inputDescription"/>
+            app:layout_constraintStart_toEndOf="@+id/btnAdd"
+            app:layout_constraintTop_toBottomOf="@+id/et_newpassword" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
