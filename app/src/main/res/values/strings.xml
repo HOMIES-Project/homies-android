@@ -104,7 +104,7 @@
     <string name="description_task_et">descripción</string>
     <string name="task_et">tarea</string>
     <string name="task_text_dialog">Debes de introducir al menos una tarea y un usuario</string>
-=======
+    =======
 
     <!-- List Expenses -->
     <string name="balance">Saldo</string>

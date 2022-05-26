@@ -7,7 +7,7 @@
 
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/haveTo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/por_comprar"
@@ -15,13 +15,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ListView
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/porcomprar"
         android:layout_width="match_parent"
         android:layout_height="300dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toBottomOf="@+id/haveTo" />
 
     <TextView
         android:id="@+id/comprado"
@@ -32,7 +32,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/porcomprar" />
 
-    <ListView
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/yacomprado"
         android:layout_width="match_parent"
         android:layout_height="300dp"
@@ -41,6 +41,7 @@
         app:layout_constraintTop_toBottomOf="@+id/comprado" />
 
     <Button
+        android:id="@+id/deleteShop"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
