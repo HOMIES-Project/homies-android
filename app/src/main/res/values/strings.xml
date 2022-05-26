@@ -90,6 +90,7 @@
     <string name="newpassword">Contraseña nueva</string>
     <string name="changePass">Cambiar Contraseña</string>
     <string name="changeSucess">¡Contraseña cambiada!</string>
+    <string name="delete_all_products">¿Estás seguro de que quieres eliminar todos los articulos comprados?</string>
 
     <!-- List Expenses -->
     <string name="balance">Saldo</string>
