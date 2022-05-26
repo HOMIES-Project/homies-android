@@ -608,6 +608,8 @@ public class InfoGroupFragment extends Fragment {
     //method to update the group
     public void updateInfoGroup(GroupRequest groupRequest) {
         SharedPreferences preferences = getActivity().getSharedPreferences("MY_APP", Context.MODE_PRIVATE);
+        //int idGroup  = preferences.getInt("GROUPID",0);
+        int userId  = preferences.getInt("USER_ID",0);
         String retrivedToken  = preferences.getString("TOKEN",null);
         int idGroup = preferences.getInt("GROUPID",0);
         Call<GroupResponse> updateInfo = NetworkConfig.getService().updateInfoGroup("Bearer " + retrivedToken, idGroup,createRequestGroup());
@@ -631,12 +633,10 @@ public class InfoGroupFragment extends Fragment {
                     String message = getString(R.string.updateInfo);
                     Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
 
-
                 } else {
                     String message = getString(R.string.error_login);
                     Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
                 }
-
             }
 
             @Override

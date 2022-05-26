@@ -10,6 +10,11 @@ import com.homies.homies.retrofit.model.LeaveGroup;
 import com.homies.homies.retrofit.model.UserData;
 import com.homies.homies.retrofit.model.UserRequest;
 import com.homies.homies.retrofit.model.UserResponse;
+import com.homies.homies.retrofit.model.tasks.AddUserTask;
+import com.homies.homies.retrofit.model.tasks.CreateNewTask;
+import com.homies.homies.retrofit.model.tasks.DeleteUserTask;
+import com.homies.homies.retrofit.model.tasks.TaskListResponse;
+import com.homies.homies.retrofit.model.tasks.UpdateTask;
 
 import java.util.List;
 
@@ -71,6 +76,33 @@ public interface UserService {
 
     @PUT("groups/{id}")
     Call<GroupResponse> updateInfoGroup(@Header("Authorization")String authHeader,@Path("id") int userId, @Body GroupRequest groupRequest);
+
+
+    //task funtions
+
+    @POST("tasks")
+    Call<TaskListResponse> createNewTask(@Header("Authorization") String authHeader, @Body CreateNewTask createNewTask);
+
+    @POST("tasks/add-user")
+    Call<TaskListResponse> addUserTask(@Header("Authorization") String authHeader, @Body AddUserTask addUserTask);
+
+    @DELETE("task/delete-user")
+    Call<TaskListResponse> deleteUserTask(@Header("Authorization") String authHeader, @Body DeleteUserTask deleteUserTask);
+
+    @DELETE("/task/delete-task/{id}")
+    Call<Void> deleteTask(@Header("Authorization") String authHeader, @Path("id") int userId);
+
+    @GET("task-lists")
+    Call<List<TaskListResponse>> getAllTask(@Header("Authorization") String authHeader);
+
+    @GET("task-lists/{id}")
+    Call<TaskListResponse> getTask(@Header("Authorization") String authHeader);
+
+    @GET("task-lists-user/{id}/{login}")
+    Call<List<TaskListResponse>> getUserTasks(@Header("Authorization") String authHeader, @Path("id") int userId, @Path("login") String login);
+
+    @PUT("tasks/update-tasks")
+    Call<TaskListResponse> updateTasks(@Header("Authorization") String authHeader, @Body UpdateTask updateTask);
 
 
 }
