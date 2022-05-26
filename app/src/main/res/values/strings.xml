@@ -91,12 +91,20 @@
     <string name="changePass">Cambiar Contraseña</string>
     <string name="changeSucess">¡Contraseña cambiada!</string>
 
+
+    <!-- Shopping List -->
+    <string name="delete_all_products">¿Estás seguro de que quieres eliminar todos los articulos comprados?</string>
+    <string name="por_comprar">Por comprar</string>
+    <string name="comprado">Comprado</string>
+    <string name="borrar_todo">Borrar todo</string>
+
+    <!-- Task List -->
     <string name="btn_cancel_task">cancelar</string>
     <string name="btn_confirm_task">confirmar</string>
     <string name="description_task_et">descripción</string>
     <string name="task_et">tarea</string>
     <string name="task_text_dialog">Debes de introducir al menos una tarea y un usuario</string>
-=======
+    =======
 
     <!-- List Expenses -->
     <string name="balance">Saldo</string>
@@ -110,7 +118,8 @@
     <string name="createExpenses">Crear Gasto</string>
     <string name="expenseSucess">Gasto Creado</string>
 
->>>>>>> develop
+
+    >>>>>>> develop
 
 
 </resources>

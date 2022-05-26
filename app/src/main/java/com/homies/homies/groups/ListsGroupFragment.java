@@ -54,7 +54,7 @@ import static android.widget.Toast.makeText;
 public class ListsGroupFragment extends Fragment {
 
 
-    Button btnEditGroup, btnAddTask, btnCreateTask, btnCancelTask, btn_expenses;
+    Button btnAddTask, btnCreateTask, btnCancelTask, btn_expenses, btnShoppingList;
 
     Toolbar toolbar;
     EditText userTask, descriptionTask;
@@ -78,6 +78,7 @@ public class ListsGroupFragment extends Fragment {
         activity = getActivity();
         context = getActivity().getApplicationContext();
         btn_expenses = info.findViewById(R.id.btn_expenses);
+        btnShoppingList = info.findViewById(R.id.btnShoppingList);
 
         btn_expenses.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -86,6 +87,18 @@ public class ListsGroupFragment extends Fragment {
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.replace(R.id.fragmentGroup, listExpensesFragment);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
+            }
+        });
+
+        btnShoppingList.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ListShoppingFragment listShoppingFragment = new ListShoppingFragment();
+                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.fragmentGroup, listShoppingFragment);
                 fragmentTransaction.addToBackStack(null);
                 fragmentTransaction.commit();
             }
@@ -149,10 +162,6 @@ public class ListsGroupFragment extends Fragment {
         return info;
 
     }
-
-
-
-
 
     public void groupInfo() {
         SharedPreferences preferences = getActivity().getSharedPreferences("MY_APP", Context.MODE_PRIVATE);
@@ -309,8 +318,8 @@ public class ListsGroupFragment extends Fragment {
 
 
                 } else {
-                    String message = getString(R.string.error_login);
-                    makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+                   // String message = getString(R.string.error_login);
+                   // makeText(getContext(), message, Toast.LENGTH_SHORT).show();
                 }
             }
             @Override
