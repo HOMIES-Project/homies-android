@@ -3,23 +3,14 @@ package com.homies.homies.groups;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
-import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -33,24 +24,17 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.textfield.TextInputLayout;
 import com.homies.homies.R;
-import com.homies.homies.UserAdapter;
+import com.homies.homies.Adapters.UserAdapter;
 import com.homies.homies.retrofit.config.NetworkConfig;
-import com.homies.homies.retrofit.model.AddUser;
-import com.homies.homies.retrofit.model.ChangeAdmin;
-import com.homies.homies.retrofit.model.DeleteUser;
-import com.homies.homies.retrofit.model.GroupRequest;
-import com.homies.homies.retrofit.model.GroupResponse;
-import com.homies.homies.retrofit.model.LeaveGroup;
-import com.homies.homies.retrofit.model.UserData;
-import com.homies.homies.retrofit.model.UserRequest;
-import com.homies.homies.retrofit.model.UserResponse;
-import com.homies.homies.user.LoginFragment;
-import com.homies.homies.user.MainActivity;
-import com.homies.homies.user.RegisterFragment;
+import com.homies.homies.retrofit.model.group.AddUser;
+import com.homies.homies.retrofit.model.group.ChangeAdmin;
+import com.homies.homies.retrofit.model.user.DeleteUser;
+import com.homies.homies.retrofit.model.group.GroupRequest;
+import com.homies.homies.retrofit.model.group.GroupResponse;
+import com.homies.homies.retrofit.model.group.LeaveGroup;
+import com.homies.homies.retrofit.model.user.UserData;
 
-import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -87,9 +71,7 @@ public class InfoGroupFragment extends Fragment {
         btnConfirmDeleteGroup = editGroup.findViewById(R.id.btnConfirmDeleteGroup);
         btnLeaveGroup = editGroup.findViewById(R.id.btnLeaveGroup);
         act = editGroup.findViewById(R.id.act);
-
         activity = getActivity();
-
         context = getActivity().getApplicationContext();
 
 
@@ -260,6 +242,7 @@ public class InfoGroupFragment extends Fragment {
             bottomSheetDialog.show();
         });
 
+        //Update Info Group
         act.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -314,6 +297,7 @@ public class InfoGroupFragment extends Fragment {
 
                         btnAddUser.setVisibility(View.GONE);
                         btnDeleteGroup.setVisibility(View.GONE);
+                        act.setVisibility(View.GONE);
                         et_GroupName.setFocusable(false);
                         et_GroupName.setFocusableInTouchMode(false);
                         et_GroupName.setClickable(false);

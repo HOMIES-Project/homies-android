@@ -1,18 +1,9 @@
-package com.homies.homies.retrofit.model;
+package com.homies.homies.retrofit.model.group;
 
-public class ChangeAdmin {
+public class LeaveGroup {
 
-    private int idAdminGroup;
     private String login;
     private int idGroup;
-
-    public int getIdAdminGroup() {
-        return idAdminGroup;
-    }
-
-    public void setIdAdminGroup(int idAdminGroup) {
-        this.idAdminGroup = idAdminGroup;
-    }
 
     public String getLogin() {
         return login;

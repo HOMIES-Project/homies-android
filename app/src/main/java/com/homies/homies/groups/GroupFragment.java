@@ -24,11 +24,12 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.homies.homies.List.ListsTaskFragment;
 import com.homies.homies.R;
 import com.homies.homies.retrofit.config.NetworkConfig;
-import com.homies.homies.retrofit.model.GroupRequest;
-import com.homies.homies.retrofit.model.GroupResponse;
-import com.homies.homies.retrofit.model.UserData;
+import com.homies.homies.retrofit.model.group.GroupRequest;
+import com.homies.homies.retrofit.model.group.GroupResponse;
+import com.homies.homies.retrofit.model.user.UserData;
 
 import java.util.List;
 
@@ -63,13 +64,14 @@ public class GroupFragment extends Fragment {
 
         progressBar.setVisibility(View.VISIBLE);
 
+        //Add new group
         add.setOnClickListener((View.OnClickListener) view -> {
             BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(
                     getActivity(), R.style.BottonSheetDialogTheme
             );
             View bottomSheetView = LayoutInflater.from(activity.getApplicationContext())
                     .inflate(
-                            R.layout.dialog_layout_botton_addgroup,
+                            R.layout.dialog_addgroup,
                             group.findViewById(R.id.bottonAddContainer)
                     );
             inputGroup = bottomSheetView.findViewById(R.id.inputGroup);
@@ -140,7 +142,7 @@ public class GroupFragment extends Fragment {
                             FragmentTransaction transaction = fragmentManager.beginTransaction();
                             transaction.setReorderingAllowed(true);
 
-                            transaction.replace(R.id.fragmentGroup, ListsGroupFragment.class, null);
+                            transaction.replace(R.id.fragmentGroup, ListsTaskFragment.class, null);
                             transaction.addToBackStack(null);
                             transaction.commit();
 

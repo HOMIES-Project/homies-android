@@ -1,4 +1,4 @@
-package com.homies.homies.retrofit.model;
+package com.homies.homies.retrofit.model.tasks;
 
 public class ToDoModel {
     private int id, status;

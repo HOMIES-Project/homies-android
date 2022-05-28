@@ -1,25 +1,30 @@
-package com.homies.homies.retrofit.model;
+package com.homies.homies.retrofit.model.user;
 
-public class UserResponse {
+import java.time.LocalDate;
+import java.util.Date;
+
+public class UserRequest {
 
     private String password;
     private String email;
     private String firstName;
     private String lastName;
-    private String langKey;
     private String login;
     private String username;
-    private String id_token;
-    private int id;
+    private String token;
     private String key;
+    private String langKey;
+    private String birthDate;
+    private String photo;
+    private String phone;
 
 
-    public String getLogin() {
-        return login;
+    public String getLangKey() {
+        return langKey;
     }
 
-    public void setLogin(String login) {
-        this.login = login;
+    public void setLangKey(String langKey) {
+        this.langKey = langKey;
     }
 
     public String getPassword() {
@@ -54,12 +59,12 @@ public class UserResponse {
         this.lastName = lastName;
     }
 
-    public String getLangKey() {
-        return langKey;
+    public String getLogin() {
+        return login;
     }
 
-    public void setLangKey(String langKey) {
-        this.langKey = langKey;
+    public void setLogin(String login) {
+        this.login = login;
     }
 
     public String getUsername() {
@@ -71,11 +76,11 @@ public class UserResponse {
     }
 
     public String getToken() {
-        return id_token;
+        return token;
     }
 
     public void setToken(String token) {
-        this.id_token = token;
+        this.token = token;
     }
 
     public String getKey() {
@@ -86,13 +91,27 @@ public class UserResponse {
         this.key = key;
     }
 
-    public int getId() {
-        return id;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
+    public String getPhoto() {
+        return photo;
+    }
 
+    public void setPhoto(String photo) {
+        this.photo = photo;
+    }
+
+    public String getBirthDate() {
+        return birthDate;
+    }
+
+    public void setBirthDate(String birthDate) {
+        this.birthDate = birthDate;
+    }
 }

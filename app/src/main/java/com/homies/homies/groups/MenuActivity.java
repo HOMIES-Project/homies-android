@@ -1,6 +1,5 @@
 package com.homies.homies.groups;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentManager;
@@ -13,16 +12,13 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Base64;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.homies.homies.R;
 import com.homies.homies.SplashActivity;
 import com.homies.homies.retrofit.config.NetworkConfig;
-import com.homies.homies.retrofit.model.UserData;
+import com.homies.homies.retrofit.model.user.UserData;
 import com.homies.homies.user.SettingsUser;
 
 import retrofit2.Call;
@@ -33,8 +29,6 @@ import retrofit2.Response;
 public class MenuActivity extends AppCompatActivity {
 
     Toolbar toolbar;
-    private Bitmap bitmap;
-    private Menu menu;
     ImageView img1,img2;
 
     @Override
@@ -62,6 +56,7 @@ public class MenuActivity extends AppCompatActivity {
         });
     }
 
+    //method to go to settings
     public void Settings() {
         SettingsUser settingsUser = new SettingsUser();
         FragmentManager fragmentManager = getSupportFragmentManager();
@@ -71,6 +66,7 @@ public class MenuActivity extends AppCompatActivity {
         fragmentTransaction.commit();
     }
 
+    //method to logout
     public void logoutUser() {
         Intent intent = new Intent ( MenuActivity.this, SplashActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
@@ -89,6 +85,7 @@ public class MenuActivity extends AppCompatActivity {
         return userData;
     }
 
+    //method to view profile picture
     public void userInfo() {
         SharedPreferences preferences = this.getSharedPreferences("MY_APP", Context.MODE_PRIVATE);
         String retrivedToken  = preferences.getString("TOKEN",null);
@@ -100,16 +97,12 @@ public class MenuActivity extends AppCompatActivity {
 
                     UserData adslist= response.body();
 
-                    String user = adslist.getUser().getLogin();
-                    String name = adslist.getUser().getFirstName();
-                    String lastName = adslist.getUser().getLastName();
-                    String email = adslist.getUser().getEmail();
                     String photoString = adslist.getPhoto();
 
                     if(photoString != null){
                         byte[] decodedString = Base64.decode(photoString, Base64.DEFAULT);
                         Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
-                        img1.setImageBitmap(decodedByte);
+                        img2.setImageBitmap(decodedByte);
                     }
 
 

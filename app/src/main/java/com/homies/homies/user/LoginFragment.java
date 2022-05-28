@@ -25,8 +25,8 @@ import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.homies.homies.groups.MenuActivity;
 import com.homies.homies.R;
 import com.homies.homies.retrofit.config.NetworkConfig;
-import com.homies.homies.retrofit.model.UserRequest;
-import com.homies.homies.retrofit.model.UserResponse;
+import com.homies.homies.retrofit.model.user.UserRequest;
+import com.homies.homies.retrofit.model.user.UserResponse;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -64,13 +64,14 @@ public class LoginFragment extends Fragment {
 
         });
 
+        //Button to reset pass
         forgotPassword.setOnClickListener((View.OnClickListener) view -> {
             BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(
                     getActivity(), R.style.BottonSheetDialogTheme
             );
             View bottomSheetView = LayoutInflater.from(activity.getApplicationContext())
                     .inflate(
-                            R.layout.dialog_layout_botton_sheet,
+                            R.layout.dialog_forget_pass,
                             (ScrollView)login.findViewById(R.id.bottonSheetContainer)
                     );
 
@@ -91,6 +92,7 @@ public class LoginFragment extends Fragment {
             bottomSheetDialog.show();
         });
 
+        //button to log in
         btnLogin.setOnClickListener(view -> {
             if (TextUtils.isEmpty(inputUser.getText().toString().trim()) || TextUtils.isEmpty(inputPassword.getText().toString().trim())) {
                 String message = getString(R.string.val_required);
@@ -109,6 +111,7 @@ public class LoginFragment extends Fragment {
         return login;
     }
 
+    //method for logging in
     public void loginUser(UserRequest userRequest) {
         Call<UserResponse> loginResponseCall = NetworkConfig.getService().loginUser(userRequest);
         loginResponseCall.enqueue(new Callback<UserResponse>() {
@@ -137,6 +140,7 @@ public class LoginFragment extends Fragment {
 
     }
 
+    //method to reset password
     public void resetPassword(String email) {
         Call<Void> resetPasswordResponseCall = NetworkConfig.getService().resetPassword(email);
         resetPasswordResponseCall.enqueue(new Callback<Void>() {

@@ -1,5 +1,7 @@
-package com.homies.homies.retrofit.model;
+package com.homies.homies.retrofit.model.group;
 
+
+import com.homies.homies.retrofit.model.user.UserData;
 
 public class GroupRequest {
 

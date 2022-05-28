@@ -1,4 +1,4 @@
-package com.homies.homies.groups;
+package com.homies.homies.List;
 
 import android.app.Activity;
 import android.content.Context;
@@ -7,42 +7,34 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.SpinnerAdapter;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.homies.homies.R;
-import com.homies.homies.ToDoAdapter;
+import com.homies.homies.Adapters.ToDoAdapter;
+import com.homies.homies.groups.InfoGroupFragment;
+import com.homies.homies.groups.MenuActivity;
 import com.homies.homies.retrofit.config.NetworkConfig;
-import com.homies.homies.retrofit.model.AddUser;
-import com.homies.homies.retrofit.model.GroupResponse;
+import com.homies.homies.retrofit.model.group.GroupResponse;
 
-import com.homies.homies.retrofit.model.TaskList;
-import com.homies.homies.retrofit.model.ToDoModel;
-import com.homies.homies.retrofit.model.UserData;
+import com.homies.homies.retrofit.model.user.UserData;
 import com.homies.homies.retrofit.model.tasks.AddUserTask;
 import com.homies.homies.retrofit.model.tasks.CreateNewTask;
 import com.homies.homies.retrofit.model.tasks.TaskListResponse;
 
-import java.util.ArrayList;
 import java.util.List;
-
-import com.homies.homies.user.LoginFragment;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -50,8 +42,8 @@ import retrofit2.Response;
 
 import static android.widget.Toast.makeText;
 
-
-public class ListsGroupFragment extends Fragment {
+//*****************in development*****************
+public class ListsTaskFragment extends Fragment {
 
 
     Button btnAddTask, btnCreateTask, btnCancelTask, btn_expenses, btnShoppingList;
@@ -107,7 +99,6 @@ public class ListsGroupFragment extends Fragment {
         groupInfo();
 
 
-        
         //toDoList.setLayoutManager(new LinearLayoutManager(getActivity()));
         //tasksAdapter = new ToDoAdapter(clickedTask);
         //toDoList.setAdapter(tasksAdapter);
@@ -117,6 +108,8 @@ public class ListsGroupFragment extends Fragment {
 
         btnAddTask = info.findViewById(R.id.btn_addTask);
 
+
+        //button to add task
         btnAddTask.setOnClickListener((View.OnClickListener) view -> {
             BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(
                     getActivity(), R.style.BottonSheetDialogTheme
@@ -163,6 +156,7 @@ public class ListsGroupFragment extends Fragment {
 
     }
 
+    //method to go to group settings
     public void groupInfo() {
         SharedPreferences preferences = getActivity().getSharedPreferences("MY_APP", Context.MODE_PRIVATE);
         String retrivedToken  = preferences.getString("TOKEN",null);
@@ -184,7 +178,7 @@ public class ListsGroupFragment extends Fragment {
                     } catch (Exception e) {
                     e.printStackTrace();
                 }
-
+                    //method to go to group settings
                     toolbar.setOnClickListener(new View.OnClickListener() {
 
                         @Override
@@ -222,6 +216,7 @@ public class ListsGroupFragment extends Fragment {
         });
     }
 
+    //method to get users on a spinner
     public void spinnerList() {
 
         SharedPreferences preferences = getActivity().getSharedPreferences("MY_APP", Context.MODE_PRIVATE);
@@ -277,7 +272,6 @@ public class ListsGroupFragment extends Fragment {
             public void onResponse(Call<TaskListResponse> call, Response<TaskListResponse> response) {
                 //userListTask();
 
-
                 /*String userAssigned = userListTask().getLogin();
                 response.body().setUserAssigneds(userAssigned);
 
@@ -294,7 +288,7 @@ public class ListsGroupFragment extends Fragment {
         });
     }
 
-    //*****************in development***************** FALTA AÑADIR TAREA
+    //*****************in development*****************
     public void addTask(CreateNewTask createNewTask){
         SharedPreferences preferences = getActivity().getSharedPreferences("MY_APP", Context.MODE_PRIVATE);
         String retrivedToken = preferences.getString("TOKEN", null);
@@ -308,14 +302,10 @@ public class ListsGroupFragment extends Fragment {
                     String message = "Tarea añadida";
                     makeText(getContext(), message, Toast.LENGTH_SHORT).show();
 
-
                    //<TaskListResponse> data = response.body();
 
                    //RecyclerViewAdapterListUser adapterListUser = new RecyclerViewAdapterListUser(getContext(), data);
                    //userList.setAdapter(adapterListUser);
-
-
-
 
                 } else {
                    // String message = getString(R.string.error_login);
@@ -347,6 +337,7 @@ public class ListsGroupFragment extends Fragment {
         return addUserTask;
     }
 
+    //*****************in development*****************
     public CreateNewTask createNewTask(){
         CreateNewTask createNewTask = new CreateNewTask();
         SharedPreferences preferences = getActivity().getSharedPreferences("MY_APP", Context.MODE_PRIVATE);

@@ -1,4 +1,4 @@
-package com.homies.homies.groups;
+package com.homies.homies.List;
 
 import android.app.Activity;
 import android.app.Dialog;
@@ -24,9 +24,10 @@ import androidx.fragment.app.Fragment;
 
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.homies.homies.R;
+import com.homies.homies.groups.MenuActivity;
 import com.homies.homies.retrofit.config.NetworkConfig;
-import com.homies.homies.retrofit.model.GroupResponse;
-import com.homies.homies.retrofit.model.UserData;
+import com.homies.homies.retrofit.model.group.GroupResponse;
+import com.homies.homies.retrofit.model.user.UserData;
 
 import java.util.List;
 
@@ -34,6 +35,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+//*****************in development*****************
 public class ListExpensesFragment extends Fragment {
 
     TextView expenses,balance,noExpenses;
@@ -65,6 +67,7 @@ public class ListExpensesFragment extends Fragment {
         ((MenuActivity)getActivity()).getSupportActionBar().setTitle("Lista de Gastos");
 
 
+        //method for adding expenses
         addExpense.setOnClickListener((View.OnClickListener) view -> {
             BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(
                     getActivity(), R.style.BottonSheetDialogTheme
@@ -122,6 +125,7 @@ public class ListExpensesFragment extends Fragment {
         mDialog.show();
     }
 
+    //method to get users on a spinner
     public void spinnerList() {
 
         SharedPreferences preferences = getActivity().getSharedPreferences("MY_APP", Context.MODE_PRIVATE);

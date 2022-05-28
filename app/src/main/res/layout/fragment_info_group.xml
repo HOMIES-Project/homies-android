@@ -1,8 +1,13 @@
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="match_parent">
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
     tools:context=".groups.MenuActivity">
 
     <Button
@@ -108,7 +113,7 @@
         android:background="@drawable/btn_custom"
         android:fontFamily="@font/montserrat_regular"
         android:padding="1dp"
-        android:text="@string/añadir_usuario"
+        android:text="@string/add_user"
         android:textAllCaps="false"
         android:textColor="@color/primaryTextColor"
         app:layout_constraintEnd_toEndOf="parent"
@@ -151,5 +156,5 @@
 
 
 
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

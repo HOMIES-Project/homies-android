@@ -1,6 +1,6 @@
-package com.homies.homies.retrofit.model;
+package com.homies.homies.retrofit.model.group;
 
-public class AddUser {
+public class ChangeAdmin {
 
     private int idAdminGroup;
     private String login;

@@ -78,7 +78,7 @@
             android:background="@drawable/btn_custom"
             android:fontFamily="@font/montserrat_regular"
             android:padding="1dp"
-            android:text="@string/addButton"
+            android:text="@string/addGroup"
             android:textAllCaps="false"
             android:textColor="@color/primaryTextColor"
             app:layout_constraintBottom_toBottomOf="parent"

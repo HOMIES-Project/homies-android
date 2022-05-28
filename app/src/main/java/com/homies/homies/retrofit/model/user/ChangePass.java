@@ -1,4 +1,4 @@
-package com.homies.homies.retrofit.model;
+package com.homies.homies.retrofit.model.user;
 
 public class ChangePass {
 

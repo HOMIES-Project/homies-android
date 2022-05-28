@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.widget.Button;
 
 import com.homies.homies.R;
-import com.homies.homies.retrofit.model.UserResponse;
 
 public class MainActivity extends AppCompatActivity {
 

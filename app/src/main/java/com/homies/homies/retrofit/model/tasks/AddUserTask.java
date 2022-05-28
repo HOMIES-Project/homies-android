@@ -1,9 +1,5 @@
 package com.homies.homies.retrofit.model.tasks;
 
-import com.homies.homies.retrofit.model.UserData;
-
-import java.util.List;
-
 public class AddUserTask {
 
     private int idTask;

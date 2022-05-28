@@ -36,20 +36,16 @@ import android.widget.Toast;
 
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.textfield.TextInputLayout;
-import com.homies.homies.groups.ListsGroupFragment;
 import com.homies.homies.groups.MenuActivity;
 import com.homies.homies.R;
 import com.homies.homies.retrofit.config.NetworkConfig;
-import com.homies.homies.retrofit.model.ChangePass;
-import com.homies.homies.retrofit.model.LeaveGroup;
-import com.homies.homies.retrofit.model.UserData;
-import com.homies.homies.retrofit.model.UserRequest;
-import com.homies.homies.retrofit.model.UserResponse;
+import com.homies.homies.retrofit.model.user.ChangePass;
+import com.homies.homies.retrofit.model.user.UserData;
+import com.homies.homies.retrofit.model.user.UserRequest;
+import com.homies.homies.retrofit.model.user.UserResponse;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.util.Date;
-import java.util.regex.Pattern;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -141,7 +137,7 @@ public class SettingsUser extends Fragment {
             );
             View bottomSheetView = LayoutInflater.from(activity.getApplicationContext())
                     .inflate(
-                            R.layout.dialog_layout_botton_deleteuser,
+                            R.layout.dialog_delete_profile,
                             settings.findViewById(R.id.bottonDeleteUser)
                     );
 
@@ -380,7 +376,7 @@ public class SettingsUser extends Fragment {
 
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if (et_user.getText().toString().trim().length() < 4) {
-                    ip_user.setError(getString(R.string.val_username));
+                    ip_user.setError(getString(R.string.val_four_character));
                     condition = false;
                 } else {
                     ip_user.setErrorEnabled(false);
@@ -428,10 +424,18 @@ public class SettingsUser extends Fragment {
     private void validateClickFields() {
 
         if (et_user.getText().toString().trim().length() < 4) {
-            ip_user.setError(getString(R.string.val_username));
+            ip_user.setError(getString(R.string.val_four_character));
             condition = false;
         } else {
             ip_user.setErrorEnabled(false);
+        }
+
+        String phoneInput = et_phone.getText().toString().trim();
+        if (phoneInput.length() < 8) {
+            ip_phone.setError(getString(R.string.val_email));
+            condition = false;
+        }  else {
+            ip_phone.setErrorEnabled(false);
         }
 
         String emailInput = et_email.getText().toString().trim();

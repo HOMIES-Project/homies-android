@@ -1,9 +1,19 @@
-package com.homies.homies.retrofit.model;
+package com.homies.homies.retrofit.model.user;
 
-public class LeaveGroup {
+public class DeleteUser {
 
+    private int idAdminGroup;
     private String login;
     private int idGroup;
+
+
+    public int getIdAdminGroup() {
+        return idAdminGroup;
+    }
+
+    public void setIdAdminGroup(int idAdminGroup) {
+        this.idAdminGroup = idAdminGroup;
+    }
 
     public String getLogin() {
         return login;
@@ -20,4 +30,6 @@ public class LeaveGroup {
     public void setIdGroup(int idGroup) {
         this.idGroup = idGroup;
     }
+
+
 }
