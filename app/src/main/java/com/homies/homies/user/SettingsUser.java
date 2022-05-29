@@ -4,6 +4,7 @@ import static android.app.Activity.RESULT_OK;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -29,6 +30,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -46,6 +48,10 @@ import com.homies.homies.retrofit.model.user.UserResponse;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -64,6 +70,7 @@ public class SettingsUser extends Fragment {
     ProgressBar progressBar;
     boolean condition = true;
     private Bitmap bitmap;
+    DatePickerDialog datePickerDialog;
 
     private static final int MY_PERMISSIONS_REQUEST = 100;
     private final int PICK_IMAGE_FROM_GALLERY_REQUEST =1;
@@ -185,6 +192,33 @@ public class SettingsUser extends Fragment {
 
             bottomSheetDialog.setContentView(bottomSheetView);
             bottomSheetDialog.show();
+        });
+
+        et_birthday.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // calender class's instance and get current date , month and year from calender
+                final Calendar c = Calendar.getInstance();
+                int mYear = c.get(Calendar.YEAR); // current year
+                int mMonth = c.get(Calendar.MONTH); // current month
+                int mDay = c.get(Calendar.DAY_OF_MONTH); // current day
+                // date picker dialog
+                datePickerDialog = new DatePickerDialog(getContext(),
+                        new DatePickerDialog.OnDateSetListener() {
+
+                            @Override
+                            public void onDateSet(DatePicker view, int year,
+                                                  int monthOfYear, int dayOfMonth) {
+                                // set day of month , month and year value in the edit text
+                                Date date = new Date(year-1900, monthOfYear,dayOfMonth);
+                                SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+                                String cdate = formatter.format(date);
+                                et_birthday.setText(cdate);
+
+                            }
+                        }, mYear, mMonth, mDay);
+                datePickerDialog.show();
+            }
         });
 
         return settings;

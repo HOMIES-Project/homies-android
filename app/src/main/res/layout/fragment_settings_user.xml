@@ -236,6 +236,7 @@
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:startIconDrawable="@drawable/ic_calendar"
+            android:descendantFocusability="blocksDescendants"
             app:startIconTint="@color/primaryColor">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -245,6 +246,7 @@
                 android:background="@drawable/rounded_edittext"
                 android:fontFamily="@font/montserrat_regular"
                 android:inputType="date"
+                android:descendantFocusability="blocksDescendants"
                 android:padding="15dp"
                 android:textColor="@color/fieldTextColor"
                 android:textSize="15sp" />
