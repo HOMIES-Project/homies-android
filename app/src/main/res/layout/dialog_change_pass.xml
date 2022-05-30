@@ -18,7 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="61dp"
             android:layout_marginStart="32dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="16dp"
             android:layout_marginEnd="32dp"
             android:layout_marginBottom="16dp"
             android:background="@drawable/rounded_edittext"
@@ -34,7 +34,8 @@
             app:layout_constraintBottom_toTopOf="@+id/et_newpassword"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="TextContrastCheck" />
 
 
         <EditText
@@ -44,6 +45,9 @@
             android:layout_marginStart="32dp"
             android:layout_marginEnd="32dp"
             android:background="@drawable/rounded_edittext"
+            android:drawableStart="@drawable/ic_lock_password"
+            android:drawablePadding="5sp"
+            android:drawableTint="@color/primaryColor"
             android:fontFamily="@font/montserrat_regular"
             android:hint="@string/newpassword"
             android:inputType="textPassword"
@@ -54,9 +58,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            android:drawableStart="@drawable/ic_lock_password"
-            android:drawablePadding="5sp"
-            android:drawableTint="@color/primaryColor"/>
+            tools:ignore="TextContrastCheck" />
 
 
         <Button
@@ -74,7 +76,8 @@
             app:layout_constraintEnd_toStartOf="@+id/btnCancel"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/et_newpassword" />
+            app:layout_constraintTop_toBottomOf="@+id/et_newpassword"
+            tools:ignore="TextContrastCheck" />
 
         <Button
             android:id="@+id/btnCancel"
@@ -92,7 +95,8 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/btnAdd"
-            app:layout_constraintTop_toBottomOf="@+id/et_newpassword" />
+            app:layout_constraintTop_toBottomOf="@+id/et_newpassword"
+            tools:ignore="TextContrastCheck" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

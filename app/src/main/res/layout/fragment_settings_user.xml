@@ -11,7 +11,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/re"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         android:orientation="vertical"
         app:layout_constraintStart_toStartOf="parent"
@@ -40,7 +40,8 @@
             android:background="@drawable/ic_edit"
             android:padding="1dp"
             app:layout_constraintBottom_toBottomOf="@+id/imageView3"
-            app:layout_constraintEnd_toEndOf="@+id/imageView3" />
+            app:layout_constraintEnd_toEndOf="@+id/imageView3"
+            tools:ignore="SpeakableTextPresentCheck" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/ip_user"
@@ -82,7 +83,8 @@
                 android:maxLength="20"
                 android:padding="15dp"
                 android:textColor="@color/fieldTextColor"
-                android:textSize="15sp" />
+                android:textSize="15sp"
+                tools:ignore="TextContrastCheck" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -214,7 +216,8 @@
                 android:inputType="textEmailAddress"
                 android:padding="15dp"
                 android:textColor="@color/fieldTextColor"
-                android:textSize="15sp" />
+                android:textSize="15sp"
+                tools:ignore="TextContrastCheck" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -244,12 +247,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="61dp"
                 android:background="@drawable/rounded_edittext"
+                android:descendantFocusability="blocksDescendants"
                 android:fontFamily="@font/montserrat_regular"
                 android:inputType="date"
-                android:descendantFocusability="blocksDescendants"
                 android:padding="15dp"
                 android:textColor="@color/fieldTextColor"
-                android:textSize="15sp" />
+                android:textSize="15sp"
+                tools:ignore="TextContrastCheck" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -303,7 +307,8 @@
             app:layout_constraintBottom_toTopOf="@+id/btn_save"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.492"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            tools:ignore="TextContrastCheck" />
 
         <Button
             android:id="@+id/btn_save"
@@ -322,7 +327,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.492"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btn_change" />
+            app:layout_constraintTop_toBottomOf="@+id/btn_change"
+            tools:ignore="TextContrastCheck" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_delete"

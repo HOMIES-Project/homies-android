@@ -112,6 +112,8 @@
     <string name="expenditure">Introduzca el gasto</string>
     <string name="createExpenses">Crear Gasto</string>
     <string name="expenseSucess">Gasto Creado</string>
+    <string name="act">Actualizar</string>
+    <string name="select_name">Select Name</string>
 
 
     >>>>>>> develop

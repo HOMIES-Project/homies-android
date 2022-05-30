@@ -1,47 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
-    <Button
-        android:id="@+id/btn_expenses"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/btn_custom"
-        android:drawableLeft="@drawable/ic_money"
-        android:fontFamily="@font/montserrat_regular"
-        android:paddingLeft="10dp"
-        android:text="@string/btn_expenses"
-        android:textAllCaps="false"
-        android:textColor="@color/white"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <Button
+            android:id="@+id/btn_expenses"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/btn_custom"
+            android:drawableStart="@drawable/ic_money"
+            android:fontFamily="@font/montserrat_regular"
+            android:paddingStart="10dp"
+            android:text="@string/btn_expenses"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="TextContrastCheck" />
 
-    <Button
-        android:id="@+id/btnShoppingList"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/btn_custom"
-        android:fontFamily="@font/montserrat_regular"
-        android:paddingLeft="10dp"
-        android:text="@string/btn_shopping_list"
-        android:textAllCaps="false"
-        android:textColor="@color/white"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_expenses"
-        android:drawableLeft="@drawable/ic_shop"/>
+        <Button
+            android:id="@+id/btnShoppingList"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/btn_custom"
+            android:drawableStart="@drawable/ic_shop"
+            android:fontFamily="@font/montserrat_regular"
+            android:paddingStart="10dp"
+            android:text="@string/btn_shopping_list"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btn_expenses"
+            tools:ignore="TextContrastCheck" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/toDoList"
@@ -73,7 +76,8 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/toDoList" />
+            app:layout_constraintTop_toBottomOf="@+id/toDoList"
+            tools:ignore="TextContrastCheck" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

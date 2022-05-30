@@ -45,7 +45,8 @@
                     android:textColor="@color/secondaryTextColor"
                     android:textSize="17sp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="DuplicateSpeakableTextCheck" />
                 <View
                     android:id="@+id/view"
                     android:layout_width="100dp"
@@ -118,7 +119,8 @@
                 android:maxLength="50"
                 android:padding="15dp"
                 android:textColor="@color/fieldTextColor"
-                android:textSize="15sp" />
+                android:textSize="15sp"
+                tools:ignore="TextContrastCheck" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -156,7 +158,8 @@
                 android:maxLength="50"
                 android:padding="15dp"
                 android:textColor="@color/fieldTextColor"
-                android:textSize="15sp" />
+                android:textSize="15sp"
+                tools:ignore="TextContrastCheck" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
@@ -164,12 +167,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="25dp"
-            android:text="@string/rememberPassword"
             android:fontFamily="@font/montserrat_semibold"
+            android:text="@string/rememberPassword"
             android:textColor="@color/primaryColor"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/ip_pasword" />
+            app:layout_constraintTop_toBottomOf="@+id/ip_pasword"
+            tools:ignore="TextContrastCheck" />
 
         <Button
             android:id="@+id/loginButton"
@@ -187,7 +191,8 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/forgotPasswordTV" />
+            app:layout_constraintTop_toBottomOf="@+id/forgotPasswordTV"
+            tools:ignore="TextContrastCheck" />
 
         <ProgressBar
             android:id="@+id/progressBar2"

@@ -21,7 +21,7 @@
             android:layout_marginTop="22dp"
             android:layout_marginEnd="20dp"
             android:fontFamily="@font/montserrat_regular"
-            android:gravity="left"
+            android:gravity="start"
             android:lines="2"
             android:minLines="2"
             android:singleLine="false"
@@ -33,19 +33,20 @@
 
         <Spinner
             android:id="@+id/spinnerTask"
-            android:hint="Select Name"
             android:layout_width="250dp"
             android:layout_height="61dp"
             android:layout_marginStart="20dp"
             android:layout_marginTop="20dp"
-            android:spinnerMode="dropdown"
             android:background="@drawable/rounded_edittext"
             android:drawableStart="@drawable/ic_user"
             android:drawablePadding="10dp"
             android:drawableTint="@color/fieldTextColor"
             android:fontFamily="@font/montserrat_regular"
+            android:hint="@string/select_name"
+            android:spinnerMode="dropdown"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textTaskDialog" />
+            app:layout_constraintTop_toBottomOf="@+id/textTaskDialog"
+            tools:ignore="SpeakableTextPresentCheck" />
 
 
         <EditText
@@ -55,7 +56,7 @@
             android:layout_marginStart="20dp"
             android:layout_marginTop="20dp"
             android:background="@drawable/rounded_edittext"
-            android:drawableLeft="@drawable/ic_task"
+            android:drawableStart="@drawable/ic_task"
             android:drawablePadding="10dp"
             android:drawableTint="@color/fieldTextColor"
             android:fontFamily="@font/montserrat_regular"
@@ -76,7 +77,7 @@
             android:layout_marginTop="20dp"
             android:layout_marginEnd="20dp"
             android:background="@drawable/rounded_edittext"
-            android:drawableLeft="@drawable/ic_mode_edit"
+            android:drawableStart="@drawable/ic_mode_edit"
             android:drawablePadding="10dp"
             android:drawableTint="@color/fieldTextColor"
             android:fontFamily="@font/montserrat_regular"
@@ -87,7 +88,8 @@
             android:textSize="15sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/userTask" />
+            app:layout_constraintTop_toBottomOf="@+id/userTask"
+            tools:ignore="TextContrastCheck" />
 
         <Button
             android:id="@+id/btnCreateTask"
@@ -105,7 +107,8 @@
             android:textColor="@color/primaryTextColor"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/descriptionTask" />
+            app:layout_constraintTop_toBottomOf="@+id/descriptionTask"
+            tools:ignore="TextContrastCheck" />
 
 
         <Button
@@ -124,7 +127,8 @@
             android:textColor="@color/primaryTextColor"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/descriptionTask" />
+            app:layout_constraintTop_toBottomOf="@+id/descriptionTask"
+            tools:ignore="TextContrastCheck" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

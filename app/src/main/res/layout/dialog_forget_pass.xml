@@ -35,18 +35,19 @@
             android:layout_marginTop="25dp"
             android:layout_marginEnd="20dp"
             android:background="@drawable/rounded_edittext"
+            android:drawableStart="@drawable/ic_email"
+            android:drawablePadding="10dp"
+            android:drawableTint="@color/primaryColor"
             android:fontFamily="@font/montserrat_regular"
             android:hint="@string/e_mail"
             android:inputType="textEmailAddress"
             android:maxLength="50"
             android:padding="15dp"
             android:textSize="15sp"
-            android:drawableTint="@color/primaryColor"
-            android:drawableLeft="@drawable/ic_email"
-            android:drawablePadding="10dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/ingressMail" />
+            app:layout_constraintTop_toBottomOf="@+id/ingressMail"
+            tools:ignore="TextContrastCheck" />
 
         <Button
             android:id="@+id/btnRecover"
@@ -64,7 +65,8 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/recoverInput"/>
+            app:layout_constraintTop_toBottomOf="@+id/recoverInput"
+            tools:ignore="TextContrastCheck" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

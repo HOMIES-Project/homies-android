@@ -11,14 +11,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         tools:context=".LayoutActivity">
+
         <Button
             android:id="@+id/btnCancelActionGroup"
-            android:layout_width="14dp"
-            android:layout_height="14dp"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
             android:layout_marginEnd="10dp"
             android:background="@drawable/ic_close"
             app:layout_constraintBottom_toTopOf="@+id/eraseGroup"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
         <TextView
             android:id="@+id/eraseGroup"
@@ -28,9 +30,9 @@
             android:layout_marginTop="24dp"
             android:layout_marginEnd="20dp"
             android:fontFamily="@font/montserrat_regular"
-            android:gravity="left"
+            android:gravity="start"
             android:text="@string/leave_group"
-            android:textSize="17dp"
+            android:textSize="17sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -44,7 +46,7 @@
             android:layout_marginTop="16dp"
             android:layout_marginEnd="20dp"
             android:fontFamily="@font/montserrat_regular"
-            android:gravity="left"
+            android:gravity="start"
             android:text="@string/noreturn_text"
             android:textSize="17sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -68,7 +70,8 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/noReturn"/>
+            app:layout_constraintTop_toBottomOf="@+id/noReturn"
+            tools:ignore="TextContrastCheck" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
