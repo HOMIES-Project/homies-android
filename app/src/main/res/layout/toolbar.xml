@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/primaryColor"
+    app:titleTextColor="@color/primaryTextColor"
+    app:navigationIcon="@drawable/ic_logo_toolbar"
+    android:id="@+id/toolbar">
+
+    <RelativeLayout
+        android:layout_width="100dp"
+        android:layout_height="match_parent"
+        android:layout_alignParentEnd="true"
+        android:layout_gravity="end">
+
+
+        <ImageView
+            android:id="@+id/img1"
+            android:layout_width="45dp"
+            android:layout_height="34dp"
+            android:layout_alignParentEnd="true"
+            android:layout_gravity="end"
+            android:src="@drawable/ic_logout"
+            tools:ignore="ImageContrastCheck" />
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/img2"
+            android:layout_width="45dp"
+            android:layout_height="34dp"
+            android:layout_alignParentStart="true"
+            android:layout_gravity="start"
+            android:src="@drawable/user_profile_icon"
+            tools:ignore="ImageContrastCheck" />
+
+
+</RelativeLayout>
+
+
+
+</androidx.appcompat.widget.Toolbar>

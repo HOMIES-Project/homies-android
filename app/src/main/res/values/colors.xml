@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+    <color name="primaryColor">#34ADE7</color>
+    <color name="primaryLightColor">#5BB8E4</color>
+    <color name="primaryLightColor2">#91CBE7</color>
+    <color name="primaryLightColor3">#D3ECF6</color>
+    <color name="primaryLightColor4">#E4E9EC</color>
+
+
+    <color name="secondaryColor">#005D8E</color>
+    <color name="secondaryLightColor">#378DB6</color>
+    <color name="secondaryLightColor2">#64A5C3</color>
+    <color name="secondaryLightColor3">#93BDD0</color>
+    <color name="secondaryLightColor4">#BFD6E0</color>
+
+    <color name="errorColor">#9B0000</color>
+    <color name="errorLightColor">#A72A2A</color>
+    <color name="errorLightColor2">#B65252</color>
+    <color name="errorLightColor3">#CF8585</color>
+    <color name="errorLightColor4">#FAEBED</color>
+
+    <color name="background">#FBFBFB</color>
+
+
+    <color name="primaryTextColor">#FFFFFF</color>
+    <color name="fieldTextColor">#1E2A0F</color>
+    <color name="secondaryTextColor">#000000</color>
+    <color name="errorTextColor">#FFFFFF</color>
+</resources>

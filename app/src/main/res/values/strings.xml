@@ -1,0 +1,124 @@
+<resources>
+
+    <!-- Login/Register -->
+    <string name="app_name">Homies</string>
+    <string name="username">Usuario</string>
+    <string name="password">Contraseña</string>
+    <string name="e_mail">Email</string>
+    <string name="phone">Telefono</string>
+    <string name="birthday">F.Nacimiento</string>
+    <string name="register">Registrarse</string>
+    <string name="re_type_password">Repetir Contraseña</string>
+    <string name="your_first_name">Nombre</string>
+    <string name="your_last_name">Apellidos</string>
+    <string name="val_required">Todos los campos obligatorios</string>
+    <string name="val_passMin">Contraseña mínima de 8 caracteres</string>
+    <string name="val_four_character">Mínimo de 4 caracteres</string>
+    <string name="val_email">Mínimo de 8 caracteres</string>
+    <string name="val_pass">Mínimo de 8 caracteres</string>
+    <string name="val_repass">Mínimo de 8 caracteres</string>
+    <string name="val_pass_matched">La contraseña no coincide</string>
+    <string name="login">Login</string>
+    <string name="rememberPassword">¿Has olvidado la contraseña?</string>
+    <string name="signUpPage">Registro</string>
+    <string name="signUpCorrect">Registrado</string>
+    <string name="signUpFailed">Error en el registro</string>
+    <string name="fieldEmpty">El campo no puede estar vacio</string>
+    <string name="fieldEmail">El campo debe tener el formato email</string>
+    <string name="logoApp">Homies</string>
+    <string name="helperRequired">Obligatorio*</string>
+    <string name="error_login">¡Error! Intentelo de nuevo</string>
+    <string name="snackbar_confirm_email">Revisa tu email para finalizar el registro</string>
+    <string name="error_user_registered">Usuario ya registrado</string>
+    <string name="error_server">Error en el servidor</string>
+
+
+
+    <!-- Group -->
+    <string name="ingressEmail">Debes de introducir una dirección de email para que la contraseña se envíe.</string>
+    <string name="recoverButton">Enviar</string>
+    <string name="settings">Opciones</string>
+    <string name="group_exit">Salir del grupo</string>
+    <string name="log_out">Cerrar sesion</string>
+    <string name="groupName">Grupo</string>
+    <string name="addGroup">Craer Grupo</string>
+    <string name="delete_group">Borrar Grupo</string>
+    <string name="text_erase_group">¿Estás seguro que quieres eliminar este grupo?</string>
+    <string name="noreturn_text">Esta acción no puede deshacerse</string>
+    <string name="confirmErase">Confirmar</string>
+    <string name="confirm">Confirmar</string>
+    <string name="groupSucess">¡Grupo creado!</string>
+    <string name="add_user">Añadir usuario</string>
+    <string name="val_user">Es necesario un nombre de usuario</string>
+    <string name="userSucess">Usuario añadido</string>
+    <string name="groupDescription">Descripcion</string>
+    <string name="Btn_leave_group">Dejar grupo</string>
+    <string name="btn_shopping_list">Lista de la compra</string>
+    <string name="btn_expenses">Gastos</string>
+    <string name="btn_add_task">Añadir tarea</string>
+    <string name="btn_editGroup">Editar grupo</string>
+    <string name="title_toolber_myGroup">Mi grupo</string>
+    <string name="delete_user">¿Estás seguro de que quieres eliminar al usuario de este grupo?</string>
+    <string name="leave_group">¿Está seguro de que quiere salir de este grupo?</string>
+    <string name="confirm_leave_group">Saliste del grupo</string>
+    <string name="delete_user_group">Usuario borrado del grupo</string>
+    <string name="ingressGroup">Introduzca nombre del grupo y una descripción.</string>
+    <string name="nameGroup">Introduzca nombre grupo</string>
+    <string name="descriptionGroup">Introduzca descripción del grupo</string>
+    <string name="Cancel">Cancelar</string>
+    <string name="val_name">Es necesario asignar al grupo un nombre</string>
+    <string name="val_desc">Es necesario asignar al grupo una descripción</string>
+    <string name="val_group">El nombre debe contener entre 3 y 50 caracteres</string>
+    <string name="userTV">Introduce el id del usuario que quieres añadir</string>
+    <string name="error_user">Usuario no añadido al grupo</string>
+    <string name="deleteGroupSucess">¡Grupo eliminado!</string>
+    <string name="changeAdmin">Hacer Admin. del grupo</string>
+    <string name="change_admin">¿Está seguro de que quiere cambiar de administrador?</string>
+
+
+    <!-- Settings User -->
+    <string name="saveChanges">Guardar Cambios</string>
+    <string name="deleteAccount">Borrar cuenta</string>
+    <string name="confirmDelete">¿Estás seguro de que quieres eliminar tu perfil?</string>
+    <string name="reconfirmDelete">Esta accion no puede deshacerse</string>
+    <string name="deleteSucess">¡Usuario eliminado!</string>
+    <string name="updateInfo">Datos Actualizados</string>
+    <string name="oldpassword">Contraseña actual</string>
+    <string name="newpassword">Contraseña nueva</string>
+    <string name="changePass">Cambiar Contraseña</string>
+    <string name="changeSucess">¡Contraseña cambiada!</string>
+
+
+    <!-- Shopping List -->
+    <string name="delete_all_products">¿Estás seguro de que quieres eliminar todos los articulos comprados?</string>
+    <string name="to_buy">Por comprar</string>
+    <string name="purchased">Comprado</string>
+    <string name="delete">Borrar todo</string>
+
+    <!-- Task List -->
+    <string name="btn_cancel_task">cancelar</string>
+    <string name="btn_confirm_task">confirmar</string>
+    <string name="description_task_et">descripción</string>
+    <string name="task_et">tarea</string>
+    <string name="task_text_dialog">Debes de introducir al menos una tarea y un usuario</string>
+    =======
+
+    <!-- List Expenses -->
+    <string name="balance">Saldo</string>
+    <string name="expenses">Gastos</string>
+    <string name="noexpenses">No hay ningun gasto aun</string>
+    <string name="dialogExpenses">Escriba su gasto y a quién va dirigido</string>
+    <string name="descriptionExpenses">Descripción del Gasto</string>
+    <string name="selectMember">Elige un miembro</string>
+    <string name="forWhom">Para quien</string>
+    <string name="expenditure">Introduzca el gasto</string>
+    <string name="createExpenses">Crear Gasto</string>
+    <string name="expenseSucess">Gasto Creado</string>
+    <string name="act">Actualizar</string>
+    <string name="select_name">Select Name</string>
+
+
+    >>>>>>> develop
+
+
+</resources>
