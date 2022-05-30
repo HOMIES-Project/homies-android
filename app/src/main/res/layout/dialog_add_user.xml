@@ -14,12 +14,13 @@
 
         <Button
             android:id="@+id/btnCancelAction"
-            android:layout_width="14dp"
-            android:layout_height="14dp"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
             android:layout_marginEnd="10dp"
             android:background="@drawable/ic_close"
             app:layout_constraintBottom_toTopOf="@+id/ingressUser"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
         <TextView
             android:id="@+id/ingressUser"
@@ -29,7 +30,7 @@
             android:layout_marginTop="22dp"
             android:layout_marginEnd="20dp"
             android:fontFamily="@font/montserrat_regular"
-            android:gravity="left"
+            android:gravity="start"
             android:lines="2"
             android:minLines="2"
             android:singleLine="false"
@@ -47,18 +48,19 @@
             android:layout_marginTop="40dp"
             android:layout_marginEnd="20dp"
             android:background="@drawable/rounded_edittext"
-            android:drawableLeft="@drawable/ic_user"
+            android:drawableStart="@drawable/ic_user"
             android:drawablePadding="10dp"
             android:drawableTint="@color/primaryColor"
             android:fontFamily="@font/montserrat_regular"
-            android:hint="@string/add_user_et"
+            android:hint="@string/username"
             android:inputType="text"
             android:maxLength="50"
             android:padding="15dp"
             android:textSize="15sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/ingressUser" />
+            app:layout_constraintTop_toBottomOf="@+id/ingressUser"
+            tools:ignore="TextContrastCheck" />
 
         <Button
             android:id="@+id/btnConfirmUser"
@@ -70,13 +72,14 @@
             android:background="@drawable/btn_custom"
             android:fontFamily="@font/montserrat_regular"
             android:padding="1dp"
-            android:text="@string/confirmUser"
+            android:text="@string/confirm"
             android:textAllCaps="false"
             android:textColor="@color/primaryTextColor"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/userInput" />
+            app:layout_constraintTop_toBottomOf="@+id/userInput"
+            tools:ignore="TextContrastCheck" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

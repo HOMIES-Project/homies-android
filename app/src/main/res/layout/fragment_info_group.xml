@@ -1,20 +1,27 @@
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".groups.MenuActivity">
+    android:layout_height="match_parent">
 
-    <Button
-        android:id="@+id/act"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:layout_marginEnd="10dp"
-        android:gravity="center"
-        android:text="Actualizar"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <Button
+            android:id="@+id/act"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="10dp"
+            android:gravity="center"
+            android:text="@string/act"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="TextContrastCheck" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/ip_groupName"
@@ -26,6 +33,9 @@
         android:padding="1dp"
         app:boxStrokeWidth="0dp"
         app:boxStrokeWidthFocused="0dp"
+        app:counterEnabled="true"
+        app:counterMaxLength="50"
+        app:endIconMode="clear_text"
         app:errorTextAppearance="@style/error_appearance"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -48,14 +58,15 @@
             android:padding="15dp"
             android:text="@string/groupName"
             android:textColor="@color/fieldTextColor"
-            android:textSize="15sp" />
+            android:textSize="15sp"
+            tools:ignore="TextContrastCheck" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/ip_groupDetail"
         style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="130dp"
         android:layout_marginStart="20dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="20dp"
@@ -63,6 +74,9 @@
         android:textAlignment="textStart"
         app:boxStrokeWidth="0dp"
         app:boxStrokeWidthFocused="0dp"
+        app:counterEnabled="true"
+        app:counterMaxLength="50"
+        app:endIconMode="clear_text"
         app:errorTextAppearance="@style/error_appearance"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -73,7 +87,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/et_detail"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="100dp"
             android:layout_marginStart="0dp"
             android:layout_marginTop="0dp"
             android:layout_marginEnd="0dp"
@@ -81,7 +95,7 @@
             android:background="@drawable/rounded_edittext"
             android:fontFamily="@font/montserrat_regular"
             android:inputType="text"
-            android:maxLength="50"
+
             android:padding="15dp"
             android:text="@string/groupDescription"
             android:textColor="@color/fieldTextColor"
@@ -100,21 +114,22 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ip_groupDetail" />
 
-    <Button
-        android:id="@+id/btnAddUser"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:background="@drawable/btn_custom"
-        android:fontFamily="@font/montserrat_regular"
-        android:padding="1dp"
-        android:text="@string/añadir_usuario"
-        android:textAllCaps="false"
-        android:textColor="@color/primaryTextColor"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/userList" />
+        <Button
+            android:id="@+id/btnAddUser"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:background="@drawable/btn_custom"
+            android:fontFamily="@font/montserrat_regular"
+            android:padding="1dp"
+            android:text="@string/add_user"
+            android:textAllCaps="false"
+            android:textColor="@color/primaryTextColor"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/userList"
+            tools:ignore="TextContrastCheck" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnLeaveGroup"
@@ -149,7 +164,21 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnLeaveGroup" />
 
+        <ProgressBar
+            android:id="@+id/progressBar2"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:indeterminate="true"
+            android:indeterminateTintMode="src_atop"
+            android:indeterminateTint="@color/primaryColor"
+            android:visibility="gone"/>
 
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

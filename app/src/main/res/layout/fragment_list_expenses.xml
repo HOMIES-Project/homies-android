@@ -43,7 +43,9 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.979"
-        app:srcCompat="@drawable/ic_plus_circle" />
+        app:srcCompat="@drawable/ic_plus_circle"
+        tools:ignore="SpeakableTextPresentCheck,ImageContrastCheck"
+        tools:targetApi="p" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/noExpenses"

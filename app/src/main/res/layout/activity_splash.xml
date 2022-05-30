@@ -8,21 +8,20 @@
     android:background="@color/primaryColor">
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/logo"
         android:layout_width="133dp"
         android:layout_height="164dp"
-        android:layout_marginStart="139dp"
-        android:layout_marginTop="203dp"
-        android:layout_marginEnd="139dp"
-        android:layout_marginBottom="250dp"
+        android:layout_marginTop="190dp"
+        android:layout_marginBottom="104dp"
         app:layout_constraintBottom_toTopOf="@+id/progressBar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_logo_circle" />
+        app:srcCompat="@drawable/ic_logo_circle"
+        tools:ignore="ImageContrastCheck" />
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/nameLogo"
         android:layout_width="146dp"
         android:layout_height="69dp"
         android:layout_marginStart="132dp"
@@ -31,7 +30,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/ic_branding" />
+        app:srcCompat="@drawable/ic_branding"
+        tools:ignore="ImageContrastCheck" />
 
     <ProgressBar
         android:id="@+id/progressBar"
@@ -41,7 +41,7 @@
         android:layout_marginStart="181dp"
         android:layout_marginEnd="182dp"
         android:layout_marginBottom="38dp"
-        app:layout_constraintBottom_toTopOf="@+id/imageView2"
+        app:layout_constraintBottom_toTopOf="@+id/nameLogo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         android:indeterminate="true"

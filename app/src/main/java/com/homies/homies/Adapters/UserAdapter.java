@@ -1,4 +1,4 @@
-package com.homies.homies;
+package com.homies.homies.Adapters;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -8,29 +8,18 @@ import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.homies.homies.R;
 import com.homies.homies.groups.InfoGroupFragment;
-import com.homies.homies.retrofit.model.DeleteUser;
-import com.homies.homies.retrofit.model.GroupResponse;
-import com.homies.homies.retrofit.model.UserData;
+import com.homies.homies.retrofit.model.group.GroupResponse;
+import com.homies.homies.retrofit.model.user.UserData;
 
-import org.w3c.dom.Text;
-
-import java.security.acl.Group;
-import java.util.ArrayList;
-import java.util.List;
-
+//adapter to view group members
 public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolderDatos> {
 
     GroupResponse groups ;

@@ -1,10 +1,8 @@
 package com.homies.homies.retrofit.model.tasks;
 
-import com.homies.homies.retrofit.model.TaskList;
-import com.homies.homies.retrofit.model.UserAdmin;
-import com.homies.homies.retrofit.model.UserData;
+import com.homies.homies.retrofit.model.user.UserAdmin;
+import com.homies.homies.retrofit.model.user.UserData;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class TaskListResponse {

@@ -1,6 +1,6 @@
-package com.homies.homies.retrofit.model;
+package com.homies.homies.retrofit.model.group;
 
-import com.homies.homies.retrofit.model.UserData;
+import com.homies.homies.retrofit.model.user.UserData;
 
 import java.util.Date;
 import java.util.List;

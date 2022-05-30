@@ -4,6 +4,7 @@ import static android.app.Activity.RESULT_OK;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -29,6 +30,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -36,20 +38,20 @@ import android.widget.Toast;
 
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.textfield.TextInputLayout;
-import com.homies.homies.groups.ListsGroupFragment;
 import com.homies.homies.groups.MenuActivity;
 import com.homies.homies.R;
 import com.homies.homies.retrofit.config.NetworkConfig;
-import com.homies.homies.retrofit.model.ChangePass;
-import com.homies.homies.retrofit.model.LeaveGroup;
-import com.homies.homies.retrofit.model.UserData;
-import com.homies.homies.retrofit.model.UserRequest;
-import com.homies.homies.retrofit.model.UserResponse;
+import com.homies.homies.retrofit.model.user.ChangePass;
+import com.homies.homies.retrofit.model.user.UserData;
+import com.homies.homies.retrofit.model.user.UserRequest;
+import com.homies.homies.retrofit.model.user.UserResponse;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
-import java.util.regex.Pattern;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -68,6 +70,7 @@ public class SettingsUser extends Fragment {
     ProgressBar progressBar;
     boolean condition = true;
     private Bitmap bitmap;
+    DatePickerDialog datePickerDialog;
 
     private static final int MY_PERMISSIONS_REQUEST = 100;
     private final int PICK_IMAGE_FROM_GALLERY_REQUEST =1;
@@ -114,7 +117,7 @@ public class SettingsUser extends Fragment {
         upload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                progressBar.setVisibility(View.VISIBLE);
                 Intent intent = new Intent();
                 intent.setType("image/*");
                 intent.setAction(Intent.ACTION_GET_CONTENT);
@@ -126,6 +129,7 @@ public class SettingsUser extends Fragment {
         btn_save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                progressBar.setVisibility(View.VISIBLE);
                 condition = true;
                 validateClickFields();
                 if (condition) {
@@ -141,13 +145,13 @@ public class SettingsUser extends Fragment {
             );
             View bottomSheetView = LayoutInflater.from(activity.getApplicationContext())
                     .inflate(
-                            R.layout.dialog_layout_botton_deleteuser,
+                            R.layout.dialog_delete_profile,
                             settings.findViewById(R.id.bottonDeleteUser)
                     );
 
             btnConfirm = bottomSheetView.findViewById(R.id.btnConfirm);
             btnConfirm.setOnClickListener(view1 -> {
-
+                progressBar.setVisibility(View.VISIBLE);
                 deleteUser();
 
 
@@ -175,7 +179,7 @@ public class SettingsUser extends Fragment {
             btnAdd = bottomSheetView.findViewById(R.id.btnAdd);
             btnCancel = bottomSheetView.findViewById(R.id.btnCancel);
             btnAdd.setOnClickListener(view1 -> {
-
+                progressBar.setVisibility(View.VISIBLE);
                 changePass(changeRequest());
 
 
@@ -189,6 +193,33 @@ public class SettingsUser extends Fragment {
 
             bottomSheetDialog.setContentView(bottomSheetView);
             bottomSheetDialog.show();
+        });
+
+        et_birthday.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // calender class's instance and get current date , month and year from calender
+                final Calendar c = Calendar.getInstance();
+                int mYear = c.get(Calendar.YEAR); // current year
+                int mMonth = c.get(Calendar.MONTH); // current month
+                int mDay = c.get(Calendar.DAY_OF_MONTH); // current day
+                // date picker dialog
+                datePickerDialog = new DatePickerDialog(getContext(),
+                        new DatePickerDialog.OnDateSetListener() {
+
+                            @Override
+                            public void onDateSet(DatePicker view, int year,
+                                                  int monthOfYear, int dayOfMonth) {
+                                // set day of month , month and year value in the edit text
+                                Date date = new Date(year-1900, monthOfYear,dayOfMonth);
+                                SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+                                String cdate = formatter.format(date);
+                                et_birthday.setText(cdate);
+
+                            }
+                        }, mYear, mMonth, mDay);
+                datePickerDialog.show();
+            }
         });
 
         return settings;
@@ -212,12 +243,14 @@ public class SettingsUser extends Fragment {
             @Override
             public void onResponse(Call<UserResponse> call, Response<UserResponse> response) {
                 if (response.isSuccessful()) {
+                    progressBar.setVisibility(View.GONE);
                     String message = getString(R.string.deleteSucess);
                     Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(activity, MainActivity.class));
                     activity.finish();
 
                 } else {
+                    progressBar.setVisibility(View.GONE);
                     String message = getString(R.string.error_login);
                     Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
                 }
@@ -264,6 +297,7 @@ public class SettingsUser extends Fragment {
                     et_birthday.setText(birthday);
 
                 } else {
+                    progressBar.setVisibility(View.GONE);
                     String message = getString(R.string.error_login);
                     Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
                 }
@@ -313,6 +347,7 @@ public class SettingsUser extends Fragment {
             @Override
             public void onResponse(Call<UserData> call, Response<UserData> response) {
                 if (response.isSuccessful()) {
+                    progressBar.setVisibility(View.GONE);
 
                    startActivity(new Intent(activity, MenuActivity.class));
                     activity.finish();
@@ -322,6 +357,7 @@ public class SettingsUser extends Fragment {
 
 
                 } else {
+                    progressBar.setVisibility(View.GONE);
                     String message = getString(R.string.error_login);
                     Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
                 }
@@ -380,7 +416,7 @@ public class SettingsUser extends Fragment {
 
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if (et_user.getText().toString().trim().length() < 4) {
-                    ip_user.setError(getString(R.string.val_username));
+                    ip_user.setError(getString(R.string.val_four_character));
                     condition = false;
                 } else {
                     ip_user.setErrorEnabled(false);
@@ -428,10 +464,18 @@ public class SettingsUser extends Fragment {
     private void validateClickFields() {
 
         if (et_user.getText().toString().trim().length() < 4) {
-            ip_user.setError(getString(R.string.val_username));
+            ip_user.setError(getString(R.string.val_four_character));
             condition = false;
         } else {
             ip_user.setErrorEnabled(false);
+        }
+
+        String phoneInput = et_phone.getText().toString().trim();
+        if (phoneInput.length() < 8) {
+            ip_phone.setError(getString(R.string.val_email));
+            condition = false;
+        }  else {
+            ip_phone.setErrorEnabled(false);
         }
 
         String emailInput = et_email.getText().toString().trim();
@@ -471,7 +515,7 @@ public class SettingsUser extends Fragment {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
                 if (response.isSuccessful()) {
-
+                    progressBar.setVisibility(View.GONE);
                     if (et_newpassword.length() < 8) {
                         ip_password.setError(getString(R.string.val_passMin));
                         condition = false;
@@ -479,6 +523,7 @@ public class SettingsUser extends Fragment {
                         Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
 
                     }else {
+                        progressBar.setVisibility(View.GONE);
                         String message = getString(R.string.changeSucess);
                         Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
 

@@ -14,12 +14,13 @@
 
         <Button
             android:id="@+id/btnCancelAction"
-            android:layout_width="14dp"
-            android:layout_height="14dp"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
             android:layout_marginEnd="10dp"
             android:background="@drawable/ic_close"
             app:layout_constraintBottom_toTopOf="@+id/ingressUser"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
         <TextView
             android:id="@+id/ingressUser"
@@ -29,7 +30,7 @@
             android:layout_marginTop="22dp"
             android:layout_marginEnd="20dp"
             android:fontFamily="@font/montserrat_regular"
-            android:gravity="left"
+            android:gravity="start"
             android:lines="2"
             android:minLines="2"
             android:singleLine="false"
@@ -46,7 +47,7 @@
             android:layout_marginStart="20dp"
             android:layout_marginTop="30dp"
             android:background="@drawable/rounded_edittext"
-            android:drawableLeft="@drawable/ic_assignment"
+            android:drawableStart="@drawable/ic_assignment"
             android:drawablePadding="10dp"
             android:drawableTint="@color/primaryColor"
             android:fontFamily="@font/montserrat_regular"
@@ -54,18 +55,19 @@
             android:inputType="text"
             android:maxLength="50"
             android:padding="15dp"
-            android:textSize="10sp"
+            android:textSize="11sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/ingressUser" />
+            app:layout_constraintTop_toBottomOf="@+id/ingressUser"
+            tools:ignore="TextContrastCheck" />
+
         <androidx.appcompat.widget.AppCompatSpinner
             android:id="@+id/memberInput"
             android:layout_width="169dp"
             android:layout_height="61dp"
-            android:layout_marginStart="20dp"
             android:layout_marginTop="30dp"
             android:layout_marginEnd="20dp"
             android:background="@drawable/rounded_edittext"
-            android:drawableLeft="@drawable/ic_user"
+            android:drawableStart="@drawable/ic_user"
             android:drawablePadding="10dp"
             android:drawableTint="@color/primaryColor"
             android:fontFamily="@font/montserrat_regular"
@@ -73,18 +75,19 @@
             android:inputType="text"
             android:maxLength="50"
             android:padding="15dp"
-            android:textSize="10sp"
+            android:textSize="11sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/ingressUser" />
+            app:layout_constraintTop_toBottomOf="@+id/ingressUser"
+            tools:ignore="SpeakableTextPresentCheck" />
+
         <EditText
             android:id="@+id/expenditureInput"
             android:layout_width="169dp"
             android:layout_height="61dp"
             android:layout_marginStart="20dp"
             android:layout_marginTop="20dp"
-            android:layout_marginEnd="20dp"
             android:background="@drawable/rounded_edittext"
-            android:drawableLeft="@drawable/ic_monetization_on"
+            android:drawableStart="@drawable/ic_monetization_on"
             android:drawablePadding="10dp"
             android:drawableTint="@color/primaryColor"
             android:fontFamily="@font/montserrat_regular"
@@ -92,18 +95,19 @@
             android:inputType="text"
             android:maxLength="50"
             android:padding="15dp"
-            android:textSize="10sp"
+            android:textSize="11sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/descriptionInput" />
+            app:layout_constraintTop_toBottomOf="@+id/descriptionInput"
+            tools:ignore="TextContrastCheck" />
+
         <androidx.appcompat.widget.AppCompatSpinner
             android:id="@+id/whomInput"
             android:layout_width="169dp"
             android:layout_height="61dp"
-            android:layout_marginStart="20dp"
             android:layout_marginTop="20dp"
             android:layout_marginEnd="20dp"
             android:background="@drawable/rounded_edittext"
-            android:drawableLeft="@drawable/ic_user"
+            android:drawableStart="@drawable/ic_user"
             android:drawablePadding="10dp"
             android:drawableTint="@color/primaryColor"
             android:fontFamily="@font/montserrat_regular"
@@ -111,9 +115,10 @@
             android:inputType="text"
             android:maxLength="50"
             android:padding="15dp"
-            android:textSize="10sp"
+            android:textSize="11sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/memberInput" />
+            app:layout_constraintTop_toBottomOf="@+id/memberInput"
+            tools:ignore="SpeakableTextPresentCheck" />
 
 
         <Button
@@ -121,8 +126,8 @@
             android:layout_width="169dp"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:layout_marginTop="25dp"
             android:layout_marginStart="20dp"
+            android:layout_marginTop="25dp"
             android:layout_marginBottom="12dp"
             android:background="@drawable/btn_custom"
             android:fontFamily="@font/montserrat_regular"
@@ -132,7 +137,9 @@
             android:textColor="@color/primaryTextColor"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/expenditureInput" />
+            app:layout_constraintTop_toBottomOf="@+id/expenditureInput"
+            tools:ignore="TextContrastCheck" />
+
         <Button
             android:id="@+id/btnCancelExpense"
             android:layout_width="169dp"
@@ -149,7 +156,8 @@
             android:textColor="@color/primaryTextColor"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/whomInput" />
+            app:layout_constraintTop_toBottomOf="@+id/whomInput"
+            tools:ignore="TextContrastCheck" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

@@ -1,4 +1,4 @@
-package com.homies.homies.groups;
+package com.homies.homies.List;
 
 import android.app.Activity;
 import android.app.Dialog;
@@ -16,8 +16,9 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.homies.homies.R;
+import com.homies.homies.groups.MenuActivity;
 
-
+//*****************in development*****************
 public class ListShoppingFragment extends Fragment {
 
     TextView haveTo, comprado;
@@ -43,7 +44,7 @@ public class ListShoppingFragment extends Fragment {
         dialog();
 
 
-        ((MenuActivity)getActivity()).getSupportActionBar().setTitle("Lista de Gastos");
+        ((MenuActivity)getActivity()).getSupportActionBar().setTitle("Lista de la Compra");
 
 
 

@@ -23,7 +23,7 @@ import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputLayout;
 import com.homies.homies.R;
 import com.homies.homies.retrofit.config.NetworkConfig;
-import com.homies.homies.retrofit.model.UserRequest;
+import com.homies.homies.retrofit.model.user.UserRequest;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -106,7 +106,7 @@ public class RegisterFragment extends Fragment {
 
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if (et_user.getText().toString().trim().length() < 4) {
-                    ip_user.setError(getString(R.string.val_username));
+                    ip_user.setError(getString(R.string.val_four_character));
                     condition = false;
                 } else {
                     ip_user.setErrorEnabled(false);
@@ -215,7 +215,7 @@ public class RegisterFragment extends Fragment {
     private void validateClickFields() {
 
         if (et_user.getText().toString().trim().length() < 4) {
-            ip_user.setError(getString(R.string.val_username));
+            ip_user.setError(getString(R.string.val_four_character));
             condition = false;
         } else {
             ip_user.setErrorEnabled(false);
@@ -271,6 +271,7 @@ public class RegisterFragment extends Fragment {
         return userRequest;
     }
 
+    //method of registration
     public void saveUser(UserRequest userRequest) {
         Call<Void> userResponseCall = NetworkConfig.getService().saveUser(userRequest);
         userResponseCall.enqueue(new Callback<Void>() {
@@ -301,6 +302,7 @@ public class RegisterFragment extends Fragment {
     }
 
 
+    //method to go to login
     public void Login(View v) {
         LoginFragment loginFragment = new LoginFragment();
         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();

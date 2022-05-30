@@ -1,15 +1,15 @@
 package com.homies.homies.retrofit.api;
 
-import com.homies.homies.retrofit.model.AddUser;
-import com.homies.homies.retrofit.model.ChangeAdmin;
-import com.homies.homies.retrofit.model.ChangePass;
-import com.homies.homies.retrofit.model.DeleteUser;
-import com.homies.homies.retrofit.model.GroupRequest;
-import com.homies.homies.retrofit.model.GroupResponse;
-import com.homies.homies.retrofit.model.LeaveGroup;
-import com.homies.homies.retrofit.model.UserData;
-import com.homies.homies.retrofit.model.UserRequest;
-import com.homies.homies.retrofit.model.UserResponse;
+import com.homies.homies.retrofit.model.group.AddUser;
+import com.homies.homies.retrofit.model.group.ChangeAdmin;
+import com.homies.homies.retrofit.model.user.ChangePass;
+import com.homies.homies.retrofit.model.user.DeleteUser;
+import com.homies.homies.retrofit.model.group.GroupRequest;
+import com.homies.homies.retrofit.model.group.GroupResponse;
+import com.homies.homies.retrofit.model.group.LeaveGroup;
+import com.homies.homies.retrofit.model.user.UserData;
+import com.homies.homies.retrofit.model.user.UserRequest;
+import com.homies.homies.retrofit.model.user.UserResponse;
 import com.homies.homies.retrofit.model.tasks.AddUserTask;
 import com.homies.homies.retrofit.model.tasks.CreateNewTask;
 import com.homies.homies.retrofit.model.tasks.DeleteUserTask;
@@ -78,7 +78,7 @@ public interface UserService {
     Call<GroupResponse> updateInfoGroup(@Header("Authorization")String authHeader,@Path("id") int userId, @Body GroupRequest groupRequest);
 
 
-    //task funtions
+    //task funtions(in development)
 
     @POST("tasks")
     Call<TaskListResponse> createNewTask(@Header("Authorization") String authHeader, @Body CreateNewTask createNewTask);

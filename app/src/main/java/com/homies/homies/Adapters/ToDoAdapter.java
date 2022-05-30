@@ -1,4 +1,4 @@
-package com.homies.homies;
+package com.homies.homies.Adapters;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -12,16 +12,19 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.homies.homies.groups.ListsGroupFragment;
+import com.homies.homies.List.ListsTaskFragment;
+import com.homies.homies.R;
 import com.homies.homies.retrofit.model.tasks.TaskListResponse;
 
+
+//adapter to view List Task (in development)
 public class ToDoAdapter extends RecyclerView.Adapter<ToDoAdapter.ViewHolder> {
 
     TaskListResponse taskList ;
     Context context;
     ClickedTask clickedTask;
 
-    ListsGroupFragment listsGroupFragment = new ListsGroupFragment();
+    ListsTaskFragment listsTaskFragment = new ListsTaskFragment();
 
 
     public ToDoAdapter( ClickedTask clickedTask) {

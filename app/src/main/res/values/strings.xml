@@ -1,6 +1,7 @@
 <resources>
+
+    <!-- Login/Register -->
     <string name="app_name">Homies</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="username">Usuario</string>
     <string name="password">Contraseña</string>
     <string name="e_mail">Email</string>
@@ -12,7 +13,7 @@
     <string name="your_last_name">Apellidos</string>
     <string name="val_required">Todos los campos obligatorios</string>
     <string name="val_passMin">Contraseña mínima de 8 caracteres</string>
-    <string name="val_username">Mínimo de 4 caracteres</string>
+    <string name="val_four_character">Mínimo de 4 caracteres</string>
     <string name="val_email">Mínimo de 8 caracteres</string>
     <string name="val_pass">Mínimo de 8 caracteres</string>
     <string name="val_repass">Mínimo de 8 caracteres</string>
@@ -31,27 +32,23 @@
     <string name="error_user_registered">Usuario ya registrado</string>
     <string name="error_server">Error en el servidor</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 
-    <string name="recoverInput">Email</string>
+
+    <!-- Group -->
     <string name="ingressEmail">Debes de introducir una dirección de email para que la contraseña se envíe.</string>
     <string name="recoverButton">Enviar</string>
     <string name="settings">Opciones</string>
     <string name="group_exit">Salir del grupo</string>
     <string name="log_out">Cerrar sesion</string>
-    <string name="groupName">Group</string>
+    <string name="groupName">Grupo</string>
+    <string name="addGroup">Craer Grupo</string>
     <string name="delete_group">Borrar Grupo</string>
     <string name="text_erase_group">¿Estás seguro que quieres eliminar este grupo?</string>
     <string name="noreturn_text">Esta acción no puede deshacerse</string>
     <string name="confirmErase">Confirmar</string>
-    <string name="userTV">Introduce el id del usuario que quieres añadir</string>
-    <string name="add_user_et">Usuario</string>
-    <string name="error_user">Usuario no añadido al grupo</string>
-    <string name="confirmUser">Confirmar</string>
-
-    <!-- Add Group -->
-    <string name="añadir_usuario">Añadir usuario</string>
+    <string name="confirm">Confirmar</string>
+    <string name="groupSucess">¡Grupo creado!</string>
+    <string name="add_user">Añadir usuario</string>
     <string name="val_user">Es necesario un nombre de usuario</string>
     <string name="userSucess">Usuario añadido</string>
     <string name="groupDescription">Descripcion</string>
@@ -68,13 +65,14 @@
     <string name="ingressGroup">Introduzca nombre del grupo y una descripción.</string>
     <string name="nameGroup">Introduzca nombre grupo</string>
     <string name="descriptionGroup">Introduzca descripción del grupo</string>
-    <string name="addButton">Crear Grupo</string>
     <string name="Cancel">Cancelar</string>
-    <string name="val_name">Es necesario asiganr al grupo un nombre</string>
-    <string name="groupSucess">¡Grupo creado!</string>
+    <string name="val_name">Es necesario asignar al grupo un nombre</string>
+    <string name="val_desc">Es necesario asignar al grupo una descripción</string>
+    <string name="val_group">El nombre debe contener entre 3 y 50 caracteres</string>
+    <string name="userTV">Introduce el id del usuario que quieres añadir</string>
+    <string name="error_user">Usuario no añadido al grupo</string>
     <string name="deleteGroupSucess">¡Grupo eliminado!</string>
     <string name="changeAdmin">Hacer Admin. del grupo</string>
-
     <string name="change_admin">¿Está seguro de que quiere cambiar de administrador?</string>
 
 
@@ -83,7 +81,6 @@
     <string name="deleteAccount">Borrar cuenta</string>
     <string name="confirmDelete">¿Estás seguro de que quieres eliminar tu perfil?</string>
     <string name="reconfirmDelete">Esta accion no puede deshacerse</string>
-    <string name="confirm">Confirmar</string>
     <string name="deleteSucess">¡Usuario eliminado!</string>
     <string name="updateInfo">Datos Actualizados</string>
     <string name="oldpassword">Contraseña actual</string>
@@ -94,9 +91,9 @@
 
     <!-- Shopping List -->
     <string name="delete_all_products">¿Estás seguro de que quieres eliminar todos los articulos comprados?</string>
-    <string name="por_comprar">Por comprar</string>
-    <string name="comprado">Comprado</string>
-    <string name="borrar_todo">Borrar todo</string>
+    <string name="to_buy">Por comprar</string>
+    <string name="purchased">Comprado</string>
+    <string name="delete">Borrar todo</string>
 
     <!-- Task List -->
     <string name="btn_cancel_task">cancelar</string>
@@ -117,6 +114,8 @@
     <string name="expenditure">Introduzca el gasto</string>
     <string name="createExpenses">Crear Gasto</string>
     <string name="expenseSucess">Gasto Creado</string>
+    <string name="act">Actualizar</string>
+    <string name="select_name">Select Name</string>
 
 
     >>>>>>> develop

@@ -42,6 +42,8 @@
         android:outlineAmbientShadowColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/ic_plus_circle" />
+        app:srcCompat="@drawable/ic_plus_circle"
+        tools:ignore="SpeakableTextPresentCheck,ImageContrastCheck"
+        tools:targetApi="p" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

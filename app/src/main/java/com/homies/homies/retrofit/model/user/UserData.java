@@ -1,15 +1,21 @@
-package com.homies.homies.retrofit.model;
+package com.homies.homies.retrofit.model.user;
 
-public class UserAdmin {
+import com.homies.homies.retrofit.model.group.GroupResponse;
+
+import java.util.List;
+
+public class UserData {
+
     private int id;
-    private byte photo;
+    private String photo;
     private String photoContentType;
     private String phone;
     private boolean premium;
     private String birthDate;
     private String addDate;
-    UserRequest userAdmin;
-    GroupRequest group;
+    UserRequest user;
+    List<GroupResponse> groups;
+    DeleteUser delete;
 
     public int getId() {
         return id;
@@ -19,11 +25,11 @@ public class UserAdmin {
         this.id = id;
     }
 
-    public byte getPhoto() {
+    public String getPhoto() {
         return photo;
     }
 
-    public void setPhoto(byte photo) {
+    public void setPhoto(String photo) {
         this.photo = photo;
     }
 
@@ -67,19 +73,27 @@ public class UserAdmin {
         this.addDate = addDate;
     }
 
-    public UserRequest getUserAdmin() {
-        return userAdmin;
+    public UserRequest getUser() {
+        return user;
     }
 
-    public void setUserAdmin(UserRequest userAdmin) {
-        this.userAdmin = userAdmin;
+    public void setUser(UserRequest user) {
+        this.user = user;
     }
 
-    public GroupRequest getGroup() {
-        return group;
+    public List<GroupResponse> getGroups() {
+        return groups;
     }
 
-    public void setGroup(GroupRequest group) {
-        this.group = group;
+    public void setGroups(List<GroupResponse> groups) {
+        this.groups = groups;
+    }
+
+    public DeleteUser getDelete() {
+        return delete;
+    }
+
+    public void setDelete(DeleteUser delete) {
+        this.delete = delete;
     }
 }
