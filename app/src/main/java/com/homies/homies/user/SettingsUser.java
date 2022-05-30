@@ -117,7 +117,7 @@ public class SettingsUser extends Fragment {
         upload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                progressBar.setVisibility(View.VISIBLE);
                 Intent intent = new Intent();
                 intent.setType("image/*");
                 intent.setAction(Intent.ACTION_GET_CONTENT);
@@ -129,6 +129,7 @@ public class SettingsUser extends Fragment {
         btn_save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                progressBar.setVisibility(View.VISIBLE);
                 condition = true;
                 validateClickFields();
                 if (condition) {
@@ -150,7 +151,7 @@ public class SettingsUser extends Fragment {
 
             btnConfirm = bottomSheetView.findViewById(R.id.btnConfirm);
             btnConfirm.setOnClickListener(view1 -> {
-
+                progressBar.setVisibility(View.VISIBLE);
                 deleteUser();
 
 
@@ -178,7 +179,7 @@ public class SettingsUser extends Fragment {
             btnAdd = bottomSheetView.findViewById(R.id.btnAdd);
             btnCancel = bottomSheetView.findViewById(R.id.btnCancel);
             btnAdd.setOnClickListener(view1 -> {
-
+                progressBar.setVisibility(View.VISIBLE);
                 changePass(changeRequest());
 
 
@@ -242,12 +243,14 @@ public class SettingsUser extends Fragment {
             @Override
             public void onResponse(Call<UserResponse> call, Response<UserResponse> response) {
                 if (response.isSuccessful()) {
+                    progressBar.setVisibility(View.GONE);
                     String message = getString(R.string.deleteSucess);
                     Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(activity, MainActivity.class));
                     activity.finish();
 
                 } else {
+                    progressBar.setVisibility(View.GONE);
                     String message = getString(R.string.error_login);
                     Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
                 }
@@ -294,6 +297,7 @@ public class SettingsUser extends Fragment {
                     et_birthday.setText(birthday);
 
                 } else {
+                    progressBar.setVisibility(View.GONE);
                     String message = getString(R.string.error_login);
                     Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
                 }
@@ -343,6 +347,7 @@ public class SettingsUser extends Fragment {
             @Override
             public void onResponse(Call<UserData> call, Response<UserData> response) {
                 if (response.isSuccessful()) {
+                    progressBar.setVisibility(View.GONE);
 
                    startActivity(new Intent(activity, MenuActivity.class));
                     activity.finish();
@@ -352,6 +357,7 @@ public class SettingsUser extends Fragment {
 
 
                 } else {
+                    progressBar.setVisibility(View.GONE);
                     String message = getString(R.string.error_login);
                     Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
                 }
@@ -509,7 +515,7 @@ public class SettingsUser extends Fragment {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
                 if (response.isSuccessful()) {
-
+                    progressBar.setVisibility(View.GONE);
                     if (et_newpassword.length() < 8) {
                         ip_password.setError(getString(R.string.val_passMin));
                         condition = false;
@@ -517,6 +523,7 @@ public class SettingsUser extends Fragment {
                         Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
 
                     }else {
+                        progressBar.setVisibility(View.GONE);
                         String message = getString(R.string.changeSucess);
                         Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
 

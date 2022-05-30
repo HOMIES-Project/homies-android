@@ -36,8 +36,7 @@ public class NetworkConfig {
                 .build();
         Retrofit retrofit = new Retrofit.Builder()
                 .addConverterFactory(GsonConverterFactory.create())
-                //.baseUrl("https://homies-back-app.herokuapp.com/api/")
-                .baseUrl("https://homies-pruebas-jorge.herokuapp.com/api/")
+                .baseUrl("https://homies-back-app.herokuapp.com/api/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(okHttpClient)
                 .build();

@@ -66,7 +66,9 @@
     <string name="nameGroup">Introduzca nombre grupo</string>
     <string name="descriptionGroup">Introduzca descripción del grupo</string>
     <string name="Cancel">Cancelar</string>
-    <string name="val_name">Es necesario asiganr al grupo un nombre</string>
+    <string name="val_name">Es necesario asignar al grupo un nombre</string>
+    <string name="val_desc">Es necesario asignar al grupo una descripción</string>
+    <string name="val_group">El nombre debe contener entre 3 y 50 caracteres</string>
     <string name="userTV">Introduce el id del usuario que quieres añadir</string>
     <string name="error_user">Usuario no añadido al grupo</string>
     <string name="deleteGroupSucess">¡Grupo eliminado!</string>

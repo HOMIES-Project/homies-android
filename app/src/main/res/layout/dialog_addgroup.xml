@@ -10,7 +10,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:context=".LayoutActivity">
+        >
 
         <TextView
             android:id="@+id/ingressGroup"
@@ -27,50 +27,110 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <EditText
-            android:id="@+id/inputGroup"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/ip_group"
+            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
             android:layout_width="match_parent"
-            android:layout_height="61dp"
+            android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="25dp"
             android:layout_marginEnd="20dp"
-            android:background="@drawable/rounded_edittext"
-            android:drawableStart="@drawable/ic_people"
-            android:drawablePadding="10dp"
-            android:drawableTint="@color/primaryColor"
+            android:layout_marginBottom="1dp"
             android:fontFamily="@font/montserrat_regular"
-            android:hint="@string/nameGroup"
-            android:inputType="textEmailAddress"
-            android:maxLength="50"
-            android:padding="15dp"
-            android:textSize="15sp"
+            android:padding="1dp"
+            app:boxStrokeWidth="0dp"
+            app:boxStrokeWidthFocused="0dp"
+            app:counterEnabled="true"
+            app:counterMaxLength="50"
+            app:endIconMode="clear_text"
+            app:errorTextAppearance="@style/error_appearance"
+            app:helperText="@string/helperRequired"
+            app:helperTextTextColor="@color/primaryLightColor"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/ingressGroup"
-            tools:ignore="TextContrastCheck"
-            android:importantForAutofill="no" />
+            app:startIconDrawable="@drawable/ic_people"
+            app:startIconTint="@color/primaryColor">
 
-        <EditText
-            android:id="@+id/inputDescription"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/inputGroup"
+                android:layout_width="match_parent"
+                android:layout_height="61dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="25dp"
+                android:layout_marginEnd="20dp"
+                app:counterEnabled="true"
+                app:counterMaxLength="20"
+                android:drawablePadding="10dp"
+                android:drawableTint="@color/primaryColor"
+                android:fontFamily="@font/montserrat_regular"
+                android:hint="@string/nameGroup"
+                android:inputType="textEmailAddress"
+                android:maxLength="50"
+                android:padding="15dp"
+                android:textSize="15sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ingressGroup"
+                tools:ignore="TextContrastCheck"
+                android:importantForAutofill="no"
+                android:layout_marginBottom="0dp"
+                android:background="@drawable/rounded_edittext"
+                android:textColor="@color/fieldTextColor"
+                 />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/ip_Detail"
+            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
             android:layout_width="match_parent"
-            android:layout_height="100dp"
+            android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="25dp"
             android:layout_marginEnd="20dp"
-            android:background="@drawable/rounded_edittext"
-            android:drawableStart="@drawable/ic_mode_edit"
-            android:drawablePadding="10dp"
-            android:drawableTint="@color/primaryColor"
+            android:layout_marginBottom="1dp"
             android:fontFamily="@font/montserrat_regular"
-            android:hint="@string/descriptionGroup"
-            android:inputType="textEmailAddress"
-            android:maxLength="50"
-            android:padding="15dp"
-            android:textSize="15sp"
+            android:padding="1dp"
+            app:boxStrokeWidth="0dp"
+            app:boxStrokeWidthFocused="0dp"
+            app:counterEnabled="true"
+            app:counterMaxLength="50"
+            app:endIconMode="clear_text"
+            app:errorTextAppearance="@style/error_appearance"
+            app:helperText="@string/helperRequired"
+            app:helperTextTextColor="@color/primaryLightColor"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/inputGroup"
-            tools:ignore="TextContrastCheck" />
+            app:layout_constraintTop_toBottomOf="@+id/ip_group"
+            app:startIconDrawable="@drawable/ic_mode_edit"
+            app:startIconTint="@color/primaryColor">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/inputDescription"
+                android:layout_width="match_parent"
+                android:layout_height="61dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="25dp"
+                android:layout_marginEnd="20dp"
+                app:counterEnabled="true"
+                app:counterMaxLength="20"
+                android:drawablePadding="10dp"
+                android:drawableTint="@color/primaryColor"
+                android:fontFamily="@font/montserrat_regular"
+                android:inputType="textEmailAddress"
+                android:maxLength="50"
+                android:padding="15dp"
+                android:textSize="15sp"
+                android:importantForAutofill="no"
+                android:layout_marginBottom="0dp"
+                android:background="@drawable/rounded_edittext"
+                android:textColor="@color/fieldTextColor"
+                android:hint="@string/descriptionGroup"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ip_Detail"
+                tools:ignore="TextContrastCheck"
+                />
+        </com.google.android.material.textfield.TextInputLayout>
 
         <Button
             android:id="@+id/btnAdd"
@@ -87,7 +147,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/btnCancel"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/inputDescription"
+            app:layout_constraintTop_toBottomOf="@+id/ip_Detail"
             tools:ignore="TextContrastCheck" />
 
 
@@ -107,7 +167,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/btnAdd"
-            app:layout_constraintTop_toBottomOf="@+id/inputDescription"
+            app:layout_constraintTop_toBottomOf="@+id/ip_Detail"
             tools:ignore="TextContrastCheck" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

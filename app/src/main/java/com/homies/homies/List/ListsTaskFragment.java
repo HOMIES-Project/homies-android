@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -55,6 +56,7 @@ public class ListsTaskFragment extends Fragment {
     private ToDoAdapter tasksAdapter;
     Activity activity;
     Context context;
+    ProgressBar progressBar;
 
     ToDoAdapter.ClickedTask clickedTask;
 
@@ -71,6 +73,10 @@ public class ListsTaskFragment extends Fragment {
         context = getActivity().getApplicationContext();
         btn_expenses = info.findViewById(R.id.btn_expenses);
         btnShoppingList = info.findViewById(R.id.btnShoppingList);
+
+        progressBar = info.findViewById(R.id.progressBar2);
+
+        progressBar.setVisibility(View.VISIBLE);
 
         btn_expenses.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -167,6 +173,7 @@ public class ListsTaskFragment extends Fragment {
             @Override
             public void onResponse(Call<GroupResponse> call, Response<GroupResponse> response) {
                 if (response.isSuccessful()) {
+                    progressBar.setVisibility(View.GONE);
                     GroupResponse adslist= response.body();
                     String user = adslist.getGroupName();
 
@@ -201,6 +208,7 @@ public class ListsTaskFragment extends Fragment {
                     });
 
                 } else {
+                    progressBar.setVisibility(View.GONE);
                     String message = getString(R.string.error_login);
                     Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
                 }

@@ -44,7 +44,7 @@ public class ListShoppingFragment extends Fragment {
         dialog();
 
 
-        ((MenuActivity)getActivity()).getSupportActionBar().setTitle("Lista de Gastos");
+        ((MenuActivity)getActivity()).getSupportActionBar().setTitle("Lista de la Compra");
 
 
 

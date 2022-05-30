@@ -5,12 +5,15 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -45,9 +48,8 @@ public class InfoGroupFragment extends Fragment {
     RecyclerView userList;
     Button btnAddUser, btnCancelAction, btnConfirmUser, btnDeleteGroup, btnCancelActionGroup, btnConfirmDeleteGroup,
             btnConfirmChangeAdmin,btnCancelChangeAdmin,btnLeaveGroup,btnConfirmLeaveGroup,act;
-    EditText userInput;
+    EditText userInput,et_GroupName, et_detail;
     Activity activity;
-    EditText et_GroupName, et_detail;
     TextInputLayout ip_groupName,ip_groupDetail;
     ImageButton delete;
     ArrayList<UserData> usuarios;
@@ -55,6 +57,8 @@ public class InfoGroupFragment extends Fragment {
     Context context;
     UserAdapter.ClickedItem clickedItem;
     Toolbar toolbar;
+    ProgressBar progressBar;
+    boolean condition = true;
 
 
 
@@ -84,6 +88,11 @@ public class InfoGroupFragment extends Fragment {
 
         delete = userList.findViewById(R.id.delete);
 
+        progressBar = editGroup.findViewById(R.id.progressBar2);
+
+        progressBar.setVisibility(View.VISIBLE);
+
+
 
         usuarios = new ArrayList<>();
         ArrayList<GroupResponse> arrayOfUsers = new ArrayList<GroupResponse>();
@@ -108,7 +117,7 @@ public class InfoGroupFragment extends Fragment {
                 btnCancelActionGroup = bottomSheetView.findViewById(R.id.btnCancelActionGroup);
                 btnConfirmDeleteGroup = bottomSheetView.findViewById(R.id.btnConfirmDeleteGroup);
                 btnConfirmDeleteGroup.setOnClickListener(view1 -> {
-
+                    progressBar.setVisibility(View.VISIBLE);
                     deleteUser(deleteRequest());
                     bottomSheetDialog.dismiss();
 
@@ -137,7 +146,7 @@ public class InfoGroupFragment extends Fragment {
                 btnCancelChangeAdmin = bottomSheetView.findViewById(R.id.btnCancelChangeAdmin);
                 btnConfirmChangeAdmin = bottomSheetView.findViewById(R.id.btnConfirmChangeAdmin);
                 btnConfirmChangeAdmin.setOnClickListener(view1 -> {
-
+                    progressBar.setVisibility(View.VISIBLE);
                     changeAdmin(changeRequest());
                     bottomSheetDialog.dismiss();
 
@@ -170,7 +179,7 @@ public class InfoGroupFragment extends Fragment {
                     String message = getString(R.string.val_user);
                     Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
                 } else {
-
+                    progressBar.setVisibility(View.VISIBLE);
                     addUserGroup(createRequest());
                     bottomSheetDialog.dismiss();
                 }
@@ -198,7 +207,7 @@ public class InfoGroupFragment extends Fragment {
             btnCancelActionGroup = bottomSheetView.findViewById(R.id.btnCancelActionGroup);
             btnConfirmDeleteGroup = bottomSheetView.findViewById(R.id.btnConfirmDeleteGroup);
             btnConfirmDeleteGroup.setOnClickListener(view1 -> {
-
+                progressBar.setVisibility(View.VISIBLE);
                 deleteGroup();
 
 
@@ -228,7 +237,7 @@ public class InfoGroupFragment extends Fragment {
             btnCancelActionGroup = bottomSheetView.findViewById(R.id.btnCancelActionGroup);
             btnConfirmLeaveGroup = bottomSheetView.findViewById(R.id.btnConfirmLeaveGroup);
             btnConfirmLeaveGroup.setOnClickListener(view1 -> {
-
+                progressBar.setVisibility(View.VISIBLE);
                 leaveGroup(leaveRequest());
                 bottomSheetDialog.dismiss();
 
@@ -242,11 +251,17 @@ public class InfoGroupFragment extends Fragment {
             bottomSheetDialog.show();
         });
 
+        validateFields();
         //Update Info Group
         act.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                updateInfoGroup(createRequestGroup());
+                condition = true;
+                validateClickFields();
+                if (condition) {
+                    progressBar.setVisibility(View.VISIBLE);
+                    updateInfoGroup(createRequestGroup());
+                }
 
             }
         });
@@ -286,6 +301,7 @@ public class InfoGroupFragment extends Fragment {
             @Override
             public void onResponse(Call<GroupResponse> call, Response<GroupResponse> response) {
                 if (response.isSuccessful()) {
+                    progressBar.setVisibility(View.GONE);
                     GroupResponse adslist= response.body();
 
                     String user = adslist.getGroupName();
@@ -307,6 +323,7 @@ public class InfoGroupFragment extends Fragment {
                     }
 
                 } else {
+                    progressBar.setVisibility(View.GONE);
                     String message = getString(R.string.error_login);
                     Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
                 }
@@ -334,13 +351,14 @@ public class InfoGroupFragment extends Fragment {
             @Override
             public void onResponse(Call<GroupResponse> call, Response<GroupResponse> response) {
                 if (response.isSuccessful()) {
-
+                    progressBar.setVisibility(View.GONE);
                     GroupResponse data = response.body();
 
                     adaptador.setData(data);
                     userList.setAdapter(adaptador);
 
                 } else {
+                    progressBar.setVisibility(View.GONE);
                     String message = getString(R.string.error_login);
                     Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
                 }
@@ -378,11 +396,13 @@ public class InfoGroupFragment extends Fragment {
             @Override
             public void onResponse(Call<GroupResponse> call, Response<GroupResponse> response) {
                 if (response.isSuccessful()) {
+                    progressBar.setVisibility(View.GONE);
                     String message = getString(R.string.userSucess);
                     Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
                     groupInfo();
                     groupPhoto();
                 } else {
+                    progressBar.setVisibility(View.GONE);
                     String message = getString(R.string.error_login);
                     Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
                 }
@@ -418,12 +438,14 @@ public class InfoGroupFragment extends Fragment {
             @Override
             public void onResponse(Call<GroupResponse> call, Response<GroupResponse> response) {
                 if (response.isSuccessful()) {
+                    progressBar.setVisibility(View.GONE);
                     String message = getString(R.string.deleteSucess);
                     Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
                     groupInfo();
                     groupPhoto();
 
                 } else {
+                    progressBar.setVisibility(View.GONE);
                     String message = getString(R.string.error_login);
                     Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
                 }
@@ -457,9 +479,11 @@ public class InfoGroupFragment extends Fragment {
             @Override
             public void onResponse(Call<UserData> call, Response<UserData> response) {
                 if (response.isSuccessful()) {
+                    progressBar.setVisibility(View.GONE);
                     preferences.edit().putString("USER_NAME",response.body().getUser().getLogin()).apply();
 
                 } else {
+                    progressBar.setVisibility(View.GONE);
                     String message = getString(R.string.error_login);
                     Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
                 }
@@ -485,6 +509,7 @@ public class InfoGroupFragment extends Fragment {
             @Override
             public void onResponse(Call<GroupResponse> call, Response<GroupResponse> response) {
                 if (response.isSuccessful()) {
+                    progressBar.setVisibility(View.GONE);
                     String message = getString(R.string.deleteSucess);
                     Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
                     GroupFragment groupFragment = new GroupFragment();
@@ -493,6 +518,7 @@ public class InfoGroupFragment extends Fragment {
                     fragmentTransaction.commit();
 
                 } else {
+                    progressBar.setVisibility(View.GONE);
                     String message = getString(R.string.error_login);
                     Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
                 }
@@ -517,6 +543,7 @@ public class InfoGroupFragment extends Fragment {
             @Override
             public void onResponse(Call<GroupResponse> call, Response<GroupResponse> response) {
                 if (response.isSuccessful()) {
+                    progressBar.setVisibility(View.GONE);
                     String message = getString(R.string.deleteGroupSucess);
                     Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
                     GroupFragment groupFragment = new GroupFragment();
@@ -525,6 +552,7 @@ public class InfoGroupFragment extends Fragment {
                     fragmentTransaction.commit();
 
                 } else {
+                    progressBar.setVisibility(View.GONE);
                     String message = getString(R.string.error_login);
                     Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
                 }
@@ -561,6 +589,7 @@ public class InfoGroupFragment extends Fragment {
             @Override
             public void onResponse(Call<GroupResponse> call, Response<GroupResponse> response) {
                 if (response.isSuccessful()) {
+                    progressBar.setVisibility(View.GONE);
                     String message = context.getString(R.string.userSucess);
                     Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
 
@@ -601,6 +630,7 @@ public class InfoGroupFragment extends Fragment {
             @Override
             public void onResponse(Call<GroupResponse> call, Response<GroupResponse> response) {
                 if (response.isSuccessful()) {
+                    progressBar.setVisibility(View.GONE);
                     GroupResponse adslist= response.body();
 
                     String title = adslist.getGroupName();
@@ -618,6 +648,7 @@ public class InfoGroupFragment extends Fragment {
                     Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
 
                 } else {
+                    progressBar.setVisibility(View.GONE);
                     String message = getString(R.string.error_login);
                     Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
                 }
@@ -629,6 +660,86 @@ public class InfoGroupFragment extends Fragment {
                 Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
             }
         });
+
+    }
+    // Validations when interacting with form fields
+    private void validateFields() {
+        //region validation
+        et_GroupName.addTextChangedListener(new TextWatcher() {
+
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (et_GroupName.getText().toString().trim().isEmpty()) {
+                    ip_groupName.setError(getString(R.string.val_name));
+                    condition = false;
+                }if (et_GroupName.getText().toString().trim().length() < 3) {
+                    ip_groupName.setError(getString(R.string.val_group));
+                    condition = false;
+                } else {
+                    ip_groupName.setErrorEnabled(false);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+        //endregion
+        //region validationUser
+
+        et_detail.addTextChangedListener(new TextWatcher() {
+
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (et_detail.getText().toString().trim().isEmpty()) {
+                    ip_groupDetail.setError(getString(R.string.val_desc));
+                    condition = false;
+                }if (et_detail.getText().toString().trim().length() < 3) {
+                    ip_groupDetail.setError(getString(R.string.val_group));
+                    condition = false;
+                } else {
+                    ip_groupDetail.setErrorEnabled(false);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+        //endregion
+    }
+    //Validations when clicking on the registration button
+    private void validateClickFields() {
+
+        String nameGroup = et_GroupName.getText().toString().trim();
+        if (nameGroup.isEmpty()) {
+            ip_groupName.setError(getString(R.string.val_name));
+            condition = false;
+        }if (nameGroup.length() < 3) {
+            ip_groupName.setError(getString(R.string.val_group));
+            condition = false;
+        }else {
+            ip_groupName.setErrorEnabled(false);
+        }
+
+        String descriptionInput = et_detail.getText().toString().trim();
+        if (descriptionInput.isEmpty()) {
+            ip_groupDetail.setError(getString(R.string.val_desc));
+            condition = false;
+        }
+        if (descriptionInput.length() < 3) {
+            ip_groupDetail.setError(getString(R.string.val_group));
+            condition = false;
+        }else {
+            ip_groupDetail.setErrorEnabled(false);
+        }
+
 
     }
 }
